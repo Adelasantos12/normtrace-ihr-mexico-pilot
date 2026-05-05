@@ -1,0 +1,35 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+dist/
+.cache/
+
+# Temporary files
+*.tmp
+outputs_temp/
+*.log
+*.bak
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
