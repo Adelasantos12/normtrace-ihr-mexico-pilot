@@ -1,45 +1,31 @@
-# NormTrace-IHR Webapp
+# NormTrace-IHR Webapp v0.3
 
-## Overview
-This is the frontend MVP for the NormTrace-IHR Mexico Pilot. It provides a policy-facing interface for exploring preliminary legal-institutional mapping between IHR 2005 obligations and Mexico’s domestic legal architecture.
+Legal Internalisation Mapping Infrastructure for International Health Regulations.
 
-## What the app does
-- displays IHR 2005 mapping results;
-- shows anchoring levels and gap types;
-- explores Mexican legal provisions;
-- displays actors and institutional relationships;
-- shows implementation gap areas for IHR 2024 and Pandemic Agreement readiness;
-- provides printable reports.
+## Project Info
+- **Version**: v0.3 (Mexico Pilot)
+- **Data Package**: `data_package_v0_1` (Audited)
+- **Framework**: Vite + React + TypeScript + Tailwind CSS
 
-## What the app does not do
-- does not assess legal compliance;
-- does not provide legal advice;
-- does not generate new legal analysis in real time;
-- does not expose raw data downloads in the public version.
+## Deployment (Vercel)
+- **Root Directory**: `05_webapp`
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
 
-## Data source
-The app uses the cleaned audited data package:
-04_outputs/exports/data_package_v0_1/
+## Key Features
+- **Instrument Index**: Comprehensive registry of Mexican legal instruments assessed.
+- **IHR Mapping**: Structural alignment of domestic law to IHR 2005/2024.
+- **Actor Network**: Preliminary institutional relationship map derived from the legal corpus.
+- **Printable Report**: Customizable PDF-ready report builder for policy stakeholders.
 
-At build time or setup, selected files are copied to:
-05_webapp/public/data/
+## Limitations
+- **Preliminary Analysis**: All mappings require expert legal review (caveats L-01 to L-08).
+- **Actor Network**: Represents statutory (de jure) relationships, not observed operational coordination.
+- **DOI**: Currently TBD (10.5281/zenodo.0000000).
 
-## Methodology note
-NormTrace-IHR is a country-specific legal-institutional mapping workflow, not a generic keyword matching system.
-
-## Development
-- npm install
-- npm run dev
-- npm run build
-- npm run preview
-
-## Vercel deployment
-- **Root Directory:** 05_webapp
-- **Build Command:** npm run build
-- **Output Directory:** dist
-
-## Version
-Mexico Pilot v0.1
-
-## Status
-Preliminary expert review version.
+## Local Development
+```bash
+cd 05_webapp
+npm install
+npm run dev # run in dev mode
+```

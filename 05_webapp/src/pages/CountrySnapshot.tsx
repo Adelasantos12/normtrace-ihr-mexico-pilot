@@ -1,195 +1,91 @@
-import { useCsvData } from '../hooks/useData';
+import { } from 'react';
 import {
-  Loader2,
-  AlertCircle,
-  Shield,
-
-  CheckCircle,
-  AlertTriangle,
-  Search,
-  ArrowUpRight,
-  Printer
+  FileText, CheckCircle, AlertCircle, Info, Shield,
+  Globe, Activity, TrendingUp, Search
 } from 'lucide-react';
+import { useMarkdownData } from '../hooks/useData';
+import ReactMarkdown from 'react-markdown';
 
-import { useMemo } from 'react';
+export default function CountrySnapshot() {
+  const { content, loading, error } = useMarkdownData('mexico_legal_internalisation_snapshot.md');
 
-interface MappingRow {
-  obligation_id: string;
-  article: string;
-  article_title: string;
-  anchoring_level: string;
-  domestic_norm: string;
-  gap_type: string;
-}
-
-export function CountrySnapshot() {
-  const { data: mappingData, loading: mLoading } = useCsvData<MappingRow>('mexico_ihr2005_mapping_clean.csv');
-  const { data: gapData, loading: gLoading } = useCsvData<any>('mexico_implementation_gap_map_clean.csv');
-
-  const snapshot = useMemo(() => {
-    if (!mappingData.length) return null;
-
-    const strong = mappingData.filter(m => parseInt(m.anchoring_level) >= 4);
-    const partial = mappingData.filter(m => parseInt(m.anchoring_level) === 3);
-    const review = mappingData.filter(m => parseInt(m.anchoring_level) <= 2);
-
-    return {
-      total: mappingData.length,
-      strong,
-      partial,
-      review,
-      gaps: gapData.length
-    };
-  }, [mappingData, gapData]);
-
-  if (mLoading || gLoading) return <div className="flex justify-center py-20"><Loader2 className="animate-spin text-blue-600" size={48} /></div>;
-  if (!snapshot) return <div className="p-8 text-red-600 bg-red-50 rounded-lg flex gap-2"><AlertCircle /> Error loading snapshot data</div>;
+  if (loading) return <div className="flex justify-center py-20"><Activity className="animate-spin text-blue-600" /></div>;
 
   return (
-    <div className="space-y-12 pb-20 print:p-0">
-      <header className="flex justify-between items-start">
-        <div className="space-y-4">
-          <h1 className="text-3xl font-bold text-slate-900">Mexico: Legal Internalisation Profile</h1>
-          <p className="text-slate-500 max-w-2xl font-medium">
-             This snapshot provides a policy-facing overview of Mexico's institutional readiness for pandemic governance, derived from the structural mapping of international health obligations against the domestic legal architecture.
-          </p>
-        </div>
-        <button
-          onClick={() => window.print()}
-          className="print:hidden flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold hover:bg-slate-50 shadow-sm transition-all"
-        >
-          <Printer size={16} /> Print Full Report
-        </button>
+    <div className="space-y-12 pb-20">
+      <header className="space-y-4">
+         <div className="flex items-center gap-3">
+            <div className="p-3 bg-blue-900 text-white font-black text-xl tracking-tighter">MEX-PROFILE</div>
+            <h1 className="text-3xl font-bold text-slate-900">Mexico Legal Internalisation Snapshot</h1>
+         </div>
+         <p className="text-slate-500 max-w-3xl">Strategic overview of Mexico's structural readiness and legal anchoring for international health obligations.</p>
       </header>
 
-      {/* Key Findings Section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-         <div className="p-8 bg-blue-900 text-white rounded-[2rem] space-y-4 shadow-xl">
-            <h3 className="text-xs font-bold text-blue-400 uppercase tracking-widest">Baseline Mapped</h3>
-            <div className="flex items-baseline gap-2">
-               <span className="text-5xl font-extrabold">{snapshot.total}</span>
-               <span className="text-blue-300 font-bold uppercase text-[10px]">IHR 2005 Obligations</span>
-            </div>
-            <p className="text-xs text-blue-200 leading-relaxed italic border-t border-blue-800 pt-4">
-               Baseline mapping identifies domestic anchors for core IHR capacities within the current Mexican framework.
-            </p>
-         </div>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div className="lg:col-span-8 bg-white border border-slate-200 rounded-[2rem] shadow-sm overflow-hidden">
+           <div className="p-12 prose prose-slate max-w-none prose-headings:text-slate-900 prose-headings:font-black prose-p:text-slate-600 prose-p:leading-relaxed prose-li:text-slate-600">
+              <ReactMarkdown>{content}</ReactMarkdown>
+           </div>
+        </div>
 
-         <div className="p-8 bg-white border border-slate-200 rounded-[2rem] space-y-4 shadow-sm">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest">Anchoring Distribution</h3>
-            <div className="space-y-3">
-               <div className="flex justify-between items-center text-xs font-bold">
-                  <span className="text-green-600 flex items-center gap-1"><CheckCircle size={14} /> Strong (L4-L5)</span>
-                  <span>{Math.round((snapshot.strong.length/snapshot.total)*100)}%</span>
-               </div>
-               <div className="flex justify-between items-center text-xs font-bold">
-                  <span className="text-blue-600 flex items-center gap-1"><Shield size={14} /> Partial (L3)</span>
-                  <span>{Math.round((snapshot.partial.length/snapshot.total)*100)}%</span>
-               </div>
-               <div className="flex justify-between items-center text-xs font-bold text-amber-600">
-                  <span className="flex items-center gap-1"><AlertTriangle size={14} /> Review Needed</span>
-                  <span>{Math.round((snapshot.review.length/snapshot.total)*100)}%</span>
-               </div>
-            </div>
-         </div>
+        <div className="lg:col-span-4 space-y-8">
+           <div className="p-8 bg-blue-900 text-white rounded-[2rem] shadow-xl shadow-blue-100 space-y-6">
+              <h3 className="font-bold text-lg">Structural Summary</h3>
+              <div className="space-y-4">
+                 <div className="flex justify-between items-center border-b border-blue-800 pb-3">
+                    <span className="text-xs text-blue-300 uppercase tracking-widest font-bold">Anchoring Baseline</span>
+                    <span className="text-sm font-bold">Level 3 (Partial)</span>
+                 </div>
+                 <div className="flex justify-between items-center border-b border-blue-800 pb-3">
+                    <span className="text-xs text-blue-300 uppercase tracking-widest font-bold">Primary Authority</span>
+                    <span className="text-sm font-bold">SSA / CSG</span>
+                 </div>
+                 <div className="flex justify-between items-center border-b border-blue-800 pb-3">
+                    <span className="text-xs text-blue-300 uppercase tracking-widest font-bold">IHR NFP Liaison</span>
+                    <span className="text-sm font-bold">DGE / SINAVE</span>
+                 </div>
+              </div>
+              <div className="p-4 bg-blue-800/50 rounded-xl flex gap-3 border border-blue-700">
+                 <Info size={16} className="text-blue-300 shrink-0 mt-0.5" />
+                 <p className="text-[10px] text-blue-100 leading-relaxed italic">
+                    Analysis derived from federal corpus index v0.1. Methodology summary available in the Methodology section.
+                 </p>
+              </div>
+           </div>
 
-         <div className="p-8 bg-slate-100 rounded-[2rem] space-y-4 shadow-sm border border-slate-200/50">
-            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest text-center">Update Pressure</h3>
-            <div className="text-center space-y-2">
-               <p className="text-4xl font-black text-slate-900">{snapshot.gaps}</p>
-               <p className="text-[10px] font-bold text-slate-500 uppercase">Implementation Gap Areas</p>
-            </div>
-            <p className="text-[10px] text-slate-500 text-center leading-relaxed font-medium">
-               Identified areas requiring legal-institutional update under IHR 2024 and Pandemic Agreement readiness.
-            </p>
-         </div>
-      </div>
+           <div className="p-8 bg-white border border-slate-200 rounded-[2rem] shadow-sm space-y-6">
+              <h3 className="font-bold text-slate-900 flex items-center gap-2">
+                 <Activity size={18} className="text-blue-600" />
+                 Readiness Checklist
+              </h3>
+              <div className="space-y-4">
+                 {[
+                   { label: "Surveillance Statutory Basis", status: "Verified (LGS/RI-SS)" },
+                   { label: "NFP Focal Point Designation", status: "Verified (RI-SS Art 35)" },
+                   { label: "International Sanitary Control", status: "Requires Update (1985 Reg)" },
+                   { label: "PABS Material Sharing", status: "Provisional (Corpus Pending)" },
+                 ].map((item, i) => (
+                    <div key={i} className="flex gap-4 items-start">
+                       <CheckCircle size={14} className={item.status.includes('Verified') ? "text-emerald-500" : "text-slate-300"} />
+                       <div>
+                          <p className="text-[10px] font-bold text-slate-900">{item.label}</p>
+                          <p className="text-[10px] text-slate-500">{item.status}</p>
+                       </div>
+                    </div>
+                 ))}
+              </div>
+           </div>
 
-      {/* Detail Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-         {/* Stronger Anchoring */}
-         <div className="space-y-6">
-            <h3 className="text-sm font-black text-slate-900 flex items-center gap-2 uppercase tracking-tight">
-               <div className="w-2 h-2 bg-green-500 rounded-full" />
-               Stronger Anchoring Areas
-            </h3>
-            <div className="space-y-3">
-               {snapshot.strong.slice(0, 5).map((m, i) => (
-                  <div key={i} className="p-4 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-all">
-                     <div className="text-[10px] font-bold text-blue-600 uppercase mb-1">{m.article_title || m.obligation_id}</div>
-                     <div className="text-[10px] text-slate-500 font-medium">{m.domestic_norm}</div>
-                  </div>
-               ))}
-            </div>
-         </div>
-
-         {/* Partial Anchoring */}
-         <div className="space-y-6">
-            <h3 className="text-sm font-black text-slate-900 flex items-center gap-2 uppercase tracking-tight">
-               <div className="w-2 h-2 bg-blue-500 rounded-full" />
-               Partial Anchoring Areas
-            </h3>
-            <div className="space-y-3">
-               {snapshot.partial.slice(0, 5).map((m, i) => (
-                  <div key={i} className="p-4 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-all">
-                     <div className="text-[10px] font-bold text-blue-600 uppercase mb-1">{m.article_title || m.obligation_id}</div>
-                     <div className="text-[10px] text-slate-500 font-medium">{m.domestic_norm}</div>
-                  </div>
-               ))}
-            </div>
-         </div>
-
-         {/* Review Sensitive */}
-         <div className="space-y-6">
-            <h3 className="text-sm font-black text-slate-900 flex items-center gap-2 uppercase tracking-tight">
-               <div className="w-2 h-2 bg-amber-500 rounded-full" />
-               Review-Sensitive Areas
-            </h3>
-            <div className="space-y-3">
-               {snapshot.review.slice(0, 5).map((m, i) => (
-                  <div key={i} className="p-4 bg-amber-50/50 border border-amber-100 rounded-2xl shadow-sm hover:shadow-md transition-all">
-                     <div className="text-[10px] font-bold text-amber-700 uppercase mb-1">{m.article_title || m.obligation_id}</div>
-                     <div className="text-[10px] text-amber-600 font-bold">{m.gap_type || "Structural review required"}</div>
-                  </div>
-               ))}
-            </div>
-         </div>
-      </div>
-
-      {/* Checklist Preview */}
-      <section className="space-y-8 bg-white border border-slate-200 rounded-[3rem] p-12 shadow-sm">
-         <h3 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
-            <Search className="text-blue-600" size={24} />
-            Institutional Checklist Preview
-         </h3>
-         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-            {[
-               { area: "National IHR Focal Point / Authority", status: "Administrative", anchor: "RI-SS-2025 Art. 35", gap: "Procedural clarity needed" },
-               { area: "Epidemiological Surveillance", status: "Strong Statutory", anchor: "LGS Art. 134 / NOM-017", gap: "Data privacy updates" },
-               { area: "Points of Entry (Sanidad Internacional)", status: "Statutory", anchor: "LGS Art. 17 Bis / Art. 293", gap: "Person vs. Goods coordination" },
-               { area: "Equitable Access / Health Products", status: "Partial", anchor: "LGS Art. 17 Bis 12 Ter", gap: "Fast-track authorization rules" },
-               { area: "PABS-related Readiness", status: "TBD / Provisional", anchor: "None identified", gap: "Final PABS Annex dependency" },
-               { area: "Intersectoral Coordination", status: "Administrative", anchor: "LGS Art. 7", gap: "Operational mechanism gap" },
-            ].map((item, i) => (
-               <div key={i} className="flex gap-4 group">
-                  <div className="w-1 bg-slate-100 rounded-full group-hover:bg-blue-400 transition-all shrink-0" />
-                  <div className="space-y-1 py-1">
-                     <p className="text-xs font-black text-slate-900 uppercase tracking-tight">{item.area}</p>
-                     <div className="flex flex-wrap gap-2 pt-1">
-                        <span className="text-[9px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded uppercase tracking-tighter">Status: {item.status}</span>
-                        <span className="text-[9px] font-bold text-slate-500 bg-slate-50 px-2 py-0.5 rounded uppercase tracking-tighter">Anchor: {item.anchor}</span>
-                        <span className="text-[9px] font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded uppercase tracking-tighter">Gap: {item.gap}</span>
-                     </div>
-                  </div>
-               </div>
-            ))}
-         </div>
-      </section>
-
-      <div className="flex justify-center pt-6">
-         <button className="flex items-center gap-2 text-xs font-bold text-blue-700 hover:text-blue-900 transition-colors uppercase tracking-widest">
-            Read full technical documentation <ArrowUpRight size={14} />
-         </button>
+           <div className="p-8 bg-amber-50 border border-amber-100 rounded-[2rem] space-y-4">
+              <div className="flex items-center gap-2 text-amber-800">
+                 <AlertCircle size={18} />
+                 <h4 className="font-bold text-sm">Critical Caveat</h4>
+              </div>
+              <p className="text-[11px] text-amber-900 leading-relaxed">
+                 The <strong>Reglamento de Sanidad Internacional (1985)</strong> remains the primary operational instrument but significantly predates IHR (2005). Statutory alignment review is a high-priority entry point.
+              </p>
+           </div>
+        </div>
       </div>
     </div>
   );

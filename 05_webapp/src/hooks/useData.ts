@@ -25,7 +25,15 @@ export function useCsvData<T>(fileName: string) {
           skipEmptyLines: true,
           delimiter: delimiter,
           complete: (results) => {
-            setData(results.data as T[]);
+            // Clean keys of any potential whitespace
+            const cleanedData = results.data.map((row: any) => {
+               const cleanRow: any = {};
+               Object.keys(row).forEach(key => {
+                  cleanRow[key.trim()] = row[key];
+               });
+               return cleanRow;
+            });
+            setData(cleanedData as T[]);
             setLoading(false);
           },
           error: (err: any) => {

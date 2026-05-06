@@ -1,38 +1,39 @@
+import { } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useMarkdownData } from '../hooks/useData';
-import { Loader2, AlertCircle } from 'lucide-react';
+import { Loader2, Info } from 'lucide-react';
 
-export function MarkdownPage({ title, fileName }: { title: string, fileName: string }) {
+interface MarkdownPageProps {
+  fileName: string;
+  title: string;
+  subtitle?: string;
+}
+
+export default function MarkdownPage({ fileName, title, subtitle }: MarkdownPageProps) {
   const { content, loading, error } = useMarkdownData(fileName);
 
   if (loading) return <div className="flex justify-center py-20"><Loader2 className="animate-spin text-blue-600" size={48} /></div>;
-  if (error) return <div className="p-8 text-red-600 bg-red-50 rounded-lg flex gap-2"><AlertCircle /> Error loading {title}</div>;
+  if (error) return <div className="p-8 text-red-600 bg-red-50 rounded-lg">Error loading content: {error.message}</div>;
 
   return (
-    <div className="space-y-6">
-      <header>
-        <h1 className="text-3xl font-bold text-slate-900">{title}</h1>
+    <div className="space-y-10 pb-20">
+      <header className="space-y-2">
+         <h1 className="text-3xl font-bold text-slate-900">{title}</h1>
+         {subtitle && <p className="text-slate-500 max-w-3xl">{subtitle}</p>}
       </header>
 
-      <article className="prose prose-slate max-w-none bg-white p-10 border border-slate-200 rounded-lg shadow-sm">
-        <ReactMarkdown
-            components={{
-                h1: ({...props}) => <h1 className="text-2xl font-bold text-blue-900 border-b pb-2 mb-4" {...props} />,
-                h2: ({...props}) => <h2 className="text-xl font-bold text-slate-800 mt-8 mb-4" {...props} />,
-                h3: ({...props}) => <h3 className="text-lg font-bold text-slate-700 mt-6 mb-3" {...props} />,
-                p: ({...props}) => <p className="text-slate-600 leading-relaxed mb-4" {...props} />,
-                ul: ({...props}) => <ul className="list-disc pl-5 mb-4 space-y-2" {...props} />,
-                li: ({...props}) => <li className="text-slate-600" {...props} />,
-                table: ({...props}) => <div className="overflow-x-auto my-6"><table className="w-full border-collapse border border-slate-200 text-sm" {...props} /></div>,
-                th: ({...props}) => <th className="bg-slate-50 border border-slate-200 p-2 font-bold text-left" {...props} />,
-                td: ({...props}) => <td className="border border-slate-200 p-2" {...props} />,
-                blockquote: ({...props}) => <blockquote className="border-l-4 border-blue-200 pl-4 italic text-slate-500 my-4" {...props} />,
-                code: ({...props}) => <code className="bg-slate-100 px-1 rounded text-pink-600 font-mono text-xs" {...props} />,
-            }}
-        >
-          {content}
-        </ReactMarkdown>
-      </article>
+      <div className="bg-white border border-slate-200 rounded-[2rem] shadow-sm overflow-hidden">
+        <div className="p-12 prose prose-slate max-w-none prose-headings:text-slate-900 prose-headings:font-black prose-p:text-slate-600 prose-p:leading-relaxed prose-li:text-slate-600 prose-blockquote:border-l-blue-600 prose-blockquote:bg-slate-50 prose-blockquote:p-6 prose-blockquote:rounded-r-xl">
+           <ReactMarkdown>{content}</ReactMarkdown>
+        </div>
+      </div>
+
+      <div className="p-6 bg-blue-50 border border-blue-100 rounded-2xl flex gap-4">
+         <Info size={20} className="text-blue-500 shrink-0 mt-0.5" />
+         <p className="text-xs text-blue-800 leading-relaxed italic">
+            This document is rendered from the audited data package. Methodology summary available in the Methodology section.
+         </p>
+      </div>
     </div>
   );
 }

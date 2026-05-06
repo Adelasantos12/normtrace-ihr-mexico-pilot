@@ -1,22 +1,21 @@
-import { useMemo } from 'react';
-import { useCsvData } from '../hooks/useData';
+import React, { useMemo } from 'react';
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+  GitMerge, FileText, Shield, Users, AlertTriangle,
+  Layers, BarChart as ChartIcon, ExternalLink, Info,
+  TrendingUp, Activity, Gavel, Loader2, AlertCircle,
+  ChevronRight
+} from 'lucide-react';
+import {
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+  PieChart, Pie, Cell
 } from 'recharts';
-import { Loader2, AlertCircle, Shield, FileText, GitMerge, Users, AlertTriangle, Layers } from 'lucide-react';
-import { getAnchoringLabel, cn } from '../lib/utils';
+import { useCsvData } from '../hooks/useData';
+import { cn, getAnchoringLabel } from '../lib/utils';
+import { getLegalDomain } from '../lib/domainGrouping';
+import { InstrumentsPanel } from '../components/InstrumentsPanel';
 
-interface MappingRow {
-  obligation_id: string;
-  anchoring_level: string;
-  review_status: string;
-  confidence_level: string;
-  gap_type: string;
-  domestic_norm: string;
-}
-
-export function Dashboard() {
-  const { data: mappingData, loading: mLoading } = useCsvData<MappingRow>('mexico_ihr2005_mapping_clean.csv');
+export default function Dashboard() {
+  const { data: mappingData, loading: mLoading } = useCsvData<any>('mexico_ihr2005_mapping_clean.csv');
   const { data: provisionsData, loading: pLoading } = useCsvData<any>('mexico_legal_provisions_clean.csv');
   const { data: actorsData, loading: aLoading } = useCsvData<any>('mexico_health_governance_actors_clean.csv');
   const { data: corpusData, loading: cLoading } = useCsvData<any>('mexico_normative_corpus_index_clean.csv');
@@ -29,6 +28,7 @@ export function Dashboard() {
       anchoring: {} as Record<string, number>,
       gaps: {} as Record<string, number>,
       norms: {} as Record<string, number>,
+      domains: {} as Record<string, number>,
     };
 
     mappingData.forEach(row => {
@@ -39,10 +39,14 @@ export function Dashboard() {
       counts.norms[row.domestic_norm] = (counts.norms[row.domestic_norm] || 0) + 1;
     });
 
+    corpusData.forEach(inst => {
+      const domain = getLegalDomain(inst.sector, inst.subsector);
+      counts.domains[domain] = (counts.domains[domain] || 0) + 1;
+    });
+
     const formatData = (obj: Record<string, number>) =>
       Object.entries(obj).map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value);
 
-    // Interpret anchoring
     const l3to5 = (counts.anchoring['3'] || 0) + (counts.anchoring['4'] || 0) + (counts.anchoring['5'] || 0);
     const l0to2 = (counts.anchoring['0'] || 0) + (counts.anchoring['1'] || 0) + (counts.anchoring['2'] || 0);
 
@@ -66,6 +70,7 @@ export function Dashboard() {
       })).sort((a, b) => a.name.localeCompare(b.name)),
       gaps: formatData(counts.gaps).slice(0, 5),
       norms: formatData(counts.norms).slice(0, 5),
+      domains: formatData(counts.domains),
       interpretation
     };
   }, [mappingData, provisionsData, actorsData, corpusData, gapData]);
@@ -78,56 +83,56 @@ export function Dashboard() {
 
   return (
     <div className="space-y-10 pb-20">
-      <header className="flex justify-between items-end">
-        <div>
-           <h1 className="text-3xl font-bold text-slate-900">Dashboard</h1>
-           <p className="text-slate-500">Legal Internalisation Metrics for Mexico Pilot v0.1</p>
-        </div>
-        <div className="flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold border border-blue-100">
-           <Shield size={14} /> Mapping Version: v0.1
-        </div>
+      <header>
+         <h1 className="text-3xl font-bold text-slate-900">Mexico Legal Brain Dashboard</h1>
+         <p className="text-slate-500 mt-1">Legal Internalisation Metrics for Mexico Pilot v0.1</p>
       </header>
 
       {/* Summary Cards */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         {[
           { label: "IHR 2005 Obligations", value: stats.totalObligations, icon: GitMerge },
-          { label: "Domestic Provisions", value: stats.totalProvisions, icon: FileText },
-          { label: "Mexican Instruments", value: stats.totalInstruments, icon: Shield },
+          { label: "Extracted Provisions", value: stats.totalProvisions, icon: FileText },
+          { label: "Instruments Assessed", value: stats.totalInstruments, icon: Shield },
           { label: "Actors Identified", value: stats.totalActors, icon: Users },
-          { label: "Gap Areas", value: stats.totalGaps, icon: AlertTriangle },
+          { label: "Implementation Gaps", value: stats.totalGaps, icon: AlertTriangle },
         ].map((stat, i) => (
-          <div key={i} className="p-5 bg-white border border-slate-200 rounded-2xl shadow-sm space-y-2">
-            <div className="flex items-center justify-between text-slate-400">
-               <stat.icon size={18} />
-               <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">KPI</span>
+          <div key={i} className="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm space-y-3">
+            <div className="p-2 bg-slate-50 w-fit rounded-lg text-slate-500">
+               <stat.icon size={20} />
             </div>
-            <p className="text-2xl font-bold text-blue-900">{stat.value}</p>
-            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-tight leading-tight">{stat.label}</p>
+            <div>
+              <p className="text-2xl font-bold text-slate-900">{stat.value}</p>
+              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{stat.label}</p>
+            </div>
           </div>
         ))}
       </div>
 
+      <InstrumentsPanel instruments={corpusData} />
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Instrument Layers */}
-        <div className="lg:col-span-1 space-y-4">
-           <h3 className="font-bold text-slate-800 flex items-center gap-2">
+        <div className="lg:col-span-1 space-y-6">
+           <h3 className="font-bold text-slate-900 flex items-center gap-2 px-1">
               <Layers size={18} className="text-blue-600" />
               Instrument Layers
            </h3>
-           <div className="space-y-3">
+           <div className="space-y-4">
               {[
-                { title: "IHR 2005 Baseline", file: "mexico_ihr2005_mapping_clean.csv", status: "Baseline mapped", color: "bg-blue-600" },
-                { title: "IHR 2024 Amendment Pressure", file: "ihr_2024_changes_clean.csv", status: "Update-review layer", color: "bg-amber-500" },
-                { title: "Pandemic Agreement / PABS", file: "pandemic_agreement_obligations_clean.csv", status: "Provisional readiness", color: "bg-slate-500" },
+                { title: "IHR 2005 Baseline", description: "Current binding international regulations", status: "Baseline mapped", color: "bg-blue-600" },
+                { title: "IHR 2024 Amendment Pressure", description: "Impact of 2024 amendments on domestic law", status: "Update-review layer", color: "bg-amber-500" },
+                { title: "Pandemic Agreement / PABS", description: "Readiness for emerging international standards", status: "Provisional readiness", color: "bg-slate-500" },
               ].map((layer, i) => (
-                <div key={i} className="p-4 bg-white border border-slate-200 rounded-xl shadow-sm space-y-2">
+                <div key={i} className="p-5 bg-white border border-slate-200 rounded-xl shadow-sm space-y-3 hover:border-blue-200 transition-colors group">
                   <div className="flex justify-between items-start">
-                    <span className="text-xs font-bold text-slate-900">{layer.title}</span>
-                    <div className={cn("w-2 h-2 rounded-full", layer.color)} />
+                    <div>
+                      <span className="text-xs font-bold text-slate-900 group-hover:text-blue-700 transition-colors">{layer.title}</span>
+                      <p className="text-[10px] text-slate-500 mt-1">{layer.description}</p>
+                    </div>
+                    <div className={cn("w-2 h-2 rounded-full mt-1", layer.color)} />
                   </div>
-                  <div className="text-[10px] text-slate-400 font-mono truncate">{layer.file}</div>
-                  <div className="inline-block px-2 py-0.5 bg-slate-50 text-[10px] font-bold text-slate-600 rounded border border-slate-100">
+                  <div className="inline-block px-2 py-0.5 bg-slate-50 text-[9px] font-bold text-slate-600 rounded border border-slate-100 uppercase tracking-tight">
                     {layer.status}
                   </div>
                 </div>
@@ -136,9 +141,9 @@ export function Dashboard() {
         </div>
 
         {/* Mexico Anchoring Profile */}
-        <div className="lg:col-span-2 space-y-4">
-           <h3 className="font-bold text-slate-800">Mexico Anchoring Profile</h3>
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 border border-slate-200 rounded-2xl shadow-sm">
+        <div className="lg:col-span-2 space-y-6">
+           <h3 className="font-bold text-slate-900 px-1">Mexico Anchoring Profile</h3>
+           <div className="bg-white p-8 border border-slate-200 rounded-2xl shadow-sm space-y-8">
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={stats.anchoring} layout="vertical">
@@ -146,37 +151,44 @@ export function Dashboard() {
                     <XAxis type="number" hide />
                     <YAxis dataKey="name" type="category" width={60} tick={{fontSize: 10, fontWeight: 'bold'}} axisLine={false} tickLine={false} />
                     <Tooltip
+                      cursor={{fill: '#f8fafc'}}
                       content={({ active, payload }) => {
                         if (active && payload && payload.length) {
                           return (
-                            <div className="bg-slate-900 text-white p-3 rounded-lg text-[10px] shadow-xl border border-slate-700">
-                              <p className="font-bold mb-1">{payload[0].payload.fullName}</p>
-                              <p>Count: {payload[0].value} obligations</p>
+                            <div className="bg-white p-3 rounded-lg text-[10px] shadow-xl border border-slate-200">
+                              <p className="font-bold text-slate-900 mb-1">{payload[0].payload.fullName}</p>
+                              <p className="text-slate-500">Count: {payload[0].value} obligations</p>
                             </div>
                           );
                         }
                         return null;
                       }}
                     />
-                    <Bar dataKey="value" fill="#1e40af" radius={[0, 4, 4, 0]} barSize={20} />
+                    <Bar dataKey="value" fill="#1e40af" radius={[0, 4, 4, 0]} barSize={24} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
-              <div className="space-y-4">
-                 <div className="p-4 bg-blue-50/50 rounded-xl border border-blue-100">
-                    <h4 className="text-xs font-bold text-blue-900 uppercase tracking-widest mb-2 flex items-center gap-2">
-                       <Shield size={14} />
-                       Identified Anchoring Pattern
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t border-slate-100">
+                 <div className="space-y-3">
+                    <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                       <TrendingUp size={14} className="text-blue-500" />
+                       Anchoring Pattern Analysis
                     </h4>
-                    <p className="text-xs text-blue-800 leading-relaxed italic">
-                       {stats.interpretation}
+                    <p className="text-xs text-slate-700 leading-relaxed font-medium italic">
+                       "{stats.interpretation}"
                     </p>
                  </div>
-                 <div className="space-y-1">
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Anchoring Scale Definition</p>
-                    <div className="text-[10px] text-slate-500 space-y-1">
-                       <p><strong>L0–L2:</strong> Administrative, operational or indirect anchoring.</p>
-                       <p><strong>L3–L5:</strong> Statutory, legislative or integrated anchoring.</p>
+                 <div className="space-y-3">
+                    <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Anchoring Scale Guide</h4>
+                    <div className="grid grid-cols-1 gap-2">
+                       <div className="flex justify-between items-center bg-slate-50 px-3 py-2 rounded-lg">
+                          <span className="text-[10px] font-bold text-slate-500">L0–L2</span>
+                          <span className="text-[10px] text-slate-600 font-medium">Admin / Operational</span>
+                       </div>
+                       <div className="flex justify-between items-center bg-blue-50 px-3 py-2 rounded-lg">
+                          <span className="text-[10px] font-bold text-blue-600">L3–L5</span>
+                          <span className="text-[10px] text-blue-700 font-medium">Statutory / Legislative</span>
+                       </div>
                     </div>
                  </div>
               </div>
@@ -186,26 +198,39 @@ export function Dashboard() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Top Gap Types */}
-        <div className="space-y-4">
-          <h3 className="font-bold text-slate-800">Most Frequent Gap Types</h3>
-          <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
-             {stats.gaps.map((gap, i) => (
-                <div key={i} className="px-5 py-3 flex items-center justify-between border-b border-slate-50 last:border-0 hover:bg-slate-50 transition-colors">
-                   <span className="text-xs text-slate-600 font-medium">{gap.name}</span>
-                   <span className="px-2 py-0.5 bg-blue-50 text-blue-700 rounded text-[10px] font-bold">{gap.value}</span>
-                </div>
-             ))}
+        <div className="space-y-6">
+          <h3 className="font-bold text-slate-900 px-1">Top Legal Domain Distribution</h3>
+          <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-6">
+             <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={stats.domains.slice(0, 5)} layout="vertical">
+                    <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f1f5f9" />
+                    <XAxis type="number" hide />
+                    <YAxis dataKey="name" type="category" width={140} tick={{fontSize: 9, fontWeight: 'bold'}} axisLine={false} tickLine={false} />
+                    <Tooltip cursor={{fill: '#f8fafc'}} />
+                    <Bar dataKey="value" fill="#3b82f6" radius={[0, 4, 4, 0]} barSize={20} />
+                  </BarChart>
+                </ResponsiveContainer>
+             </div>
           </div>
         </div>
 
         {/* Top Domestic Norms */}
-        <div className="space-y-4">
-          <h3 className="font-bold text-slate-800">Key Domestic Norms</h3>
-          <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="space-y-6">
+          <h3 className="font-bold text-slate-900 px-1">High-Impact Domestic Norms</h3>
+          <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden divide-y divide-slate-50">
              {stats.norms.map((norm, i) => (
-                <div key={i} className="px-5 py-3 flex items-center justify-between border-b border-slate-50 last:border-0 hover:bg-slate-50 transition-colors">
-                   <span className="text-xs text-slate-600 font-medium truncate pr-4">{norm.name}</span>
-                   <span className="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-bold">{norm.value}</span>
+                <div key={i} className="px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors group">
+                   <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-[10px] font-bold text-slate-400 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
+                         {i + 1}
+                      </div>
+                      <span className="text-xs text-slate-700 font-medium truncate max-w-[240px]">{norm.name}</span>
+                   </div>
+                   <div className="flex items-center gap-4">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{norm.value} Oblig.</span>
+                      <ChevronRight size={14} className="text-slate-300" />
+                   </div>
                 </div>
              ))}
           </div>
