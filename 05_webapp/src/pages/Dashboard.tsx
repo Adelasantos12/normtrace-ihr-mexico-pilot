@@ -29,6 +29,9 @@ export default function Dashboard() {
       gaps: {} as Record<string, number>,
       norms: {} as Record<string, number>,
       domains: {} as Record<string, number>,
+      confidence: {} as Record<string, number>,
+      review: 0,
+      actors: {} as Record<string, number>,
     };
 
     mappingData.forEach(row => {
@@ -37,6 +40,34 @@ export default function Dashboard() {
           counts.gaps[row.gap_type] = (counts.gaps[row.gap_type] || 0) + 1;
       }
       counts.norms[row.domestic_norm] = (counts.norms[row.domestic_norm] || 0) + 1;
+      counts.confidence[row.confidence_level] = (counts.confidence[row.confidence_level] || 0) + 1;
+      if (row.review_status === 'requires_human_review') {
+        counts.review++;
+      }
+    });
+
+    gapData.forEach(row => {
+      if (row.review_status === 'requires_human_review') {
+        counts.review++;
+      }
+      const actorField = row.main_mexico_actors || row.main_actors;
+      if (actorField) {
+        actorField.split(/[,;]/).forEach((a: string) => {
+          const actor = a.trim();
+          if (actor) counts.actors[actor] = (counts.actors[actor] || 0) + 1;
+        });
+      }
+    });
+
+    provisionsData.forEach(row => {
+      if (row.actor_mentioned) {
+        row.actor_mentioned.split(/[,;]/).forEach((a: string) => {
+          const actor = a.trim();
+          if (actor && actor !== 'N/A' && actor !== 'None') {
+            counts.actors[actor] = (counts.actors[actor] || 0) + 1;
+          }
+        });
+      }
     });
 
     corpusData.forEach(inst => {
@@ -61,8 +92,9 @@ export default function Dashboard() {
       totalObligations: new Set(mappingData.map(m => m.obligation_id)).size,
       totalProvisions: provisionsData.length,
       totalInstruments: corpusData.length,
-      totalActors: actorsData.length,
+      totalActorsCount: actorsData.length,
       totalGaps: gapData.length,
+      reviewRequired: counts.review,
       anchoring: Object.entries(counts.anchoring).map(([name, value]) => ({
         name: `Level ${name}`,
         fullName: getAnchoringLabel(name),
@@ -71,6 +103,8 @@ export default function Dashboard() {
       gaps: formatData(counts.gaps).slice(0, 5),
       norms: formatData(counts.norms).slice(0, 5),
       domains: formatData(counts.domains),
+      confidence: formatData(counts.confidence),
+      topActors: formatData(counts.actors).slice(0, 5),
       interpretation
     };
   }, [mappingData, provisionsData, actorsData, corpusData, gapData]);
@@ -89,15 +123,16 @@ export default function Dashboard() {
       </header>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
         {[
-          { label: "IHR 2005 Obligations", value: stats.totalObligations, icon: GitMerge },
-          { label: "Extracted Provisions", value: stats.totalProvisions, icon: FileText },
-          { label: "Instruments Assessed", value: stats.totalInstruments, icon: Shield },
-          { label: "Actors Identified", value: stats.totalActors, icon: Users },
-          { label: "Implementation Gaps", value: stats.totalGaps, icon: AlertTriangle },
+          { label: "IHR Obligations", value: stats.totalObligations, icon: GitMerge },
+          { label: "Legal Provisions", value: stats.totalProvisions, icon: FileText },
+          { label: "Instruments", value: stats.totalInstruments, icon: Shield },
+          { label: "Actors Indexed", value: stats.totalActorsCount, icon: Users },
+          { label: "Gaps Found", value: stats.totalGaps, icon: AlertTriangle },
+          { label: "Human Review", value: stats.reviewRequired, icon: Info, color: "text-amber-600 bg-amber-50" },
         ].map((stat, i) => (
-          <div key={i} className="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm space-y-3">
+          <div key={i} className={cn("p-6 bg-white border border-slate-200 rounded-2xl shadow-sm space-y-3", stat.color)}>
             <div className="p-2 bg-slate-50 w-fit rounded-lg text-slate-500">
                <stat.icon size={20} />
             </div>
@@ -196,41 +231,80 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Top Gap Types */}
-        <div className="space-y-6">
-          <h3 className="font-bold text-slate-900 px-1">Top Legal Domain Distribution</h3>
-          <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-6">
-             <div className="h-64">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Top Legal Domains */}
+        <div className="lg:col-span-1 space-y-6">
+          <h3 className="font-bold text-slate-900 px-1 text-sm">Top Legal Domains</h3>
+          <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 h-72">
+             <ResponsiveContainer width="100%" height="100%">
+               <BarChart data={stats.domains.slice(0, 5)} layout="vertical">
+                 <XAxis type="number" hide />
+                 <YAxis dataKey="name" type="category" width={110} tick={{fontSize: 8, fontWeight: 'bold'}} axisLine={false} tickLine={false} />
+                 <Tooltip cursor={{fill: '#f8fafc'}} />
+                 <Bar dataKey="value" fill="#3b82f6" radius={[0, 4, 4, 0]} barSize={12} />
+               </BarChart>
+             </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* Confidence Distribution */}
+        <div className="lg:col-span-1 space-y-6">
+          <h3 className="font-bold text-slate-900 px-1 text-sm">Assessment Confidence</h3>
+          <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 h-72 flex flex-col justify-center">
+             <div className="h-48">
                 <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={stats.domains.slice(0, 5)} layout="vertical">
-                    <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f1f5f9" />
-                    <XAxis type="number" hide />
-                    <YAxis dataKey="name" type="category" width={140} tick={{fontSize: 9, fontWeight: 'bold'}} axisLine={false} tickLine={false} />
-                    <Tooltip cursor={{fill: '#f8fafc'}} />
-                    <Bar dataKey="value" fill="#3b82f6" radius={[0, 4, 4, 0]} barSize={20} />
-                  </BarChart>
+                  <PieChart>
+                    <Pie
+                      data={stats.confidence}
+                      innerRadius={60}
+                      outerRadius={80}
+                      paddingAngle={5}
+                      dataKey="value"
+                    >
+                      {stats.confidence.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={['#1e40af', '#3b82f6', '#94a3b8'][index % 3]} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
                 </ResponsiveContainer>
+             </div>
+             <div className="flex justify-center gap-4 mt-2">
+                {stats.confidence.map((entry, i) => (
+                  <div key={i} className="flex items-center gap-1.5">
+                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: ['#1e40af', '#3b82f6', '#94a3b8'][i % 3] }} />
+                    <span className="text-[10px] font-bold text-slate-500">{entry.name}</span>
+                  </div>
+                ))}
              </div>
           </div>
         </div>
 
         {/* Top Domestic Norms */}
-        <div className="space-y-6">
-          <h3 className="font-bold text-slate-900 px-1">High-Impact Domestic Norms</h3>
-          <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden divide-y divide-slate-50">
+        <div className="lg:col-span-1 space-y-6">
+          <h3 className="font-bold text-slate-900 px-1 text-sm">High-Impact Norms</h3>
+          <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden divide-y divide-slate-50 h-72">
              {stats.norms.map((norm, i) => (
-                <div key={i} className="px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors group">
+                <div key={i} className="px-5 py-3.5 flex items-center justify-between hover:bg-slate-50 transition-colors group">
                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-[10px] font-bold text-slate-400 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
-                         {i + 1}
-                      </div>
-                      <span className="text-xs text-slate-700 font-medium truncate max-w-[240px]">{norm.name}</span>
+                      <span className="text-[10px] text-slate-700 font-bold truncate max-w-[140px]">{norm.name}</span>
                    </div>
-                   <div className="flex items-center gap-4">
-                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{norm.value} Oblig.</span>
-                      <ChevronRight size={14} className="text-slate-300" />
+                   <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">{norm.value}</span>
+                </div>
+             ))}
+          </div>
+        </div>
+
+        {/* Top Actors */}
+        <div className="lg:col-span-1 space-y-6">
+          <h3 className="font-bold text-slate-900 px-1 text-sm">Most Frequent Actors</h3>
+          <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden divide-y divide-slate-50 h-72">
+             {stats.topActors.map((actor, i) => (
+                <div key={i} className="px-5 py-3.5 flex items-center justify-between hover:bg-slate-50 transition-colors group">
+                   <div className="flex items-center gap-3">
+                      <span className="text-[10px] text-slate-700 font-bold truncate max-w-[140px]">{actor.name}</span>
                    </div>
+                   <span className="text-[10px] font-bold text-slate-400">{actor.value} refs</span>
                 </div>
              ))}
           </div>
