@@ -43,6 +43,7 @@
 - markdown/mexico_capacity_building_entry_points.md
 
 ## Vercel Deployment Settings
+- **SPA Routing:** Added vercel.json with index.html rewrite.
 - **Project Name:** normtrace-ihr-mexico
 - **Framework Preset:** Vite
 - **Root Directory:** 05_webapp
