@@ -1,73 +1,45 @@
-# React + TypeScript + Vite
+# NormTrace-IHR Webapp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+This is the frontend MVP for the NormTrace-IHR Mexico Pilot. It provides a policy-facing interface for exploring preliminary legal-institutional mapping between IHR 2005 obligations and Mexico’s domestic legal architecture.
 
-Currently, two official plugins are available:
+## What the app does
+- displays IHR 2005 mapping results;
+- shows anchoring levels and gap types;
+- explores Mexican legal provisions;
+- displays actors and institutional relationships;
+- shows implementation gap areas for IHR 2024 and Pandemic Agreement readiness;
+- provides printable reports.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What the app does not do
+- does not assess legal compliance;
+- does not provide legal advice;
+- does not generate new legal analysis in real time;
+- does not expose raw data downloads in the public version.
 
-## React Compiler
+## Data source
+The app uses the cleaned audited data package:
+04_outputs/exports/data_package_v0_1/
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+At build time or setup, selected files are copied to:
+05_webapp/public/data/
 
-## Expanding the ESLint configuration
+## Methodology note
+NormTrace-IHR is a country-specific legal-institutional mapping workflow, not a generic keyword matching system.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Development
+- npm install
+- npm run dev
+- npm run build
+- npm run preview
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Vercel deployment
+- **Root Directory:** 05_webapp
+- **Build Command:** npm run build
+- **Output Directory:** dist
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Version
+Mexico Pilot v0.1
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Status
+Preliminary expert review version.
