@@ -1,0 +1,290 @@
+{
+  "generated": "2026-05-07",
+  "pipeline": "build_mexico_ihr_network.py",
+  "version": "0.1",
+  "status": "preliminary_ai_assisted",
+  "caution": "Corpus-derived legal-institutional traceability network. Not an observed operational coordination network. Centrality = legal-institutional salience in documented corpus only.",
+  "node_count": 404,
+  "edge_count": 676,
+  "node_type_counts": {
+    "actor": 18,
+    "legal_instrument": 18,
+    "domestic_provision": 111,
+    "ihr2005_obligation": 45,
+    "implementation_domain": 14,
+    "ihr2024_change": 57,
+    "pandemic_agreement_obligation": 83,
+    "pabs_draft_obligation": 38,
+    "gap_type": 20
+  },
+  "edge_rel_counts": {
+    "has_legal_basis_in": 27,
+    "mentions_actor": 70,
+    "grants_power_to": 48,
+    "creates_duty_for": 45,
+    "creates_procedure_for": 36,
+    "coordinates_with": 41,
+    "belongs_to": 110,
+    "anchors_obligation": 7,
+    "linked_to_gap_type": 58,
+    "partially_anchors_obligation": 39,
+    "indirectly_anchors_obligation": 32,
+    "requires_review_for": 2,
+    "linked_to_implementation_domain": 119,
+    "linked_to_ihr2024_change": 42
+  },
+  "top_actors_degree": [
+    {
+      "node_id": "MEX_ACTOR_SS_001",
+      "label": "Secretaría de Salud",
+      "degree": 59,
+      "betweenness": 0.001222
+    },
+    {
+      "node_id": "MEX_ACTOR_CONGRESS_001",
+      "label": "Congreso de la Unión",
+      "degree": 7,
+      "betweenness": 2.5e-05
+    },
+    {
+      "node_id": "MEX_ACTOR_DGE_001",
+      "label": "Dirección General de Epidemiología",
+      "degree": 5,
+      "betweenness": 0.0
+    },
+    {
+      "node_id": "MEX_ACTOR_CSG_001",
+      "label": "Consejo de Salubridad General",
+      "degree": 4,
+      "betweenness": 2.5e-05
+    },
+    {
+      "node_id": "MEX_ACTOR_SRE_001",
+      "label": "Secretaría de Relaciones Exteriores",
+      "degree": 3,
+      "betweenness": 6e-06
+    },
+    {
+      "node_id": "MEX_ACTOR_STATES_001",
+      "label": "Entidades federativas (gobiernos estatales — 32 entidades)",
+      "degree": 3,
+      "betweenness": 6e-06
+    },
+    {
+      "node_id": "MEX_ACTOR_INAI_001",
+      "label": "Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI) / Transparencia para el Pueblo",
+      "degree": 3,
+      "betweenness": 0.0
+    },
+    {
+      "node_id": "MEX_ACTOR_CHAMBER_DEPUTIES_001",
+      "label": "Cámara de Diputados",
+      "degree": 2,
+      "betweenness": 6e-06
+    },
+    {
+      "node_id": "MEX_ACTOR_ASF_001",
+      "label": "Auditoría Superior de la Federación",
+      "degree": 2,
+      "betweenness": 0.0
+    },
+    {
+      "node_id": "MEX_ACTOR_COFEPRIS_001",
+      "label": "Comisión Federal para la Protección contra Riesgos Sanitarios (COFEPRIS)",
+      "degree": 1,
+      "betweenness": 0.0
+    }
+  ],
+  "top_actors_betweenness": [
+    {
+      "node_id": "MEX_ACTOR_SS_001",
+      "label": "Secretaría de Salud",
+      "degree": 59,
+      "betweenness": 0.001222
+    },
+    {
+      "node_id": "MEX_ACTOR_CSG_001",
+      "label": "Consejo de Salubridad General",
+      "degree": 4,
+      "betweenness": 2.5e-05
+    },
+    {
+      "node_id": "MEX_ACTOR_CONGRESS_001",
+      "label": "Congreso de la Unión",
+      "degree": 7,
+      "betweenness": 2.5e-05
+    },
+    {
+      "node_id": "MEX_ACTOR_SRE_001",
+      "label": "Secretaría de Relaciones Exteriores",
+      "degree": 3,
+      "betweenness": 6e-06
+    },
+    {
+      "node_id": "MEX_ACTOR_STATES_001",
+      "label": "Entidades federativas (gobiernos estatales — 32 entidades)",
+      "degree": 3,
+      "betweenness": 6e-06
+    },
+    {
+      "node_id": "MEX_ACTOR_CHAMBER_DEPUTIES_001",
+      "label": "Cámara de Diputados",
+      "degree": 2,
+      "betweenness": 6e-06
+    },
+    {
+      "node_id": "MEX_ACTOR_DGE_001",
+      "label": "Dirección General de Epidemiología",
+      "degree": 5,
+      "betweenness": 0.0
+    },
+    {
+      "node_id": "MEX_ACTOR_COFEPRIS_001",
+      "label": "Comisión Federal para la Protección contra Riesgos Sanitarios (COFEPRIS)",
+      "degree": 1,
+      "betweenness": 0.0
+    },
+    {
+      "node_id": "MEX_ACTOR_CENAPRECE_001",
+      "label": "Centro Nacional de Programas Preventivos y Control de Enfermedades (CENAPRECE)",
+      "degree": 1,
+      "betweenness": 0.0
+    },
+    {
+      "node_id": "MEX_ACTOR_SEGOB_001",
+      "label": "Secretaría de Gobernación",
+      "degree": 1,
+      "betweenness": 0.0
+    }
+  ],
+  "top_instruments": [
+    {
+      "node_id": "MEX-002",
+      "label": "Ley General de Salud",
+      "degree": 23
+    },
+    {
+      "node_id": "MEX-004",
+      "label": "CPEUM latest reform 2026-04-23",
+      "degree": 22
+    },
+    {
+      "node_id": "MEX-016",
+      "label": "Reglamento LGS sanidad internacional",
+      "degree": 20
+    },
+    {
+      "node_id": "MEX-017",
+      "label": "Reglamento Interior SS 2025",
+      "degree": 14
+    },
+    {
+      "node_id": "MEX-015",
+      "label": "Reglamento LGS investigación para la salud",
+      "degree": 10
+    },
+    {
+      "node_id": "MEX-009",
+      "label": "LOAPF",
+      "degree": 9
+    },
+    {
+      "node_id": "MEX-001",
+      "label": "Ley aprobación tratados materia económica",
+      "degree": 5
+    },
+    {
+      "node_id": "MEX-003",
+      "label": "Ley celebración de tratados",
+      "degree": 5
+    },
+    {
+      "node_id": "MEX-006",
+      "label": "LFPRH",
+      "degree": 5
+    },
+    {
+      "node_id": "MEX-012",
+      "label": "NOM-017 vigilancia epidemiológica",
+      "degree": 5
+    }
+  ],
+  "top_obligations_by_anchors": [
+    {
+      "obligation_id": "IHR-OBL-001",
+      "label": "IHR Art. 4 — Responsible authorities",
+      "anchor_count": 3
+    },
+    {
+      "obligation_id": "IHR-OBL-002",
+      "label": "IHR Art. 5(1) — Surveillance",
+      "anchor_count": 3
+    },
+    {
+      "obligation_id": "IHR-OBL-004",
+      "label": "IHR Art. 6(1) — Notification",
+      "anchor_count": 3
+    },
+    {
+      "obligation_id": "IHR-OBL-010",
+      "label": "IHR Art. 13(1) — Public health response",
+      "anchor_count": 3
+    },
+    {
+      "obligation_id": "IHR-OBL-016",
+      "label": "IHR Annex 1B, par.1 — Core capacity — designated PoE baseline (at all times)",
+      "anchor_count": 3
+    },
+    {
+      "obligation_id": "IHR-OBL-003",
+      "label": "IHR Art. 5(2) — Surveillance",
+      "anchor_count": 2
+    },
+    {
+      "obligation_id": "IHR-OBL-005",
+      "label": "IHR Art. 6(2) — Notification",
+      "anchor_count": 2
+    },
+    {
+      "obligation_id": "IHR-OBL-006",
+      "label": "IHR Art. 7 — Information-sharing during unexpected or unusual public health events",
+      "anchor_count": 2
+    },
+    {
+      "obligation_id": "IHR-OBL-007",
+      "label": "IHR Art. 8 — Consultation",
+      "anchor_count": 2
+    },
+    {
+      "obligation_id": "IHR-OBL-012",
+      "label": "IHR Annex 1A, par.4 — Core capacity — community and primary public health response level",
+      "anchor_count": 2
+    }
+  ],
+  "gap_type_link_freq": [
+    {
+      "gap_type": "procedural gap",
+      "links": 20
+    },
+    {
+      "gap_type": "regulatory gap",
+      "links": 16
+    },
+    {
+      "gap_type": "partial regulatory gap",
+      "links": 9
+    },
+    {
+      "gap_type": "rights safeguard gap",
+      "links": 6
+    },
+    {
+      "gap_type": "full gap",
+      "links": 5
+    },
+    {
+      "gap_type": "coordination gap",
+      "links": 2
+    }
+  ]
+}
