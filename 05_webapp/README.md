@@ -29,3 +29,6 @@ cd 05_webapp
 npm install
 npm run dev # run in dev mode
 ```
+
+## Methodology Source
+The Methodology page renders content from `00_project/normtrace_ihr_methodology_full.md`, which is synced to `05_webapp/public/data/markdown/normtrace_ihr_methodology_full.md` during the build process.

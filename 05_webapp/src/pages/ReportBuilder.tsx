@@ -5,14 +5,13 @@ import {
   Layers, Users, AlertTriangle, BookOpen
 } from 'lucide-react';
 import { cn } from '../lib/utils';
+import { useCsvData } from '../hooks/useData';
 
 const SECTIONS = [
   { id: 'cover', label: 'Cover Page', icon: FileText, always: true },
   { id: 'executive', label: 'Executive Summary', icon: Info },
   { id: 'dashboard', label: 'Dashboard Summary', icon: Layers },
-  { id: 'instruments', label: 'Instruments Assessed', icon: Shield },
   { id: 'mapping', label: 'IHR 2005 Mapping Summary', icon: GitMerge },
-  { id: 'anchoring', label: 'IHR Legal Anchoring Checklist', icon: CheckCircle },
   { id: 'provisions', label: 'Legal Provisions Corpus Overview', icon: BookOpen },
   { id: 'actors', label: 'Actor Network and Actor Table', icon: Users },
   { id: 'gaps', label: 'Implementation Gap Map', icon: AlertTriangle },
@@ -23,6 +22,10 @@ const SECTIONS = [
 
 export default function ReportBuilder() {
   const [selected, setSelected] = useState<Set<string>>(new Set(SECTIONS.map(s => s.id)));
+  const { data: mappingData } = useCsvData<any>('mexico_ihr2005_mapping_clean.csv');
+  const { data: gapData } = useCsvData<any>('mexico_implementation_gap_map_clean.csv');
+  const { data: provisionData } = useCsvData<any>('mexico_legal_provisions_clean.csv');
+  const { data: actorData } = useCsvData<any>('mexico_health_governance_actors_clean.csv');
 
   const toggleSection = (id: string) => {
     const next = new Set(selected);
@@ -48,41 +51,44 @@ export default function ReportBuilder() {
          <div className="flex gap-4 pt-2">
             <button
               onClick={handlePrint}
-              className="px-6 py-3 bg-blue-600 text-white rounded-xl font-bold flex items-center gap-2 hover:bg-blue-700 transition-all shadow-lg shadow-blue-200"
+              className="flex items-center gap-2 px-6 py-3 bg-blue-900 text-white rounded-xl text-sm font-bold hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20"
             >
-               <Printer size={18} /> Print / Save as PDF
+               <Printer size={16} /> Print / Export PDF
             </button>
-            <div className="p-3 bg-amber-50 border border-amber-100 rounded-xl flex gap-3 flex-1">
-               <Info size={16} className="text-amber-500 shrink-0 mt-0.5" />
-               <p className="text-[10px] text-amber-900 leading-relaxed italic">
-                  The report is generated from the current audited data package. It is not a legal opinion or compliance assessment. Preliminary expert review version.
-               </p>
-            </div>
+            <button className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 text-slate-600 rounded-xl text-sm font-bold hover:bg-slate-50 transition-all">
+               <Download size={16} /> Download CSV Package
+            </button>
          </div>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 print:hidden">
+      <div className="print:hidden grid grid-cols-1 md:grid-cols-2 gap-12 pt-8">
          <div className="space-y-6">
-            <h3 className="font-bold text-slate-900 px-1">Report Content Sections</h3>
-            <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden divide-y divide-slate-50">
+            <h3 className="font-bold text-slate-900 px-1">Report Contents</h3>
+            <div className="space-y-2">
                {SECTIONS.map((section) => (
                   <button
                     key={section.id}
                     onClick={() => toggleSection(section.id)}
                     className={cn(
-                      "w-full px-5 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors",
-                      selected.has(section.id) ? "bg-blue-50/30" : "opacity-60"
+                      "w-full flex items-center justify-between p-4 rounded-2xl border transition-all text-left group",
+                      selected.has(section.id)
+                        ? "bg-white border-blue-200 shadow-sm"
+                        : "bg-slate-50 border-transparent text-slate-400 opacity-60"
                     )}
                   >
-                     <div className="flex items-center gap-3">
-                        <div className={cn("p-2 rounded-lg", selected.has(section.id) ? "bg-blue-100 text-blue-700" : "bg-slate-100 text-slate-400")}>
-                           <section.icon size={16} />
+                     <div className="flex items-center gap-4">
+                        <div className={cn(
+                          "p-2 rounded-lg transition-colors",
+                          selected.has(section.id) ? "bg-blue-50 text-blue-600" : "bg-slate-100 text-slate-400"
+                        )}>
+                           <section.icon size={18} />
                         </div>
-                        <span className={cn("text-sm font-bold", selected.has(section.id) ? "text-slate-900" : "text-slate-500")}>
-                           {section.label}
-                        </span>
+                        <div>
+                           <p className="text-xs font-bold">{section.label}</p>
+                           {section.always && <p className="text-[10px] text-slate-400 font-medium">Required Section</p>}
+                        </div>
                      </div>
-                     {selected.has(section.id) ? <CheckCircle size={16} className="text-blue-600" /> : <div className="w-4 h-4 border-2 border-slate-200 rounded-full" />}
+                     {selected.has(section.id) && <CheckCircle size={16} className="text-blue-500" />}
                   </button>
                ))}
             </div>
@@ -182,6 +188,69 @@ export default function ReportBuilder() {
                         <li>Gaps in intersectoral coordination for Points of Entry and PABS-readiness require further regulatory clarification.</li>
                      </ul>
                   </div>
+               </div>
+            </div>
+         )}
+
+         {/* Mapping Summary Table */}
+         {selected.has('mapping') && mappingData.length > 0 && (
+            <div className="page-break-before space-y-8">
+               <h2 className="text-3xl font-bold border-l-4 border-blue-600 pl-6">IHR 2005 Mapping Summary</h2>
+               <div className="text-sm overflow-hidden border border-slate-200 rounded-xl">
+                  <table className="w-full text-left border-collapse">
+                     <thead className="bg-slate-50 border-b border-slate-200">
+                        <tr>
+                           <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">ID</th>
+                           <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">IHR Obligation (Simplified)</th>
+                           <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">Domestic Norm</th>
+                           <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">Level</th>
+                           <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">Match</th>
+                        </tr>
+                     </thead>
+                     <tbody className="divide-y divide-slate-100">
+                        {mappingData.slice(0, 40).map((row: any, i: number) => (
+                           <tr key={i} className="align-top">
+                              <td className="p-4 font-mono text-[10px] font-bold text-blue-900">{row.obligation_id}</td>
+                              <td className="p-4 font-medium text-slate-700 max-w-xs truncate">{row.ihr_obligation_simplified}</td>
+                              <td className="p-4 text-slate-600">{row.domestic_norm}</td>
+                              <td className="p-4 font-bold text-slate-900">{row.anchoring_level}</td>
+                              <td className="p-4 text-[10px] uppercase font-bold text-slate-500">{row.match_type}</td>
+                           </tr>
+                        ))}
+                     </tbody>
+                  </table>
+                  <div className="p-4 bg-slate-50 border-t border-slate-200 text-[10px] italic text-slate-500">
+                     Showing first 40 rows. Total mappings: {mappingData.length}.
+                  </div>
+               </div>
+            </div>
+         )}
+
+         {/* Implementation Gap Map */}
+         {selected.has('gaps') && gapData.length > 0 && (
+            <div className="page-break-before space-y-8">
+               <h2 className="text-3xl font-bold border-l-4 border-blue-600 pl-6">Implementation Gap Map</h2>
+               <div className="text-sm overflow-hidden border border-slate-200 rounded-xl">
+                  <table className="w-full text-left border-collapse">
+                     <thead className="bg-slate-50 border-b border-slate-200">
+                        <tr>
+                           <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">Area</th>
+                           <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">IHR 2005 Anchoring</th>
+                           <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">Main Gap Type</th>
+                           <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">IHR 2024 Implication</th>
+                        </tr>
+                     </thead>
+                     <tbody className="divide-y divide-slate-100">
+                        {gapData.map((row: any, i: number) => (
+                           <tr key={i} className="align-top">
+                              <td className="p-4 font-bold text-slate-900">{row.area}</td>
+                              <td className="p-4 text-slate-600 text-xs">{row.current_ihr2005_anchoring_pattern}</td>
+                              <td className="p-4 font-medium text-red-700">{row.main_gap_type}</td>
+                              <td className="p-4 text-slate-700 text-xs">{row.ihr2024_implication}</td>
+                           </tr>
+                        ))}
+                     </tbody>
+                  </table>
                </div>
             </div>
          )}

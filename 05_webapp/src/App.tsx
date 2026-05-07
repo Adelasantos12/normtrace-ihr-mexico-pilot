@@ -10,6 +10,7 @@ import CountrySnapshot from './pages/CountrySnapshot';
 import Instruments from './pages/Instruments';
 import Methodology from './pages/Methodology';
 import ReportBuilder from './pages/ReportBuilder';
+import CapacityBrief from './pages/CapacityBrief';
 import './App.css';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/actors" element={<ActorsExplorer />} />
           <Route path="/gap-map" element={<GapMap />} />
           <Route path="/snapshot" element={<CountrySnapshot />} />
+          <Route path="/capacity" element={<CapacityBrief />} />
           <Route path="/international" element={<Instruments />} />
           <Route path="/methodology" element={<Methodology />} />
           <Route path="/report" element={<ReportBuilder />} />

@@ -4,7 +4,7 @@ import {
   Loader2, GitBranch, Search, Filter, Info, ChevronDown, ChevronRight
 } from 'lucide-react';
 import { useCsvData } from '../hooks/useData';
-import { cn, toSafeLower } from '../lib/utils';
+import { cn } from '../lib/utils';
 
 export default function ActorsExplorer() {
   const { data, loading, error } = useCsvData<any>('mexico_health_governance_actors_clean.csv');
@@ -18,8 +18,8 @@ export default function ActorsExplorer() {
 
   const filteredActors = useMemo(() => {
     return data.filter(actor =>
-      toSafeLower(actor.actor_name).includes(toSafeLower(search)) ||
-      toSafeLower(actor.actor_id).includes(toSafeLower(search))
+      actor.actor_name.toLowerCase().includes(search.toLowerCase()) ||
+      actor.actor_id.toLowerCase().includes(search.toLowerCase())
     );
   }, [data, search]);
 

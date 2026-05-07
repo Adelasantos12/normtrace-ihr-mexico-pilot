@@ -12,7 +12,7 @@ import {
 import { useCsvData } from '../hooks/useData';
 import { cn, getAnchoringLabel } from '../lib/utils';
 import { getLegalDomain } from '../lib/domainGrouping';
-import { InstrumentsPanel } from '../components/InstrumentsPanel';
+import { InstrumentsPanel } from '../InstrumentsPanel';
 
 export default function Dashboard() {
   const { data: mappingData, loading: mLoading } = useCsvData<any>('mexico_ihr2005_mapping_clean.csv');

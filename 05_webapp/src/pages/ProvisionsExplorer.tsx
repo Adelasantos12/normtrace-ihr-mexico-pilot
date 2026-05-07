@@ -1,13 +1,13 @@
-import { Fragment, useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import {
   Search, Filter, ChevronDown, ChevronRight,
   ShieldCheck, Database, Layers, Users, FileText,
   AlertCircle, Loader2, BookOpen
 } from 'lucide-react';
 import { useCsvData } from '../hooks/useData';
-import { cn, toSafeLower } from '../lib/utils';
+import { cn } from '../lib/utils';
 import { getLegalDomain } from '../lib/domainGrouping';
-import { InstrumentsPanel } from '../components/InstrumentsPanel';
+import { InstrumentsPanel } from '../InstrumentsPanel';
 
 export default function ProvisionsExplorer() {
   const { data, loading, error } = useCsvData<any>('mexico_legal_provisions_clean.csv');
@@ -25,9 +25,9 @@ export default function ProvisionsExplorer() {
     return data.filter(row => {
       const domain = getLegalDomain(row.sector, row.subsector);
       const matchesSearch =
-        toSafeLower(row.norm_title).includes(toSafeLower(search)) ||
-        toSafeLower(row.provision_text).includes(toSafeLower(search)) ||
-        toSafeLower(row.provision_id).includes(toSafeLower(search));
+        row.norm_title.toLowerCase().includes(search.toLowerCase()) ||
+        row.provision_text.toLowerCase().includes(search.toLowerCase()) ||
+        row.provision_id.toLowerCase().includes(search.toLowerCase());
 
       const matchesTopic = !filters.topic || row.topic === filters.topic;
       const matchesActor = !filters.actor_mentioned || row.actor_mentioned === filters.actor_mentioned;
@@ -116,7 +116,7 @@ export default function ProvisionsExplorer() {
                 const isExpanded = expandedRows.has(row.provision_id);
                 const domain = getLegalDomain(row.sector, row.subsector);
                 return (
-                  <Fragment key={row.provision_id}>
+                  <React.Fragment key={row.provision_id}>
                     <tr
                       className={cn(
                         "hover:bg-slate-50/80 cursor-pointer transition-colors align-top",
@@ -226,7 +226,7 @@ export default function ProvisionsExplorer() {
                         </td>
                       </tr>
                     )}
-                  </Fragment>
+                  </React.Fragment>
                 );
               })}
             </tbody>
