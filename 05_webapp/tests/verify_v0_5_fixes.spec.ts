@@ -43,3 +43,13 @@ test('verify Methodology v0.5 fixes', async ({ page }) => {
   await expect(page.locator('.workflow-container')).toBeVisible();
   await expect(page.getByText('International Instrument', { exact: true })).toBeVisible();
 });
+
+test('verify Provisions Explorer hotfix', async ({ page }) => {
+  await page.goto('/provisions');
+
+  // Verify that the table is visible (which implies React is defined)
+  await expect(page.locator('table')).toBeVisible();
+
+  // Check for some content
+  await expect(page.getByText('Norm & Article')).toBeVisible();
+});

@@ -10,3 +10,7 @@
 - **tables rendered correctly**: yes (remark-gfm enabled, responsive scrolling added)
 - **build result**: success
 - **remaining known issues**: none identified in this scope.
+
+## Hotfix (Revision 0.5.1)
+- **bug fixed**: ReferenceError: React is not defined in ProvisionsExplorer.tsx
+- **fix applied**: added missing `import React` to ProvisionsExplorer.tsx to support `React.Fragment` in production build.
