@@ -2,12 +2,16 @@
 
 ## Executive summary
 
-### What this methodology solves
-> - Existing IHR monitoring tools are useful but do not fully reconstruct domestic legal anchoring.
-> - SPAR is standardized and recurrent but self-reported.
-> - JEE, AAR and SimEx add external and functional assessment layers but do not map each international obligation to domestic legal authority, actors, procedures and safeguards.
-> - NormTrace-IHR adds a country-specific legal-institutional conversion layer.
-> - The output is not a compliance score; it is a traceability and review infrastructure.
+<div class="methodology-callout important">
+<h3>What this methodology solves</h3>
+<ul>
+  <li>Existing IHR monitoring tools are useful but do not fully reconstruct domestic legal anchoring.</li>
+  <li>SPAR is standardized and recurrent but self-reported.</li>
+  <li>JEE, AAR and SimEx add external and functional assessment layers but do not map each international obligation to domestic legal authority, actors, procedures and safeguards.</li>
+  <li>NormTrace-IHR adds a country-specific legal-institutional conversion layer.</li>
+  <li>The output is not a compliance score; it is a traceability and review infrastructure.</li>
+</ul>
+</div>
 
 NormTrace-IHR does **not** replace IHR monitoring instruments. It complements them by adding a legal-institutional conversion layer between international obligations and reported capacities.
 
@@ -47,25 +51,6 @@ Capacity-building needs more specific information about domestic legal instrumen
 | IHR 2024 update layer | What requires adaptation under 2024 amendments? | IHR 2024 amendments | Update-review flags |
 | Pandemic Agreement / PABS readiness layer | What is legally pre-positioned for PA/PABS? | PA/PABS-related obligations | Readiness mapping |
 | Technical validation | Is the dataset coherent and auditable? | Validation scripts and checks | Audit outputs |
-
-## Why this is not keyword matching
-
-**Note:** NormTrace-IHR does not simply match words between the IHR and Mexican laws. It first reconstructs Mexico’s constitutional, federal, administrative, health-governance and regulatory architecture. Matching is then performed within that country-specific legal logic.
-
-## Country-specific legal brain
-
-| Component | Why it matters for IHR mapping |
-|---|---|
-| constitutional architecture | Defines foundational powers, limits and legal validity routes. |
-| treaty effect | Clarifies how international obligations enter domestic law. |
-| legal hierarchy | Distinguishes legal force between laws, regulations, NOMs and agreements. |
-| federalism | Determines distribution of competences across federal and subnational levels. |
-| health governance | Locates sector-specific mandates and institutional authority chains. |
-| public administration | Frames delegation, procedure and administrative execution powers. |
-| regulatory instruments | Identifies operational legal vehicles beyond primary legislation. |
-| legislative drafting patterns | Interprets legal effect of drafting formulas in Mexican normative practice. |
-| oversight and accountability | Identifies review, control and safeguard mechanisms. |
-| legal anchoring rules | Applies consistent criteria for classifying anchoring strength. |
 
 ## Source corpus workflow
 
@@ -141,7 +126,9 @@ Capacity-building needs more specific information about domestic legal instrumen
 | 4 | General statutory anchoring | Function recognized in statutory text at general level. | It does not imply complete operational design. |
 | 5 | Specific legal-institutional anchoring | Function anchored with identifiable legal authority and operative framing. | It does not measure real-world compliance/performance. |
 
-> **Emphasis:** The scale measures identifiable legal-institutional anchoring in the available corpus. It does not measure compliance or actual operational performance.
+<div class="methodology-callout note">
+<strong>Emphasis:</strong> The scale measures identifiable legal-institutional anchoring in the available corpus. It does not measure compliance or actual operational performance.
+</div>
 
 ## Gap typology
 
@@ -183,11 +170,37 @@ SPAR is useful, standardized and recurrent, but self-reported. JEE, AAR and SimE
 | obligation mapping | AI-assisted + rule-based review | preliminary mappings | yes |
 | legal validation | human expert | validated interpretation | yes (final authority) |
 
-**Emphasis:** AI is used for assisted structuring and preliminary classification, not as final legal authority.
+<div class="methodology-callout note">
+<strong>Emphasis:</strong> AI is used for assisted structuring and preliminary classification, not as final legal authority.
+</div>
 
 ## Workflow diagram
 
-**Workflow layer:** International Instrument → Obligation Classification + Domestic Legal Corpus → Mexico Legal Brain → Provision Extraction → Legal Anchoring Assessment → Gap Typology → Capacity-Building Entry Points (+ IHR 2024 update layer, + Pandemic Agreement/PABS readiness).
+<div class="workflow-container">
+  <div class="workflow-step">
+    <div class="step-number">1</div>
+    <div class="step-title">International Instrument</div>
+    <div class="step-desc">Obligation Classification</div>
+  </div>
+  <div class="workflow-arrow">→</div>
+  <div class="workflow-step">
+    <div class="step-number">2</div>
+    <div class="step-title">Domestic Legal Corpus</div>
+    <div class="step-desc">Mexico Legal Brain Rules</div>
+  </div>
+  <div class="workflow-arrow">→</div>
+  <div class="workflow-step">
+    <div class="step-number">3</div>
+    <div class="step-title">Provision Extraction</div>
+    <div class="step-desc">Actor & Competence Mapping</div>
+  </div>
+  <div class="workflow-arrow">→</div>
+  <div class="workflow-step">
+    <div class="step-number">4</div>
+    <div class="step-title">Anchoring Assessment</div>
+    <div class="step-desc">Gap Typology & Entry Points</div>
+  </div>
+</div>
 
 ## Limits
 
