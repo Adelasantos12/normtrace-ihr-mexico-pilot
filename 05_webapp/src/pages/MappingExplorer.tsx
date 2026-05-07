@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { Fragment, useState, useMemo } from 'react';
 import {
   Search, ChevronDown, ChevronRight,
   Loader2, GitMerge,
@@ -114,7 +114,7 @@ export default function MappingExplorer() {
                 const id = `${row.obligation_id}-${row.domestic_provision_id}`;
                 const isExpanded = expandedRows.has(id);
                 return (
-                  <React.Fragment key={id}>
+                  <Fragment key={id}>
                     <tr
                       className={cn(
                         "hover:bg-slate-50 transition-colors cursor-pointer align-top",
@@ -203,7 +203,7 @@ export default function MappingExplorer() {
                         </td>
                       </tr>
                     )}
-                  </React.Fragment>
+                  </Fragment>
                 );
               })}
             </tbody>

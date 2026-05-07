@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { Fragment, useState, useMemo } from 'react';
 import {
   Search, Filter, ChevronDown, ChevronRight,
   ShieldCheck, Database, Layers, Users, FileText,
@@ -116,7 +116,7 @@ export default function ProvisionsExplorer() {
                 const isExpanded = expandedRows.has(row.provision_id);
                 const domain = getLegalDomain(row.sector, row.subsector);
                 return (
-                  <React.Fragment key={row.provision_id}>
+                  <Fragment key={row.provision_id}>
                     <tr
                       className={cn(
                         "hover:bg-slate-50/80 cursor-pointer transition-colors align-top",
@@ -226,7 +226,7 @@ export default function ProvisionsExplorer() {
                         </td>
                       </tr>
                     )}
-                  </React.Fragment>
+                  </Fragment>
                 );
               })}
             </tbody>
