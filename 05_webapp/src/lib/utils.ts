@@ -36,3 +36,7 @@ export function getConfidenceColor(level: string) {
   };
   return colors[level.toLowerCase()] || 'text-slate-700 bg-slate-50 border-slate-200';
 }
+
+export function toSafeLower(value: unknown) {
+  return String(value ?? '').toLowerCase();
+}
