@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { ChevronDown, ChevronRight, Search, Filter, Shield, ExternalLink, Info } from 'lucide-react';
-import { cn } from '../lib/utils';
+import { cn, toSafeLower } from '../lib/utils';
 import { getLegalDomain } from '../lib/domainGrouping';
 
 interface Instrument {
@@ -25,8 +25,8 @@ export function InstrumentsPanel({ instruments }: { instruments: Instrument[] })
   const filteredInstruments = useMemo(() => {
     return instruments.filter(inst => {
       const domain = getLegalDomain(inst.sector, inst.subsector);
-      const matchesSearch = inst.norm_title.toLowerCase().includes(search.toLowerCase()) ||
-                           inst.short_title.toLowerCase().includes(search.toLowerCase());
+      const matchesSearch = toSafeLower(inst.norm_title).includes(toSafeLower(search)) ||
+                           toSafeLower(inst.short_title).includes(toSafeLower(search));
       const matchesDomain = !domainFilter || domain === domainFilter;
       const matchesHierarchy = !hierarchyFilter || inst.normative_hierarchy === hierarchyFilter;
       return matchesSearch && matchesDomain && matchesHierarchy;

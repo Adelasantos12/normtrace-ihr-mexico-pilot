@@ -5,7 +5,7 @@ import {
   AlertCircle, Loader2, BookOpen
 } from 'lucide-react';
 import { useCsvData } from '../hooks/useData';
-import { cn } from '../lib/utils';
+import { cn, toSafeLower } from '../lib/utils';
 import { getLegalDomain } from '../lib/domainGrouping';
 import { InstrumentsPanel } from '../components/InstrumentsPanel';
 
@@ -25,9 +25,9 @@ export default function ProvisionsExplorer() {
     return data.filter(row => {
       const domain = getLegalDomain(row.sector, row.subsector);
       const matchesSearch =
-        row.norm_title.toLowerCase().includes(search.toLowerCase()) ||
-        row.provision_text.toLowerCase().includes(search.toLowerCase()) ||
-        row.provision_id.toLowerCase().includes(search.toLowerCase());
+        toSafeLower(row.norm_title).includes(toSafeLower(search)) ||
+        toSafeLower(row.provision_text).includes(toSafeLower(search)) ||
+        toSafeLower(row.provision_id).includes(toSafeLower(search));
 
       const matchesTopic = !filters.topic || row.topic === filters.topic;
       const matchesActor = !filters.actor_mentioned || row.actor_mentioned === filters.actor_mentioned;
