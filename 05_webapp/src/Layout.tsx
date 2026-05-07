@@ -28,7 +28,7 @@ export default function Layout() {
       {/* Sidebar - hidden in print */}
       <aside className="w-64 bg-white border-r border-slate-200 flex flex-col fixed inset-y-0 print:hidden">
         <div className="p-8 border-b border-slate-100 bg-white">
-          <h2 className="text-xl font-black text-blue-900 tracking-tight">NormTrace-IHR</h2>
+          <h2 className="text-xl font-black text-[#0f172a] tracking-tight">NormTrace-IHR</h2>
           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1">Mexico Pilot v0.1</p>
         </div>
 
@@ -127,7 +127,7 @@ export default function Layout() {
             <div className="p-6 bg-slate-50 border-t border-slate-200 flex justify-end">
               <button
                 onClick={() => setShowCaveat(false)}
-                className="px-8 py-3 bg-blue-900 text-white rounded-xl text-sm font-bold hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20 active:scale-95"
+                className="px-8 py-3 bg-[#0f172a] text-white rounded-xl text-sm font-bold hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20 active:scale-95"
               >
                 Understood
               </button>

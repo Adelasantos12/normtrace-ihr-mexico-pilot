@@ -1,98 +1,101 @@
 import { useMemo, useState } from 'react';
 import { useCsvData } from '../hooks/useData';
+import {
+  Users, Share2, BarChart3, Search, Filter,
+  Info, AlertTriangle, Shield, Globe, ExternalLink,
+  ChevronDown, ChevronRight
+} from 'lucide-react';
+import { cn } from '../lib/utils';
 
-const EXPECTED = [
-  'actor_id',
-  'actor_name',
-  'legal_nature',
-  'government_level',
-  'sector',
-  'legal_basis',
-  'core_functions',
-  'ihr_relevance',
-  'pandemic_agreement_relevance',
-  'instruments_it_can_issue',
-  'coordination_role',
-  'limitations',
-  'source_norm',
-  'source_article'
-];
+type Tab = 'map' | 'inventory' | 'metrics';
 
 const LABELS: Record<string, string> = {
-  sector: 'Sector',
-  legal_basis: 'Legal basis',
-  core_functions: 'Core functions',
-  ihr_relevance: 'IHR relevance',
-  pandemic_agreement_relevance: 'Pandemic Agreement relevance',
-  instruments_it_can_issue: 'Instruments it can issue',
-  coordination_role: 'Coordination role',
-  limitations: 'Limitations',
-  source_norm: 'Source norm',
-  source_article: 'Source article'
+  actor_name: 'Official Name',
+  legal_nature: 'Legal Nature',
+  government_level: 'Government Level',
+  legal_basis: 'Primary Legal Basis',
+  ihr_relevant_functions: 'IHR Relevant Functions',
+  coordination_role: 'Coordination Role',
+  oversight_mechanisms: 'Oversight Mechanisms',
+  review_need_status: 'Review Status',
+  reviewer_notes: 'Reviewer Notes'
 };
 
 const DISPLAY_FIELDS = [
-  'sector',
+  'legal_nature',
+  'government_level',
   'legal_basis',
-  'source_norm',
-  'source_article',
-  'core_functions',
-  'ihr_relevance',
-  'pandemic_agreement_relevance',
-  'instruments_it_can_issue',
+  'ihr_relevant_functions',
   'coordination_role',
-  'limitations'
+  'oversight_mechanisms'
 ];
 
 export default function ActorsExplorer() {
-  const { data, loading, error } = useCsvData<any>('mexico_health_governance_actors_clean.csv');
-  const { data: edges } = useCsvData<any>('derived/actor_network_edges_derived.csv');
-  const [tab, setTab] = useState<'map' | 'inventory'>('map');
+  const { data: actors, loading: l1 } = useCsvData<any>('mexico_health_governance_actors_clean.csv');
+  const { data: edges, loading: l2 } = useCsvData<any>('derived/actor_network_edges_derived.csv');
+  const [tab, setTab] = useState<Tab>('map');
   const [search, setSearch] = useState('');
+  const [filters, setFilters] = useState<any>({
+    type: '',
+    relationship: '',
+    domain: '',
+    level: '',
+    gap: ''
+  });
 
-  const normalized = useMemo(() => {
-    return data.map((row) => {
-      const out: any = {};
-      for (const key of EXPECTED) {
-        const foundKey = Object.keys(row).find((k) => k.toLowerCase() === key.toLowerCase());
-        out[key] = row[foundKey || ''] || '';
-      }
-      return out;
+  const normalized = useMemo(() => actors.map(a => {
+    const n: any = {};
+    Object.keys(a).forEach(k => {
+      n[k.trim()] = a[k];
     });
-  }, [data]);
+    return n;
+  }), [actors]);
 
-  const filtered = normalized.filter((a) =>
-    `${a.actor_name} ${a.actor_id}`.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredActors = useMemo(() => normalized.filter(a => {
+    const term = search.toLowerCase();
+    return (a.actor_name?.toLowerCase().includes(term) || a.actor_id?.toLowerCase().includes(term));
+  }), [normalized, search]);
 
-  const graphNodes = useMemo(() => {
-    const nodesMap = new Map<string, { id: string; label: string; type: string }>();
+  // Derive simple metrics
+  const metrics = useMemo(() => {
+    const degree: Record<string, number> = {};
+    const instrumentSalience: Record<string, number> = {};
 
     edges.forEach((e: any) => {
-      if (e.source && !nodesMap.has(e.source)) {
-        nodesMap.set(e.source, { id: e.source, label: e.source, type: 'actor' });
-      }
-      if (e.target && !nodesMap.has(e.target)) {
-        nodesMap.set(e.target, { id: e.target, label: e.target, type: 'actor' });
-      }
+      if (e.source) degree[e.source] = (degree[e.source] || 0) + 1;
+      if (e.target) degree[e.target] = (degree[e.target] || 0) + 1;
+      if (e.source_norm) instrumentSalience[e.source_norm] = (instrumentSalience[e.source_norm] || 0) + 1;
     });
 
-    const nodes = Array.from(nodesMap.values());
+    const topActors = Object.entries(degree)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 10);
 
-    // Deterministic layout
-    const centerX = 450;
-    const centerY = 250;
-    const radius = 200;
+    const topInstruments = Object.entries(instrumentSalience)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 10);
 
-    return nodes.map((node, i) => {
-      // Special placement for key nodes
-      if (node.id === 'SSA') return { ...node, x: centerX, y: centerY };
-      if (node.id === 'CSG') return { ...node, x: centerX, y: centerY - 150 };
-      if (node.id === 'WHO') return { ...node, x: centerX + 350, y: centerY };
+    return { topActors, topInstruments };
+  }, [edges]);
 
+  // Graph data preparation (simple static layout for deterministic render)
+  const graphNodes = useMemo(() => {
+    const nodesSet = new Set<string>();
+    edges.forEach((e: any) => {
+      if (e.source) nodesSet.add(e.source);
+      if (e.target) nodesSet.add(e.target);
+    });
+
+    const nodes = Array.from(nodesSet);
+    const radius = 250;
+    const centerX = 400;
+    const centerY = 350;
+
+    return nodes.map((id, i) => {
       const angle = (i / nodes.length) * 2 * Math.PI;
       return {
-        ...node,
+        id,
+        label: id,
         x: centerX + radius * Math.cos(angle),
         y: centerY + radius * Math.sin(angle)
       };
@@ -100,246 +103,312 @@ export default function ActorsExplorer() {
   }, [edges]);
 
   const nodePositions = useMemo(() => {
-    const pos: Record<string, { x: number; y: number }> = {};
-    graphNodes.forEach(n => { pos[n.id] = { x: n.x, y: n.y }; });
+    const pos: any = {};
+    graphNodes.forEach(n => pos[n.id] = { x: n.x, y: n.y });
     return pos;
   }, [graphNodes]);
 
-  if (loading) return <div className="p-8">Loading actors...</div>;
-  if (error) return <div className="p-8 text-red-600">Error loading actors.</div>;
-
-  const renderValue = (val: string) => {
-    if (!val || val.trim() === '') return <span className="text-slate-400 italic">Not identified in current corpus</span>;
-    return val;
-  };
+  if (l1 || l2) return (
+    <div className="flex items-center justify-center min-h-[400px]">
+      <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  );
 
   return (
-    <div className="space-y-6 pb-20">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <h1 className="text-3xl font-bold text-slate-900">Actors Explorer</h1>
-        <div className="flex bg-slate-100 p-1 rounded-lg">
+    <div className="space-y-8 pb-24">
+      <header className="space-y-2">
+        <h1 className="text-4xl font-black text-slate-900 tracking-tight">Actors Explorer</h1>
+        <p className="text-lg text-slate-600">
+          Analyze the legal-institutional network of health governance and pandemic response in Mexico.
+        </p>
+      </header>
+
+      <div className="flex flex-wrap gap-2 p-1 bg-slate-100 rounded-xl w-fit">
+        {[
+          { id: 'map', label: 'Relationship Map', icon: Share2 },
+          { id: 'inventory', label: 'Actor Inventory', icon: Users },
+          { id: 'metrics', label: 'Network Metrics', icon: BarChart3 }
+        ].map(t => (
           <button
-            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${
-              tab === 'map' ? 'bg-white shadow-sm text-slate-900' : 'text-slate-600 hover:text-slate-900'
-            }`}
-            onClick={() => setTab('map')}
+            key={t.id}
+            onClick={() => setTab(t.id as Tab)}
+            className={cn(
+              "px-6 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2",
+              tab === t.id ? "bg-white text-blue-900 shadow-sm" : "text-slate-500 hover:text-slate-900"
+            )}
           >
-            Relationship Map
+            <t.icon size={16} />
+            {t.label}
           </button>
-          <button
-            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${
-              tab === 'inventory' ? 'bg-white shadow-sm text-slate-900' : 'text-slate-600 hover:text-slate-900'
-            }`}
-            onClick={() => setTab('inventory')}
-          >
-            Actor Inventory
-          </button>
-        </div>
+        ))}
       </div>
 
       {tab === 'map' && (
-        <section className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-          <div className="p-4 border-b border-slate-100 bg-slate-50/50">
-            <p className="text-sm text-slate-600 leading-relaxed">
-              <strong>Note:</strong> Corpus-derived preliminary legal-institutional network. It shows documented legal and mapping relationships, not observed operational coordination.
-            </p>
-          </div>
+        <div className="space-y-6">
+          <div className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm flex flex-col">
+             <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                   <div className="p-2 bg-blue-50 rounded-lg text-blue-600">
+                      <Share2 size={20} />
+                   </div>
+                   <div>
+                      <h3 className="font-bold text-slate-900">Legal-Institutional Network</h3>
+                      <p className="text-xs text-slate-500">Deterministic layout of documented statutory relationships.</p>
+                   </div>
+                </div>
+                <div className="flex gap-2">
+                   <span className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded text-[10px] font-bold border border-slate-200">{graphNodes.length} NODES</span>
+                   <span className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded text-[10px] font-bold border border-slate-200">{edges.length} EDGES</span>
+                </div>
+             </div>
 
-          <div className="p-6 space-y-8">
-            <div className="border border-slate-200 rounded-lg bg-white overflow-hidden relative">
-              <div className="overflow-auto max-h-[600px] bg-slate-50">
-                <svg viewBox="0 0 900 500" className="w-full min-w-[800px] h-auto aspect-[9/5]">
-                  <defs>
-                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="28" refY="3.5" orient="auto">
-                      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
-                    </marker>
-                  </defs>
+             <div className="relative bg-slate-50/50 h-[700px] overflow-hidden">
+                <svg width="800" height="700" viewBox="0 0 800 700" className="w-full h-full">
+                   <defs>
+                     <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="28" refY="3.5" orient="auto">
+                       <polygon points="0 0, 10 3.5, 0 7" fill="#cbd5e1" />
+                     </marker>
+                   </defs>
 
-                  {/* Edges */}
-                  {edges.map((e: any, i: number) => {
-                    const start = nodePositions[e.source];
-                    const end = nodePositions[e.target];
-                    if (!start || !end) return null;
-                    return (
-                      <line
-                        key={`edge-${i}`}
-                        x1={start.x} y1={start.y}
-                        x2={end.x} y2={end.y}
-                        stroke="#cbd5e1"
-                        strokeWidth="1.5"
-                        markerEnd="url(#arrowhead)"
-                        strokeDasharray={e.relationship_type === 'coordination' ? '4 2' : '0'}
-                      />
-                    );
-                  })}
+                   {/* Edges */}
+                   {edges.map((e: any, i: number) => {
+                     const start = nodePositions[e.source];
+                     const end = nodePositions[e.target];
+                     if (!start || !end) return null;
+                     return (
+                       <line
+                         key={`edge-${i}`}
+                         x1={start.x} y1={start.y}
+                         x2={end.x} y2={end.y}
+                         stroke="#cbd5e1"
+                         strokeWidth="1.5"
+                         markerEnd="url(#arrowhead)"
+                         className="opacity-60"
+                       />
+                     );
+                   })}
 
-                  {/* Nodes */}
-                  {graphNodes.map((n) => (
-                    <g key={n.id} transform={`translate(${n.x}, ${n.y})`} className="cursor-default">
-                      <circle
-                        r="22"
-                        fill={n.id === 'SSA' ? '#3b82f6' : n.id === 'CSG' ? '#1e40af' : n.id === 'WHO' ? '#10b981' : '#f8fafc'}
-                        stroke={n.id === 'SSA' || n.id === 'CSG' || n.id === 'WHO' ? 'transparent' : '#64748b'}
-                        strokeWidth="1.5"
-                        className="shadow-sm"
-                      />
-                      <text
-                        textAnchor="middle"
-                        dy=".3em"
-                        fontSize="10"
-                        fontWeight="bold"
-                        className={n.id === 'SSA' || n.id === 'CSG' || n.id === 'WHO' ? 'fill-white' : 'fill-slate-700'}
-                      >
-                        {n.label}
-                      </text>
-                    </g>
-                  ))}
+                   {/* Nodes */}
+                   {graphNodes.map((n) => (
+                     <g key={n.id} transform={`translate(${n.x}, ${n.y})`} className="cursor-default group">
+                        <circle
+                          r="24"
+                          fill="white"
+                          stroke="#64748b"
+                          strokeWidth="2"
+                          className="shadow-sm group-hover:stroke-blue-500 transition-colors"
+                        />
+                        <text
+                          textAnchor="middle"
+                          dy=".3em"
+                          fontSize="10"
+                          fontWeight="bold"
+                          fill="#1e293b"
+                        >
+                          {n.label}
+                        </text>
+                     </g>
+                   ))}
                 </svg>
-              </div>
 
-              {/* Legend */}
-              <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm border border-slate-200 p-3 rounded-lg text-[10px] space-y-2 shadow-sm">
-                <div className="font-bold text-slate-800 border-b border-slate-100 pb-1 mb-1 uppercase tracking-wider">Legend</div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-[#1e40af]"></div>
-                  <span>High Level Authority (CSG)</span>
+                {/* Legend */}
+                <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-md border border-slate-200 p-6 rounded-2xl shadow-xl max-w-xs space-y-4">
+                   <h4 className="text-xs font-black text-slate-900 uppercase tracking-widest">Relationship Map Legend</h4>
+                   <div className="space-y-3">
+                      {[
+                        { label: 'Actor', color: 'bg-white border-slate-400' },
+                        { label: 'Legal Basis', color: 'bg-blue-100 border-blue-200' },
+                        { label: 'IHR Obligation', color: 'bg-emerald-100 border-emerald-200' }
+                      ].map(l => (
+                        <div key={l.label} className="flex items-center gap-3">
+                           <div className={cn("w-4 h-4 rounded-full border", l.color)} />
+                           <span className="text-[10px] font-bold text-slate-600 uppercase">{l.label}</span>
+                        </div>
+                      ))}
+                   </div>
+                   <div className="pt-4 border-t border-slate-100">
+                      <p className="text-[9px] text-slate-500 leading-relaxed italic">
+                        <strong>Methodological Note:</strong> Corpus-derived legal-institutional network.
+                        This graph shows documented relationships among actors, legal instruments,
+                        provisions and international obligations. It does not represent observed operational coordination.
+                      </p>
+                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-[#3b82f6]"></div>
-                  <span>Executive Health Body (SSA)</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-[#10b981]"></div>
-                  <span>International Body (WHO)</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-[#f8fafc] border border-slate-400"></div>
-                  <span>Technical/Institutional Actor</span>
-                </div>
-                <div className="flex items-center gap-2 pt-1 border-t border-slate-100 mt-1">
-                  <div className="w-6 h-0.5 bg-[#cbd5e1]"></div>
-                  <span>Formal Competence / Subordination</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-6 h-0.5 bg-[#cbd5e1] border-t border-dashed border-slate-400"></div>
-                  <span>Legal Coordination Link</span>
-                </div>
-              </div>
+             </div>
+          </div>
+
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-xl font-bold text-slate-900">Relationship Registry</h3>
+              <span className="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded">{edges.length} CONNECTIONS</span>
             </div>
-
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h3 className="font-semibold text-slate-800">Legal Relationship Registry</h3>
-                <span className="text-xs text-slate-500">{edges.length} connections documented</span>
-              </div>
-              <div className="overflow-x-auto border border-slate-200 rounded-xl">
-                <table className="w-full text-sm text-left">
-                  <thead className="bg-slate-50 text-slate-600 font-medium border-b border-slate-200">
-                    <tr>
-                      <th className="p-3">Source</th>
-                      <th className="p-3">Target</th>
-                      <th className="p-3">Relationship Type</th>
-                      <th className="p-3">IHR Functional Area</th>
-                      <th className="p-3">Legal Basis</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100">
-                    {edges.map((e: any, i: number) => (
-                      <tr key={i} className="hover:bg-slate-50 transition-colors">
-                        <td className="p-3 font-semibold text-slate-900">{e.source}</td>
-                        <td className="p-3 font-semibold text-slate-900">{e.target}</td>
-                        <td className="p-3">
-                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
-                            e.relationship_type === 'oversight' ? 'bg-purple-50 text-purple-700' :
-                            e.relationship_type === 'subordination' ? 'bg-blue-50 text-blue-700' :
-                            e.relationship_type === 'coordination' ? 'bg-amber-50 text-amber-700' :
-                            'bg-slate-50 text-slate-600'
-                          }`}>
-                            {e.relationship_type}
-                          </span>
-                        </td>
-                        <td className="p-3 text-slate-600 text-xs italic">{e.ihr_area}</td>
-                        <td className="p-3">
-                          <div className="text-slate-900 font-medium">{e.source_norm}</div>
-                          <div className="text-slate-500 text-[10px]">{e.legal_basis}</div>
-                        </td>
+            <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+               <div className="overflow-x-auto">
+                  <table className="w-full text-sm text-left">
+                    <thead className="bg-slate-50 text-slate-600 font-bold border-b border-slate-200">
+                      <tr>
+                        <th className="p-4">Source</th>
+                        <th className="p-4">Relationship</th>
+                        <th className="p-4">Target</th>
+                        <th className="p-4">Legal Basis</th>
+                        <th className="p-4">Confidence</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100">
+                       {edges.map((e: any, i: number) => (
+                         <tr key={i} className="hover:bg-slate-50 transition-colors">
+                            <td className="p-4 font-bold text-slate-900">{e.source}</td>
+                            <td className="p-4">
+                               <span className={cn(
+                                 "px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider",
+                                 e.relationship_type === 'oversight' ? "bg-purple-50 text-purple-700" :
+                                 e.relationship_type === 'subordination' ? "bg-blue-50 text-blue-700" :
+                                 "bg-slate-50 text-slate-600"
+                               )}>
+                                 {e.relationship_type}
+                               </span>
+                            </td>
+                            <td className="p-4 font-bold text-slate-900">{e.target}</td>
+                            <td className="p-4">
+                               <div className="text-xs text-slate-700 font-medium">{e.source_norm}</div>
+                               <div className="text-[10px] text-slate-400">Art. {e.source_article}</div>
+                            </td>
+                            <td className="p-4">
+                               <span className="px-2 py-0.5 bg-slate-100 rounded text-[10px] font-bold">{e.confidence || 'Medium'}</span>
+                            </td>
+                         </tr>
+                       ))}
+                    </tbody>
+                  </table>
+               </div>
             </div>
           </div>
-        </section>
+        </div>
       )}
 
       {tab === 'inventory' && (
         <div className="space-y-6">
-          <div className="bg-white border border-slate-200 rounded-xl p-6 space-y-4 shadow-sm">
-            <div className="flex flex-col md:flex-row gap-4">
-              <div className="flex-1 relative">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row gap-4 items-center">
+             <div className="relative flex-1 w-full">
+                <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
                 <input
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search by actor name or ID..."
-                  className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                   value={search}
+                   onChange={(e) => setSearch(e.target.value)}
+                   placeholder="Search by actor name or ID..."
+                   className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none font-medium transition-all"
                 />
-                <div className="absolute left-3 top-2.5 text-slate-400">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                </div>
-              </div>
-              <div className="flex items-center px-4 bg-slate-50 rounded-lg border border-slate-200 text-sm text-slate-600">
-                Showing {filtered.length} of {normalized.length} actors
-              </div>
-            </div>
-
-            <details className="text-xs text-slate-400 group">
-              <summary className="cursor-pointer hover:text-slate-600 transition-colors list-none flex items-center gap-1">
-                <span className="opacity-50 group-open:rotate-90 transition-transform">▶</span> Developer data check
-              </summary>
-              <div className="mt-2 p-3 bg-slate-50 rounded border border-slate-100 grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div>Rows: <strong>{normalized.length}</strong></div>
-                <div>Empty Names: <strong>{normalized.filter(a => !a.actor_name).length}</strong></div>
-                <div>Empty Legal Basis: <strong>{normalized.filter(a => !a.legal_basis).length}</strong></div>
-              </div>
-            </details>
+             </div>
+             <div className="px-6 py-3 bg-slate-100 rounded-xl text-xs font-bold text-slate-500 uppercase tracking-widest">
+                {filteredActors.length} Actors Found
+             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {filtered.map((a) => (
-              <div key={a.actor_id || a.actor_name} className="bg-white border border-slate-200 rounded-xl p-6 space-y-4 hover:border-blue-200 transition-colors shadow-sm">
-                <div className="pb-3 border-b border-slate-100">
-                  <h3 className="text-lg font-bold text-slate-900">{a.actor_name || 'Unnamed Actor'}</h3>
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    <span className="px-2 py-0.5 bg-blue-50 text-blue-700 rounded text-xs font-medium border border-blue-100">
-                      ID: {a.actor_id || 'N/A'}
-                    </span>
-                    <span className="px-2 py-0.5 bg-slate-50 text-slate-600 rounded text-xs font-medium border border-slate-200">
-                      {a.legal_nature || 'N/A'}
-                    </span>
-                    <span className="px-2 py-0.5 bg-slate-50 text-slate-600 rounded text-xs font-medium border border-slate-200">
-                      {a.government_level || 'N/A'}
-                    </span>
+          <div className="grid md:grid-cols-2 gap-6">
+             {filteredActors.map((a, i) => (
+               <div key={i} className="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm hover:border-blue-200 transition-all space-y-6">
+                  <div className="flex justify-between items-start gap-4">
+                     <div className="space-y-1">
+                        <h3 className="text-xl font-black text-slate-900 leading-tight">{a.actor_name || 'Unnamed Actor'}</h3>
+                        <div className="flex gap-2">
+                           <span className="px-2 py-0.5 bg-blue-900 text-white rounded text-[9px] font-black uppercase tracking-widest">ID: {a.actor_id}</span>
+                           <span className="px-2 py-0.5 bg-slate-100 text-slate-500 rounded text-[9px] font-bold uppercase tracking-widest">{a.legal_nature}</span>
+                        </div>
+                     </div>
+                     <div className="p-3 bg-slate-50 rounded-2xl text-slate-400">
+                        <Users size={24} />
+                     </div>
                   </div>
-                </div>
 
-                <div className="grid grid-cols-1 gap-y-3">
-                  {DISPLAY_FIELDS.map((k) => (
-                    <div key={k} className="text-sm">
-                      <span className="font-semibold text-slate-700 block mb-0.5">{LABELS[k]}:</span>
-                      <div className="text-slate-600">{renderValue(a[k])}</div>
+                  <div className="grid gap-y-4">
+                     {DISPLAY_FIELDS.map(f => (
+                       <div key={f} className="space-y-1">
+                          <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{LABELS[f]}</div>
+                          <p className="text-sm text-slate-700 leading-relaxed">{a[f] || 'Not identified in current corpus'}</p>
+                       </div>
+                     ))}
+                  </div>
+
+                  {a.review_need_status === 'REVIEW_REQUIRED' && (
+                    <div className="p-4 bg-amber-50 border border-amber-100 rounded-2xl flex gap-3">
+                       <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
+                       <div className="space-y-1">
+                          <p className="text-[10px] font-bold text-amber-800 uppercase tracking-widest">Expert Review Needed</p>
+                          <p className="text-xs text-amber-700">{a.reviewer_notes || 'Pending validation of institutional competences.'}</p>
+                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+                  )}
+               </div>
+             ))}
           </div>
+        </div>
+      )}
 
-          {filtered.length === 0 && (
-            <div className="p-12 text-center border-2 border-dashed border-slate-200 rounded-xl">
-              <p className="text-slate-500">No actors match your search criteria.</p>
-            </div>
-          )}
+      {tab === 'metrics' && (
+        <div className="space-y-8">
+           <div className="grid md:grid-cols-2 gap-8">
+              <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
+                 <div className="flex items-center gap-3">
+                    <div className="p-2 bg-blue-900 rounded-lg text-white">
+                       <Users size={20} />
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900">Top Legally Salient Actors</h3>
+                 </div>
+                 <div className="space-y-4">
+                    {metrics.topActors.map(([id, count], i) => (
+                      <div key={id} className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                         <div className="flex items-center gap-4">
+                            <span className="text-xs font-black text-slate-300 w-4">{i + 1}</span>
+                            <span className="font-bold text-slate-900">{id}</span>
+                         </div>
+                         <div className="flex items-center gap-2">
+                            <div className="w-32 h-2 bg-slate-200 rounded-full overflow-hidden">
+                               <div className="h-full bg-blue-600" style={{ width: `${(count / (metrics.topActors[0][1] as number)) * 100}%` }} />
+                            </div>
+                            <span className="text-xs font-bold text-slate-500">{count}</span>
+                         </div>
+                      </div>
+                    ))}
+                 </div>
+              </div>
+
+              <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
+                 <div className="flex items-center gap-3">
+                    <div className="p-2 bg-emerald-600 rounded-lg text-white">
+                       <Shield size={20} />
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900">Top Legal Instruments</h3>
+                 </div>
+                 <div className="space-y-4">
+                    {metrics.topInstruments.map(([id, count], i) => (
+                      <div key={id} className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                         <div className="flex items-center gap-4">
+                            <span className="text-xs font-black text-slate-300 w-4">{i + 1}</span>
+                            <span className="text-xs font-bold text-slate-900 truncate max-w-[200px]">{id}</span>
+                         </div>
+                         <div className="flex items-center gap-2">
+                            <div className="w-32 h-2 bg-slate-200 rounded-full overflow-hidden">
+                               <div className="h-full bg-emerald-600" style={{ width: `${(count / (metrics.topInstruments[0][1] as number)) * 100}%` }} />
+                            </div>
+                            <span className="text-xs font-bold text-slate-500">{count}</span>
+                         </div>
+                      </div>
+                    ))}
+                 </div>
+              </div>
+           </div>
+
+           <div className="bg-slate-900 text-white rounded-[2rem] p-10 space-y-6">
+              <div className="flex items-center gap-3">
+                 <Info size={24} className="text-blue-400" />
+                 <h3 className="text-2xl font-black">Network Interpretation Limits</h3>
+              </div>
+              <p className="text-slate-400 leading-relaxed max-w-4xl">
+                 High degree indicates that the node is frequently connected in the legal-institutional corpus.
+                 It does not measure actual operational authority. The metrics presented here reflect
+                 "legal-institutional salience" within the analyzed documents. They do not imply real-world
+                 operational coordination or compliance performance.
+              </p>
+           </div>
         </div>
       )}
     </div>
