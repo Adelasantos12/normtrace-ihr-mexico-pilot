@@ -1,208 +1,241 @@
 # Methodology
 
 ## Executive summary
-> **What this methodology solves:**
+
+> [!IMPORTANT]
+> ### What this methodology solves
 > - Existing IHR monitoring tools are useful but do not fully reconstruct domestic legal anchoring.
 > - SPAR is standardized and recurrent but self-reported.
 > - JEE, AAR and SimEx add external and functional assessment layers but do not map each international obligation to domestic legal authority, actors, procedures and safeguards.
 > - NormTrace-IHR adds a country-specific legal-institutional conversion layer.
 > - The output is not a compliance score; it is a traceability and review infrastructure.
 
+NormTrace-IHR does **not** replace IHR monitoring instruments. It complements them by adding a legal-institutional conversion layer between international obligations and reported capacities.
+
 ## Methodological problem
-International obligations are monitored, but domestic legal conversion is often opaque. Many states report capacity in SPAR or JEE without having clear, statutory anchoring for that capacity in their domestic legal architecture.
 
-Self-reported capacity can diverge from legally anchored capacity. An agency may perform a function by practice or custom (de facto) without a clear legal mandate (de jure), which creates institutional vulnerability and lack of accountability.
+International obligations are monitored, but domestic legal conversion is often opaque. Reporting frameworks capture performance signals, yet they do not always reconstruct which legal instruments actually authorize action.
 
-Capacity-building needs more specific information about domestic legal instruments, actors, competences, procedures, coordination and safeguards. To strengthen a health system, one must know exactly which article of which law needs to be amended, which actor has the power to act, and what procedural gaps exist.
+Self-reported capacity can diverge from legally anchored capacity. In practice, an authority may perform a function de facto without a stable de jure legal basis, reducing predictability, reviewability and institutional continuity.
+
+Capacity-building needs more specific information about domestic legal instruments, actors, competences, procedures, coordination and safeguards. NormTrace-IHR addresses this by identifying legal anchors, institutional responsibilities, procedural routes and oversight needs obligation by obligation.
 
 ## Conceptual model
-International obligation
-→ legal anchoring need
-→ domestic legal corpus
-→ country legal brain
-→ provision extraction
-→ actor and competence mapping
-→ anchoring assessment
-→ gap typology
-→ capacity-building entry point
 
-1. **International obligation**: Identify the specific duty in IHR 2005, 2024, or Pandemic Agreement.
-2. **Legal anchoring need**: Determine what kind of domestic law is needed to fulfill the obligation.
-3. **Domestic legal corpus**: Collect the relevant national laws, regulations, and norms.
-4. **Country legal brain**: Apply the country-specific legal logic (e.g., Mexico's federalism).
-5. **Provision extraction**: Isolate the specific articles and fractions relevant to the obligation.
-6. **Actor and competence mapping**: Identify which entity has the legal power to execute the provision.
-7. **Anchoring assessment**: Score the strength of the legal link using the 0-5 scale.
-8. **Gap typology**: Classify why anchoring is weak or missing.
-9. **Capacity-building entry point**: Identify the specific legal or institutional lever for improvement.
+```mermaid
+graph LR
+A[International obligation] --> B[Legal anchoring need]
+B --> C[Domestic legal corpus]
+C --> D[Country legal brain]
+D --> E[Provision extraction]
+E --> F[Actor and competence mapping]
+F --> G[Anchoring assessment]
+G --> H[Gap typology]
+H --> I[Capacity-building entry point]
+```
+
+- **International obligation**: identify the exact duty in IHR (2005/2024) or Pandemic Agreement/PABS-related text.
+- **Legal anchoring need**: determine the type of domestic legal basis required for implementation.
+- **Domestic legal corpus**: assemble national legal sources to test legal internalisation.
+- **Country legal brain**: apply country-specific constitutional and administrative logic before mapping.
+- **Provision extraction**: isolate norm units (articles, fractions, numerals, transitories).
+- **Actor and competence mapping**: identify legally empowered actors and their competences.
+- **Anchoring assessment**: classify legal anchoring strength using explicit scale criteria.
+- **Gap typology**: characterize the specific type of legal-institutional deficit.
+- **Capacity-building entry point**: identify concrete legal, institutional or procedural reform levers.
 
 ## Analytical layers
+
 | Layer | Question | Input | Output |
-| :--- | :--- | :--- | :--- |
-| IHR obligation classification | What exactly does the treaty require? | IHR 2005/2024 text | Obligation ID and type |
-| Domestic legal corpus | Which laws are in scope? | Source PDF/HTML | Markdown corpus |
-| Mexico legal system profile | How does the legal system work? | Constitutional law | Mexico legal brain |
-| Legislative drafting patterns | How are powers usually granted? | Administrative law | Pattern rules |
-| Domestic provision extraction | Where is the relevant text? | Markdown corpus | Provision table |
-| Actor and competence mapping | Who has the authority? | Institutional law | Actor mapping |
-| Legal anchoring assessment | How strong is the link? | Mapping rules | Anchoring level |
-| IHR 2024 update layer | What changed in 2024? | IHR 2024 amendments | Update-review layer |
-| Pandemic Agreement readiness | Is the system ready for PA/PABS? | Draft PA text | Readiness layer |
-| Technical validation | Is the data accurate? | Validation scripts | Audit report |
+|---|---|---|---|
+| IHR obligation classification | What exactly is required? | IHR 2005/2024 text | Classified obligation set |
+| Domestic legal corpus | Which legal sources are in scope? | Laws, regulations, agreements, NOMs | Structured national corpus |
+| Mexico legal system profile | How does authority flow domestically? | Constitutional and administrative architecture | Country legal brain rules |
+| Legislative drafting patterns | How are duties/powers expressed in legal drafting? | Drafting formulas and legal syntax | Pattern library |
+| Domestic provision extraction | Where are relevant provisions located? | Structured corpus | Provision-level dataset |
+| Actor and competence mapping | Who can do what legally? | Provisions + institutional references | Actor-competence map |
+| Legal anchoring assessment | How strong is legal anchoring? | Mapping rules + extracted provisions | Anchoring level (0-5) |
+| IHR 2024 update layer | What requires adaptation under 2024 amendments? | IHR 2024 amendments | Update-review flags |
+| Pandemic Agreement / PABS readiness layer | What is legally pre-positioned for PA/PABS? | PA/PABS-related obligations | Readiness mapping |
+| Technical validation | Is the dataset coherent and auditable? | Validation scripts and checks | Audit outputs |
 
 ## Why this is not keyword matching
-> **Note**: NormTrace-IHR does not simply match words between the IHR and Mexican laws. It first reconstructs Mexico’s constitutional, federal, administrative, health-governance and regulatory architecture. Matching is then performed within that country-specific legal logic. A keyword search for "surveillance" might miss the specific administrative "atribuciones" that actually anchor the function.
+
+> [!NOTE]
+> **NormTrace-IHR does not simply match words between the IHR and Mexican laws.** It first reconstructs Mexico’s constitutional, federal, administrative, health-governance and regulatory architecture. Matching is then performed within that country-specific legal logic.
 
 ## Country-specific legal brain
+
 | Component | Why it matters for IHR mapping |
-| :--- | :--- |
-| constitutional architecture | Defines the ultimate source of power for health measures. |
-| treaty effect | Determines how IHR obligations enter the domestic hierarchy. |
-| legal hierarchy | Distinguishes between laws (LGS) and regulations (RISI/NOM). |
-| federalism | Allocates competences between Federation and States. |
-| health governance | Defines the roles of SS, CSG, and other health actors. |
-| public administration | Sets the rules for internal regulations and delegations. |
-| regulatory instruments | Identifies the role of NOMs in technical standards. |
-| legislative drafting patterns | Recognizes how "deberá" vs "podrá" creates obligations. |
-| oversight and accountability | Maps the role of CNDH and administrative courts. |
-| legal anchoring rules | Defines what counts as Level 3 vs Level 5 anchoring. |
+|---|---|
+| constitutional architecture | Defines foundational powers, limits and legal validity routes. |
+| treaty effect | Clarifies how international obligations enter domestic law. |
+| legal hierarchy | Distinguishes legal force between laws, regulations, NOMs and agreements. |
+| federalism | Determines distribution of competences across federal and subnational levels. |
+| health governance | Locates sector-specific mandates and institutional authority chains. |
+| public administration | Frames delegation, procedure and administrative execution powers. |
+| regulatory instruments | Identifies operational legal vehicles beyond primary legislation. |
+| legislative drafting patterns | Interprets legal effect of drafting formulas in Mexican normative practice. |
+| oversight and accountability | Identifies review, control and safeguard mechanisms. |
+| legal anchoring rules | Applies consistent criteria for classifying anchoring strength. |
 
 ## Source corpus workflow
-1. Convert legal sources to Markdown
-2. Create metadata
-3. Classify instrument type
-4. Classify normative hierarchy
-5. Classify sector/legal domain
-6. Detect structure
-7. Extract provisions
-8. Link provisions to actors and obligations
-9. Validate IDs and references
-10. Generate outputs
+
+1. Convert legal sources to Markdown.
+2. Create metadata.
+3. Classify instrument type.
+4. Classify normative hierarchy.
+5. Classify sector/legal domain.
+6. Detect structure.
+7. Extract provisions.
+8. Link provisions to actors and obligations.
+9. Validate IDs and references.
+10. Generate outputs.
 
 | Corpus field | Purpose |
-| :--- | :--- |
-| instrument_type | Distinguishes Law, Regulation, Decree, Agreement, NOM. |
-| normative_hierarchy | Ranks the instrument in the legal pyramid. |
-| sector/legal_domain | Identifies Public Administration, Health, Trade, etc. |
-| issuing_authority | The actor who published the instrument. |
-| government_level | Federal, State, or Local. |
-| legal_function | Governance, Surveillance, Response, Finance. |
-| publication_date | Tracks the currency of the instrument. |
-| last_amendment_date | Tracks recent updates. |
-| source_status | Active, Repealed, or Reform in progress. |
-| relevance_for_ihr | Binary or categorical relevance to IHR. |
-| relevance_for_pandemic_agreement | Binary or categorical relevance to PA. |
+|---|---|
+| instrument_type | Identify the legal instrument class. |
+| normative_hierarchy | Locate the instrument within legal hierarchy. |
+| sector/legal_domain | Tag substantive legal domain for routing and analysis. |
+| issuing_authority | Track formal authority behind the instrument. |
+| government_level | Distinguish federal/state/local legal anchoring routes. |
+| legal_function | Classify legal role (e.g., governance, surveillance, response). |
+| publication_date | Establish legal currency timeline. |
+| last_amendment_date | Detect recency and update pressure. |
+| source_status | Track validity status (active/reformed/repealed). |
+| relevance_for_ihr | Mark direct/indirect relevance to IHR obligations. |
+| relevance_for_pandemic_agreement | Mark relevance to Pandemic Agreement/PABS readiness. |
 
 ## Legislative pattern extraction
+
 | Pattern detected | Analytical use |
-| :--- | :--- |
-| Articles, fractions, paragraphs | Unit of analysis for extraction. |
-| Transitory provisions | Identifies effective dates and implementation duties. |
-| “corresponde a” | Assigns core competence to an actor. |
-| “son atribuciones de” | Defines specific legal powers. |
-| “deberá” | Creates a mandatory duty. |
-| “podrá” | Creates a discretionary power. |
-| “se coordinará” | Signals a multi-actor coordination mechanism. |
-| “en el ámbito de sus competencias” | Signals federal/state division of labour. |
-| “sin perjuicio de” | Clarifies overlapping or non-exclusive powers. |
-| “conforme a las disposiciones aplicables” | Points to lower-level regulatory needs. |
-| NOM numerals | Identifies technical standards and protocols. |
-| regulations and internal regulations | Maps administrative operationalisation. |
-| administrative agreements | Maps specific inter-agency delegations. |
+|---|---|
+| Articles, fractions, paragraphs | Define extraction units and legal granularity. |
+| Transitory provisions | Capture implementation timelines and conditional effects. |
+| “corresponde a” | Indicates core competence assignment. |
+| “son atribuciones de” | Signals formal attribution of powers/duties. |
+| “deberá” | Indicates mandatory duty. |
+| “podrá” | Indicates discretionary authority. |
+| “se coordinará” | Indicates coordination mechanism expectations. |
+| “en el ámbito de sus competencias” | Indicates competence boundaries and federal distribution. |
+| “sin perjuicio de” | Indicates coexistence of competences and non-exclusion logic. |
+| “conforme a las disposiciones aplicables” | Indicates dependency on complementary regulatory frameworks. |
+| NOM numerals | Capture technical-operational norm references. |
+| regulations and internal regulations | Capture administrative operationalization routes. |
+| administrative agreements | Capture inter-institutional delegation or procedural implementation. |
 
 ## Obligation classification rules
+
 | Trigger | Likely anchoring implication |
-| :--- | :--- |
-| designated national authority | Requires high-level statutory/administrative designation. |
-| duties for public authorities | Requires clear "atribuciones" in internal regulations. |
-| obligations for private actors | Requires statutory basis (principle of legality). |
-| restrictions on persons/travellers/goods | Requires statutory basis and constitutional safeguards. |
-| coercive or sanitary measures | Requires clear legal mandate and proportionality rules. |
-| sensitive data processing | Requires data protection and privacy anchoring. |
-| mandatory information exchange | Requires procedural protocols and data-sharing agreements. |
-| federal-state coordination | Requires coordination agreements or federal laws. |
-| recurrent institutional capacity | Requires permanent administrative structure. |
-| budgetary or planning implications | Requires inclusion in budget or development plans. |
-| reviewable procedures | Requires administrative appeal or oversight mechanisms. |
-| rights safeguards | Requires due process and human rights anchoring. |
-| laboratories/pathogens/biosafety/benefit-sharing | Requires technical regulations and biosafety norms. |
+|---|---|
+| designated national authority | Requires explicit legal designation and scope. |
+| duties for public authorities | Requires clear competence and duty language. |
+| obligations for private actors | Requires legal basis with enforceability structure. |
+| restrictions on persons/travellers/goods | Requires legality, proportionality and safeguard framing. |
+| coercive or sanitary measures | Requires authority, procedure and rights safeguards. |
+| sensitive data processing | Requires legal basis, purpose limitation and safeguards. |
+| mandatory information exchange | Requires legal channels, responsibilities and conditions. |
+| federal-state coordination | Requires vertical coordination architecture. |
+| recurrent institutional capacity | Requires durable legal-institutional embedding. |
+| budgetary or planning implications | Requires planning/budget linkage or financing basis. |
+| reviewable procedures | Requires administrative/legal review pathways. |
+| rights safeguards | Requires due process and accountability mechanisms. |
+| laboratories/pathogens/biosafety/benefit-sharing | Requires specialized legal-technical framework anchoring. |
 
 ## Anchoring scale
-| Level | Label | Meaning | What it does not mean |
-| :--- | :--- | :--- | :--- |
-| 0 | No anchoring | No mention found in corpus. | Does not mean the capacity doesn't exist de facto. |
-| 1 | Actor-only | Actor is mentioned but not the specific function. | Does not mean the actor is not doing it. |
-| 2 | Indirect/Implicit | Function is implied by broader mandate. | Does not mean the mandate is clear. |
-| 3 | Administrative/Internal | Function is in internal regulation or manual. | Does not mean it has a statutory (Law) basis. |
-| 4 | General Statutory | Function is in a Law (e.g. LGS) but lacks detail. | Does not mean procedures are defined. |
-| 5 | Specific Statutory | Function and procedure are in a Law. | Does not mean 100% compliance. |
 
-> **Emphasis**: The scale measures identifiable legal-institutional anchoring in the available corpus. It does not measure compliance or actual operational performance.
+| Level | Label | Meaning | What it does not mean |
+|---|---|---|---|
+| 0 | No anchoring | No identifiable legal-institutional anchor in available corpus. | It does not prove operational absence. |
+| 1 | Actor mention only | Institution appears but duty/function is not anchored. | It does not imply legal sufficiency. |
+| 2 | Indirect anchoring | Function inferred through broad mandate language. | It does not imply procedural clarity. |
+| 3 | Administrative anchoring | Function anchored in administrative/sub-legal instruments. | It does not imply statutory depth. |
+| 4 | General statutory anchoring | Function recognized in statutory text at general level. | It does not imply complete operational design. |
+| 5 | Specific legal-institutional anchoring | Function anchored with identifiable legal authority and operative framing. | It does not measure real-world compliance/performance. |
+
+> **Emphasis:** The scale measures identifiable legal-institutional anchoring in the available corpus. It does not measure compliance or actual operational performance.
 
 ## Gap typology
+
 | Gap type | What it means | Why it matters |
-| :--- | :--- | :--- |
-| legal silence | No legal basis found for the obligation. | Absolute lack of de jure authority. |
-| competence ambiguity | Unclear which actor has the power. | Risk of inaction or overlapping duties. |
-| administrative-only anchoring | Basis is in regulation but not in Law. | Institutional vulnerability to admin changes. |
-| procedural gap | Power exists but the "how" is missing. | Operational uncertainty and lack of due process. |
-| coordination gap | No rule for how actors work together. | Siloed response and communication failures. |
-| federal implementation gap | Federal power exists but state-level doesn't. | Incomplete national coverage. |
-| rights-safeguard gap | Measure exists but oversight doesn't. | Risk of human rights violations. |
-| oversight gap | No mechanism to review the performance. | Lack of accountability and learning. |
-| budget/capacity gap | Mandate exists but no resource rule. | Unfunded mandates that fail to deliver. |
-| update-review needed | Basis exists but needs 2024 alignment. | Non-alignment with latest international rules. |
+|---|---|---|
+| legal silence | No legal anchor identified. | Leaves obligations without clear domestic legal basis. |
+| competence ambiguity | Roles or powers are unclear/overlapping. | Increases implementation friction and accountability risk. |
+| administrative-only anchoring | Anchoring exists mainly at sub-statutory level. | May reduce stability and enforceability. |
+| procedural gap | Duties exist without clear execution procedure. | Weakens implementation reliability and legal certainty. |
+| coordination gap | Coordination routes are absent/underdefined. | Undermines multi-actor response coherence. |
+| federal implementation gap | National and subnational anchoring is uneven. | Limits territorial consistency and readiness. |
+| rights-safeguard gap | Restrictive powers lack sufficient safeguards. | Raises proportionality and rights-protection concerns. |
+| oversight gap | Limited review/control mechanisms. | Reduces transparency and corrective capacity. |
+| budget/capacity gap | Legal duties exceed institutional resource design. | Creates implementability risk. |
+| update-review needed | Anchoring exists but requires alignment updates. | Supports forward compatibility with evolving norms. |
 
 ## Role of SPAR, JEE, AAR and SimEx
+
 | Tool | What it captures | Main limitation for legal anchoring | How NormTrace complements it |
-| :--- | :--- | :--- | :--- |
-| SPAR | Standardized self-assessment. | Self-reported; doesn't verify legal basis. | Provides the "de jure" verification. |
-| JEE | External technical review. | Voluntary; high-level; not item-by-item. | Maps specific articles to each IHR item. |
-| AAR | Operational experience. | Focused on a single event/function. | Connects event experience to systemic law. |
-| SimEx | Tested performance. | Snapshot of capability in a simulation. | Identifies the legal levers to fix tested gaps. |
-| **NormTrace-IHR** | **Legal-institutional architecture.** | **Limited to the available legal corpus.** | **Adds a legal conversion layer to all tools.** |
+|---|---|---|---|
+| SPAR | Recurrent standardized self-reporting of capacities. | Self-reported and not obligation-by-obligation legal reconstruction. | Adds legal traceability of domestic anchors per obligation. |
+| JEE | External technical assessment of core capacities. | Voluntary and not designed for complete legal architecture reconstruction. | Adds country-specific legal-institutional conversion detail. |
+| AAR | Post-event functional learning. | Event-centered, not systematic legal mapping framework. | Connects lessons to legal anchors and reform pathways. |
+| SimEx | Operational simulation testing. | Performance-focused snapshot without full legal reconstruction. | Identifies legal/institutional levers behind tested gaps. |
+| NormTrace-IHR | Legal-institutional traceability infrastructure. | Corpus-dependent and requires expert interpretation. | Complements monitoring tools with obligation-level legal conversion layer. |
+
+SPAR is useful, standardized and recurrent, but self-reported. JEE, AAR and SimEx are complementary and valuable, but they do not systematically reconstruct domestic legal architecture obligation by obligation.
 
 ## Use of Python, AI and human review
-| Function | Tool | Output | Human review needed? |
-| :--- | :--- | :--- | :--- |
-| data cleaning | Python | clean CSVs | No (automated validation) |
-| schema validation | Python | validation logs | No (automated validation) |
-| referential integrity | Python | audit reports | No (automated validation) |
-| source structuring | AI-assisted | Markdown and metadata drafts | Yes (consistency check) |
-| pattern detection | AI-assisted | legal drafting patterns | Yes (expert validation) |
-| provision extraction | AI-assisted | preliminary provision tables | Yes (expert validation) |
-| obligation mapping | AI-assisted + rule-based review | preliminary mappings | Yes (expert validation) |
-| legal validation | human expert | validated interpretation | **Crucial (Final Authority)** |
 
-> **Emphasis**: AI is used for assisted structuring and preliminary classification, not as final legal authority.
+| Function | Tool | Output | Human review needed? |
+|---|---|---|---|
+| data cleaning | Python | clean CSVs | yes (spot-check) |
+| schema validation | Python | validation logs | yes (exception review) |
+| referential integrity | Python | audit reports | yes (interpretation review) |
+| source structuring | AI-assisted | Markdown and metadata drafts | yes |
+| pattern detection | AI-assisted | legal drafting patterns | yes |
+| provision extraction | AI-assisted | preliminary provision tables | yes |
+| obligation mapping | AI-assisted + rule-based review | preliminary mappings | yes |
+| legal validation | human expert | validated interpretation | yes (final authority) |
+
+**Emphasis:** AI is used for assisted structuring and preliminary classification, not as final legal authority.
 
 ## Workflow diagram
+
 ```mermaid
 graph TD
-  A[International Instrument] --> B[Obligation Classification]
-  C[Domestic Legal Corpus] --> D[Mexico Legal Brain]
-  D --> E[Provision Extraction]
-  B --> F[Legal Anchoring Assessment]
-  E --> F
-  F --> G[Gap Typology]
-  G --> H[Capacity-Building Entry Points]
-  F --> I[IHR 2024 Update Layer]
-  F --> J[Pandemic Agreement / PABS Readiness]
+A[International Instrument] --> B[Obligation Classification]
+C[Domestic Legal Corpus] --> D[Mexico Legal Brain]
+D --> E[Provision Extraction]
+B --> F[Legal Anchoring Assessment]
+E --> F
+F --> G[Gap Typology]
+G --> H[Capacity-Building Entry Points]
+F --> I[IHR 2024 Update Layer]
+F --> J[Pandemic Agreement / PABS Readiness]
 ```
 
 ## Limits
-- **corpus-limited**: Only analyzes the provided digital legal corpus.
-- **preliminary**: Results are subject to ongoing refinement.
-- **AI-assisted**: Initial classifications are machine-suggested.
-- **not legal advice**: Findings do not constitute professional legal counsel.
-- **not compliance assessment**: Does not measure whether actors actually comply.
-- **requires expert validation**: All mappings must be reviewed by legal experts.
-- **PABS provisional**: Dependent on the finalization of the Pandemic Agreement Annex.
-- **does not measure actual operational performance**: Focuses on the "de jure" architecture.
+
+- corpus-limited
+- preliminary
+- AI-assisted
+- not legal advice
+- not compliance assessment
+- requires expert validation
+- PABS provisional until final annex
+- does not measure actual operational performance
 
 ## References
-- World Health Organization. (2005). International Health Regulations (2005).
-- World Health Organization. (2024). Amendments to the International Health Regulations (2005).
-- World Health Organization. (2024). Draft Pandemic Agreement.
-- Mexican Federal Law. (2025). Ley General de Salud.
-- Mexican Administrative Law. (2025). Reglamento Interior de la Secretaría de Salud.
+
+1. World Health Organization. *International Health Regulations (2005)*.
+2. World Health Organization. *Amendments to the International Health Regulations (2005), 2024 package*.
+3. World Health Organization. *SPAR framework and reporting guidance*.
+4. World Health Organization. *Joint External Evaluation (JEE) tools and guidance*.
+5. World Health Organization. *After Action Review (AAR) guidance*.
+6. World Health Organization. *Simulation Exercise (SimEx) guidance*.
+7. Draft texts and negotiation materials related to the WHO Pandemic Agreement and PABS discussions (status-dependent).
+
+## Technical audit summary
+
+- Verdict: **PASS_WITH_DOCUMENTED_FINDINGS**.
+- Scope: schema validation, unique IDs, cross-reference integrity, anchoring scale compliance.
+- Interpretation: audit findings are documented and integrated as caveats/warnings in analysis outputs.
+- Positioning note: this audit summary is supporting technical context and is not the main methodology.

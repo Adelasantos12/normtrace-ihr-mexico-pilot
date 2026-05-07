@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-  FileText, Download, Printer, CheckCircle, ChevronRight,
+  FileText, Printer, CheckCircle, ChevronRight,
   Shield, AlertCircle, Calendar, Info, Globe, GitMerge,
   Layers, Users, AlertTriangle, BookOpen
 } from 'lucide-react';
@@ -55,9 +55,9 @@ export default function ReportBuilder() {
             >
                <Printer size={16} /> Print / Export PDF
             </button>
-            <button className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 text-slate-600 rounded-xl text-sm font-bold hover:bg-slate-50 transition-all">
-               <Download size={16} /> Download CSV Package
-            </button>
+            <a href="/report/print" className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 text-slate-600 rounded-xl text-sm font-bold hover:bg-slate-50 transition-all">
+               <Printer size={16} /> Open print route
+            </a>
          </div>
       </header>
 
