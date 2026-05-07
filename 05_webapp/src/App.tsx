@@ -10,6 +10,7 @@ import CountrySnapshot from './pages/CountrySnapshot';
 import Instruments from './pages/Instruments';
 import Methodology from './pages/Methodology';
 import ReportBuilder from './pages/ReportBuilder';
+import ReportPrint from './pages/ReportPrint';
 import CapacityBrief from './pages/CapacityBrief';
 import './App.css';
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/international" element={<Instruments />} />
           <Route path="/methodology" element={<Methodology />} />
           <Route path="/report" element={<ReportBuilder />} />
+          <Route path="/report/print" element={<ReportPrint />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
