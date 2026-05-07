@@ -2,8 +2,7 @@
 
 ## Executive summary
 
-> [!IMPORTANT]
-> ### What this methodology solves
+### What this methodology solves
 > - Existing IHR monitoring tools are useful but do not fully reconstruct domestic legal anchoring.
 > - SPAR is standardized and recurrent but self-reported.
 > - JEE, AAR and SimEx add external and functional assessment layers but do not map each international obligation to domestic legal authority, actors, procedures and safeguards.
@@ -22,17 +21,7 @@ Capacity-building needs more specific information about domestic legal instrumen
 
 ## Conceptual model
 
-```mermaid
-graph LR
-A[International obligation] --> B[Legal anchoring need]
-B --> C[Domestic legal corpus]
-C --> D[Country legal brain]
-D --> E[Provision extraction]
-E --> F[Actor and competence mapping]
-F --> G[Anchoring assessment]
-G --> H[Gap typology]
-H --> I[Capacity-building entry point]
-```
+**Workflow:** International obligation → legal anchoring need → domestic legal corpus → country legal brain → provision extraction → actor and competence mapping → anchoring assessment → gap typology → capacity-building entry point
 
 - **International obligation**: identify the exact duty in IHR (2005/2024) or Pandemic Agreement/PABS-related text.
 - **Legal anchoring need**: determine the type of domestic legal basis required for implementation.
@@ -61,8 +50,7 @@ H --> I[Capacity-building entry point]
 
 ## Why this is not keyword matching
 
-> [!NOTE]
-> **NormTrace-IHR does not simply match words between the IHR and Mexican laws.** It first reconstructs Mexico’s constitutional, federal, administrative, health-governance and regulatory architecture. Matching is then performed within that country-specific legal logic.
+**Note:** NormTrace-IHR does not simply match words between the IHR and Mexican laws. It first reconstructs Mexico’s constitutional, federal, administrative, health-governance and regulatory architecture. Matching is then performed within that country-specific legal logic.
 
 ## Country-specific legal brain
 
@@ -199,18 +187,7 @@ SPAR is useful, standardized and recurrent, but self-reported. JEE, AAR and SimE
 
 ## Workflow diagram
 
-```mermaid
-graph TD
-A[International Instrument] --> B[Obligation Classification]
-C[Domestic Legal Corpus] --> D[Mexico Legal Brain]
-D --> E[Provision Extraction]
-B --> F[Legal Anchoring Assessment]
-E --> F
-F --> G[Gap Typology]
-G --> H[Capacity-Building Entry Points]
-F --> I[IHR 2024 Update Layer]
-F --> J[Pandemic Agreement / PABS Readiness]
-```
+**Workflow layer:** International Instrument → Obligation Classification + Domestic Legal Corpus → Mexico Legal Brain → Provision Extraction → Legal Anchoring Assessment → Gap Typology → Capacity-Building Entry Points (+ IHR 2024 update layer, + Pandemic Agreement/PABS readiness).
 
 ## Limits
 
