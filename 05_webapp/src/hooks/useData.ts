@@ -1,52 +1,37 @@
 import { useState, useEffect } from 'react';
 import Papa from 'papaparse';
 
+function parseCsvText(text: string) {
+  const tryParse = (delimiter: string) =>
+    Papa.parse(text, { header: true, skipEmptyLines: true, delimiter }).data as any[];
+
+  let rows = tryParse(',');
+  const firstKey = rows[0] ? Object.keys(rows[0])[0] : '';
+  if (firstKey && firstKey.includes(';')) rows = tryParse(';');
+
+  return rows.map((row) => {
+    const cleanRow: any = {};
+    Object.keys(row).forEach((key) => {
+      cleanRow[key.trim().replace(/^"|"$/g, '')] = typeof row[key] === 'string' ? row[key].trim().replace(/^"|"$/g, '') : row[key];
+    });
+    return cleanRow;
+  });
+}
+
 export function useCsvData<T>(fileName: string) {
   const [data, setData] = useState<T[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(`/data/${fileName}`);
-        if (!response.ok) {
-          throw new Error(`Failed to fetch ${fileName}`);
-        }
-        const csvText = await response.text();
-
-        // Detect delimiter: check if semicolon exists and if it produces more columns than comma
-        const semiCount = (csvText.match(/;/g) || []).length;
-        const commaCount = (csvText.match(/,/g) || []).length;
-        const delimiter = semiCount > commaCount ? ";" : ",";
-
-        Papa.parse(csvText, {
-          header: true,
-          skipEmptyLines: true,
-          delimiter: delimiter,
-          complete: (results) => {
-            // Clean keys of any potential whitespace
-            const cleanedData = results.data.map((row: any) => {
-               const cleanRow: any = {};
-               Object.keys(row).forEach(key => {
-                  cleanRow[key.trim()] = row[key];
-               });
-               return cleanRow;
-            });
-            setData(cleanedData as T[]);
-            setLoading(false);
-          },
-          error: (err: any) => {
-            setError(err);
-            setLoading(false);
-          }
-        });
-      } catch (err) {
-        setError(err as Error);
-        setLoading(false);
-      }
-    }
-    fetchData();
+    fetch(`/data/${fileName}`)
+      .then((r) => {
+        if (!r.ok) throw new Error(`Failed to fetch ${fileName}`);
+        return r.text();
+      })
+      .then((csvText) => setData(parseCsvText(csvText) as T[]))
+      .catch((err) => setError(err as Error))
+      .finally(() => setLoading(false));
   }, [fileName]);
 
   return { data, loading, error };
@@ -58,21 +43,14 @@ export function useMarkdownData(fileName: string) {
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(`/data/markdown/${fileName}`);
-        if (!response.ok) {
-          throw new Error(`Failed to fetch ${fileName}`);
-        }
-        const text = await response.text();
-        setContent(text);
-        setLoading(false);
-      } catch (err) {
-        setError(err as Error);
-        setLoading(false);
-      }
-    }
-    fetchData();
+    fetch(`/data/markdown/${fileName}`)
+      .then((r) => {
+        if (!r.ok) throw new Error(`Failed to fetch ${fileName}`);
+        return r.text();
+      })
+      .then(setContent)
+      .catch((err) => setError(err as Error))
+      .finally(() => setLoading(false));
   }, [fileName]);
 
   return { content, loading, error };
