@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import {
   Home, LayoutDashboard, Search, BookOpen, Users,
-  Map, FileText, Globe, Shield, Info, AlertCircle, FileBarChart, X
+  Map, FileText, Globe, Shield, Info, AlertCircle, FileBarChart, X, Menu
 } from 'lucide-react';
 import { cn } from './lib/utils';
 
 const navItems = [
   { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { path: '/mapping', label: 'IHR Mapping', icon: Search },
+  { path: '/mapping', label: 'International Mapping', icon: Search },
   { path: '/provisions', label: 'Legal Provisions', icon: BookOpen },
   { path: '/actors', label: 'Actors Explorer', icon: Users },
   { path: '/gap-map', label: 'Implementation Gap Map', icon: Map },
@@ -21,12 +21,43 @@ const navItems = [
 
 export default function Layout() {
   const [showCaveat, setShowCaveat] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
+  // Close mobile menu on navigation
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
   return (
-    <div className="flex min-h-screen bg-slate-50 text-slate-900 font-sans">
-      {/* Sidebar - hidden in print */}
-      <aside className="w-64 bg-white border-r border-slate-200 flex flex-col fixed inset-y-0 print:hidden">
+    <div className="flex min-h-screen bg-slate-50 text-slate-900 font-sans relative">
+      {/* Mobile Header */}
+      <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between z-30">
+         <div className="flex items-center gap-3">
+            <div className="p-2 bg-blue-900 text-white font-black text-xs">NT-IHR</div>
+            <h2 className="font-black text-slate-900 tracking-tight text-sm">NormTrace-IHR</h2>
+         </div>
+         <button
+           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+           className="p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors"
+         >
+           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+         </button>
+      </header>
+
+      {/* Sidebar Overlay for Mobile */}
+      {isMobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 transition-opacity"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside className={cn(
+        "bg-white border-r border-slate-200 flex flex-col fixed inset-y-0 z-50 print:hidden transition-transform duration-300 ease-in-out lg:translate-x-0 lg:w-64",
+        isMobileMenuOpen ? "translate-x-0 w-72" : "-translate-x-full w-64"
+      )}>
         <div className="p-8 border-b border-slate-100 bg-white">
           <h2 className="text-xl font-black text-[#0f172a] tracking-tight">NormTrace-IHR</h2>
           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1">Mexico Pilot v0.1</p>
@@ -76,7 +107,7 @@ export default function Layout() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 ml-64 p-12 min-h-screen print:m-0 print:p-0 print:bg-white print:ml-0">
+      <main className="flex-1 lg:ml-64 p-6 md:p-12 mt-16 lg:mt-0 min-h-screen print:m-0 print:p-0 print:bg-white print:ml-0">
         <div className="max-w-6xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
           <Outlet />
         </div>
@@ -84,7 +115,7 @@ export default function Layout() {
 
       {/* Caveat Modal */}
       {showCaveat && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-[60] flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden border border-slate-200 animate-in zoom-in-95 duration-200">
             <div className="p-6 bg-amber-50 border-b border-amber-100 flex items-center justify-between">
               <div className="flex items-center gap-3 text-amber-900 font-bold text-sm uppercase tracking-wider">

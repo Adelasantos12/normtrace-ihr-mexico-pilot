@@ -85,7 +85,7 @@ export default function CountrySnapshot() {
         <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
            <Info size={20} className="text-blue-600" /> What this snapshot shows
         </h2>
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {purposes.map((p, i) => (
             <div key={i} className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-3">
               <div className={cn("w-10 h-10 rounded-xl flex items-center justify-center", p.bg, p.color)}>
