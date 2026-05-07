@@ -5,7 +5,7 @@ import {
   Activity, Info
 } from 'lucide-react';
 import { useCsvData } from '../hooks/useData';
-import { cn, getStatusLabel, getAnchoringLabel } from '../lib/utils';
+import { cn, getStatusLabel, getAnchoringLabel, toSafeLower } from '../lib/utils';
 
 export default function MappingExplorer() {
   const { data, loading, error } = useCsvData<any>('mexico_ihr2005_mapping_clean.csv');
@@ -22,9 +22,9 @@ export default function MappingExplorer() {
   const filteredData = useMemo(() => {
     return data.filter(row => {
       const matchesSearch =
-        row.obligation_id.toLowerCase().includes(search.toLowerCase()) ||
-        row.assessment_summary.toLowerCase().includes(search.toLowerCase()) ||
-        row.domestic_norm.toLowerCase().includes(search.toLowerCase());
+        toSafeLower(row.obligation_id).includes(toSafeLower(search)) ||
+        toSafeLower(row.assessment_summary).includes(toSafeLower(search)) ||
+        toSafeLower(row.domestic_norm).includes(toSafeLower(search));
 
       const matchesAnchoring = !filters.anchoring_level || row.anchoring_level === filters.anchoring_level;
       const matchesGap = !filters.gap_type || row.gap_type === filters.gap_type;
