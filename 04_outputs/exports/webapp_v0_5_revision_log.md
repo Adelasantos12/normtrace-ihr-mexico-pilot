@@ -1,12 +1,12 @@
-# NormTrace-IHR Webapp v0.5 Repair Log
+# Webapp v0.5 Revision Log
 
-- actor relationship map restored: yes
-- relationship edge source used: existing data (`05_webapp/public/data/derived/actor_network_edges_derived.csv`)
-- Actor Inventory public labels cleaned: yes
-- debug data check moved/hidden: yes (behind "Developer data check")
-- methodology source deduplicated: yes
-- callouts rendered correctly: yes (removed unsupported `[!IMPORTANT]/[!NOTE]` syntax)
-- Mermaid rendered or replaced with workflow cards: yes (replaced with rendered workflow text blocks)
-- tables rendered correctly: yes
-- build result: SUCCESS (`npm run build`)
-- remaining known issues: chunk-size warning (>500kB) remains; relationship map is corpus-derived and partial where data is sparse.
+- **actor relationship map restored**: yes
+- **relationship edge source used**: 05_webapp/public/data/derived/actor_network_edges_derived.csv
+- **Actor Inventory public labels cleaned**: yes
+- **debug data check moved/hidden**: yes (moved to collapsible details section)
+- **methodology source deduplicated**: yes
+- **callouts rendered correctly**: yes (using custom HTML blocks and Tailwind styling)
+- **Mermaid rendered or replaced with workflow cards**: replaced with static CSS/HTML workflow cards
+- **tables rendered correctly**: yes (remark-gfm enabled, responsive scrolling added)
+- **build result**: success
+- **remaining known issues**: none identified in this scope.
