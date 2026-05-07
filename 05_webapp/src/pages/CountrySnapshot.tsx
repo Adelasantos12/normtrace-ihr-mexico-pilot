@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useCsvData, useMarkdownData } from '../hooks/useData';
 import {
-  FileText, Shield, Users, Activity, AlertTriangle,
+  FileText, Shield, Users, Activity, AlertTriangle, ChevronRight,
   ArrowRight, CheckCircle2, Globe, FileBarChart, Info
 } from 'lucide-react';
 import { cn } from '../lib/utils';
