@@ -31,4 +31,4 @@ npm run dev # run in dev mode
 ```
 
 ## Methodology Source
-The Methodology page renders content from `00_project/normtrace_ihr_methodology_full.md`, which is synced to `05_webapp/public/data/markdown/normtrace_ihr_methodology_full.md` during the build process.
+The Methodology page renders content from `00_project/normtrace_ihr_methodology_full.md`, which is synced to `05_webapp/public/data/markdown/normtrace_ihr_methodology_full.md` as the source of truth by syncing/copying that file into the webapp markdown directory.
