@@ -1,3 +1,4 @@
+import { FileText, ChevronRight } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -18,7 +19,7 @@ export default function Methodology() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/data/markdown/normtrace_ihr_methodology_full.md')
+    fetch('/data/markdown/normtrace_ihr_methodology_web.md')
       .then((res) => res.text())
       .then((text) => {
         setContent(text);
@@ -80,6 +81,19 @@ export default function Methodology() {
                 </li>
               ))}
             </ul>
+          </div>
+
+          <div className="mt-6 p-5 bg-white border border-slate-200 rounded-xl shadow-sm mb-6">
+            <h3 className="text-sm font-bold text-slate-800 mb-3">Academic Resource</h3>
+            <a
+              href="/data/markdown/normtrace_ihr_methodology_full.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs flex items-center gap-2 text-blue-600 hover:text-blue-800 font-bold transition-colors"
+            >
+              <FileText size={14} />
+              View full academic methodology draft
+            </a>
           </div>
 
           <div className="mt-6 p-5 bg-blue-50 border border-blue-100 rounded-xl">
