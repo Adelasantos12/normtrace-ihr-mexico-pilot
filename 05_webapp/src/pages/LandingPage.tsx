@@ -93,7 +93,7 @@ export default function LandingPage() {
            </div>
            <div className="space-y-4">
               <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Data Package</h4>
-              <p className="text-xs font-bold text-slate-700 italic">v0.1 Mexico Pilot</p>
+              <p className="text-xs font-bold text-slate-700 italic">v0.1 Mexico Pilot</p><p className="text-[9px] text-slate-400 font-mono opacity-60">DOI: 10.5281/zenodo.20085170</p>
            </div>
            <div className="sm:col-span-2 lg:col-span-2 space-y-4">
               <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Disclaimers</h4>

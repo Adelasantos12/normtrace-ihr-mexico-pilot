@@ -35,7 +35,10 @@ export default function Layout() {
       <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between z-30">
          <div className="flex items-center gap-3">
             <div className="p-2 bg-blue-900 text-white font-black text-xs">NT-IHR</div>
-            <h2 className="font-black text-slate-900 tracking-tight text-sm">NormTrace-IHR</h2>
+            <div className="flex flex-col">
+               <h2 className="font-black text-slate-900 tracking-tight text-sm leading-tight">NormTrace-IHR</h2>
+               <p className="text-[7px] text-slate-400 font-mono opacity-60">DOI: 10.5281/zenodo.20085170</p>
+            </div>
          </div>
          <button
            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -61,6 +64,7 @@ export default function Layout() {
         <div className="p-8 border-b border-slate-100 bg-white">
           <h2 className="text-xl font-black text-[#0f172a] tracking-tight">NormTrace-IHR</h2>
           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1">Mexico Pilot v0.1</p>
+          <p className="text-[8px] text-slate-400 font-mono mt-2 opacity-60">DOI: 10.5281/zenodo.20085170</p>
         </div>
 
         <nav className="flex-1 overflow-y-auto p-4 space-y-1">
