@@ -179,7 +179,7 @@ export default function NormativeHierarchy() {
             </button>
             {showBloque && (
               <div className="p-4 bg-white rounded-xl border border-blue-200 text-xs text-slate-600 leading-relaxed space-y-2">
-                <p>The <strong>bloque de constitucionalidad</strong> (constitutional bloc) is the set of norms that, together with the Constitution itself, form the supreme constitutional reference for legal interpretation and validity review. In Mexico after the 2011 reform, it comprises: (1) the CPEUM; (2) international human rights treaties ratified by Mexico. IHR (2005) provisions that embody human rights obligations: including individual rights under Arts. 23–32 (health measures applied to travellers) and Art. 44–45 (confidentiality and data protection): may thus be positioned within the constitutional bloc.</p>
+                <p>The <strong>bloque de constitucionalidad</strong> (constitutional bloc) is the set of norms that, together with the Constitution itself, form the supreme constitutional reference for legal interpretation and validity review. In Mexico after the 2011 reform, it comprises: (1) the CPEUM; (2) international human rights treaties ratified by Mexico. IHR (2005) provisions that embody human rights obligations: including individual rights under Arts. 23-32 (health measures applied to travellers) and Art. 44-45 (confidentiality and data protection): may thus be positioned within the constitutional bloc.</p>
                 <p>Practical effect: a domestic norm that restricts rights protected by the IHR must satisfy the pro-persona test: it cannot be interpreted restrictively when a broader interpretation is available.</p>
               </div>
             )}
@@ -191,7 +191,7 @@ export default function NormativeHierarchy() {
             <div className="space-y-1">
               <div className="text-xs font-black text-amber-900 uppercase tracking-wider">Critical Finding: Tier Mismatch</div>
               <p className="text-xs text-amber-800 leading-relaxed">
-                The primary IHR implementation instrument (RLGS-SI, 1985) sits at the <strong>regulatory tier (Level 3)</strong>. IHR 2005 obligations requiring specific procedural design, enforceable actor competences, and rights-safeguard provisions need <strong>statutory anchoring (Level 4–5)</strong>. This tier mismatch is the single most important structural finding from the Mexico pilot.
+                The primary IHR implementation instrument (RLGS-SI, 1985) sits at the <strong>regulatory tier (Level 3)</strong>. IHR 2005 obligations requiring specific procedural design, enforceable actor competences, and rights-safeguard provisions need <strong>statutory anchoring (Level 4-5)</strong>. This tier mismatch is the single most important structural finding from the Mexico pilot.
               </p>
             </div>
           </div>
@@ -293,7 +293,7 @@ export default function NormativeHierarchy() {
         <div className="flex items-start gap-3 p-4 bg-slate-50 rounded-xl border border-slate-200">
           <Info size={16} className="text-slate-400 shrink-0 mt-0.5" />
           <p className="text-xs text-slate-500 leading-relaxed">
-            Click any tier to expand instruments and IHR relevance detail. Pyramid width is schematic: wider = lower in hierarchy. Mean anchoring score (L0–L5) reflects the quality of IHR linkage for provisions at that tier, averaged across all mapping rows in the corpus.
+            Click any tier to expand instruments and IHR relevance detail. Pyramid width is schematic: wider = lower in hierarchy. Mean anchoring score (L0-L5) reflects the quality of IHR linkage for provisions at that tier, averaged across all mapping rows in the corpus.
           </p>
         </div>
       </div>
@@ -373,7 +373,7 @@ export default function NormativeHierarchy() {
               The pro-persona principle (Art. 1 CPEUM, 2011) does not resolve this structural problem. It ensures <em>interpretive</em> alignment with IHR human rights provisions, but does not substitute for the <em>operative</em> legal architecture: the designated authority, the defined procedure, the enforceable competence: that IHR implementation requires.
             </p>
             <p>
-              The most significant reform pathway identified by NormTrace is therefore not treaty ratification or administrative practice, but <strong>statutory reform</strong>: the LGS and specific sectoral laws need obligation-specific provisions at L4–L5 anchoring to close the gap between constitutional intent and operational capacity.
+              The most significant reform pathway identified by NormTrace is therefore not treaty ratification or administrative practice, but <strong>statutory reform</strong>: the LGS and specific sectoral laws need obligation-specific provisions at L4-L5 anchoring to close the gap between constitutional intent and operational capacity.
             </p>
           </div>
         </div>
@@ -381,7 +381,7 @@ export default function NormativeHierarchy() {
           <CheckCircle size={16} className="text-blue-400" />
           <p className="text-xs text-slate-400 italic">
             Analysis derived from NormTrace-IHR Mexico Pilot v0.1. All outputs preliminary; expert legal validation required.
-            See methodology for anchoring scale definitions (L0–L5).
+            See methodology for anchoring scale definitions (L0-L5).
           </p>
         </div>
       </div>

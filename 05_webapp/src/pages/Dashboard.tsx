@@ -217,11 +217,11 @@ export default function Dashboard() {
                     <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Anchoring Scale Guide</h4>
                     <div className="grid grid-cols-1 gap-2">
                        <div className="flex justify-between items-center bg-slate-50 px-3 py-2 rounded-lg">
-                          <span className="text-[10px] font-bold text-slate-500">L0–L2</span>
+                          <span className="text-[10px] font-bold text-slate-500">L0-L2</span>
                           <span className="text-[10px] text-slate-600 font-medium">Admin / Operational</span>
                        </div>
                        <div className="flex justify-between items-center bg-blue-50 px-3 py-2 rounded-lg">
-                          <span className="text-[10px] font-bold text-blue-600">L3–L5</span>
+                          <span className="text-[10px] font-bold text-blue-600">L3-L5</span>
                           <span className="text-[10px] text-blue-700 font-medium">Statutory / Legislative</span>
                        </div>
                     </div>

@@ -184,7 +184,7 @@ export default function MappingExplorer() {
                         <div className="space-y-2 flex-1">
                           <div className="flex items-center gap-2">
                             <span className="px-2 py-0.5 bg-slate-900 text-white rounded text-[10px] font-black uppercase tracking-widest">
-                              {r.instrument} — {r.article}
+                              {r.instrument}: {r.article}
                             </span>
                             <span className="text-[10px] font-bold text-slate-400">ID: {r.obligation_id}</span>
                           </div>

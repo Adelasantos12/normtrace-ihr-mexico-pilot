@@ -85,7 +85,7 @@ export default function LandingPage() {
             {
               value: '1.76/5',
               label: 'Mean Anchoring Score',
-              sub: '45 IHR 2005 obligations: concentrated at L1–L2',
+              sub: '45 IHR 2005 obligations: concentrated at L1-L2',
               color: 'text-red-600',
               bg: 'bg-red-50 border-red-100'
             },
@@ -255,10 +255,10 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-2 gap-8 text-sm text-slate-600 leading-relaxed">
             <div className="space-y-3">
               <p>
-                The IHR Monitoring and Evaluation Framework (SPAR, JEE) assesses reported capacity levels. Bishowkarma et al. (2026) documented improved alignment between SPAR and JEE across most indicators in recent editions, while identifying that three capacity areas retain significant score disagreement: infection prevention and control, healthcare-associated infection surveillance, and <strong>national IHR focal point functions</strong> — precisely the capacities that depend most directly on legal-institutional anchoring.
+                The IHR Monitoring and Evaluation Framework (SPAR, JEE) assesses reported capacity levels. Bishowkarma et al. (2026) documented improved alignment between SPAR and JEE across most indicators in recent editions, while identifying that three capacity areas retain significant score disagreement: infection prevention and control, healthcare-associated infection surveillance, and <strong>national IHR focal point functions</strong>, precisely the capacities that depend most directly on legal-institutional anchoring.
               </p>
               <p>
-                Even when SPAR and JEE agree, neither instrument traces the domestic legal foundation of the capacity being measured. A country may score well on NFP functions because its DGE performs the role operationally, while lacking the statutory designation IHR Art. 4 requires. That is a real gap — invisible to aggregate scoring, visible through legal traceability.
+                Even when SPAR and JEE agree, neither instrument traces the domestic legal foundation of the capacity being measured. A country may score well on NFP functions because its DGE performs the role operationally, while lacking the statutory designation IHR Art. 4 requires. That is a real gap (invisible to aggregate scoring, visible through legal traceability).
               </p>
             </div>
             <div className="space-y-3">
@@ -281,7 +281,7 @@ export default function LandingPage() {
           <div className="sm:col-span-2 space-y-3">
             <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Analytical Framework</h4>
             <p className="text-xs text-slate-500 leading-relaxed">
-              NormTrace-IHR applies legal-institutional traceability as its core methodology, drawing on multi-level governance theory (Hooghe and Marks, 2003), institutional decoupling analysis (Meyer and Rowan, 1977), and network science (Freeman, 1978; Granovetter, 1973) for the actor topology layer. The normative pipeline concept captures the cascading structure of domestic legal architectures without reducing them to a single compliance score. IHR compliance and reform scholarship — notably Habibi et al. (<em>Lancet</em>, 2020) — informs the diagnostic framework for identifying where obligations are formally present but operationally blocked.
+              NormTrace-IHR applies legal-institutional traceability as its core methodology, drawing on multi-level governance theory (Hooghe and Marks, 2003), institutional decoupling analysis (Meyer and Rowan, 1977), and network science (Freeman, 1978; Granovetter, 1973) for the actor topology layer. The normative pipeline concept captures the cascading structure of domestic legal architectures without reducing them to a single compliance score. IHR compliance and reform scholarship, notably Habibi et al. (<em>Lancet</em>, 2020), informs the diagnostic framework for identifying where obligations are formally present but operationally blocked.
             </p>
           </div>
           <div className="space-y-4">

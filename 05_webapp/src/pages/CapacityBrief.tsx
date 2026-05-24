@@ -67,7 +67,7 @@ export default function CapacityBrief() {
       icon: Package,
       color: 'text-purple-600',
       bg: 'bg-purple-50',
-      caveat: 'Provisional — pending final normative consolidation.'
+      caveat: 'Provisional: pending final normative consolidation.'
     }
   ];
 
@@ -175,7 +175,7 @@ export default function CapacityBrief() {
                   { id: 'Audience', title: 'Intended Audience', icon: Users, content: 'Primary: National IHR Focal Points, Health Legal Offices, WHO/PAHO technical teams. Secondary: Legislative research units, inter-sectoral coordination committees, and civil society oversight bodies.' },
                   { id: 'Evidence', title: 'Evidence Base', icon: Shield, content: 'Derived from the NormTrace-IHR Mexico Pilot corpus (v0.1), comprising 18 federal instruments and 110/111 identified legal provisions cross-referenced against IHR 2005 and 2024 update layers.' },
                   { id: 'Limits', title: 'What this document does not do', icon: AlertTriangle, content: 'This document does not provide legal advice, judicial interpretation, compliance scores, or official reform recommendations. It is an AI-assisted analytical infrastructure for expert review.' },
-                  { id: 'Status', title: 'Review Status', icon: CheckCircle2, content: 'PRELIMINARY — Requires validation by qualified Mexican constitutional and administrative legal experts.' }
+                  { id: 'Status', title: 'Review Status', icon: CheckCircle2, content: 'PRELIMINARY: Requires validation by qualified Mexican constitutional and administrative legal experts.' }
                 ].map(s => (
                   <div key={s.id} className="border-b border-slate-100 last:border-none">
                      <button

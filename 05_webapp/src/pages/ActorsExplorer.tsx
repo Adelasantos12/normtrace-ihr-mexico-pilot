@@ -41,6 +41,33 @@ const EDGE_STYLES: Record<string, any> = {
   'gap': { stroke: '#ef4444', dash: '2 2' }
 };
 
+const NODE_STYLES: Record<string, { fill: string; stroke: string; textFill: string }> = {
+  actor:      { fill: '#1e3a5f', stroke: '#1e3a5f', textFill: 'white' },
+  instrument: { fill: '#eef2ff', stroke: '#4338ca', textFill: '#3730a3' },
+  obligation: { fill: '#f0fdf4', stroke: '#16a34a', textFill: '#15803d' },
+  gap:        { fill: '#fef2f2', stroke: '#dc2626', textFill: '#dc2626' }
+};
+
+const GAP_ABBREV: Record<string, string> = {
+  procedural_gap: 'Proc. Gap', coordination_gap: 'Coord. Gap', legal_silence: 'No Anchor',
+  fragmentation: 'Fragment.', tier_mismatch: 'Tier Mis.', outdated: 'Outdated', rights_gap: 'Rights Gap'
+};
+
+function getNodeType(id: string): 'actor' | 'instrument' | 'obligation' | 'gap' {
+  if (id.startsWith('IHR-OBL-')) return 'obligation';
+  if (['procedural_gap', 'coordination_gap', 'legal_silence', 'fragmentation',
+       'tier_mismatch', 'outdated', 'rights_gap', 'none'].includes(id.toLowerCase())) return 'gap';
+  if (NODE_METADATA[id]) return 'actor';
+  return 'instrument';
+}
+
+function makeNodeLabel(id: string): string {
+  if (GAP_ABBREV[id]) return GAP_ABBREV[id];
+  if (id.startsWith('IHR-OBL-')) return id.replace('IHR-OBL-', 'OBL-');
+  if (id === 'WHO' || id === 'OMS') return 'WHO/OMS';
+  return id.length > 11 ? id.slice(0, 9) + '…' : id;
+}
+
 const LABELS: Record<string, string> = {
   actor_id: 'Actor ID',
   actor_name: 'Actor Name',
@@ -150,30 +177,67 @@ export default function ActorsExplorer() {
     });
 
     const nodes = Array.from(nodesSet);
-    const radius = 260;
-    const centerX = 400;
-    const centerY = 350;
+    const cx = 400, cy = 360;
+    const posMap: Record<string, { x: number; y: number }> = {};
 
-    return nodes.map((id, i) => {
-      const angle = (i / nodes.length) * 2 * Math.PI;
+    if (activeView === 'actor-instrument') {
+      // Bipartite: actors left, instruments right
+      const actors = nodes.filter(n => getNodeType(n) === 'actor');
+      const instrs = nodes.filter(n => getNodeType(n) !== 'actor');
+      const aStep = actors.length > 1 ? Math.min(68, 580 / (actors.length - 1)) : 0;
+      const iStep = instrs.length > 1 ? Math.min(55, 580 / (instrs.length - 1)) : 0;
+      actors.forEach((n, i) => { posMap[n] = { x: 150, y: 60 + i * aStep }; });
+      instrs.forEach((n, i) => { posMap[n] = { x: 640, y: 60 + i * iStep }; });
+    } else if (activeView === 'gap-exposure') {
+      // Hub-spoke: gap types cluster at center, obligations around outer ring
+      const gaps = nodes.filter(n => getNodeType(n) === 'gap');
+      const obls = nodes.filter(n => getNodeType(n) === 'obligation');
+      const others = nodes.filter(n => !gaps.includes(n) && !obls.includes(n));
+      gaps.forEach((n, i) => {
+        const a = gaps.length > 1 ? (i / gaps.length) * 2 * Math.PI : 0;
+        posMap[n] = { x: cx + 85 * Math.cos(a), y: cy + 65 * Math.sin(a) };
+      });
+      obls.forEach((n, i) => {
+        const a = (i / Math.max(obls.length, 1)) * 2 * Math.PI - Math.PI / 2;
+        posMap[n] = { x: cx + 265 * Math.cos(a), y: cy + 225 * Math.sin(a) };
+      });
+      others.forEach((n, i) => { posMap[n] = { x: 50 + i * 80, y: 30 }; });
+    } else {
+      // provision-ihr: norms on left arc, obligations on right arc
+      const norms = nodes.filter(n => getNodeType(n) !== 'obligation');
+      const obls  = nodes.filter(n => getNodeType(n) === 'obligation');
+      const r = 268;
+      norms.forEach((n, i) => {
+        const a = Math.PI * (0.55 + (i / Math.max(norms.length - 1, 1)) * 0.9);
+        posMap[n] = { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
+      });
+      obls.forEach((n, i) => {
+        const a = -Math.PI * 0.45 + Math.PI * (i / Math.max(obls.length - 1, 1)) * 0.9;
+        posMap[n] = { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
+      });
+    }
+
+    return nodes.map(id => {
       const deg = currentEdges.reduce((acc, e: any) => acc + (e.source === id || e.target === id ? 1 : 0), 0);
       const inDeg = currentEdges.reduce((acc, e: any) => acc + (e.target === id ? 1 : 0), 0);
       const outDeg = currentEdges.reduce((acc, e: any) => acc + (e.source === id ? 1 : 0), 0);
-
+      const nodeType = getNodeType(id);
+      const pos = posMap[id] || { x: cx, y: cy };
       return {
         id,
-        label: id === 'SSA' ? 'SSA' : id === 'WHO' ? 'WHO/OMS' : id,
+        label: makeNodeLabel(id),
         full: NODE_METADATA[id]?.full || id,
-        type: NODE_METADATA[id]?.type || 'Legal Entity',
-        layer: NODE_METADATA[id]?.layer || 'Analytical',
+        type: NODE_METADATA[id]?.type || (nodeType === 'obligation' ? 'IHR 2005 Obligation' : nodeType === 'gap' ? 'Gap Type' : 'Legal Instrument'),
+        layer: NODE_METADATA[id]?.layer || (nodeType === 'obligation' ? 'International' : 'Domestic Legal'),
+        nodeType,
         degree: deg,
         inDegree: inDeg,
         outDegree: outDeg,
-        x: centerX + radius * Math.cos(angle),
-        y: centerY + radius * Math.sin(angle)
+        x: pos.x,
+        y: pos.y
       };
     });
-  }, [currentEdges]);
+  }, [currentEdges, activeView]);
 
   const nodePositions = useMemo(() => {
     const pos: any = {};
@@ -224,8 +288,8 @@ export default function ActorsExplorer() {
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Network View</label>
                 <div className="flex bg-slate-100 p-1 rounded-xl">
                    {[
-                     { id: 'actor-instrument', label: 'Actor–Instrument' },
-                     { id: 'provision-ihr', label: 'Provision–IHR' },
+                     { id: 'actor-instrument', label: 'Actor / Instrument' },
+                     { id: 'provision-ihr', label: 'Provision / IHR' },
                      { id: 'gap-exposure', label: 'Gap Exposure' }
                    ].map(v => (
                      <button
@@ -329,7 +393,9 @@ export default function ActorsExplorer() {
                    {/* Nodes */}
                    {graphNodes.map((n) => {
                      const isHovered = hoveredNode?.id === n.id;
-                     const isWeak = activeView === 'gap-exposure' && n.degree < 2;
+                     const baseR = Math.max(14, Math.min(28, 11 + n.degree));
+                     const r = isHovered ? baseR + 4 : baseR;
+                     const style = NODE_STYLES[n.nodeType] || NODE_STYLES.instrument;
 
                      return (
                        <g
@@ -340,19 +406,19 @@ export default function ActorsExplorer() {
                         onMouseLeave={() => setHoveredNode(null)}
                        >
                           <circle
-                            r={isHovered ? 28 : 24}
-                            fill="white"
-                            stroke={isHovered ? "#3b82f6" : isWeak ? "#ef4444" : "#64748b"}
+                            r={r}
+                            fill={style.fill}
+                            stroke={isHovered ? '#2563eb' : style.stroke}
                             strokeWidth={isHovered ? 3 : 2}
-                            className="shadow-sm transition-all duration-300"
+                            className="transition-all duration-300"
                           />
                           <text
                             textAnchor="middle"
                             dy=".3em"
-                            fontSize="9"
+                            fontSize="8"
                             fontWeight="900"
-                            fill="#1e293b"
-                            className="pointer-events-none uppercase tracking-tighter"
+                            fill={style.textFill}
+                            className="pointer-events-none"
                           >
                             {n.label}
                           </text>
@@ -402,24 +468,51 @@ export default function ActorsExplorer() {
                 )}
 
                 {/* Legend */}
-                <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-md border border-slate-200 p-6 rounded-2xl shadow-xl max-w-xs space-y-4">
-                   <h4 className="text-xs font-black text-slate-900 uppercase tracking-widest">Relationship Map Legend</h4>
-                   <div className="grid grid-cols-2 gap-x-6 gap-y-3">
-                      {[
-                        { label: 'Actor', color: 'bg-white border-slate-400' },
-                        { label: 'Instrument', color: 'bg-white border-blue-400' },
-                        { label: 'Oversight', color: 'bg-purple-500 border-none' },
-                        { label: 'Subordinate', color: 'bg-blue-500 border-none' },
-                        { label: 'Coordination', color: 'bg-slate-400 border-none' },
-                        { label: 'Weak Anchor', color: 'bg-white border-red-500' }
-                      ].map(l => (
-                        <div key={l.label} className="flex items-center gap-3">
-                           <div className={cn("w-3 h-3 rounded-full border", l.color)} />
-                           <span className="text-[9px] font-bold text-slate-600 uppercase">{l.label}</span>
-                        </div>
-                      ))}
+                <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-md border border-slate-200 p-4 rounded-2xl shadow-xl space-y-3 text-[9px]">
+                   <div className="font-black text-slate-500 uppercase tracking-widest">Legend</div>
+                   <div className="space-y-1.5">
+                     <div className="text-[8px] font-bold text-slate-400 uppercase tracking-wider">Node type</div>
+                     {([
+                       { label: 'Institutional Actor', bg: '#1e3a5f', text: 'white' },
+                       { label: 'Legal Instrument', bg: '#eef2ff', border: '#4338ca', text: '#3730a3' },
+                       { label: 'IHR Obligation', bg: '#f0fdf4', border: '#16a34a', text: '#15803d' },
+                       { label: 'Gap Type', bg: '#fef2f2', border: '#dc2626', text: '#dc2626' }
+                     ] as any[]).map((l: any) => (
+                       <div key={l.label} className="flex items-center gap-2">
+                         <div className="w-3 h-3 rounded-full shrink-0 border"
+                           style={{ background: l.bg, borderColor: l.border || l.bg }} />
+                         <span className="font-bold text-slate-600">{l.label}</span>
+                       </div>
+                     ))}
+                   </div>
+                   <div className="space-y-1.5 border-t border-slate-100 pt-2">
+                     <div className="text-[8px] font-bold text-slate-400 uppercase tracking-wider">Edge type</div>
+                     {[
+                       { label: 'Oversight', color: '#8b5cf6' },
+                       { label: 'Subordination', color: '#3b82f6' },
+                       { label: 'Coordination (dashed)', color: '#94a3b8' },
+                       { label: 'Gap exposure', color: '#ef4444' }
+                     ].map(l => (
+                       <div key={l.label} className="flex items-center gap-2">
+                         <div className="w-5 h-0.5 shrink-0 rounded" style={{ background: l.color }} />
+                         <span className="font-bold text-slate-600">{l.label}</span>
+                       </div>
+                     ))}
+                   </div>
+                   <div className="border-t border-slate-100 pt-2 text-slate-400 italic">
+                     Node size scales with degree centrality.
                    </div>
                 </div>
+             </div>
+
+             {/* Figure caption: sits directly below the network visualization */}
+             <div className="px-8 py-4 bg-slate-50 border-t border-slate-100">
+               <p className="text-[10px] text-slate-500 leading-relaxed max-w-5xl">
+                 <strong className="text-slate-700">
+                   Figure 1. Corpus-derived legal-institutional network of IHR 2005 implementation in Mexico (NormTrace pilot v0.1).
+                 </strong>{' '}
+                 Node color encodes type: dark blue = institutional actor; indigo-outlined = domestic legal instrument; green-outlined = IHR 2005 obligation; red-outlined = gap type. Node size scales with degree centrality (number of corpus-derived connections). Edge type encodes relationship class: oversight (purple, solid), subordination (blue, solid), coordination (grey, dashed), gap-exposure (red, dashed). The network represents corpus-derived legal-institutional salience, not operational coordination or political authority. Three structural findings are diagnostically significant: (1) SSA/DGE over-centralisation without adequate statutory specificity; (2) RLGS-SI cluster anchored to IHR obligations despite predating IHR 2005 by 20 years; (3) SSA-INM missing coordination edge for Points of Entry (IHR Arts. 23-32). Hover any node for full name, layer, and degree detail.
+               </p>
              </div>
 
              <div className="p-8 grid md:grid-cols-3 gap-8 bg-white border-t border-slate-100">
@@ -447,7 +540,7 @@ export default function ActorsExplorer() {
              </div>
           </div>
 
-          {/* Inline topology interpretation — connects map to analysis */}
+          {/* Inline topology interpretation: connects map to analysis */}
           <div className="bg-slate-900 text-white rounded-[2rem] p-8 space-y-6">
             <div className="flex items-center justify-between gap-4 flex-wrap">
               <div className="flex items-center gap-3">
@@ -787,7 +880,7 @@ export default function ActorsExplorer() {
                   title: 'DGE / NFP Function',
                   type: 'Mandate Decoupling',
                   color: 'bg-red-50 border-red-200',
-                  desc: 'DGE operationally performs NFP functions (24/7 WHO communication, surveillance, notification) but its legal basis is administrative practice + RI-SS 2025 (internal regulation). IHR Art. 4 requires statutory designation. The formal–operational gap is the most acute decoupling in the corpus.',
+                  desc: 'DGE operationally performs NFP functions (24/7 WHO communication, surveillance, notification) but its legal basis is administrative practice + RI-SS 2025 (internal regulation). IHR Art. 4 requires statutory designation. The formal-to-operational gap is the most acute decoupling in the corpus.',
                   reform: 'LGS amendment to designate NFP with defined functions'
                 },
                 {
@@ -801,7 +894,7 @@ export default function ActorsExplorer() {
                   title: 'SSA-INM Coordination',
                   type: 'Structural Hole',
                   color: 'bg-amber-50 border-amber-200',
-                  desc: 'At points of entry, SSA holds health authority and INM holds border control authority. IHR Arts. 23–32 require coordinated health measures for travellers. No formal SSA-INM coordination protocol exists in the corpus: this structural hole means POE health measures depend on informal inter-institutional practice.',
+                  desc: 'At points of entry, SSA holds health authority and INM holds border control authority. IHR Arts. 23-32 require coordinated health measures for travellers. No formal SSA-INM coordination protocol exists in the corpus: this structural hole means POE health measures depend on informal inter-institutional practice.',
                   reform: 'Inter-secretarial MOU or joint POE health protocol'
                 }
               ].map((d, i) => (
@@ -820,11 +913,10 @@ export default function ActorsExplorer() {
             </div>
           </div>
 
-          {/* Network caption */}
-          <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-3">
-            <h4 className="font-black text-slate-900">Network Topology Caption</h4>
-            <p className="text-sm text-slate-600 leading-relaxed max-w-4xl">
-              <strong>Figure: Corpus-derived legal-institutional network of IHR implementation in Mexico (v0.1 pilot).</strong> Nodes represent institutional actors and legal instruments identified in the NormTrace corpus (N=18 instruments, 14 actors). Edge type encodes relationship class: oversight (purple, solid), subordination (blue, solid), coordination (grey, dashed), reporting (green, solid), anchoring (blue, solid), gap-exposure (red, dashed). Node size reflects degree centrality. The network is a complex adaptive system in which IHR compliance is an emergent property of the interactions among these components. Three structural features are diagnostically significant: (1) the over-centralisation of IHR functions in SSA/DGE without adequate statutory specificity (hub fragility); (2) the structural hole between SSA and INM at points of entry (coordination gap); and (3) the RLGS-SI cluster, which is densely connected to multiple IHR obligations despite being a 1985 pre-IHR instrument (temporal decoupling). The network does not represent operational coordination or political authority: it represents corpus-derived legal-institutional salience. See Habibi et al. (Lancet, 2020) and Paina &amp; Peters (Implementation Science, 2012) for methodological context.
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 space-y-2">
+            <h4 className="font-black text-slate-900 text-sm">Figure reference</h4>
+            <p className="text-xs text-slate-600 leading-relaxed max-w-4xl">
+              The network figure and its caption (Figure 1) appear in the <strong>Relationship Map</strong> tab, directly below the visualization. The analysis above interprets that figure through network science concepts: hub centrality (Freeman, 1978), structural holes (Burt, 1992), weak ties (Granovetter, 1973), and CAS cascade dynamics (Paina &amp; Peters, 2012). The three topology findings (hub fragility, temporal decoupling, SSA-INM structural hole) correspond to patterns visible in the Actor / Instrument view of the map.
             </p>
           </div>
         </div>

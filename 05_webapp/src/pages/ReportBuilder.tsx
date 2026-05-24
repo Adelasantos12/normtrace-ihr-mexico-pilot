@@ -305,7 +305,7 @@ export default function ReportBuilder() {
 
                <div className="flex justify-between items-center text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em]">
                   <div>NormTrace-IHR Mexico Pilot v0.1</div>
-                  <div>Page Appendix — v0.3 Build</div>
+                  <div>Page Appendix: v0.3 Build</div>
                </div>
             </div>
          )}

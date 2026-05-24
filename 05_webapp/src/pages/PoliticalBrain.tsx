@@ -91,7 +91,7 @@ const INSTITUTIONAL_ACTORS = [
     mandateType: 'Migration control and border management',
     ihrRole: 'Points-of-entry health measures for travellers: application of health measures to persons at borders',
     decouplingRisk: 'VERY_HIGH',
-    decouplingNote: 'INM operates at POE with significant interface with IHR health measures (Arts. 23–32) but operates under a migration mandate without explicit IHR coordination protocols. SSA-INM coordination for health measures at borders lacks statutory specification.',
+    decouplingNote: 'INM operates at POE with significant interface with IHR health measures (Arts. 23-32) but operates under a migration mandate without explicit IHR coordination protocols. SSA-INM coordination for health measures at borders lacks statutory specification.',
     reformFeasibility: 'LOW',
     vetoCapacity: 'HIGH',
     reformNotes: 'SSA-INM coordination is the most under-specified inter-institutional relationship in the IHR corpus. Formal protocol or joint regulation is needed but requires inter-secretarial political will.',
@@ -367,7 +367,7 @@ export default function PoliticalBrain() {
             <div className="grid md:grid-cols-2 gap-5">
               {[
                 {
-                  type: 'Mandate–Performance Decoupling',
+                  type: 'Mandate vs. Performance Decoupling',
                   example: 'DGE exercises NFP functions under internal regulation (RI-SS 2025), not statutory designation',
                   color: 'bg-red-50 border-red-200',
                   impact: 'NFP function depends on administrative arrangement, not law: vulnerable to reorganisation'
@@ -511,12 +511,12 @@ export default function PoliticalBrain() {
               <div className="space-y-3 text-xs text-slate-600 leading-relaxed">
                 <div className="p-3 bg-blue-50 rounded-xl border border-blue-100">
                   <p className="font-bold text-blue-900">Habibi R, et al. (2020)</p>
-                  <p>"Do not violate the International Health Regulations during the COVID-19 outbreak." <em>The Lancet</em>, 395(10225), 664–666. doi:10.1016/S0140-6736(20)30373-1</p>
+                  <p>"Do not violate the International Health Regulations during the COVID-19 outbreak." <em>The Lancet</em>, 395(10225), 664-666. doi:10.1016/S0140-6736(20)30373-1</p>
                   <p className="mt-1 text-[10px] text-slate-500">IHR compliance analysis: States Parties' obligations under international health law; informs the diagnostic framing for procedural and rights-safeguard gaps.</p>
                 </div>
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
                   <p className="font-bold text-slate-900">Meyer JW, Rowan B. (1977)</p>
-                  <p>"Institutionalized organizations: formal structure as myth and ceremony." <em>Am J Sociol</em>, 83(2), 340–363.</p>
+                  <p>"Institutionalized organizations: formal structure as myth and ceremony." <em>Am J Sociol</em>, 83(2), 340-363.</p>
                   <p className="mt-1 text-[10px] text-slate-500">Foundational decoupling theory: formal legal structure as institutional myth divorced from operational practice.</p>
                 </div>
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
@@ -526,7 +526,7 @@ export default function PoliticalBrain() {
                 </div>
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
                   <p className="font-bold text-slate-900">Gostin LO, Katz R. (2016)</p>
-                  <p>"The International Health Regulations: the governing framework for global health security." <em>Milbank Q</em>, 94(2), 264–313.</p>
+                  <p>"The International Health Regulations: the governing framework for global health security." <em>Milbank Q</em>, 94(2), 264-313.</p>
                 </div>
               </div>
             </div>
