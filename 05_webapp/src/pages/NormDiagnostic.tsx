@@ -42,7 +42,7 @@ const DIAGNOSTICS: Record<DiagnosticCode, DiagnosticDef> = {
     bg: 'bg-amber-50',
     border: 'border-amber-200',
     icon: 'clock',
-    description: 'Legal anchor exists but primary instrument predates IHR 2005 — update review required'
+    description: 'Legal anchor exists but primary instrument predates IHR 2005: update review required'
   },
   TIER_MISMATCH: {
     code: 'TIER_MISMATCH',
@@ -60,7 +60,7 @@ const DIAGNOSTICS: Record<DiagnosticCode, DiagnosticDef> = {
     bg: 'bg-blue-50',
     border: 'border-blue-200',
     icon: 'info',
-    description: 'Indirect or general statutory anchor only — no obligation-specific provision identified'
+    description: 'Indirect or general statutory anchor only: no obligation-specific provision identified'
   },
   PROCEDURAL_GAP: {
     code: 'PROCEDURAL_GAP',
@@ -96,7 +96,7 @@ const DIAGNOSTICS: Record<DiagnosticCode, DiagnosticDef> = {
     bg: 'bg-slate-100',
     border: 'border-slate-300',
     icon: 'x',
-    description: 'No domestic legal anchor identified in available corpus — legal silence'
+    description: 'No domestic legal anchor identified in available corpus: legal silence'
   },
   FRAGMENTED: {
     code: 'FRAGMENTED',
@@ -245,7 +245,7 @@ export default function NormDiagnostic() {
           <h1 className="text-4xl font-black text-slate-900 tracking-tight">Norm Diagnostic</h1>
         </div>
         <p className="text-lg text-slate-600 max-w-4xl">
-          Cross-diagnostic matrix: IHR obligation × domestic norm. Each pairing is classified by diagnostic status — from well-anchored to orphaned, with identification of tier mismatches, outdated instruments, procedural gaps, and fragmented anchoring.
+          Cross-diagnostic matrix: IHR obligation × domestic norm. Each pairing is classified by diagnostic status: from well-anchored to orphaned, with identification of tier mismatches, outdated instruments, procedural gaps, and fragmented anchoring.
         </p>
       </header>
 
@@ -516,7 +516,7 @@ export default function NormDiagnostic() {
       {view === 'matrix' && (
         <div className="space-y-4">
           <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-            <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Diagnostic Matrix — IHR Obligations by Status</div>
+            <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Diagnostic Matrix: IHR Obligations by Status</div>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
               {obligationDiagnostics.map(o => {
                 const def = DIAGNOSTICS[o.diagnostic];
@@ -524,7 +524,7 @@ export default function NormDiagnostic() {
                   <div
                     key={o.id}
                     className={cn('p-3 rounded-xl border space-y-1 transition-all cursor-default', def.bg, def.border)}
-                    title={`${o.id}: ${def.label} — ${def.description}`}
+                    title={`${o.id}: ${def.label}: ${def.description}`}
                   >
                     <div className="flex items-center gap-1.5">
                       <span className={def.color}>{getDiagnosticIcon(def.icon, 11)}</span>
@@ -557,9 +557,9 @@ export default function NormDiagnostic() {
       <div className="bg-amber-50 border border-amber-100 rounded-2xl p-6 flex gap-4">
         <Info size={20} className="text-amber-600 shrink-0 mt-0.5" />
         <div className="space-y-1">
-          <p className="text-xs font-black text-amber-900 uppercase tracking-wider">Diagnostic Classification — Methodological Note</p>
+          <p className="text-xs font-black text-amber-900 uppercase tracking-wider">Diagnostic Classification: Methodological Note</p>
           <p className="text-xs text-amber-800 leading-relaxed">
-            Diagnostic codes are algorithmically derived from anchoring level, fit dimension scores, and gap type classifications in the NormTrace dataset. They classify the <em>legal-institutional anchoring quality</em> — not operational performance. A "Procedural Gap" means legally-assigned duties without defined procedures in the corpus; it does not confirm that procedures do not exist in practice. All classifications require expert legal validation before any policy application.
+            Diagnostic codes are algorithmically derived from anchoring level, fit dimension scores, and gap type classifications in the NormTrace dataset. They classify the <em>legal-institutional anchoring quality</em>: not operational performance. A "Procedural Gap" means legally-assigned duties without defined procedures in the corpus; it does not confirm that procedures do not exist in practice. All classifications require expert legal validation before any policy application.
           </p>
         </div>
       </div>

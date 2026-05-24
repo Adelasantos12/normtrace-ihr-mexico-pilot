@@ -447,6 +447,66 @@ export default function ActorsExplorer() {
              </div>
           </div>
 
+          {/* Inline topology interpretation — connects map to analysis */}
+          <div className="bg-slate-900 text-white rounded-[2rem] p-8 space-y-6">
+            <div className="flex items-center justify-between gap-4 flex-wrap">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-blue-600 rounded-xl shrink-0">
+                  <Target size={18} />
+                </div>
+                <div>
+                  <h3 className="font-black text-base">What this network reveals</h3>
+                  <p className="text-slate-400 text-xs">Three structural findings visible in the graph above</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setTab('topology')}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-xs font-bold transition-all"
+              >
+                Full topology analysis <ChevronRight size={14} />
+              </button>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-5">
+              {[
+                {
+                  node: 'SSA / DGE',
+                  badge: 'Hub fragility',
+                  badgeColor: 'bg-red-600',
+                  finding: 'SSA is the highest-degree node (deg=59) and DGE operationally performs NFP functions. But DGE\'s legal basis is administrative practice, not statute. IHR Art. 4 requires statutory designation. The hub is real; its anchoring is not.',
+                  link: 'Mandate decoupling'
+                },
+                {
+                  node: 'RLGS-SI (1985)',
+                  badge: 'Temporal decoupling',
+                  badgeColor: 'bg-amber-600',
+                  finding: 'The primary regulatory hub for IHR obligations was enacted in 1985, twenty years before IHR 2005. Mexico ratified the IHR in 2007 but never updated the RLGS-SI content. The corpus edge exists; the obligation coverage does not.',
+                  link: 'Cascade failure risk'
+                },
+                {
+                  node: 'SSA / INM interface',
+                  badge: 'Structural hole',
+                  badgeColor: 'bg-orange-600',
+                  finding: 'At points of entry, SSA holds health authority and INM holds border control authority. IHR Arts. 23-32 require coordinated health measures for travellers. No formal coordination protocol appears in the corpus: the edge is missing.',
+                  link: 'POE coordination gap'
+                }
+              ].map((f, i) => (
+                <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-black text-sm text-white">{f.node}</span>
+                    <span className={`px-2 py-0.5 rounded text-[9px] font-black text-white ${f.badgeColor}`}>{f.badge}</span>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed">{f.finding}</p>
+                  <div className="text-[10px] font-bold text-blue-400 uppercase tracking-wider">{f.link}</div>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-slate-500 text-[10px] italic border-t border-white/10 pt-4">
+              Network as complex adaptive system: see Paina &amp; Peters, <em>Implementation Science</em> 2012; Freeman, <em>Social Networks</em> 1978; Granovetter, <em>AJS</em> 1973. IHR legal compliance framing: Habibi R et al., <em>Lancet</em> 2020.
+            </p>
+          </div>
+
           <div className="bg-amber-50 border border-amber-100 rounded-[2rem] p-8 flex gap-4">
              <Info size={24} className="text-amber-500 shrink-0" />
              <p className="text-xs text-amber-800 leading-relaxed font-medium">
@@ -638,7 +698,7 @@ export default function ActorsExplorer() {
           <div className="bg-slate-900 text-white rounded-[2rem] p-10 space-y-6">
             <div className="flex items-center gap-3">
               <Target size={24} className="text-blue-400" />
-              <h2 className="text-2xl font-black">Network Topology — Analytical Interpretation</h2>
+              <h2 className="text-2xl font-black">Network Topology: Analytical Interpretation</h2>
             </div>
             <p className="text-slate-300 leading-relaxed max-w-4xl">
               The legal-institutional network derived from the NormTrace corpus is analysed here as a complex adaptive system (CAS). Nodes are actors and legal instruments; edges are corpus-derived relationships (oversight, subordination, coordination, reporting, anchoring). CAS topology analysis identifies: <strong>hubs</strong> (high-centrality nodes whose failure cascades), <strong>bridges</strong> (nodes connecting otherwise disconnected components), <strong>structural holes</strong> (weak coordination ties), and <strong>decoupled sub-networks</strong> (formally connected but operationally isolated clusters).
@@ -651,14 +711,14 @@ export default function ActorsExplorer() {
           {/* Hub analysis */}
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm space-y-5">
-              <h3 className="text-xl font-black text-slate-900">Network Hubs — Critical Nodes</h3>
+              <h3 className="text-xl font-black text-slate-900">Network Hubs: Critical Nodes</h3>
               <p className="text-sm text-slate-500">Nodes with highest degree centrality. In a CAS framework, hubs are both resilience anchors and systemic vulnerabilities: their failure cascades across multiple IHR implementation pathways simultaneously.</p>
               <div className="space-y-3">
                 {[
                   { node: 'Secretaría de Salud (SSA)', degree: 59, role: 'Primary hub', interpretation: 'Highest-degree node. Central to virtually all IHR implementation pathways. Resilience depends on SSA institutional continuity; reform of IHR legal architecture must run through SSA.', color: 'bg-blue-900 text-white' },
-                  { node: 'Ley General de Salud (LGS)', degree: 23, role: 'Statutory hub', interpretation: 'Primary statutory anchor. Multiple IHR obligations pass through LGS but anchoring is general — LGS functions as a hub through breadth, not specificity.', color: 'bg-blue-700 text-white' },
-                  { node: 'CPEUM', degree: 22, role: 'Constitutional hub', interpretation: 'Constitutional foundation — connects treaty obligations to domestic system. High degree reflects the breadth of constitutional reference, not specific IHR operative anchoring.', color: 'bg-indigo-700 text-white' },
-                  { node: 'RLGS-SI (1985)', degree: 20, role: 'Regulatory hub', interpretation: 'Primary IHR regulatory instrument, despite predating IHR 2005. Its age and hierarchical position (regulatory, not statutory) make it a fragile hub — reform-critical.', color: 'bg-amber-600 text-white' },
+                  { node: 'Ley General de Salud (LGS)', degree: 23, role: 'Statutory hub', interpretation: 'Primary statutory anchor. Multiple IHR obligations pass through LGS but anchoring is general: LGS functions as a hub through breadth, not specificity.', color: 'bg-blue-700 text-white' },
+                  { node: 'CPEUM', degree: 22, role: 'Constitutional hub', interpretation: 'Constitutional foundation: connects treaty obligations to domestic system. High degree reflects the breadth of constitutional reference, not specific IHR operative anchoring.', color: 'bg-indigo-700 text-white' },
+                  { node: 'RLGS-SI (1985)', degree: 20, role: 'Regulatory hub', interpretation: 'Primary IHR regulatory instrument, despite predating IHR 2005. Its age and hierarchical position (regulatory, not statutory) make it a fragile hub: reform-critical.', color: 'bg-amber-600 text-white' },
                 ].map((h, i) => (
                   <div key={i} className="p-4 border border-slate-100 rounded-2xl space-y-2">
                     <div className="flex items-center justify-between gap-3">
@@ -682,7 +742,7 @@ export default function ActorsExplorer() {
                     label: 'Bridge Nodes',
                     icon: <ArrowRight size={16} />,
                     color: 'bg-purple-50 border-purple-200',
-                    content: 'SRE (Secretaría de Relaciones Exteriores) functions as a structural bridge between the international layer (WHO/treaty obligations) and the domestic institutional network. Degree is relatively low — its topological importance exceeds its corpus-level salience. Coordination gap between SRE and SSA/DGE is a structural hole in the network.'
+                    content: 'SRE (Secretaría de Relaciones Exteriores) functions as a structural bridge between the international layer (WHO/treaty obligations) and the domestic institutional network. Degree is relatively low: its topological importance exceeds its corpus-level salience. Coordination gap between SRE and SSA/DGE is a structural hole in the network.'
                   },
                   {
                     label: 'Structural Holes',
@@ -700,7 +760,7 @@ export default function ActorsExplorer() {
                     label: 'Peripheral Nodes',
                     icon: <Target size={16} />,
                     color: 'bg-slate-50 border-slate-200',
-                    content: 'Entidades federativas (state health authorities) are peripheral in the federal corpus network — low degree despite operational importance. This reflects the federal pilot scope and confirms the federal gap finding: state-level implementation is legally under-specified and cannot be traced in the federal corpus.'
+                    content: 'Entidades federativas (state health authorities) are peripheral in the federal corpus network: low degree despite operational importance. This reflects the federal pilot scope and confirms the federal gap finding: state-level implementation is legally under-specified and cannot be traced in the federal corpus.'
                   }
                 ].map((s, i) => (
                   <div key={i} className={`p-4 rounded-2xl border ${s.color} space-y-2`}>
@@ -719,7 +779,7 @@ export default function ActorsExplorer() {
           <div className="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm space-y-6">
             <h3 className="text-xl font-black text-slate-900">Institutional Decoupling & Bottleneck Analysis</h3>
             <p className="text-sm text-slate-500 max-w-3xl">
-              In CAS analysis, decoupling occurs when formally connected components operate independently in practice. Bottlenecks are high-centrality nodes where implementation constraints concentrate — obligated to perform critical IHR functions but without the normative specification or coordination capacity to do so.
+              In CAS analysis, decoupling occurs when formally connected components operate independently in practice. Bottlenecks are high-centrality nodes where implementation constraints concentrate: obligated to perform critical IHR functions but without the normative specification or coordination capacity to do so.
             </p>
             <div className="grid md:grid-cols-3 gap-5">
               {[
@@ -731,17 +791,17 @@ export default function ActorsExplorer() {
                   reform: 'LGS amendment to designate NFP with defined functions'
                 },
                 {
-                  title: 'RLGS-SI (1985) — Cascade Failure',
+                  title: 'RLGS-SI (1985): Cascade Failure',
                   type: 'Temporal Decoupling',
                   color: 'bg-orange-50 border-orange-200',
-                  desc: 'The primary IHR regulatory hub predates IHR 2005 by 20 years. IHR obligations ratified in 2007 were never cascaded into the RLGS-SI. The formal legal anchor exists but the content does not reflect current international obligations — temporal decoupling between treaty adoption and regulatory update.',
+                  desc: 'The primary IHR regulatory hub predates IHR 2005 by 20 years. IHR obligations ratified in 2007 were never cascaded into the RLGS-SI. The formal legal anchor exists but the content does not reflect current international obligations: temporal decoupling between treaty adoption and regulatory update.',
                   reform: 'Presidential decree updating RLGS-SI content'
                 },
                 {
                   title: 'SSA-INM Coordination',
                   type: 'Structural Hole',
                   color: 'bg-amber-50 border-amber-200',
-                  desc: 'At points of entry, SSA holds health authority and INM holds border control authority. IHR Arts. 23–32 require coordinated health measures for travellers. No formal SSA-INM coordination protocol exists in the corpus — this structural hole means POE health measures depend on informal inter-institutional practice.',
+                  desc: 'At points of entry, SSA holds health authority and INM holds border control authority. IHR Arts. 23–32 require coordinated health measures for travellers. No formal SSA-INM coordination protocol exists in the corpus: this structural hole means POE health measures depend on informal inter-institutional practice.',
                   reform: 'Inter-secretarial MOU or joint POE health protocol'
                 }
               ].map((d, i) => (
@@ -764,7 +824,7 @@ export default function ActorsExplorer() {
           <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-3">
             <h4 className="font-black text-slate-900">Network Topology Caption</h4>
             <p className="text-sm text-slate-600 leading-relaxed max-w-4xl">
-              <strong>Figure: Corpus-derived legal-institutional network of IHR implementation in Mexico (v0.1 pilot).</strong> Nodes represent institutional actors and legal instruments identified in the NormTrace corpus (N=18 instruments, 14 actors). Edge type encodes relationship class: oversight (purple, solid), subordination (blue, solid), coordination (grey, dashed), reporting (green, solid), anchoring (blue, solid), gap-exposure (red, dashed). Node size reflects degree centrality. The network is a complex adaptive system in which IHR compliance is an emergent property of the interactions among these components. Three structural features are diagnostically significant: (1) the over-centralisation of IHR functions in SSA/DGE without adequate statutory specificity (hub fragility); (2) the structural hole between SSA and INM at points of entry (coordination gap); and (3) the RLGS-SI cluster, which is densely connected to multiple IHR obligations despite being a 1985 pre-IHR instrument (temporal decoupling). The network does not represent operational coordination or political authority — it represents corpus-derived legal-institutional salience. See Habibi et al. (Lancet, 2020) and Paina &amp; Peters (Implementation Science, 2012) for methodological context.
+              <strong>Figure: Corpus-derived legal-institutional network of IHR implementation in Mexico (v0.1 pilot).</strong> Nodes represent institutional actors and legal instruments identified in the NormTrace corpus (N=18 instruments, 14 actors). Edge type encodes relationship class: oversight (purple, solid), subordination (blue, solid), coordination (grey, dashed), reporting (green, solid), anchoring (blue, solid), gap-exposure (red, dashed). Node size reflects degree centrality. The network is a complex adaptive system in which IHR compliance is an emergent property of the interactions among these components. Three structural features are diagnostically significant: (1) the over-centralisation of IHR functions in SSA/DGE without adequate statutory specificity (hub fragility); (2) the structural hole between SSA and INM at points of entry (coordination gap); and (3) the RLGS-SI cluster, which is densely connected to multiple IHR obligations despite being a 1985 pre-IHR instrument (temporal decoupling). The network does not represent operational coordination or political authority: it represents corpus-derived legal-institutional salience. See Habibi et al. (Lancet, 2020) and Paina &amp; Peters (Implementation Science, 2012) for methodological context.
             </p>
           </div>
         </div>

@@ -54,7 +54,7 @@ export default function LandingPage() {
           </h1>
 
           <p className="text-lg text-slate-500 max-w-3xl leading-relaxed font-medium">
-            NormTrace-IHR maps each International Health Regulations obligation through Mexico's normative architecture — from constitutional bridge to statutory anchor to regulatory provision to institutional actor — identifying where the legal pipeline flows, where it narrows, and where it breaks entirely.
+            NormTrace-IHR maps each International Health Regulations obligation through Mexico's normative architecture: from constitutional bridge to statutory anchor to regulatory provision to institutional actor: identifying where the legal pipeline flows, where it narrows, and where it breaks entirely.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-2">
@@ -85,7 +85,7 @@ export default function LandingPage() {
             {
               value: '1.76/5',
               label: 'Mean Anchoring Score',
-              sub: '45 IHR 2005 obligations — concentrated at L1–L2',
+              sub: '45 IHR 2005 obligations: concentrated at L1–L2',
               color: 'text-red-600',
               bg: 'bg-red-50 border-red-100'
             },
@@ -174,7 +174,7 @@ export default function LandingPage() {
               {
                 icon: Layers,
                 title: 'Normative Hierarchy',
-                desc: "Mexico's 5-tier legal pyramid — CPEUM through acuerdos — with IHR anchoring by tier and constitutional bloc analysis",
+                desc: "Mexico's 5-tier legal pyramid: CPEUM through acuerdos: with IHR anchoring by tier and constitutional bloc analysis",
                 path: '/normative-hierarchy',
                 color: 'text-indigo-600',
                 bg: 'bg-indigo-50',
@@ -183,7 +183,7 @@ export default function LandingPage() {
               {
                 icon: Activity,
                 title: 'Norm Diagnostic',
-                desc: 'Cross-matrix: IHR obligation × domestic norm — diagnostic status per pair: outdated, fragmented, orphaned, tier-mismatched',
+                desc: 'Cross-matrix: IHR obligation × domestic norm: diagnostic status per pair: outdated, fragmented, orphaned, tier-mismatched',
                 path: '/norm-diagnostic',
                 color: 'text-blue-600',
                 bg: 'bg-blue-50',
@@ -192,7 +192,7 @@ export default function LandingPage() {
               {
                 icon: Network,
                 title: 'Actors & CAS Topology',
-                desc: 'Institutional network as a complex adaptive system — hubs, bridges, decoupled actors, and structural bottlenecks in health governance',
+                desc: 'Institutional network as a complex adaptive system: hubs, bridges, decoupled actors, and structural bottlenecks in health governance',
                 path: '/actors',
                 color: 'text-emerald-600',
                 bg: 'bg-emerald-50',
@@ -210,7 +210,7 @@ export default function LandingPage() {
               {
                 icon: GitMerge,
                 title: 'IHR Mapping Explorer',
-                desc: '45 obligations × 110 domestic provisions — anchoring scale, 6 fit dimensions, gap typology, IHR 2024 update pressure',
+                desc: '45 obligations × 110 domestic provisions: anchoring scale, 6 fit dimensions, gap typology, IHR 2024 update pressure',
                 path: '/mapping',
                 color: 'text-amber-600',
                 bg: 'bg-amber-50',
@@ -249,21 +249,48 @@ export default function LandingPage() {
           </div>
         </div>
 
+        {/* Why NormTrace */}
+        <div className="mb-16 p-8 bg-slate-50 border border-slate-200 rounded-[2rem] space-y-5">
+          <h2 className="text-xl font-black text-slate-900">The Problem NormTrace Addresses</h2>
+          <div className="grid md:grid-cols-2 gap-8 text-sm text-slate-600 leading-relaxed">
+            <div className="space-y-3">
+              <p>
+                The IHR Monitoring and Evaluation Framework (SPAR, JEE) assesses reported capacity levels. Bishowkarma et al. (2026) documented improved alignment between SPAR and JEE across most indicators in recent editions, while identifying that three capacity areas retain significant score disagreement: infection prevention and control, healthcare-associated infection surveillance, and <strong>national IHR focal point functions</strong> — precisely the capacities that depend most directly on legal-institutional anchoring.
+              </p>
+              <p>
+                Even when SPAR and JEE agree, neither instrument traces the domestic legal foundation of the capacity being measured. A country may score well on NFP functions because its DGE performs the role operationally, while lacking the statutory designation IHR Art. 4 requires. That is a real gap — invisible to aggregate scoring, visible through legal traceability.
+              </p>
+            </div>
+            <div className="space-y-3">
+              <p>
+                NormTrace does not compete with SPAR or JEE. It adds a different analytical dimension: for each IHR obligation, it reconstructs which specific domestic legal instrument, actor, and procedure currently anchor it, at which hierarchical level, and with what structural gaps.
+              </p>
+              <p>
+                The Mexico pilot is a proof of concept for a replicable framework adaptable to any legal system with a publicly accessible normative corpus. The methodology does not produce compliance scores: it produces legal-institutional maps that identify where reform is needed, at what normative level, and for which actor.
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-3 pt-2">
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Key reference:</span>
+            <span className="text-[10px] text-slate-500 italic">Bishowkarma K, et al. Estimating global public health security preparedness capacity: the contribution of SPAR and JEE. <em>Dialogues Health</em>. 2026;8:100282.</span>
+          </div>
+        </div>
+
         {/* Footer */}
         <div className="border-t border-slate-100 pt-10 grid grid-cols-1 sm:grid-cols-3 gap-10">
           <div className="sm:col-span-2 space-y-3">
-            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Theoretical Framework</h4>
+            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Analytical Framework</h4>
             <p className="text-xs text-slate-500 leading-relaxed">
-              NormTrace-IHR applies a complex adaptive systems (CAS) framework to legal-institutional analysis. Domestic legal architectures are treated as multi-level normative networks with emergent properties: cascading obligations, decoupled agents, structural bottlenecks, and internalisation failures that aggregate monitoring cannot detect at the obligation level. The methodology builds on IHR compliance and reform scholarship — notably Habibi et al. (<em>Lancet</em>, 2020) — and applies legal-institutional traceability as a diagnostic tool for identifying where obligations are formally present but operationally blocked.
+              NormTrace-IHR applies legal-institutional traceability as its core methodology, drawing on multi-level governance theory (Hooghe and Marks, 2003), institutional decoupling analysis (Meyer and Rowan, 1977), and network science (Freeman, 1978; Granovetter, 1973) for the actor topology layer. The normative pipeline concept captures the cascading structure of domestic legal architectures without reducing them to a single compliance score. IHR compliance and reform scholarship — notably Habibi et al. (<em>Lancet</em>, 2020) — informs the diagnostic framework for identifying where obligations are formally present but operationally blocked.
             </p>
           </div>
           <div className="space-y-4">
-            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Data & Status</h4>
+            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Mexico Pilot v0.1</h4>
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-amber-700 font-bold text-xs bg-amber-50 px-3 py-1.5 rounded-lg border border-amber-100 w-fit">
                 <AlertTriangle size={12} /> PASS_WITH_FINDINGS
               </div>
-              <p className="text-[10px] text-slate-400 font-mono">v0.1 · Mexico Pilot</p>
+              <p className="text-[10px] text-slate-500">Proof-of-concept pilot. Framework designed for replication across legal systems.</p>
               <p className="text-[10px] text-slate-400 font-mono opacity-60">DOI: 10.5281/zenodo.20085170</p>
               <p className="text-[10px] text-slate-400 italic">Preliminary AI-assisted outputs. Expert legal review required before any policy application.</p>
             </div>

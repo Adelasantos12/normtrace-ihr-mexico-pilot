@@ -3,7 +3,7 @@ import { useCsvData } from '../hooks/useData';
 import { Scale, AlertTriangle, Info, ChevronDown, ChevronRight, Users, Shield, Zap, Network } from 'lucide-react';
 import { cn } from '../lib/utils';
 
-// Static political analysis layer — derived from legal corpus + institutional analysis
+// Static political analysis layer: derived from legal corpus + institutional analysis
 // Requires political science validation
 
 const INSTITUTIONAL_ACTORS = [
@@ -12,7 +12,7 @@ const INSTITUTIONAL_ACTORS = [
     name: 'Consejo de Salubridad General',
     formalAuthority: 'VERY_HIGH',
     operationalInfluence: 'MEDIUM',
-    constitutionalBasis: 'Art. 73(XVI) CPEUM — General Health Council',
+    constitutionalBasis: 'Art. 73(XVI) CPEUM: General Health Council',
     mandateType: 'Constitutional sanitary authority',
     ihrRole: 'Emergency health measures, sanitary regulations, strategic oversight',
     decouplingRisk: 'MEDIUM',
@@ -46,7 +46,7 @@ const INSTITUTIONAL_ACTORS = [
     mandateType: 'National IHR Focal Point (de facto)',
     ihrRole: 'NFP 24/7 functions, surveillance networks (SINAVE), notification to WHO, epidemiological intelligence',
     decouplingRisk: 'HIGH',
-    decouplingNote: 'DGE exercises NFP functions by administrative practice and internal regulation — not by statutory designation. The NFP mandate rests on RI-SS 2025, which is below the normative level IHR Art. 4 requires.',
+    decouplingNote: 'DGE exercises NFP functions by administrative practice and internal regulation: not by statutory designation. The NFP mandate rests on RI-SS 2025, which is below the normative level IHR Art. 4 requires.',
     reformFeasibility: 'HIGH',
     vetoCapacity: 'LOW',
     reformNotes: 'DGE is the most critical IHR operational actor without adequate statutory designation. Statutory reform of LGS to designate NFP with defined functions is the highest-priority legal reform.',
@@ -76,7 +76,7 @@ const INSTITUTIONAL_ACTORS = [
     mandateType: 'International treaty liaison',
     ihrRole: 'Treaty reporting, international coordination channel, IHR Article 4 coordination with WHO at diplomatic level',
     decouplingRisk: 'HIGH',
-    decouplingNote: 'SRE holds international treaty liaison functions but IHR implementation is operationally centred in SSA/DGE. The coordination interface between SRE and health authorities lacks formal legal specification — a structural coordination gap.',
+    decouplingNote: 'SRE holds international treaty liaison functions but IHR implementation is operationally centred in SSA/DGE. The coordination interface between SRE and health authorities lacks formal legal specification: a structural coordination gap.',
     reformFeasibility: 'MEDIUM',
     vetoCapacity: 'LOW',
     reformNotes: 'Inter-secretarial MOU or formal coordination protocol between SRE and SSA for IHR reporting and emergency response is a feasible administrative reform.',
@@ -89,7 +89,7 @@ const INSTITUTIONAL_ACTORS = [
     operationalInfluence: 'HIGH',
     constitutionalBasis: 'Ley de Migración + Reglamento Interior INM',
     mandateType: 'Migration control and border management',
-    ihrRole: 'Points-of-entry health measures for travellers — application of health measures to persons at borders',
+    ihrRole: 'Points-of-entry health measures for travellers: application of health measures to persons at borders',
     decouplingRisk: 'VERY_HIGH',
     decouplingNote: 'INM operates at POE with significant interface with IHR health measures (Arts. 23–32) but operates under a migration mandate without explicit IHR coordination protocols. SSA-INM coordination for health measures at borders lacks statutory specification.',
     reformFeasibility: 'LOW',
@@ -102,11 +102,11 @@ const INSTITUTIONAL_ACTORS = [
     name: 'Entidades Federativas (32 States)',
     formalAuthority: 'MEDIUM',
     operationalInfluence: 'HIGH',
-    constitutionalBasis: 'Art. 4 + 73(XVI) CPEUM — concurrent health competence',
+    constitutionalBasis: 'Art. 4 + 73(XVI) CPEUM: concurrent health competence',
     mandateType: 'State health authorities',
-    ihrRole: 'Implementation of IHR core capacities at the state level — surveillance, points of entry, response capacity',
+    ihrRole: 'Implementation of IHR core capacities at the state level: surveillance, points of entry, response capacity',
     decouplingRisk: 'VERY_HIGH',
-    decouplingNote: 'Federal pilot covers federal law only. State-level IHR implementation is highly variable. The federal-state mandate chain is the largest single gap in IHR implementation architecture — not covered in v0.1.',
+    decouplingNote: 'Federal pilot covers federal law only. State-level IHR implementation is highly variable. The federal-state mandate chain is the largest single gap in IHR implementation architecture: not covered in v0.1.',
     reformFeasibility: 'LOW',
     vetoCapacity: 'HIGH',
     reformNotes: 'State IHR implementation requires federal-to-state coordination agreements (convenios) specifying obligations, resources, and accountability. This is the most politically complex reform pathway.',
@@ -131,7 +131,7 @@ const FEASIBILITY_MATRIX = [
     politicalCost: 'LOW',
     technicalComplexity: 'HIGH',
     actors: ['SSA', 'Presidencia', 'DGE'],
-    note: 'Presidential regulation within SS competence. Does not require congressional action. Technical complexity is high — must address points of entry, traveller rights, notification procedures, surveillance requirements.'
+    note: 'Presidential regulation within SS competence. Does not require congressional action. Technical complexity is high: must address points of entry, traveller rights, notification procedures, surveillance requirements.'
   },
   {
     reform: 'SSA-INM coordination protocol for POE health measures',
@@ -140,10 +140,10 @@ const FEASIBILITY_MATRIX = [
     politicalCost: 'MEDIUM',
     technicalComplexity: 'MEDIUM',
     actors: ['SSA', 'SEGOB', 'INM'],
-    note: 'Inter-secretarial agreement or joint regulation on application of health measures at points of entry. Requires alignment between SSA and SEGOB/INM mandates. Political cost is medium — migration policy is sensitive.'
+    note: 'Inter-secretarial agreement or joint regulation on application of health measures at points of entry. Requires alignment between SSA and SEGOB/INM mandates. Political cost is medium: migration policy is sensitive.'
   },
   {
-    reform: 'CC1 statutory reform — general IHR implementation law',
+    reform: 'CC1 statutory reform: general IHR implementation law',
     feasibility: 'LOW',
     urgency: 'MEDIUM',
     politicalCost: 'HIGH',
@@ -212,12 +212,12 @@ export default function PoliticalBrain() {
           <h1 className="text-4xl font-black text-slate-900 tracking-tight">Political Brain</h1>
         </div>
         <p className="text-lg text-slate-600 max-w-4xl">
-          Institutional authority topology for IHR implementation in Mexico — mapping the distance between formal legal mandates and operational realities, identifying decoupled actors, structural bottlenecks, and reform feasibility pathways.
+          Institutional authority topology for IHR implementation in Mexico: mapping the distance between formal legal mandates and operational realities, identifying decoupled actors, structural bottlenecks, and reform feasibility pathways.
         </p>
         <div className="flex items-center gap-2 p-3 bg-amber-50 border border-amber-200 rounded-xl w-fit">
           <AlertTriangle size={14} className="text-amber-600" />
           <p className="text-xs text-amber-800 font-medium">
-            Preliminary analytical layer — derived from legal corpus analysis. Requires political science validation.
+            Preliminary analytical layer: derived from legal corpus analysis. Requires political science validation.
           </p>
         </div>
       </header>
@@ -248,7 +248,7 @@ export default function PoliticalBrain() {
       {tab === 'topology' && (
         <div className="space-y-6">
           <div className="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm space-y-6">
-            <h2 className="text-xl font-black text-slate-900">Institutional Authority Map — IHR Mexico</h2>
+            <h2 className="text-xl font-black text-slate-900">Institutional Authority Map: IHR Mexico</h2>
             <p className="text-sm text-slate-500 max-w-3xl">
               Formal authority (legal mandate strength) versus operational influence (effective role in IHR implementation). Distance between the two signals decoupling risk.
             </p>
@@ -298,7 +298,7 @@ export default function PoliticalBrain() {
                         <div className="space-y-3">
                           <div className={cn('p-4 rounded-xl border', decouple.bg, decouple.border)}>
                             <div className={cn('text-[10px] font-black uppercase tracking-wider mb-2', decouple.color)}>
-                              Decoupling Analysis — {decouple.label} Risk
+                              Decoupling Analysis: {decouple.label} Risk
                             </div>
                             <p className="text-xs text-slate-700 leading-relaxed">{actor.decouplingNote}</p>
                           </div>
@@ -348,7 +348,7 @@ export default function PoliticalBrain() {
             {/* Structural bottlenecks */}
             <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm">
               <h3 className="text-lg font-black text-slate-900">Structural Bottlenecks</h3>
-              <p className="text-xs text-slate-500 leading-relaxed">Actors that anchor multiple IHR obligations but whose institutional position creates implementation blockages — either due to decoupling, coordination failures, or normative insufficiency.</p>
+              <p className="text-xs text-slate-500 leading-relaxed">Actors that anchor multiple IHR obligations but whose institutional position creates implementation blockages: either due to decoupling, coordination failures, or normative insufficiency.</p>
               {bottlenecks.map(actor => (
                 <div key={actor.id} className="p-5 rounded-2xl bg-red-50 border border-red-200 space-y-2">
                   <div className="flex items-center gap-2">
@@ -363,14 +363,14 @@ export default function PoliticalBrain() {
 
           {/* Decoupling typology */}
           <div className="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm space-y-6">
-            <h3 className="text-xl font-black text-slate-900">Decoupling Typology — Mexico IHR Findings</h3>
+            <h3 className="text-xl font-black text-slate-900">Decoupling Typology: Mexico IHR Findings</h3>
             <div className="grid md:grid-cols-2 gap-5">
               {[
                 {
                   type: 'Mandate–Performance Decoupling',
                   example: 'DGE exercises NFP functions under internal regulation (RI-SS 2025), not statutory designation',
                   color: 'bg-red-50 border-red-200',
-                  impact: 'NFP function depends on administrative arrangement, not law — vulnerable to reorganisation'
+                  impact: 'NFP function depends on administrative arrangement, not law: vulnerable to reorganisation'
                 },
                 {
                   type: 'Cascade Decoupling',
@@ -467,13 +467,13 @@ export default function PoliticalBrain() {
       {tab === 'theory' && (
         <div className="space-y-6">
           <div className="bg-slate-900 text-white rounded-[2rem] p-10 space-y-8">
-            <h2 className="text-2xl font-black">Analytical Framework — Cerebro Jurídico × Cerebro Político</h2>
+            <h2 className="text-2xl font-black">Analytical Framework: Cerebro Jurídico × Cerebro Político</h2>
             <div className="grid md:grid-cols-2 gap-8 text-sm text-slate-300 leading-relaxed">
               <div className="space-y-4">
                 <h3 className="text-white font-black text-lg">The Juridical Brain (Cerebro Jurídico)</h3>
                 <p>The juridical brain encodes the country's normative architecture: constitutional structure, legal hierarchy, treaty incorporation mechanisms, legislative drafting conventions, jurisdictional distribution, and the logical chain through which an international obligation can be traced to a domestic operative provision.</p>
                 <p>For Mexico, this brain is encoded in: CPEUM (especially Arts. 1, 4, 40, 73(XVI), 133), LGS, LOAPF, and the Romano-Germanic civil law tradition that governs how statutory language creates operative rights and duties.</p>
-                <p>NormTrace's corpus analysis — the anchoring scale, fit dimensions, and gap typology — operates through the juridical brain. It answers: <em>is there a legally competent actor with a legally defined procedure rooted in a legally appropriate instrument?</em></p>
+                <p>NormTrace's corpus analysis: the anchoring scale, fit dimensions, and gap typology: operates through the juridical brain. It answers: <em>is there a legally competent actor with a legally defined procedure rooted in a legally appropriate instrument?</em></p>
               </div>
               <div className="space-y-4">
                 <h3 className="text-white font-black text-lg">The Political Brain (Cerebro Político)</h3>
@@ -488,12 +488,12 @@ export default function PoliticalBrain() {
             <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm">
               <h3 className="text-lg font-black text-slate-900">Complex Adaptive Systems Framework</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                NormTrace applies a complex adaptive systems (CAS) lens to legal-institutional analysis. A domestic legal architecture for IHR implementation is not a simple hierarchical chain — it is a multi-agent system with emergent properties, feedback loops, and non-linear responses to change.
+                NormTrace applies a complex adaptive systems (CAS) lens to legal-institutional analysis. A domestic legal architecture for IHR implementation is not a simple hierarchical chain: it is a multi-agent system with emergent properties, feedback loops, and non-linear responses to change.
               </p>
               <div className="space-y-3">
                 {[
-                  { label: 'Agents', value: 'Legal instruments, institutional actors, procedural mechanisms — each with partial autonomy and specific competences' },
-                  { label: 'Emergence', value: 'IHR compliance (or non-compliance) is an emergent property of the system — not reducible to any single norm or actor' },
+                  { label: 'Agents', value: 'Legal instruments, institutional actors, procedural mechanisms: each with partial autonomy and specific competences' },
+                  { label: 'Emergence', value: 'IHR compliance (or non-compliance) is an emergent property of the system: not reducible to any single norm or actor' },
                   { label: 'Feedback', value: 'SPAR/JEE capacity scores feed back into reform processes; legal reform at one level should cascade to others but often does not' },
                   { label: 'Bottlenecks', value: 'High-centrality nodes (SSA, LGS) whose failure blocks implementation across multiple IHR capacities simultaneously' },
                   { label: 'Decoupling', value: 'Formally coupled system components (law + regulation + actor + procedure) that operate as loosely coupled in practice' }
@@ -512,17 +512,17 @@ export default function PoliticalBrain() {
                 <div className="p-3 bg-blue-50 rounded-xl border border-blue-100">
                   <p className="font-bold text-blue-900">Habibi R, et al. (2020)</p>
                   <p>"Do not violate the International Health Regulations during the COVID-19 outbreak." <em>The Lancet</em>, 395(10225), 664–666. doi:10.1016/S0140-6736(20)30373-1</p>
-                  <p className="mt-1 text-[10px] text-slate-500">IHR compliance analysis — States Parties' obligations under international health law; informs the diagnostic framing for procedural and rights-safeguard gaps.</p>
+                  <p className="mt-1 text-[10px] text-slate-500">IHR compliance analysis: States Parties' obligations under international health law; informs the diagnostic framing for procedural and rights-safeguard gaps.</p>
                 </div>
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
                   <p className="font-bold text-slate-900">Meyer JW, Rowan B. (1977)</p>
                   <p>"Institutionalized organizations: formal structure as myth and ceremony." <em>Am J Sociol</em>, 83(2), 340–363.</p>
-                  <p className="mt-1 text-[10px] text-slate-500">Foundational decoupling theory — formal legal structure as institutional myth divorced from operational practice.</p>
+                  <p className="mt-1 text-[10px] text-slate-500">Foundational decoupling theory: formal legal structure as institutional myth divorced from operational practice.</p>
                 </div>
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
                   <p className="font-bold text-slate-900">Paina L, Peters DH. (2012)</p>
                   <p>"Understanding pathways for scaling up health interventions." <em>Implementation Science</em>, 7:101.</p>
-                  <p className="mt-1 text-[10px] text-slate-500">CAS framework applied to health systems — agents, emergence, non-linearity, and context-dependency in health governance.</p>
+                  <p className="mt-1 text-[10px] text-slate-500">CAS framework applied to health systems: agents, emergence, non-linearity, and context-dependency in health governance.</p>
                 </div>
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
                   <p className="font-bold text-slate-900">Gostin LO, Katz R. (2016)</p>

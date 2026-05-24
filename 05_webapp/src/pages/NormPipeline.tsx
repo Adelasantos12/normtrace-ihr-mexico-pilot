@@ -64,14 +64,14 @@ function buildPipeline(rows: any[]): Stage[] {
   const procPartial = allProcFits.some(f => f === 'partial');
 
   return [
-    // Stage 1: IHR Source — always present
+    // Stage 1: IHR Source: always present
     {
       id: 'ihr',
       label: 'IHR Obligation',
-      sublabel: 'International source',
+      sublabel: 'International legal source',
       status: 'green',
       instrument: rows[0]?.obligation_id,
-      detail: 'Legally binding obligation under IHR (2005), 196 States Parties. Entered into force 15 June 2007.'
+      detail: 'Legally binding obligation under International Health Regulations (2005). Entered into force for 196 States Parties on 15 June 2007.'
     },
 
     // Stage 2: Constitutional Bridge
@@ -84,7 +84,7 @@ function buildPipeline(rows: any[]): Stage[] {
       detail: constRows.length
         ? `Explicit constitutional basis identified: ${constRows[0].domestic_norm}, Art. ${constRows[0].domestic_article}.`
         : 'No direct constitutional provision; obligation relies on general incorporation via Art. 133 (treaty supremacy) and Art. 1 pro-persona (2011 reform).',
-      issue: constRows.length === 0 && maxAnchoring < 2 ? 'No constitutional anchor — depends on general treaty incorporation only' : undefined
+      issue: constRows.length === 0 && maxAnchoring < 2 ? 'No constitutional anchor: depends on general treaty incorporation only' : undefined
     },
 
     // Stage 3: Statutory Layer
@@ -95,8 +95,8 @@ function buildPipeline(rows: any[]): Stage[] {
       status: maxStatAnchoring >= 4 ? 'green' : maxStatAnchoring >= 2 ? 'amber' : hasRegGap ? 'red' : maxStatAnchoring >= 1 ? 'amber' : 'red',
       instrument: statRows.length ? statRows.map(r => r.domestic_norm).filter((v, i, a) => a.indexOf(v) === i).join(', ') : undefined,
       anchoring: maxStatAnchoring,
-      issue: maxStatAnchoring < 2 ? 'No statutory anchor identified — obligation lacks basis in law' :
-        maxStatAnchoring < 4 ? 'Indirect statutory anchor only — general mandate language, no obligation-specific provision' : undefined,
+      issue: maxStatAnchoring < 2 ? 'No statutory anchor identified: obligation lacks basis in law' :
+        maxStatAnchoring < 4 ? 'Indirect statutory anchor only: general mandate language, no obligation-specific provision' : undefined,
       detail: maxStatAnchoring >= 4
         ? `Strong statutory basis in ${statRows[0]?.domestic_norm}. Specific operative provisions identified.`
         : maxStatAnchoring >= 2
@@ -114,7 +114,7 @@ function buildPipeline(rows: any[]): Stage[] {
         : maxRegAnchoring >= 1 ? 'amber' : 'grey',
       instrument: regRows.length ? regRows.map(r => r.domestic_norm).filter((v, i, a) => a.indexOf(v) === i).join(', ') : undefined,
       anchoring: maxRegAnchoring,
-      issue: hasOutdatedReg ? 'Primary regulatory instrument predates IHR 2005 — update review needed' :
+      issue: hasOutdatedReg ? 'Primary regulatory instrument predates IHR 2005: update review needed' :
         maxRegAnchoring < 1 ? 'No regulatory implementation identified' : undefined,
       detail: hasOutdatedReg
         ? `The primary anchoring instrument (${regRows.find(r => isOutdated(r.domestic_norm))?.domestic_norm}) was published before IHR 2005. Formal anchoring exists but content alignment has not been verified.`
@@ -129,8 +129,8 @@ function buildPipeline(rows: any[]): Stage[] {
       label: 'Institutional Actor',
       sublabel: 'Competence & mandate',
       status: actorStrong ? 'green' : actorPartial ? 'amber' : actorNone ? 'red' : 'amber',
-      issue: actorNone ? 'Actor competence not identified in corpus — responsibility is unclear' :
-        actorPartial ? 'Actor identified but competence only partially defined — coordination gap likely' : undefined,
+      issue: actorNone ? 'Actor competence not identified in corpus: responsibility is unclear' :
+        actorPartial ? 'Actor identified but competence only partially defined: coordination gap likely' : undefined,
       detail: actorStrong
         ? 'Responsible actor legally identified with specific competences for this obligation.'
         : actorPartial
@@ -212,23 +212,39 @@ function groupByObligation(rows: any[]): Record<string, any[]> {
 
 export default function NormPipeline() {
   const { data: mapping, loading } = useCsvData<any>('mexico_ihr2005_mapping_clean.csv');
+  const { data: obligations, loading: oblLoading } = useCsvData<any>('ihr_2005_obligations_clean.csv');
   const [expanded, setExpanded] = useState<string | null>(null);
   const [expandedStage, setExpandedStage] = useState<string | null>(null);
   const [filter, setFilter] = useState<'all' | 'blocked' | 'partial' | 'flowing'>('all');
   const [domainFilter, setDomainFilter] = useState('');
 
+  // Build lookup: obligation_id -> { article, article_title, obligation_text_short, implementation_domain, minimum_domestic_requirement }
+  const oblMap = useMemo(() => {
+    const m: Record<string, any> = {};
+    obligations.forEach((o: any) => {
+      if (o.obligation_id) m[o.obligation_id.trim()] = o;
+    });
+    return m;
+  }, [obligations]);
+
   const groups = useMemo(() => groupByObligation(mapping), [mapping]);
 
   const pipelines = useMemo(() => {
-    return Object.entries(groups).map(([obligationId, rows]) => ({
-      obligationId,
-      domain: rows[0]?.implementation_domain || rows[0]?.ihr_domain || '',
-      title: rows[0]?.assessment_summary?.split('.')[0] || obligationId,
-      article: rows[0]?.domestic_article || '',
-      stages: buildPipeline(rows),
-      rows
-    }));
-  }, [groups]);
+    return Object.entries(groups).map(([obligationId, rows]) => {
+      const obl = oblMap[obligationId] || {};
+      return {
+        obligationId,
+        article: obl.article || '',
+        articleTitle: obl.article_title || '',
+        obligationText: obl.obligation_text_short || rows[0]?.assessment_summary?.split('.')[0] || '',
+        domain: obl.implementation_domain || rows[0]?.implementation_domain || '',
+        minimumRequirement: obl.minimum_domestic_requirement || '',
+        legalForce: obl.legal_force || 'Binding',
+        stages: buildPipeline(rows),
+        rows
+      };
+    }).sort((a, b) => a.obligationId.localeCompare(b.obligationId));
+  }, [groups, oblMap]);
 
   const domains = useMemo(() => {
     return Array.from(new Set(pipelines.map(p => p.domain).filter(Boolean))).sort();
@@ -252,7 +268,7 @@ export default function NormPipeline() {
     return { flowing, blocked, partial, total: pipelines.length };
   }, [pipelines]);
 
-  if (loading) return (
+  if (loading || oblLoading) return (
     <div className="flex items-center justify-center min-h-[400px]">
       <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
     </div>
@@ -266,7 +282,7 @@ export default function NormPipeline() {
           <h1 className="text-4xl font-black text-slate-900 tracking-tight">Normative Pipeline</h1>
         </div>
         <p className="text-lg text-slate-600 max-w-4xl">
-          For each IHR 2005 obligation, trace the normative flow through Mexico's legal architecture — from international source to constitutional bridge, statutory layer, regulatory specification, institutional actor, and implementation mechanism.
+          For each IHR 2005 obligation, trace the normative flow through Mexico's legal architecture: from international source to constitutional bridge, statutory layer, regulatory specification, institutional actor, and implementation mechanism.
         </p>
       </header>
 
@@ -350,9 +366,22 @@ export default function NormPipeline() {
                   </span>
                 </div>
 
-                <div className="flex-1 min-w-0">
-                  <div className="font-black text-slate-900 text-sm">{p.obligationId}</div>
-                  {p.domain && <div className="text-[10px] text-slate-500 font-medium mt-0.5 uppercase tracking-wider">{p.domain}</div>}
+                <div className="flex-1 min-w-0 space-y-0.5">
+                  <div className="flex items-baseline gap-2 flex-wrap">
+                    {p.article && (
+                      <span className="font-black text-blue-700 text-sm shrink-0">{p.article}</span>
+                    )}
+                    {p.articleTitle && (
+                      <span className="font-bold text-slate-900 text-sm">{p.articleTitle}</span>
+                    )}
+                    {!p.article && <span className="font-black text-slate-500 text-xs font-mono">{p.obligationId}</span>}
+                  </div>
+                  {p.obligationText && (
+                    <div className="text-[11px] text-slate-500 leading-snug line-clamp-2 max-w-xl">{p.obligationText}</div>
+                  )}
+                  {p.domain && (
+                    <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">{p.domain}</div>
+                  )}
                 </div>
 
                 {/* Mini pipeline bar */}
@@ -377,6 +406,28 @@ export default function NormPipeline() {
               {/* Expanded pipeline detail */}
               {isExp && (
                 <div className="border-t border-slate-100 p-6 space-y-8 bg-slate-50/30">
+
+                  {/* IHR obligation context */}
+                  {(p.obligationText || p.minimumRequirement) && (
+                    <div className="p-5 bg-blue-50 border border-blue-200 rounded-2xl space-y-3">
+                      <div className="flex items-center gap-2">
+                        <span className="px-2.5 py-1 bg-blue-900 text-white text-[10px] font-black rounded-lg">{p.article || p.obligationId}</span>
+                        {p.articleTitle && <span className="font-bold text-blue-900 text-sm">{p.articleTitle}</span>}
+                        {p.legalForce && (
+                          <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-[9px] font-black rounded uppercase tracking-wider">{p.legalForce}</span>
+                        )}
+                      </div>
+                      {p.obligationText && (
+                        <p className="text-sm text-blue-800 leading-relaxed font-medium">{p.obligationText}</p>
+                      )}
+                      {p.minimumRequirement && (
+                        <div className="pt-2 border-t border-blue-100">
+                          <div className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-1">Minimum domestic legal requirement</div>
+                          <p className="text-xs text-blue-700 leading-relaxed">{p.minimumRequirement}</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
 
                   {/* Full pipeline visualization */}
                   <div className="overflow-x-auto pb-2">
@@ -530,10 +581,10 @@ export default function NormPipeline() {
       <div className="bg-slate-900 text-white rounded-[2rem] p-10 space-y-4">
         <div className="flex items-center gap-3">
           <Info size={22} className="text-blue-400 shrink-0" />
-          <h3 className="text-xl font-black">Methodological Note — Pipeline Analysis</h3>
+          <h3 className="text-xl font-black">Methodological Note: Pipeline Analysis</h3>
         </div>
         <p className="text-slate-300 leading-relaxed max-w-4xl text-sm">
-          The normative pipeline reconstructs the legal pathway each IHR obligation must traverse to produce domestic operational effect. Stage status is derived from the anchoring scale (L0–L5), fit dimension scores (actor, procedure, coordination, enforcement, rights-safeguard, federalism), and gap type classification in the NormTrace mapping dataset. The pipeline does not assess operational performance — a "Connected" stage indicates textual legal-institutional anchoring in the available corpus, not confirmed operational implementation. The primary diagnostic value lies in identifying <strong>where the pipeline breaks</strong>: obligations that traverse the constitutional and statutory stages but fail at the regulatory or procedural level reveal a structurally different reform challenge than obligations with legal silence at the statutory level.
+          The normative pipeline reconstructs the legal pathway each IHR obligation must traverse to produce domestic operational effect. Stage status is derived from the anchoring scale (L0–L5), fit dimension scores (actor, procedure, coordination, enforcement, rights-safeguard, federalism), and gap type classification in the NormTrace mapping dataset. The pipeline does not assess operational performance: a "Connected" stage indicates textual legal-institutional anchoring in the available corpus, not confirmed operational implementation. The primary diagnostic value lies in identifying <strong>where the pipeline breaks</strong>: obligations that traverse the constitutional and statutory stages but fail at the regulatory or procedural level reveal a structurally different reform challenge than obligations with legal silence at the statutory level.
         </p>
         <p className="text-slate-400 text-xs italic">
           Outputs are preliminary AI-assisted and require expert legal validation. See <span className="font-bold">Habibi et al., Lancet, 2020</span> for IHR compliance analysis informing this diagnostic approach.
