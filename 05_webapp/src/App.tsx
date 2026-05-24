@@ -12,6 +12,10 @@ import Methodology from './pages/Methodology';
 import ReportBuilder from './pages/ReportBuilder';
 import ReportPrint from './pages/ReportPrint';
 import CapacityBrief from './pages/CapacityBrief';
+import NormPipeline from './pages/NormPipeline';
+import NormativeHierarchy from './pages/NormativeHierarchy';
+import NormDiagnostic from './pages/NormDiagnostic';
+import PoliticalBrain from './pages/PoliticalBrain';
 import './App.css';
 
 function App() {
@@ -21,6 +25,10 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/pipeline" element={<NormPipeline />} />
+          <Route path="/normative-hierarchy" element={<NormativeHierarchy />} />
+          <Route path="/norm-diagnostic" element={<NormDiagnostic />} />
+          <Route path="/political-brain" element={<PoliticalBrain />} />
           <Route path="/mapping" element={<MappingExplorer />} />
           <Route path="/provisions" element={<ProvisionsExplorer />} />
           <Route path="/actors" element={<ActorsExplorer />} />

@@ -2,21 +2,46 @@ import { useState, useEffect } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import {
   Home, LayoutDashboard, Search, BookOpen, Users,
-  Map, FileText, Globe, Shield, Info, AlertCircle, FileBarChart, X, Menu
+  Map, FileText, Globe, Shield, Info, AlertCircle, FileBarChart, X, Menu,
+  Zap, Layers, Activity, Scale
 } from 'lucide-react';
 import { cn } from './lib/utils';
 
-const navItems = [
-  { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { path: '/mapping', label: 'International Mapping', icon: Search },
-  { path: '/provisions', label: 'Legal Provisions', icon: BookOpen },
-  { path: '/actors', label: 'Actors Explorer', icon: Users },
-  { path: '/gap-map', label: 'Implementation Gap Map', icon: Map },
-  { path: '/snapshot', label: 'Country Snapshot', icon: FileText },
-  { path: '/capacity', label: 'Capacity Brief', icon: Info },
-  { path: '/international', label: 'International Instruments', icon: Globe },
-  { path: '/methodology', label: 'Methodology', icon: Shield },
-  { path: '/report', label: 'Report & Citation', icon: FileBarChart },
+const navGroups = [
+  {
+    label: 'Overview',
+    items: [
+      { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+      { path: '/snapshot', label: 'Country Snapshot', icon: FileText },
+    ]
+  },
+  {
+    label: 'Analytical Layers',
+    items: [
+      { path: '/pipeline', label: 'Normative Pipeline', icon: Zap },
+      { path: '/normative-hierarchy', label: 'Normative Hierarchy', icon: Layers },
+      { path: '/norm-diagnostic', label: 'Norm Diagnostic', icon: Activity },
+      { path: '/political-brain', label: 'Political Brain', icon: Scale },
+    ]
+  },
+  {
+    label: 'Intelligence Layers',
+    items: [
+      { path: '/mapping', label: 'International Mapping', icon: Search },
+      { path: '/provisions', label: 'Legal Provisions', icon: BookOpen },
+      { path: '/actors', label: 'Actors & Network', icon: Users },
+      { path: '/gap-map', label: 'Implementation Gap Map', icon: Map },
+      { path: '/capacity', label: 'Capacity Brief', icon: Info },
+      { path: '/international', label: 'International Instruments', icon: Globe },
+    ]
+  },
+  {
+    label: 'Documentation',
+    items: [
+      { path: '/methodology', label: 'Methodology', icon: Shield },
+      { path: '/report', label: 'Report & Citation', icon: FileBarChart },
+    ]
+  }
 ];
 
 export default function Layout() {
@@ -78,21 +103,24 @@ export default function Layout() {
             <Home size={18} /> Home
           </NavLink>
 
-          <div className="pt-4 pb-2 px-4">
-             <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Intelligence Layers</span>
-          </div>
-
-          {navItems.map((item) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              className={({ isActive }) => cn(
-                "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all duration-200",
-                isActive ? "bg-blue-50 text-blue-700 shadow-sm" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
-              )}
-            >
-              <item.icon size={18} /> {item.label}
-            </NavLink>
+          {navGroups.map((group) => (
+            <div key={group.label}>
+              <div className="pt-4 pb-2 px-4">
+                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{group.label}</span>
+              </div>
+              {group.items.map((item) => (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  className={({ isActive }) => cn(
+                    "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all duration-200",
+                    isActive ? "bg-blue-50 text-blue-700 shadow-sm" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+                  )}
+                >
+                  <item.icon size={18} /> {item.label}
+                </NavLink>
+              ))}
+            </div>
           ))}
         </nav>
 
