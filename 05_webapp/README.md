@@ -1,73 +1,36 @@
-# React + TypeScript + Vite
+# NormTrace-IHR Webapp v0.7
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Legal Internalisation Mapping Infrastructure for International Health Regulations.
 
-Currently, two official plugins are available:
+## Project Info
+- **Version**: v0.7 (Mexico Pilot UI Revision)
+- **Data Package**: `data_package_v0_1` (Audited)
+- **Framework**: Vite + React + TypeScript + Tailwind CSS
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Deployment (Vercel)
+- **Root Directory**: `05_webapp`
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
 
-## React Compiler
+## Key Features
+- **International Legal Mapping**: Comprehensive alignment of domestic law to IHR 2005, IHR 2024, and Pandemic Agreement/PABS.
+- **Actors Explorer**: Institutional relationship map and metrics derived from the legal-institutional network.
+- **Country Snapshot**: Policy-facing profile of Mexico's legal internalisation status.
+- **Capacity Brief**: Targeted entry points for capacity-building and legal review.
+- **Methodology**: Two-layer structure with a web-facing summary and a full academic draft.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Limitations
+- **Preliminary Analysis**: All mappings require expert legal review (caveats L-01 to L-08).
+- **Actor Network**: Represents statutory (de jure) relationships, not observed operational coordination.
+- **Pilot Scope**: Currently limited to the Mexican federal level corpus.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Local Development
+```bash
+cd 05_webapp
+npm install
+npm run dev # run in dev mode
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Methodology Source
+The Methodology page renders content from `05_webapp/public/data/markdown/normtrace_ihr_methodology_web.md`.
+The full academic draft is available at `05_webapp/public/data/markdown/normtrace_ihr_methodology_full.md`.

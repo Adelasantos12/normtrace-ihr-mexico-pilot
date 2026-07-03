@@ -1,49 +1,50 @@
-
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Layout } from './components/Layout';
-import { LandingPage } from './pages/LandingPage';
-import { Dashboard } from './pages/Dashboard';
-import { MappingExplorer } from './pages/MappingExplorer';
-import { ProvisionsExplorer } from './pages/ProvisionsExplorer';
-import { ActorsExplorer } from './pages/ActorsExplorer';
-import { GapMap } from './pages/GapMap';
-import { Instruments } from './pages/Instruments';
-import { MarkdownPage } from './pages/MarkdownPage';
-import { Methodology } from './pages/Methodology';
-import { Downloads } from './pages/Downloads';
-
-// Placeholder components - will be replaced in next steps
-
-
-
-
-
-
-
-const Snapshot = () => <MarkdownPage title="Mexico Legal Internalisation Snapshot" fileName="mexico_legal_internalisation_snapshot.md" />;
-const EntryPoints = () => <MarkdownPage title="Capacity-Building Entry Points" fileName="mexico_capacity_building_entry_points.md" />;
-
-
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Layout from './Layout';
+import LandingPage from './pages/LandingPage';
+import Dashboard from './pages/Dashboard';
+import MappingExplorer from './pages/MappingExplorer';
+import ProvisionsExplorer from './pages/ProvisionsExplorer';
+import ActorsExplorer from './pages/ActorsExplorer';
+import GapMap from './pages/GapMap';
+import CountrySnapshot from './pages/CountrySnapshot';
+import Instruments from './pages/Instruments';
+import Methodology from './pages/Methodology';
+import ReportBuilder from './pages/ReportBuilder';
+import ReportPrint from './pages/ReportPrint';
+import CapacityBrief from './pages/CapacityBrief';
+import NormPipeline from './pages/NormPipeline';
+import NormativeHierarchy from './pages/NormativeHierarchy';
+import NormDiagnostic from './pages/NormDiagnostic';
+import PoliticalBrain from './pages/PoliticalBrain';
+import SparBridge from './pages/SparBridge';
+import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<LandingPage />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="mapping" element={<MappingExplorer />} />
-          <Route path="provisions" element={<ProvisionsExplorer />} />
-          <Route path="actors" element={<ActorsExplorer />} />
-          <Route path="gap-map" element={<GapMap />} />
-          <Route path="instruments" element={<Instruments />} />
-          <Route path="snapshot" element={<Snapshot />} />
-          <Route path="entry-points" element={<EntryPoints />} />
-          <Route path="methodology" element={<Methodology />} />
-          <Route path="downloads" element={<Downloads />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route element={<Layout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/pipeline" element={<NormPipeline />} />
+          <Route path="/normative-hierarchy" element={<NormativeHierarchy />} />
+          <Route path="/norm-diagnostic" element={<NormDiagnostic />} />
+          <Route path="/political-brain" element={<PoliticalBrain />} />
+          <Route path="/mapping" element={<MappingExplorer />} />
+          <Route path="/provisions" element={<ProvisionsExplorer />} />
+          <Route path="/actors" element={<ActorsExplorer />} />
+          <Route path="/spar-bridge" element={<SparBridge />} />
+          <Route path="/gap-map" element={<GapMap />} />
+          <Route path="/snapshot" element={<CountrySnapshot />} />
+          <Route path="/capacity" element={<CapacityBrief />} />
+          <Route path="/international" element={<Instruments />} />
+          <Route path="/methodology" element={<Methodology />} />
+          <Route path="/report" element={<ReportBuilder />} />
+          <Route path="/report/print" element={<ReportPrint />} />
         </Route>
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 

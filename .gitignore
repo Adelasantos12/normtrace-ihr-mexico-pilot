@@ -33,3 +33,4 @@ outputs_temp/
 .idea/
 *.swp
 *.swo
+~$*.docx

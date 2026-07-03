@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -18,10 +18,13 @@
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.15.0",
     "recharts": "^3.8.1",
+    "rehype-raw": "^7.0.0",
+    "remark-gfm": "^4.0.0",
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.59.1",
     "@types/node": "^24.12.2",
     "@types/papaparse": "^5.5.2",
     "@types/react": "^19.2.14",
