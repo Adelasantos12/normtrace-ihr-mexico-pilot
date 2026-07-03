@@ -37,6 +37,25 @@ export function useCsvData<T>(fileName: string) {
   return { data, loading, error };
 }
 
+export function useJsonData<T>(fileName: string) {
+  const [data, setData] = useState<T | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    fetch(`/data/${fileName}`)
+      .then((r) => {
+        if (!r.ok) throw new Error(`Failed to fetch ${fileName}`);
+        return r.json();
+      })
+      .then((json) => setData(json as T))
+      .catch((err) => setError(err as Error))
+      .finally(() => setLoading(false));
+  }, [fileName]);
+
+  return { data, loading, error };
+}
+
 export function useMarkdownData(fileName: string) {
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(true);
