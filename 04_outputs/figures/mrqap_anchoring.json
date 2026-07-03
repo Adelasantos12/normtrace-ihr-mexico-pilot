@@ -1,0 +1,89 @@
+{
+  "generated_by": "06_scripts/build_tables/mrqap_anchoring.py",
+  "method_note": "CODE_BRIEFING.md Phase 1-R specified an R/migraph net_regression() MRQAP. migraph/manynet could not be installed in this environment (CRAN blocked by network policy); this is a Python re-implementation of the same test design (node/instrument-label permutation, 1000 draws), not a migraph port. See network_methodology_rationale.md.",
+  "hypothesis": "Lower-rank (higher tier_ordinal) or pre-2005 instruments anchor obligations more weakly.",
+  "unit_of_analysis": "one row per obligation-to-provision mapping row with an identified instrument",
+  "instrument_attributes": {
+    "LGS": {
+      "tier_ordinal": 3,
+      "tier_label": "3_general_law",
+      "pre_2005": null,
+      "publication_date": "TBD_REVIEW"
+    },
+    "RLGS-SI": {
+      "tier_ordinal": 5,
+      "tier_label": "5_regulation",
+      "pre_2005": true,
+      "publication_date": "1985-02-18"
+    },
+    "RI-SS-2025": {
+      "tier_ordinal": 6,
+      "tier_label": "6_internal_regulation",
+      "pre_2005": false,
+      "publication_date": "2025-02-27"
+    },
+    "NOM-017": {
+      "tier_ordinal": 7,
+      "tier_label": "7_NOM_or_technical_standard",
+      "pre_2005": false,
+      "publication_date": "2013-02-19"
+    },
+    "CPEUM": {
+      "tier_ordinal": 1,
+      "tier_label": "1_constitution",
+      "pre_2005": null,
+      "publication_date": "TBD_REVIEW"
+    },
+    "Ley Aduanera": {
+      "tier_ordinal": 4,
+      "tier_label": "4_federal_or_national_law",
+      "pre_2005": true,
+      "publication_date": "1995-12-15"
+    },
+    "LOAPF": {
+      "tier_ordinal": 4,
+      "tier_label": "4_federal_or_national_law",
+      "pre_2005": null,
+      "publication_date": "TBD_REVIEW"
+    },
+    "LGPDPPSO": {
+      "tier_ordinal": 3,
+      "tier_label": "3_general_law",
+      "pre_2005": null,
+      "publication_date": "TBD_REVIEW"
+    },
+    "RLGS-Inv": {
+      "tier_ordinal": 5,
+      "tier_label": "5_regulation",
+      "pre_2005": null,
+      "publication_date": "TBD_REVIEW"
+    }
+  },
+  "model_tier": {
+    "observed_coefficient": 0.0057,
+    "permutation_p_two_sided": 0.93,
+    "n_permutations": 1000,
+    "null_mean": -0.0015,
+    "null_sd": 0.0729,
+    "n_obs": 78,
+    "n_instruments": 9,
+    "covariate": "tier_ordinal (1=constitution .. 8=lowest rank; higher = lower normative rank)"
+  },
+  "model_pre_2005": {
+    "observed_coefficient": 0.1365,
+    "permutation_p_two_sided": 0.498,
+    "n_permutations": 1000,
+    "null_mean": 0.018,
+    "null_sd": 0.3378,
+    "n_obs": 46,
+    "n_instruments": 4,
+    "covariate": "pre_2005_dummy (1 = instrument published before 2005-01-01)",
+    "excluded_instruments_no_verified_date": [
+      "CPEUM",
+      "LGPDPPSO",
+      "LGS",
+      "LOAPF",
+      "RLGS-Inv"
+    ]
+  }
+}

@@ -15,12 +15,13 @@ jobs:
           python-version: "3.11"
 
       - name: Install Python pipeline deps
-        run: pip install networkx pandas
+        run: pip install networkx pandas numpy statsmodels
 
-      - name: Regenerate network + SPAR-bridge artifacts
+      - name: Regenerate network + SPAR-bridge + MRQAP artifacts
         run: |
           python3 06_scripts/build_tables/build_network.py
           python3 06_scripts/build_tables/spar_normtrace_bridge.py
+          python3 06_scripts/build_tables/mrqap_anchoring.py
 
       - name: Validate content (corpus counts, edge integrity, paper reconciliation, no hard-coded degrees)
         run: python3 06_scripts/validation/validate_content.py

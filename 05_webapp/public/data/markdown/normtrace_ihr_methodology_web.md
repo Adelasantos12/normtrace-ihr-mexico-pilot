@@ -128,7 +128,7 @@ NormTrace applies the country-specific legal hierarchy as a structural filter. F
 | Reglamentos | 3 | Primary IHR regulatory instrument (RLGS-SI, 1985) — update-review critical |
 | NOMs, Acuerdos | 4 | Technical specifications for specific capacity areas |
 
-The critical structural finding: Mexico's primary IHR implementation instrument (RLGS-SI) sits at **tier 3 (regulatory)** but must implement obligations that require **tier 2 (statutory)** anchoring. This tier mismatch — not legal silence — explains the 1.76/5 mean anchoring score.
+The critical structural finding: Mexico's primary IHR implementation instrument (RLGS-SI) sits at **tier 3 (regulatory)** but must implement obligations that require **tier 2 (statutory)** anchoring. This tier mismatch — not legal silence — explains the 1.76/5 mean anchoring score. A corpus-wide permutation test found instrument tier and pre-2005 status are *not* statistically significant predictors of anchoring strength (p=0.93, p=0.50; n=9 and n=4 instruments) — RLGS-SI is a specific, illustrative case, not a general statistical pattern.
 
 ### SPAR self-report vs legal anchoring
 

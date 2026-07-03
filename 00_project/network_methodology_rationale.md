@@ -102,15 +102,40 @@ the weak partition is itself a finding (centralised, not modular architecture), 
 AGM algorithm (Ch. 8) should be tried next as it tolerates multi-membership.
 
 ### 3.3 CUG test → the inferential number
-The headline inferential result: instrument-degree **centralisation = 0.60**, versus a
-random-baseline mean of **0.30** over 1000 size-and-density-matched graphs, **p(≥random) < 0.001**.
-This converts "Salud/LGS is the hub" from an assertion into a test: the concentration of
-legal anchoring on a few instruments is **not** what a random allocation of the same number
-of anchoring links would produce. **Implication:** the fragility argument (reform must run
-through very few instruments) has inferential support, not just description. Next step in R
-is a **QAP/MRQAP** regression of `anchoring_level` on instrument tier and a pre-2005 dummy,
-to test formally whether older/lower-rank instruments predict weaker anchoring (the 1985
-RLGS-SI claim).
+The headline inferential result: instrument-degree **centralisation = 0.64**, versus a
+random-baseline mean of **0.33** over 1000 size-and-density-matched graphs, **p(≥random) < 0.001**
+(figures as of the aliasing fix, §5; see network_metrics.json for the live values). This converts
+"Salud/LGS is the hub" from an assertion into a test: the concentration of legal anchoring on a
+few instruments is **not** what a random allocation of the same number of anchoring links would
+produce. **Implication:** the fragility argument (reform must run through very few instruments)
+has inferential support, not just description.
+
+**MRQAP-style test of the RLGS-SI claim.** The plan was a QAP/MRQAP regression of
+`anchoring_level` on instrument tier and a pre-2005 dummy, run in R via `migraph`/`manynet`
+(`net_regression(...)`). `migraph`/`manynet` could not be installed in the execution environment
+used for this pilot — outbound access is allowlisted to a small set of package registries
+(npm, PyPI, GitHub, …) and every CRAN mirror tried (cran.r-project.org, cloud.r-project.org,
+packagemanager.posit.co, r-universe.dev) was rejected by the network policy. `06_scripts/build_tables/mrqap_anchoring.py`
+implements the same test design in Python instead: OLS of `anchoring_level` on (a) `tier_ordinal`
+and (b) `pre_2005_dummy`, one observation per obligation-to-provision mapping row, with a
+**node(instrument)-label permutation test** (1000 draws) in place of migraph's built-in QAP
+machinery — the covariates are instrument-level, so rows sharing an instrument are not
+independent, and permuting which tier/pre-2005 values attach to which instrument (keeping the
+edge structure fixed) is the same logic MRQAP uses to get valid inference under that dependency.
+
+**Result: neither covariate is a statistically significant predictor of anchoring strength in
+this corpus.** tier_ordinal: coefficient 0.006, permutation p=0.93 (n=78 rows, 9 instruments).
+pre_2005_dummy: coefficient 0.14, permutation p=0.50 (n=46 rows, only 4 of 9 instruments have a
+verified `publication_date` in the corpus index; the rest are `TBD_REVIEW` and were excluded, not
+imputed). **Implication — read carefully:** this pilot's corpus does **not** show a general
+statistical pattern of older or lower-rank instruments anchoring more weakly. The RLGS-SI
+(1985) finding remains valid as a **specific, illustrative instance** of temporal decoupling
+(§5, the instrument is 20 years older than the obligations it implements and was never amended
+to reflect them) — but it must not be generalised into "older/lower-rank instruments anchor
+worse" as a corpus-wide statistical regularity, because the formal test does not support that
+broader claim at n=9 instruments. This null result is itself worth reporting: it is the kind of
+honest negative finding the adversarial memo's rigor standard requires, not a result to omit
+because it complicates the narrative.
 
 ### 3.4 The SPAR↔legal bridge → construct-validity probe
 `spar_normtrace_bridge.py` compares Mexico's SPAR self-report (0–100) with NormTrace legal
@@ -135,6 +160,7 @@ is mapped to an allowed claim:
 | RLGS-SI (1985) as a top hub | "Primary IHR instrument predates IHR 2005 — an *update-review* gap." | Not "first to find this"; cite Menon 2018, Gostin 2019. |
 | Actor obligation-reach (SS=24) | "SS is the corpus-central actor for IHR anchoring." | Not "measures operational authority or power." |
 | Mean anchoring 1.76/5; overall 35% | "Legal coverage on the books is thin and general." | Not "measures enforcement, implementation, or outcomes." |
+| MRQAP-style tier/pre-2005 test (p=0.93, p=0.50) | "This corpus does not show a general statistical pattern of older/lower-rank instruments anchoring more weakly (n=9 instruments)." | Not "older/lower-rank instruments anchor worse" as a corpus-wide claim — only the RLGS-SI case is a specific, illustrative instance. |
 
 Non-negotiable framing (memo §4): sell **methodological resolution and diagnostic
 actionability**, on an explicitly **n=1, single-coder, preliminary** pilot. Do not present
@@ -162,6 +188,12 @@ computed network/divergence numbers as validated measurement.
 - **SPAR→CC crosswalk** is a defensible approximation, not an official WHO mapping; only
   high-confidence capacity pairings are reported, and SPAR methodology changed across
   editions (interpret trajectories, not single years).
+- **MRQAP tier/pre-2005 test is Python, not R/migraph** (§3.3): CRAN was unreachable from the
+  execution environment, so `06_scripts/build_tables/mrqap_anchoring.py` re-implements the
+  test design rather than running `migraph::net_regression()`. The pre-2005 model additionally
+  uses only 4 of 9 instruments (those with a verified, non-`TBD_REVIEW` `publication_date` in
+  `mexico_normative_corpus_index.csv`) — a small-n result, reported as such, not a validated
+  general finding.
 - All anchoring inputs remain **preliminary_ai_assisted** and unvalidated by a domestic
   public-health-law expert.
 
