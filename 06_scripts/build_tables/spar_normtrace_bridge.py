@@ -111,7 +111,7 @@ def main():
 
     # SPAR latest + mean per capacity (over available years)
     spar_series = {}
-    for cap in set(CC_TO_SPAR.values()) | {"spar_all"}:
+    for cap in sorted(set(CC_TO_SPAR.values()) | {"spar_all"}):
         vals = [(int(r["year"]), to_float(r.get(cap))) for r in spar_rows]
         vals = [(y, v) for y, v in vals if v is not None]
         if vals:

@@ -61,9 +61,8 @@ INSTRUMENT_ALIASES = {
 
 def alias(norm: str) -> str:
     norm = (norm or "").strip()
-    for full, short in INSTRUMENT_ALIASES.items():
-        if norm.startswith(full[:40]):
-            return short
+    if norm in INSTRUMENT_ALIASES:
+        return INSTRUMENT_ALIASES[norm]
     return norm or "UNSPECIFIED"
 
 

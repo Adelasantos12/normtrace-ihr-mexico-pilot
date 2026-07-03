@@ -5,47 +5,47 @@
       "instrument",
       "obligation"
     ],
-    "n_instruments": 8,
+    "n_instruments": 9,
     "n_obligations": 43,
     "n_edges": 68,
-    "density": 0.198
+    "density": 0.176
   },
   "instrument_degree_ranked": [
     {
       "instrument": "LGS",
       "obligations_anchored": 21,
       "degree_norm": 0.488,
-      "betweenness": 0.6109
+      "betweenness": 0.5711
     },
     {
       "instrument": "RLGS-SI",
-      "obligations_anchored": 20,
-      "degree_norm": 0.465,
-      "betweenness": 0.5416
+      "obligations_anchored": 19,
+      "degree_norm": 0.442,
+      "betweenness": 0.482
     },
     {
       "instrument": "RI-SS-2025",
       "obligations_anchored": 11,
       "degree_norm": 0.256,
-      "betweenness": 0.2433
+      "betweenness": 0.2292
     },
     {
       "instrument": "NOM-017",
       "obligations_anchored": 6,
       "degree_norm": 0.14,
-      "betweenness": 0.0489
+      "betweenness": 0.0455
     },
     {
       "instrument": "CPEUM",
       "obligations_anchored": 5,
       "degree_norm": 0.116,
-      "betweenness": 0.0934
+      "betweenness": 0.0879
     },
     {
       "instrument": "Ley Aduanera",
       "obligations_anchored": 3,
       "degree_norm": 0.07,
-      "betweenness": 0.0406
+      "betweenness": 0.0383
     },
     {
       "instrument": "LGPDPPSO",
@@ -55,6 +55,12 @@
     },
     {
       "instrument": "LOAPF",
+      "obligations_anchored": 1,
+      "degree_norm": 0.023,
+      "betweenness": 0.0
+    },
+    {
+      "instrument": "RLGS-Inv",
       "obligations_anchored": 1,
       "degree_norm": 0.023,
       "betweenness": 0.0
@@ -181,17 +187,18 @@
     }
   ],
   "communities": {
-    "n": 2,
-    "modularity": 0.293,
+    "n": 3,
+    "modularity": 0.286,
     "sizes": [
       22,
-      21
+      20,
+      1
     ]
   },
   "cug_test": {
     "measure": "instrument-degree centralisation",
-    "observed": 0.5952,
-    "random_mean": 0.3025,
+    "observed": 0.6402,
+    "random_mean": 0.328,
     "p_value_ge_random": 0.0,
     "interpretation": "centralisation significantly ABOVE random"
   },

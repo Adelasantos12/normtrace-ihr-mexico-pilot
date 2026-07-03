@@ -70,27 +70,99 @@
     }
   ],
   "spar_series": {
-    "spar_cap6": {
+    "spar_all": {
       "latest_year": 2025,
-      "latest": 90.0,
-      "mean": 82.3,
+      "latest": 76.0,
+      "mean": 81.3,
+      "max": 97.0,
+      "trajectory": [
+        {
+          "year": 2010,
+          "value": 43.0
+        },
+        {
+          "year": 2011,
+          "value": 66.0
+        },
+        {
+          "year": 2012,
+          "value": 76.0
+        },
+        {
+          "year": 2013,
+          "value": 89.0
+        },
+        {
+          "year": 2014,
+          "value": 95.0
+        },
+        {
+          "year": 2015,
+          "value": 96.0
+        },
+        {
+          "year": 2016,
+          "value": 97.0
+        },
+        {
+          "year": 2017,
+          "value": 94.0
+        },
+        {
+          "year": 2018,
+          "value": 86.0
+        },
+        {
+          "year": 2019,
+          "value": 83.0
+        },
+        {
+          "year": 2020,
+          "value": 83.0
+        },
+        {
+          "year": 2021,
+          "value": 84.0
+        },
+        {
+          "year": 2022,
+          "value": 75.0
+        },
+        {
+          "year": 2023,
+          "value": 79.0
+        },
+        {
+          "year": 2024,
+          "value": 79.0
+        },
+        {
+          "year": 2025,
+          "value": 76.0
+        }
+      ]
+    },
+    "spar_cap1": {
+      "latest_year": 2025,
+      "latest": 60.0,
+      "mean": 80.6,
       "max": 100.0,
       "trajectory": [
         {
           "year": 2010,
-          "value": 70.0
+          "value": 50.0
         },
         {
           "year": 2011,
-          "value": 43.0
+          "value": 100.0
         },
         {
           "year": 2012,
-          "value": 43.0
+          "value": 100.0
         },
         {
           "year": 2013,
-          "value": 71.0
+          "value": 100.0
         },
         {
           "year": 2014,
@@ -114,31 +186,31 @@
         },
         {
           "year": 2019,
-          "value": 100.0
+          "value": 80.0
         },
         {
           "year": 2020,
-          "value": 100.0
+          "value": 80.0
         },
         {
           "year": 2021,
-          "value": 90.0
+          "value": 60.0
         },
         {
           "year": 2022,
-          "value": 50.0
+          "value": 40.0
         },
         {
           "year": 2023,
-          "value": 80.0
+          "value": 60.0
         },
         {
           "year": 2024,
-          "value": 80.0
+          "value": 60.0
         },
         {
           "year": 2025,
-          "value": 90.0
+          "value": 60.0
         }
       ]
     },
@@ -214,78 +286,6 @@
         }
       ]
     },
-    "spar_all": {
-      "latest_year": 2025,
-      "latest": 76.0,
-      "mean": 81.3,
-      "max": 97.0,
-      "trajectory": [
-        {
-          "year": 2010,
-          "value": 43.0
-        },
-        {
-          "year": 2011,
-          "value": 66.0
-        },
-        {
-          "year": 2012,
-          "value": 76.0
-        },
-        {
-          "year": 2013,
-          "value": 89.0
-        },
-        {
-          "year": 2014,
-          "value": 95.0
-        },
-        {
-          "year": 2015,
-          "value": 96.0
-        },
-        {
-          "year": 2016,
-          "value": 97.0
-        },
-        {
-          "year": 2017,
-          "value": 94.0
-        },
-        {
-          "year": 2018,
-          "value": 86.0
-        },
-        {
-          "year": 2019,
-          "value": 83.0
-        },
-        {
-          "year": 2020,
-          "value": 83.0
-        },
-        {
-          "year": 2021,
-          "value": 84.0
-        },
-        {
-          "year": 2022,
-          "value": 75.0
-        },
-        {
-          "year": 2023,
-          "value": 79.0
-        },
-        {
-          "year": 2024,
-          "value": 79.0
-        },
-        {
-          "year": 2025,
-          "value": 76.0
-        }
-      ]
-    },
     "spar_cap2": {
       "latest_year": 2025,
       "latest": 93.0,
@@ -358,6 +358,78 @@
         }
       ]
     },
+    "spar_cap6": {
+      "latest_year": 2025,
+      "latest": 90.0,
+      "mean": 82.3,
+      "max": 100.0,
+      "trajectory": [
+        {
+          "year": 2010,
+          "value": 70.0
+        },
+        {
+          "year": 2011,
+          "value": 43.0
+        },
+        {
+          "year": 2012,
+          "value": 43.0
+        },
+        {
+          "year": 2013,
+          "value": 71.0
+        },
+        {
+          "year": 2014,
+          "value": 100.0
+        },
+        {
+          "year": 2015,
+          "value": 100.0
+        },
+        {
+          "year": 2016,
+          "value": 100.0
+        },
+        {
+          "year": 2017,
+          "value": 100.0
+        },
+        {
+          "year": 2018,
+          "value": 100.0
+        },
+        {
+          "year": 2019,
+          "value": 100.0
+        },
+        {
+          "year": 2020,
+          "value": 100.0
+        },
+        {
+          "year": 2021,
+          "value": 90.0
+        },
+        {
+          "year": 2022,
+          "value": 50.0
+        },
+        {
+          "year": 2023,
+          "value": 80.0
+        },
+        {
+          "year": 2024,
+          "value": 80.0
+        },
+        {
+          "year": 2025,
+          "value": 90.0
+        }
+      ]
+    },
     "spar_cap8": {
       "latest_year": 2025,
       "latest": 93.0,
@@ -427,78 +499,6 @@
         {
           "year": 2025,
           "value": 93.0
-        }
-      ]
-    },
-    "spar_cap1": {
-      "latest_year": 2025,
-      "latest": 60.0,
-      "mean": 80.6,
-      "max": 100.0,
-      "trajectory": [
-        {
-          "year": 2010,
-          "value": 50.0
-        },
-        {
-          "year": 2011,
-          "value": 100.0
-        },
-        {
-          "year": 2012,
-          "value": 100.0
-        },
-        {
-          "year": 2013,
-          "value": 100.0
-        },
-        {
-          "year": 2014,
-          "value": 100.0
-        },
-        {
-          "year": 2015,
-          "value": 100.0
-        },
-        {
-          "year": 2016,
-          "value": 100.0
-        },
-        {
-          "year": 2017,
-          "value": 100.0
-        },
-        {
-          "year": 2018,
-          "value": 100.0
-        },
-        {
-          "year": 2019,
-          "value": 80.0
-        },
-        {
-          "year": 2020,
-          "value": 80.0
-        },
-        {
-          "year": 2021,
-          "value": 60.0
-        },
-        {
-          "year": 2022,
-          "value": 40.0
-        },
-        {
-          "year": 2023,
-          "value": 60.0
-        },
-        {
-          "year": 2024,
-          "value": 60.0
-        },
-        {
-          "year": 2025,
-          "value": 60.0
         }
       ]
     }
