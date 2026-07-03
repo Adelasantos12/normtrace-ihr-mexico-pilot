@@ -77,7 +77,7 @@ Institutional decoupling — the gap between formal structure and operational pr
 | Domestic legal provisions extracted | 110 |
 | Domestic instruments in corpus | 18 |
 | Mapping rows | 80 |
-| Institutional actors profiled | 14 |
+| Institutional actors profiled | 18 (15 federal, 2 autonomous, 1 state grouping) |
 | Mean anchoring score | **1.76 / 5** |
 | Primary IHR regulatory instrument | RLGS-SI (1985) — 20 years before IHR 2005 |
 | Corpus level | Federal only (state legislation excluded) |
@@ -130,12 +130,16 @@ NormTrace applies the country-specific legal hierarchy as a structural filter. F
 
 The critical structural finding: Mexico's primary IHR implementation instrument (RLGS-SI) sits at **tier 3 (regulatory)** but must implement obligations that require **tier 2 (statutory)** anchoring. This tier mismatch — not legal silence — explains the 1.76/5 mean anchoring score.
 
+### SPAR self-report vs legal anchoring
+
+Mexico's self-reported WHO SPAR capacity runs well above NormTrace legal anchoring for the same obligations: CC1 (Legislation, policy & financing) at 80.6% (SPAR mean) vs 34.0% (NormTrace anchoring) — a +46.6-point divergence; overall, 81.3% vs 35.1%. This is a **construct-validity diagnostic** — reported capacity can exceed the domestic legal base for the obligations it claims to cover — not a claim that SPAR self-reports are inflated or false (independent SPAR–JEE comparisons show this gap has narrowed in recent editions). See `/spar-bridge` in the webapp and `00_project/network_methodology_rationale.md` §4 for the full guardrails.
+
 ---
 
 ## Role of Artificial Intelligence, Python, and Human Review
 
 - **AI-assisted structuring**: corpus conversion, metadata coding, provision extraction, preliminary anchoring classification. AI systematises legal text according to researcher-defined schemas and decision rules; it does not function as a legal authority.
-- **Python pipeline**: cleaning, validation, cross-reference checks, network analysis, reproducibility.
+- **Python pipeline**: cleaning, validation, cross-reference checks, network analysis, reproducibility. Network and SPAR-divergence figures are computed by `06_scripts/build_tables/build_network.py` and `spar_normtrace_bridge.py`; see `00_project/network_methodology_rationale.md` for the theoretical basis and interpretive limits.
 - **Human expert review**: required for legal validity, interpretation, and any policy application. All outputs are designated *preliminary_ai_assisted*.
 - **Technical audit**: PASS\_WITH\_DOCUMENTED\_FINDINGS (Audit L-01 through L-08).
 
