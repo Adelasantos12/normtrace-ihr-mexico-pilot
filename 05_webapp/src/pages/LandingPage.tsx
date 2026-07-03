@@ -3,6 +3,7 @@ import {
   Shield, ArrowRight, GitMerge, Activity, AlertTriangle,
   Layers, ChevronRight, Zap, Scale, Network
 } from 'lucide-react';
+import { PreliminaryBanner } from '../components/PreliminaryBanner';
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -39,36 +40,30 @@ export default function LandingPage() {
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-[10px] font-bold border border-blue-100">
               <Shield size={11} /> IHR Legal Traceability Infrastructure
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-bold border border-emerald-100">
-              Complex Adaptive Systems Analysis
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 text-slate-600 rounded-full text-[10px] font-bold border border-slate-200">
-              Preliminary · Expert Review Required
-            </span>
+            <PreliminaryBanner />
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight">
-            Tracing the Domestic<br />
-            <span className="text-blue-700 underline decoration-blue-100 underline-offset-8">Legal Pipeline</span><br />
-            of IHR Implementation
+            Legal capacity, reported<br />
+            <span className="text-blue-700 underline decoration-blue-100 underline-offset-8">vs. legal capacity, anchored</span>
           </h1>
 
           <p className="text-lg text-slate-500 max-w-3xl leading-relaxed font-medium">
-            NormTrace-IHR maps each International Health Regulations obligation through Mexico's normative architecture: from constitutional bridge to statutory anchor to regulatory provision to institutional actor: identifying where the legal pipeline flows, where it narrows, and where it breaks entirely.
+            NormTrace-IHR traces every IHR (2005) obligation to the specific domestic legal instrument that anchors it — constitution, statute, regulation, or none at all. Mexico self-reports 81% legislative capacity to WHO SPAR; NormTrace finds 35% of the same obligations actually anchored in domestic law.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-2">
             <button
-              onClick={() => navigate('/dashboard')}
+              onClick={() => navigate('/actors')}
               className="px-8 py-4 bg-blue-600 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-blue-700 transition-all shadow-xl shadow-blue-100 group"
             >
-              Explore Analysis <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              Explore Traceability Network <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </button>
             <button
-              onClick={() => navigate('/pipeline')}
+              onClick={() => navigate('/spar-bridge')}
               className="px-8 py-4 bg-slate-900 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-slate-700 transition-all group"
             >
-              <Zap size={16} /> View Pipeline <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              <Scale size={16} /> SPAR ↔ Legal <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </button>
             <button
               onClick={() => navigate('/methodology')}
@@ -79,37 +74,30 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Key Findings */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+        {/* Key Findings — lead with the two hook numbers */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-16">
           {[
             {
-              value: '1.76/5',
-              label: 'Mean Anchoring Score',
-              sub: '45 IHR 2005 obligations: concentrated at L1-L2',
+              value: '81% vs 35%',
+              label: 'SPAR self-report vs legal anchoring',
+              sub: 'CC1 Legislation: Mexico reports 80.6% mean capacity; NormTrace finds 34.0% anchoring for the same obligations — a +46.6pt gap',
               color: 'text-red-600',
               bg: 'bg-red-50 border-red-100'
             },
             {
-              value: '44%',
-              label: 'Obligations involve CC1',
-              sub: '20 of 45 implicate legislative reform as precondition',
+              value: '1.76/5',
+              label: 'Mean anchoring score',
+              sub: '45 IHR 2005 obligations, corpus-wide: concentrated at L1–L2 (indirect/partial)',
               color: 'text-amber-600',
               bg: 'bg-amber-50 border-amber-100'
             },
             {
               value: '1985',
-              label: 'Primary IHR Instrument',
-              sub: 'RLGS-SI predates IHR 2005 by 20 years',
+              label: 'Primary IHR instrument',
+              sub: 'RLGS-SI predates IHR 2005 by 20 years and was never amended to reflect it',
               color: 'text-blue-700',
               bg: 'bg-blue-50 border-blue-100'
             },
-            {
-              value: '33.8%',
-              label: 'Procedural Gaps',
-              sub: 'Duties legally assigned but procedures undefined',
-              color: 'text-slate-700',
-              bg: 'bg-slate-50 border-slate-200'
-            }
           ].map((f, i) => (
             <div key={i} className={`p-5 rounded-2xl border ${f.bg} space-y-2`}>
               <div className={`text-3xl font-black ${f.color}`}>{f.value}</div>
@@ -165,10 +153,10 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Analytical Layers */}
+        {/* Analytical Layers (Advanced group — see also the sidebar's collapsed "Advanced" nav) */}
         <div className="mb-16">
-          <h2 className="text-2xl font-black text-slate-900 mb-2">Analytical Architecture</h2>
-          <p className="text-slate-500 text-sm mb-8">Six integrated layers for diagnosing IHR internalisation across Mexico's normative system</p>
+          <h2 className="text-2xl font-black text-slate-900 mb-2">Advanced analytical layers</h2>
+          <p className="text-slate-500 text-sm mb-8">Supplementary views behind the four core sections above — useful for deep dives, not required for the headline finding</p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
               {

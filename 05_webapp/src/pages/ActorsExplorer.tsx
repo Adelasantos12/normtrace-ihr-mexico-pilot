@@ -369,13 +369,16 @@ const NODE_METADATA: Record<string, any> = {
   'INM': { full: 'Instituto Nacional de Migración', type: 'Institutional Actor', layer: 'Domestic Administrative' }
 };
 
+// Dash pattern is unique per relationship type (not just colour), so edge
+// type stays legible without relying on colour perception (Phase 3-UX
+// accessibility pass).
 const EDGE_STYLES: Record<string, any> = {
-  'oversight': { stroke: '#8b5cf6', dash: '0' },
-  'subordination': { stroke: '#3b82f6', dash: '0' },
-  'coordination': { stroke: '#94a3b8', dash: '4 2' },
-  'reporting': { stroke: '#10b981', dash: '0' },
+  'oversight': { stroke: '#8b5cf6', dash: '0' },        // solid
+  'subordination': { stroke: '#3b82f6', dash: '1 3' },  // dotted
+  'coordination': { stroke: '#94a3b8', dash: '6 3' },   // long dash
+  'reporting': { stroke: '#10b981', dash: '8 2 2 2' },  // dash-dot
   'anchors': { stroke: '#3b82f6', dash: '0' },
-  'gap': { stroke: '#ef4444', dash: '2 2' }
+  'gap': { stroke: '#ef4444', dash: '2 2' }             // short dash
 };
 
 const NODE_STYLES: Record<string, { fill: string; stroke: string; textFill: string }> = {
@@ -878,15 +881,17 @@ export default function ActorsExplorer() {
                      ))}
                    </div>
                    <div className="space-y-1.5 border-t border-slate-100 pt-2">
-                     <div className="text-[8px] font-bold text-slate-400 uppercase tracking-wider">Edge type</div>
+                     <div className="text-[8px] font-bold text-slate-400 uppercase tracking-wider">Edge type (pattern, not just colour)</div>
                      {[
-                       { label: 'Oversight', color: '#8b5cf6' },
-                       { label: 'Subordination', color: '#3b82f6' },
-                       { label: 'Coordination (dashed)', color: '#94a3b8' },
-                       { label: 'Gap exposure', color: '#ef4444' }
+                       { label: 'Oversight (solid)', color: '#8b5cf6', dash: EDGE_STYLES.oversight.dash },
+                       { label: 'Subordination (dotted)', color: '#3b82f6', dash: EDGE_STYLES.subordination.dash },
+                       { label: 'Coordination (long dash)', color: '#94a3b8', dash: EDGE_STYLES.coordination.dash },
+                       { label: 'Gap exposure (short dash)', color: '#ef4444', dash: EDGE_STYLES.gap.dash }
                      ].map(l => (
                        <div key={l.label} className="flex items-center gap-2">
-                         <div className="w-5 h-0.5 shrink-0 rounded" style={{ background: l.color }} />
+                         <svg width="20" height="4" className="shrink-0">
+                           <line x1="0" y1="2" x2="20" y2="2" stroke={l.color} strokeWidth="2" strokeDasharray={l.dash} />
+                         </svg>
                          <span className="font-bold text-slate-600">{l.label}</span>
                        </div>
                      ))}
