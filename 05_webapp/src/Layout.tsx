@@ -30,6 +30,7 @@ const navGroups = [
       { path: '/mapping', label: 'International Mapping', icon: Search },
       { path: '/provisions', label: 'Legal Provisions', icon: BookOpen },
       { path: '/actors', label: 'Actors & Network', icon: Users },
+      { path: '/spar-bridge', label: 'SPAR ↔ Legal', icon: Scale },
       { path: '/gap-map', label: 'Implementation Gap Map', icon: Map },
       { path: '/capacity', label: 'Capacity Brief', icon: Info },
       { path: '/international', label: 'International Instruments', icon: Globe },

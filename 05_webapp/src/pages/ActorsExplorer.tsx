@@ -1,5 +1,39 @@
 import React, { useState, useMemo } from 'react';
-import { useCsvData } from '../hooks/useData';
+import { useCsvData, useJsonData } from '../hooks/useData';
+
+// Shape of 04_outputs/figures/network_metrics.json (computed by
+// 06_scripts/build_tables/build_network.py). NEVER hard-code these numbers.
+interface NetworkMetrics {
+  network: { n_instruments: number; n_obligations: number; n_edges: number; density: number };
+  instrument_degree_ranked: { instrument: string; obligations_anchored: number; degree_norm: number; betweenness: number }[];
+  actor_reach_ranked: { actor: string; n_instruments: number; obligation_reach: number }[];
+  communities: { n: number; modularity: number | null; sizes: number[] };
+  cug_test: { observed: number; random_mean: number; p_value_ge_random: number; interpretation: string };
+}
+
+// Curated qualitative notes keyed by node; NUMBERS come from the JSON, not here.
+const HUB_NOTES: Record<string, { role: string; color: string; interpretation: string }> = {
+  'Secretaría de Salud': { role: 'Primary hub', color: 'bg-blue-900 text-white', interpretation: 'Highest actor obligation-reach in the corpus. Central to virtually all IHR implementation pathways; reform of the IHR legal architecture must run through it. Resilience depends on its institutional continuity.' },
+  'LGS': { role: 'Statutory hub', color: 'bg-blue-700 text-white', interpretation: 'Primary statutory anchor. Many IHR obligations pass through the LGS, but anchoring is general: it is a hub through breadth, not obligation-specific precision.' },
+  'RLGS-SI': { role: 'Regulatory hub', color: 'bg-amber-600 text-white', interpretation: 'Primary IHR regulatory instrument despite predating IHR 2005 by 20 years. Its age and regulatory (sub-statutory) rank make it a fragile, reform-critical hub.' },
+  'RI-SS-2025': { role: 'Administrative hub', color: 'bg-indigo-700 text-white', interpretation: 'Carries the operational NFP designation (DGE) at the internal-regulation level — administrative practice standing in for the statutory designation IHR Art. 4 requires.' },
+  'CPEUM': { role: 'Constitutional hub', color: 'bg-slate-700 text-white', interpretation: 'Constitutional foundation connecting treaty obligations to the domestic order. Its degree reflects breadth of constitutional reference, not specific IHR operative anchoring.' },
+  'NOM-017': { role: 'Technical hub', color: 'bg-slate-700 text-white', interpretation: 'Operationalises surveillance/NFP duties at the technical-normative level.' },
+};
+
+function buildHubs(m: NetworkMetrics) {
+  const hubs: { node: string; degree: number; metricLabel: string; role: string; color: string; interpretation: string }[] = [];
+  const topActor = m.actor_reach_ranked?.[0];
+  if (topActor) {
+    const note = HUB_NOTES[topActor.actor] || { role: 'Primary hub', color: 'bg-blue-900 text-white', interpretation: 'Highest actor obligation-reach in the corpus.' };
+    hubs.push({ node: topActor.actor, degree: topActor.obligation_reach, metricLabel: 'reach', ...note });
+  }
+  (m.instrument_degree_ranked || []).slice(0, 3).forEach((inst) => {
+    const note = HUB_NOTES[inst.instrument] || { role: 'Instrument hub', color: 'bg-slate-700 text-white', interpretation: 'Anchors multiple IHR obligations in the corpus.' };
+    hubs.push({ node: inst.instrument, degree: inst.obligations_anchored, metricLabel: 'deg', ...note });
+  });
+  return hubs;
+}
 import {
   Users,
   Share2,
@@ -91,6 +125,8 @@ export default function ActorsExplorer() {
   const { data: actors, loading: l1 } = useCsvData<any>('mexico_health_governance_actors_clean.csv');
   const { data: edges, loading: l2 } = useCsvData<any>('derived/actor_network_edges_derived.csv');
   const { data: mapping, loading: l3 } = useCsvData<any>('mexico_ihr2005_mapping_clean.csv');
+  // Computed network metrics (single source of truth). See build_network.py.
+  const { data: netMetrics } = useJsonData<NetworkMetrics>('derived/network_metrics.json');
 
   const [tab, setTab] = useState<Tab>('map');
   const [activeView, setActiveView] = useState<View>('actor-instrument');
@@ -566,7 +602,7 @@ export default function ActorsExplorer() {
                   node: 'SSA / DGE',
                   badge: 'Hub fragility',
                   badgeColor: 'bg-red-600',
-                  finding: 'SSA is the highest-degree node (deg=59) and DGE operationally performs NFP functions. But DGE\'s legal basis is administrative practice, not statute. IHR Art. 4 requires statutory designation. The hub is real; its anchoring is not.',
+                  finding: 'The Secretaría de Salud has the highest actor obligation-reach in the corpus, and DGE operationally performs NFP functions. But DGE\'s legal basis is administrative practice, not statute. IHR Art. 4 requires statutory designation. The hub is real; its anchoring is not.',
                   link: 'Mandate decoupling'
                 },
                 {
@@ -797,9 +833,42 @@ export default function ActorsExplorer() {
               The legal-institutional network derived from the NormTrace corpus is analysed here as a complex adaptive system (CAS). Nodes are actors and legal instruments; edges are corpus-derived relationships (oversight, subordination, coordination, reporting, anchoring). CAS topology analysis identifies: <strong>hubs</strong> (high-centrality nodes whose failure cascades), <strong>bridges</strong> (nodes connecting otherwise disconnected components), <strong>structural holes</strong> (weak coordination ties), and <strong>decoupled sub-networks</strong> (formally connected but operationally isolated clusters).
             </p>
             <p className="text-slate-400 text-xs italic">
-              Informed by: Habibi R, et al. <em>Lancet</em> 2020; Paina L &amp; Peters DH, <em>Implementation Science</em> 2012; Freeman LC, <em>Social Networks</em> 1978.
+              Informed by: Habibi R, et al. <em>Lancet</em> 2020; Paina L &amp; Peters DH, <em>Implementation Science</em> 2012; Freeman LC, <em>Social Networks</em> 1978. Two-mode centrality after Borgatti &amp; Everett 1997; CUG test after Knoke, Diani, Hollway &amp; Christopoulos 2021.
             </p>
           </div>
+
+          {/* Computed inferential metrics (from build_network.py) */}
+          {netMetrics && (
+            <div className="grid sm:grid-cols-3 gap-4">
+              <div className="bg-white border border-slate-200 rounded-2xl p-6">
+                <div className="text-[10px] font-black text-slate-400 uppercase tracking-wider">CUG test — centralisation vs random</div>
+                <div className="mt-2 flex items-baseline gap-2">
+                  <span className="text-3xl font-black text-slate-900">{netMetrics.cug_test.observed.toFixed(2)}</span>
+                  <span className="text-xs text-slate-500">obs vs {netMetrics.cug_test.random_mean.toFixed(2)} random</span>
+                </div>
+                <div className={`mt-2 inline-block px-2 py-0.5 rounded text-[10px] font-black ${netMetrics.cug_test.p_value_ge_random < 0.05 ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}`}>
+                  p(≥random) = {netMetrics.cug_test.p_value_ge_random.toFixed(3)}
+                </div>
+                <p className="mt-2 text-[11px] text-slate-500 leading-snug">{netMetrics.cug_test.interpretation}</p>
+              </div>
+              <div className="bg-white border border-slate-200 rounded-2xl p-6">
+                <div className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Communities (modularity)</div>
+                <div className="mt-2 flex items-baseline gap-2">
+                  <span className="text-3xl font-black text-slate-900">{netMetrics.communities.n}</span>
+                  <span className="text-xs text-slate-500">Q = {netMetrics.communities.modularity ?? '—'}</span>
+                </div>
+                <p className="mt-2 text-[11px] text-slate-500 leading-snug">Obligation clusters sharing anchoring instruments (greedy modularity).</p>
+              </div>
+              <div className="bg-white border border-slate-200 rounded-2xl p-6">
+                <div className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Two-mode network</div>
+                <div className="mt-2 flex items-baseline gap-2">
+                  <span className="text-3xl font-black text-slate-900">{netMetrics.network.n_instruments}×{netMetrics.network.n_obligations}</span>
+                  <span className="text-xs text-slate-500">density {netMetrics.network.density}</span>
+                </div>
+                <p className="mt-2 text-[11px] text-slate-500 leading-snug">Instruments × obligations, {netMetrics.network.n_edges} anchoring edges. Computed, not hand-set.</p>
+              </div>
+            </div>
+          )}
 
           {/* Hub analysis */}
           <div className="grid md:grid-cols-2 gap-6">
@@ -807,18 +876,14 @@ export default function ActorsExplorer() {
               <h3 className="text-xl font-black text-slate-900">Network Hubs: Critical Nodes</h3>
               <p className="text-sm text-slate-500">Nodes with highest degree centrality. In a CAS framework, hubs are both resilience anchors and systemic vulnerabilities: their failure cascades across multiple IHR implementation pathways simultaneously.</p>
               <div className="space-y-3">
-                {[
-                  { node: 'Secretaría de Salud (SSA)', degree: 59, role: 'Primary hub', interpretation: 'Highest-degree node. Central to virtually all IHR implementation pathways. Resilience depends on SSA institutional continuity; reform of IHR legal architecture must run through SSA.', color: 'bg-blue-900 text-white' },
-                  { node: 'Ley General de Salud (LGS)', degree: 23, role: 'Statutory hub', interpretation: 'Primary statutory anchor. Multiple IHR obligations pass through LGS but anchoring is general: LGS functions as a hub through breadth, not specificity.', color: 'bg-blue-700 text-white' },
-                  { node: 'CPEUM', degree: 22, role: 'Constitutional hub', interpretation: 'Constitutional foundation: connects treaty obligations to domestic system. High degree reflects the breadth of constitutional reference, not specific IHR operative anchoring.', color: 'bg-indigo-700 text-white' },
-                  { node: 'RLGS-SI (1985)', degree: 20, role: 'Regulatory hub', interpretation: 'Primary IHR regulatory instrument, despite predating IHR 2005. Its age and hierarchical position (regulatory, not statutory) make it a fragile hub: reform-critical.', color: 'bg-amber-600 text-white' },
-                ].map((h, i) => (
+                {!netMetrics && <p className="text-xs text-slate-400 italic">Loading computed metrics…</p>}
+                {netMetrics && buildHubs(netMetrics).map((h, i) => (
                   <div key={i} className="p-4 border border-slate-100 rounded-2xl space-y-2">
                     <div className="flex items-center justify-between gap-3">
                       <span className="font-black text-slate-900 text-sm">{h.node}</span>
                       <div className="flex items-center gap-2 shrink-0">
                         <span className={`px-2 py-0.5 rounded text-[10px] font-black ${h.color}`}>{h.role}</span>
-                        <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">deg={h.degree}</span>
+                        <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">{h.metricLabel}={h.degree}</span>
                       </div>
                     </div>
                     <p className="text-xs text-slate-600 leading-relaxed">{h.interpretation}</p>
