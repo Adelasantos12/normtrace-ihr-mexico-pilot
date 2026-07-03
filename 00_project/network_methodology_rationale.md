@@ -47,7 +47,7 @@ three-mode network**:
 | Mode | Entity type | Members (pilot) |
 |------|-------------|-----------------|
 | Actors (agentic) | institutions | 18 (15 federal, 2 autonomous, 1 state-grouping) |
-| Instruments (objects) | legal instruments / provisions | 8 instruments carrying edges; 110 provisions |
+| Instruments (objects) | legal instruments / provisions | 9 instruments carrying edges (post aliasing-fix, §5); 110 provisions |
 | Obligations (objects) | IHR 2005 obligations | 45 (43 with ≥1 identified anchoring instrument) |
 | Gap type (attribute) | gap classification | 10 categories |
 
@@ -94,23 +94,25 @@ or structural-hole statistics off a projection without also reporting the two-mo
 original.
 
 ### 3.2 Community detection → policy communities
-Greedy modularity on the obligation projection returns **2 communities (Q = 0.293,
-sizes 22/21)**. Read as *policy communities* (Laumann & Knoke 1987): sets of obligations
-anchored by a shared instrument cluster. Q≈0.29 is modest — expected, because the corpus
-is dominated by two breadth-hubs (LGS, RLGS-SI) that bridge most obligations. **Implication:**
-the weak partition is itself a finding (centralised, not modular architecture), and the
-AGM algorithm (Ch. 8) should be tried next as it tolerates multi-membership.
+Greedy modularity on the obligation projection returns **3 communities (Q = 0.286,
+sizes 22/20/1)** (post aliasing-fix, §5; the size-1 community is the single obligation
+now anchored by the newly-distinguished RLGS-Inv). Read as *policy communities* (Laumann
+& Knoke 1987): sets of obligations anchored by a shared instrument cluster. Q≈0.29 is
+modest — expected, because the corpus is dominated by two breadth-hubs (LGS, RLGS-SI)
+that bridge most obligations. **Implication:** the weak partition is itself a finding
+(centralised, not modular architecture), and the AGM algorithm (Ch. 8) should be tried
+next as it tolerates multi-membership.
 
 ### 3.3 CUG test → the inferential number
-The headline inferential result: instrument-degree **centralisation = 0.60**, versus a
-random-baseline mean of **0.30** over 1000 size-and-density-matched graphs, **p(≥random) < 0.001**.
-This converts "Salud/LGS is the hub" from an assertion into a test: the concentration of
-legal anchoring on a few instruments is **not** what a random allocation of the same number
-of anchoring links would produce. **Implication:** the fragility argument (reform must run
-through very few instruments) has inferential support, not just description. Next step in R
-is a **QAP/MRQAP** regression of `anchoring_level` on instrument tier and a pre-2005 dummy,
-to test formally whether older/lower-rank instruments predict weaker anchoring (the 1985
-RLGS-SI claim).
+The headline inferential result: instrument-degree **centralisation = 0.64**, versus a
+random-baseline mean of **0.33** over 1000 size-and-density-matched graphs, **p(≥random) < 0.001**
+(post aliasing-fix, §5). This converts "Salud/LGS is the hub" from an assertion into a test:
+the concentration of legal anchoring on a few instruments is **not** what a random allocation
+of the same number of anchoring links would produce. **Implication:** the fragility argument
+(reform must run through very few instruments) has inferential support, not just description.
+Next step in R is a **QAP/MRQAP** regression of `anchoring_level` on instrument tier and a
+pre-2005 dummy, to test formally whether older/lower-rank instruments predict weaker anchoring
+(the 1985 RLGS-SI claim).
 
 ### 3.4 The SPAR↔legal bridge → construct-validity probe
 `spar_normtrace_bridge.py` compares Mexico's SPAR self-report (0–100) with NormTrace legal
