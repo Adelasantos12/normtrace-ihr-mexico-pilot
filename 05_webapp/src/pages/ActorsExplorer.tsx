@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { forceSimulation, forceManyBody, forceLink, forceX, forceCollide } from 'd3-force';
 import { useCsvData, useJsonData } from '../hooks/useData';
 
 // Shape of 04_outputs/figures/network_metrics.json (computed by
@@ -6,7 +7,7 @@ import { useCsvData, useJsonData } from '../hooks/useData';
 interface NetworkMetrics {
   network: { n_instruments: number; n_obligations: number; n_edges: number; density: number };
   instrument_degree_ranked: { instrument: string; obligations_anchored: number; degree_norm: number; betweenness: number }[];
-  actor_reach_ranked: { actor: string; n_instruments: number; obligation_reach: number }[];
+  actor_reach_ranked: { actor: string; instruments: string[]; n_instruments: number; obligation_reach: number }[];
   communities: { n: number; modularity: number | null; sizes: number[] };
   cug_test: { observed: number; random_mean: number; p_value_ge_random: number; interpretation: string };
 }
@@ -34,6 +35,308 @@ function buildHubs(m: NetworkMetrics) {
   });
   return hubs;
 }
+
+// --- Computed obligation network (force-directed, Phase 1-fig) ------------
+// Reads node_registry.csv + network_edges.csv (computed by build_network.py),
+// never the hand-authored actor_network_edges_derived.csv. Lanes by mode:
+// obligations (top) -> instruments (middle) -> actors (bottom), so the
+// anchoring chain reads top to bottom. Node size = degree_norm / obligation
+// reach; edge thickness = anchoring weight; obligations with a high-severity
+// gap type get a red dashed ring and their anchoring edges are drawn dashed red.
+type GraphMode = 'obligation' | 'instrument' | 'actor';
+
+interface GraphNode {
+  id: string;
+  mode: GraphMode;
+  label: string;
+  full: string;
+  size: number;
+  gapType: string;
+  x: number;
+  y: number;
+}
+interface GraphEdge {
+  source: string;
+  target: string;
+  weight: number;
+  isGap: boolean;
+}
+
+const LANE_Y: Record<GraphMode, number> = { obligation: 90, instrument: 340, actor: 590 };
+const MODE_COLOR: Record<GraphMode, { fill: string; stroke: string; text: string }> = {
+  obligation: { fill: '#f0fdf4', stroke: '#16a34a', text: '#15803d' },
+  instrument: { fill: '#eef2ff', stroke: '#4338ca', text: '#3730a3' },
+  actor: { fill: '#1e3a5f', stroke: '#1e3a5f', text: '#ffffff' },
+};
+// gap types that represent a materially unresolved gap, vs. minor/partial ones
+const HIGH_SEVERITY_GAPS = new Set(['full_gap', 'legal_silence', 'coordination_gap']);
+
+function ComputedNetworkGraph({
+  nodeRegistry, netEdges, netMetrics, obligationGap,
+}: {
+  nodeRegistry: any[];
+  netEdges: any[];
+  netMetrics: NetworkMetrics | null;
+  obligationGap: Record<string, string>;
+}) {
+  const [selected, setSelected] = useState<string | null>(null);
+  const [hovered, setHovered] = useState<string | null>(null);
+
+  const { nodes, edges, width, height } = useMemo(() => {
+    if (!nodeRegistry.length || !netEdges.length || !netMetrics) {
+      return { nodes: [] as GraphNode[], edges: [] as GraphEdge[], width: 1000, height: 660 };
+    }
+
+    const obligationRows = nodeRegistry.filter((r) => r.mode === 'obligation');
+    const instrumentRows = nodeRegistry.filter((r) => r.mode === 'instrument');
+    const actorRows = netMetrics.actor_reach_ranked || [];
+    const maxReach = Math.max(1, ...actorRows.map((a) => a.obligation_reach));
+
+    const width = Math.max(1000, Math.max(obligationRows.length, instrumentRows.length, actorRows.length) * 32);
+    const height = 660;
+
+    const simNodes: any[] = [];
+    obligationRows.forEach((r, i) => {
+      const dn = parseFloat(r.degree_norm) || 0;
+      simNodes.push({
+        id: r.node_id, mode: 'obligation' as GraphMode,
+        label: String(r.node_id).replace('IHR-OBL-', 'OBL-'), full: r.node_id,
+        size: 6 + dn * 14,
+        gapType: obligationGap[r.node_id] || 'none',
+        x: ((i + 0.5) / obligationRows.length) * width, y: LANE_Y.obligation, fy: LANE_Y.obligation,
+      });
+    });
+    instrumentRows.forEach((r, i) => {
+      const dn = parseFloat(r.degree_norm) || 0;
+      simNodes.push({
+        id: r.node_id, mode: 'instrument' as GraphMode, label: r.node_id, full: r.node_id,
+        size: 8 + dn * 18, gapType: 'none',
+        x: ((i + 0.5) / instrumentRows.length) * width, y: LANE_Y.instrument, fy: LANE_Y.instrument,
+      });
+    });
+    actorRows.forEach((a, i) => {
+      simNodes.push({
+        id: a.actor, mode: 'actor' as GraphMode,
+        label: a.actor.length > 26 ? a.actor.slice(0, 24) + '…' : a.actor, full: a.actor,
+        size: 8 + (a.obligation_reach / maxReach) * 18, gapType: 'none',
+        x: ((i + 0.5) / actorRows.length) * width, y: LANE_Y.actor, fy: LANE_Y.actor,
+      });
+    });
+
+    const byId = new Map(simNodes.map((n) => [n.id, n]));
+
+    const simLinks: { source: any; target: any; weight: number; isGap: boolean }[] = [];
+    netEdges.forEach((e) => {
+      const s = byId.get(e.source), t = byId.get(e.target);
+      if (!s || !t) return;
+      const obligationEnd = s.mode === 'obligation' ? s : (t.mode === 'obligation' ? t : null);
+      const isGap = !!obligationEnd && HIGH_SEVERITY_GAPS.has(obligationEnd.gapType);
+      simLinks.push({ source: s, target: t, weight: parseFloat(e.weight) || 1, isGap });
+    });
+    (netMetrics.actor_reach_ranked || []).forEach((a) => {
+      (a.instruments || []).forEach((instId) => {
+        const s = byId.get(a.actor), t = byId.get(instId);
+        if (s && t) simLinks.push({ source: s, target: t, weight: 1, isGap: false });
+      });
+    });
+
+    const simulation = forceSimulation(simNodes as any)
+      .force('charge', forceManyBody().strength(-40))
+      .force('link', forceLink(simLinks as any).distance(40).strength(0.25))
+      .force('x', forceX(width / 2).strength(0.03))
+      .force('collide', forceCollide((d: any) => d.size + 3))
+      .stop();
+    for (let i = 0; i < 260; i++) simulation.tick();
+
+    const nodes: GraphNode[] = simNodes.map((n) => ({
+      id: n.id, mode: n.mode, label: n.label, full: n.full, size: n.size, gapType: n.gapType,
+      x: Math.max(24, Math.min(width - 24, n.x)), y: n.y,
+    }));
+    const edges: GraphEdge[] = simLinks.map((l) => ({
+      source: (l.source as any).id, target: (l.target as any).id, weight: l.weight, isGap: l.isGap,
+    }));
+
+    return { nodes, edges, width, height };
+  }, [nodeRegistry, netEdges, netMetrics, obligationGap]);
+
+  const posById = useMemo(() => {
+    const m: Record<string, GraphNode> = {};
+    nodes.forEach((n) => { m[n.id] = n; });
+    return m;
+  }, [nodes]);
+
+  // Click an obligation -> highlight its chain: anchoring instruments, and the
+  // actors that can issue those instruments.
+  const highlightSet = useMemo(() => {
+    if (!selected) return null;
+    const instruments = new Set<string>();
+    edges.forEach((e) => {
+      if (e.target === selected && posById[e.source]?.mode === 'instrument') instruments.add(e.source);
+      if (e.source === selected && posById[e.target]?.mode === 'instrument') instruments.add(e.target);
+    });
+    const actors = new Set<string>();
+    edges.forEach((e) => {
+      if (instruments.has(e.target) && posById[e.source]?.mode === 'actor') actors.add(e.source);
+      if (instruments.has(e.source) && posById[e.target]?.mode === 'actor') actors.add(e.target);
+    });
+    return { obligation: selected, instruments, actors };
+  }, [selected, edges, posById]);
+
+  if (!nodes.length) {
+    return <div className="p-8 text-slate-400 text-sm italic">Loading computed network…</div>;
+  }
+
+  const selectedNode = selected ? posById[selected] : null;
+  const isRelated = (id: string) =>
+    !!highlightSet && (highlightSet.obligation === id || highlightSet.instruments.has(id) || highlightSet.actors.has(id));
+
+  return (
+    <div className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
+      <div className="p-6 border-b border-slate-100 flex items-center justify-between flex-wrap gap-4">
+        <div className="space-y-1">
+          <h3 className="font-bold text-slate-900">Computed obligation network</h3>
+          <p className="text-[10px] text-slate-500 font-medium max-w-2xl leading-relaxed">
+            How to read this: top band = {nodes.filter((n) => n.mode === 'obligation').length} IHR obligations; middle
+            band = {nodes.filter((n) => n.mode === 'instrument').length} legal instruments that anchor them; bottom
+            band = institutional actors that can issue those instruments. Node size = degree/obligation-reach; edge
+            width = anchoring strength. Click an obligation to trace its chain to the responsible actor and see its
+            gap type.
+          </p>
+        </div>
+        <div className="flex gap-2">
+          <span className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded text-[10px] font-bold border border-slate-200">{nodes.length} NODES</span>
+          <span className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded text-[10px] font-bold border border-slate-200">{edges.length} EDGES</span>
+        </div>
+      </div>
+
+      <div className="flex">
+        <div className="w-52 shrink-0 border-r border-slate-100 p-4 space-y-2 text-[9px]" style={{ height }}>
+          <div className="font-black text-slate-500 uppercase tracking-widest">Legend</div>
+          {([
+            { label: 'Obligation', bg: '#f0fdf4', border: '#16a34a' },
+            { label: 'Instrument', bg: '#eef2ff', border: '#4338ca' },
+            { label: 'Actor', bg: '#1e3a5f', border: '#1e3a5f' },
+          ] as any[]).map((l) => (
+            <div key={l.label} className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full shrink-0 border" style={{ background: l.bg, borderColor: l.border }} />
+              <span className="font-bold text-slate-600">{l.label}</span>
+            </div>
+          ))}
+          <div className="flex items-center gap-2 pt-2 border-t border-slate-100">
+            <div className="w-5 h-0.5 shrink-0 rounded border-t-2 border-dashed" style={{ borderColor: '#dc2626' }} />
+            <span className="font-bold text-slate-600">Gap-exposed obligation</span>
+          </div>
+          <div className="text-slate-400 italic pt-1 border-t border-slate-100">Hover to reveal labels; node size scales with degree/reach.</div>
+          <div className="text-slate-400 italic pt-1 border-t border-slate-100">Click an obligation node (top band) to trace its chain.</div>
+        </div>
+        <div className="relative flex-1 bg-slate-50/50 overflow-auto" style={{ height }}>
+        <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ minWidth: width, minHeight: height }}>
+          <rect x={0} y={LANE_Y.obligation - 45} width={width} height={85} fill="#16a34a" opacity={0.04} />
+          <rect x={0} y={LANE_Y.instrument - 45} width={width} height={85} fill="#4338ca" opacity={0.04} />
+          <rect x={0} y={LANE_Y.actor - 45} width={width} height={85} fill="#1e3a5f" opacity={0.04} />
+          <text x={12} y={LANE_Y.obligation - 52} fontSize="10" fontWeight="900" fill="#16a34a">OBLIGATIONS</text>
+          <text x={12} y={LANE_Y.instrument - 52} fontSize="10" fontWeight="900" fill="#4338ca">INSTRUMENTS</text>
+          <text x={12} y={LANE_Y.actor - 52} fontSize="10" fontWeight="900" fill="#1e3a5f">ACTORS</text>
+
+          {edges.map((e, i) => {
+            const s = posById[e.source], t = posById[e.target];
+            if (!s || !t) return null;
+            const dimmed = !!highlightSet && !(isRelated(e.source) && isRelated(e.target));
+            return (
+              <line
+                key={`e-${i}`}
+                x1={s.x} y1={s.y} x2={t.x} y2={t.y}
+                stroke={e.isGap ? '#dc2626' : '#94a3b8'}
+                strokeDasharray={e.isGap ? '4 3' : undefined}
+                strokeWidth={Math.max(0.75, e.weight * 0.9)}
+                opacity={dimmed ? 0.06 : e.isGap ? 0.55 : 0.35}
+              />
+            );
+          })}
+
+          {nodes.map((n) => {
+            const style = MODE_COLOR[n.mode];
+            const isSelected = selected === n.id;
+            const hasGap = n.mode === 'obligation' && HIGH_SEVERITY_GAPS.has(n.gapType);
+            const dimmed = !!highlightSet && !isRelated(n.id);
+            return (
+              <g key={n.id}
+                 transform={`translate(${n.x},${n.y})`}
+                 className={n.mode === 'obligation' ? 'cursor-pointer' : ''}
+                 opacity={dimmed ? 0.15 : 1}
+                 onClick={() => n.mode === 'obligation' && setSelected(isSelected ? null : n.id)}
+                 onMouseEnter={() => setHovered(n.id)}
+                 onMouseLeave={() => setHovered(null)}>
+                <circle
+                  r={n.size}
+                  fill={style.fill}
+                  stroke={hasGap ? '#dc2626' : (isSelected ? '#2563eb' : style.stroke)}
+                  strokeWidth={isSelected ? 3 : hasGap ? 2 : 1.5}
+                  strokeDasharray={hasGap ? '3 2' : undefined}
+                />
+                {(n.size > 10 || hovered === n.id) && n.mode !== 'actor' && (
+                  <text textAnchor="middle" dy=".3em" fontSize={8} fontWeight="900" fill={style.text} className="pointer-events-none">
+                    {n.label}
+                  </text>
+                )}
+              </g>
+            );
+          })}
+        </svg>
+
+        {/* Side panel: obligation chain on click */}
+        {selectedNode && (
+          <div className="absolute top-4 right-4 bg-white border border-blue-200 p-5 rounded-2xl shadow-2xl w-72 space-y-3 animate-in fade-in slide-in-from-top-4 duration-200">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest">Obligation chain</span>
+              <button onClick={() => setSelected(null)} className="text-slate-400 hover:text-slate-700 text-xs">✕</button>
+            </div>
+            <h4 className="text-lg font-black text-slate-900">{selectedNode.label}</h4>
+            <div>
+              <div className="text-[10px] font-bold text-slate-400 uppercase mb-1">Gap type</div>
+              <span className={cn(
+                "inline-block px-2 py-0.5 rounded text-[10px] font-black uppercase",
+                selectedNode.gapType !== 'none' ? 'bg-red-50 text-red-700' : 'bg-emerald-50 text-emerald-700'
+              )}>{selectedNode.gapType || 'none'}</span>
+            </div>
+            <div>
+              <div className="text-[10px] font-bold text-slate-400 uppercase mb-1">Anchoring instruments</div>
+              <div className="flex flex-wrap gap-1">
+                {[...(highlightSet?.instruments ?? [])].map((id) => (
+                  <span key={id} className="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-[10px] font-bold">{id}</span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="text-[10px] font-bold text-slate-400 uppercase mb-1">Reachable actors</div>
+              <div className="flex flex-col gap-1">
+                {[...(highlightSet?.actors ?? [])].map((id) => (
+                  <span key={id} className="text-[11px] text-slate-700 font-medium">{id}</span>
+                ))}
+                {(!highlightSet || highlightSet.actors.size === 0) && (
+                  <span className="text-[11px] text-slate-400 italic">No actor-instrument link found in corpus.</span>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+        </div>
+      </div>
+
+      <div className="px-8 py-4 bg-slate-50 border-t border-slate-100">
+        <p className="text-[10px] text-slate-500 leading-relaxed max-w-5xl">
+          <strong className="text-slate-700">Figure 1 (computed). Force-directed instrument×obligation×actor network.</strong>{' '}
+          Layout computed by d3-force (obligations pinned to the top band, instruments to the middle band, actors to
+          the bottom band; horizontal position and spacing resolved by simulated repulsion, link attraction, and
+          collision avoidance). Node size and edge width are computed from <code>network_metrics.json</code> and{' '}
+          <code>network_edges.csv</code> (build_network.py), not hand-set. This is a corpus-derived
+          legal-institutional traceability network, not observed coordination or political authority.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 import {
   Users,
   Share2,
@@ -121,18 +424,36 @@ const DISPLAY_FIELDS = [
   'oversight_mechanisms'
 ];
 
+type MapMode = 'computed' | 'curated';
+
 export default function ActorsExplorer() {
   const { data: actors, loading: l1 } = useCsvData<any>('mexico_health_governance_actors_clean.csv');
   const { data: edges, loading: l2 } = useCsvData<any>('derived/actor_network_edges_derived.csv');
   const { data: mapping, loading: l3 } = useCsvData<any>('mexico_ihr2005_mapping_clean.csv');
   // Computed network metrics (single source of truth). See build_network.py.
   const { data: netMetrics } = useJsonData<NetworkMetrics>('derived/network_metrics.json');
+  // Computed node/edge registry for the force-directed graph (Phase 1-fig).
+  const { data: nodeRegistry } = useCsvData<any>('derived/node_registry.csv');
+  const { data: netEdges } = useCsvData<any>('derived/network_edges.csv');
 
   const [tab, setTab] = useState<Tab>('map');
+  const [mapMode, setMapMode] = useState<MapMode>('computed');
   const [activeView, setActiveView] = useState<View>('actor-instrument');
   const [search, setSearch] = useState('');
   const [hoveredNode, setHoveredNode] = useState<any>(null);
   const [hoveredEdge, setHoveredEdge] = useState<any>(null);
+
+  // obligation_id -> gap_type, for the computed graph's gap-exposure styling.
+  const obligationGap = useMemo(() => {
+    const g: Record<string, string> = {};
+    mapping.forEach((m: any) => {
+      const oid = m.obligation_id;
+      if (!oid) return;
+      const gt = (m.gap_type || 'none').trim();
+      if (!g[oid] || (gt !== 'none' && g[oid] === 'none')) g[oid] = gt;
+    });
+    return g;
+  }, [mapping]);
 
   const [filters, setFilters] = useState<any>({
     relationship_type: '',
@@ -319,6 +640,41 @@ export default function ActorsExplorer() {
 
       {tab === 'map' && (
         <div className="space-y-6">
+          <div className="flex items-center justify-between flex-wrap gap-3">
+            <div className="flex bg-slate-100 p-1 rounded-xl w-fit">
+              {[
+                { id: 'computed', label: 'Computed Network' },
+                { id: 'curated', label: 'Curated Summary (legacy)' },
+              ].map((m) => (
+                <button
+                  key={m.id}
+                  onClick={() => setMapMode(m.id as MapMode)}
+                  className={cn(
+                    "px-4 py-2 rounded-lg text-xs font-bold transition-all",
+                    mapMode === m.id ? "bg-white text-blue-900 shadow-sm" : "text-slate-500 hover:text-slate-900"
+                  )}
+                >
+                  {m.label}
+                </button>
+              ))}
+            </div>
+            <p className="text-[10px] text-slate-400 font-medium max-w-md">
+              Default view is the real computed obligation network (build_network.py). The curated summary is a
+              hand-picked 8-node overview kept for a quick visual orientation.
+            </p>
+          </div>
+
+          {mapMode === 'computed' && (
+            <ComputedNetworkGraph
+              nodeRegistry={nodeRegistry}
+              netEdges={netEdges}
+              netMetrics={netMetrics}
+              obligationGap={obligationGap}
+            />
+          )}
+
+          {mapMode === 'curated' && (
+          <div className="space-y-6">
           <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-wrap items-end gap-6">
              <div className="space-y-2 flex-1 min-w-[200px]">
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Network View</label>
@@ -692,6 +1048,8 @@ export default function ActorsExplorer() {
                </div>
             </div>
           </div>
+          </div>
+          )}
         </div>
       )}
 
