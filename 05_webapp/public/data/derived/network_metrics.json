@@ -96,7 +96,7 @@
       "obligation_reach": 23
     },
     {
-      "actor": "Comisión Federal para la Protección contra Riesgos Sanitarios (COFEPRIS)",
+      "actor": "Autoridades portuarias y aeroportuarias (puntos de entrada)",
       "instruments": [
         "LGS"
       ],
@@ -104,7 +104,7 @@
       "obligation_reach": 21
     },
     {
-      "actor": "Autoridades portuarias y aeroportuarias (puntos de entrada)",
+      "actor": "Comisión Federal para la Protección contra Riesgos Sanitarios (COFEPRIS)",
       "instruments": [
         "LGS"
       ],
@@ -119,30 +119,6 @@
       ],
       "n_instruments": 2,
       "obligation_reach": 6
-    },
-    {
-      "actor": "Congreso de la Unión",
-      "instruments": [
-        "CPEUM"
-      ],
-      "n_instruments": 1,
-      "obligation_reach": 5
-    },
-    {
-      "actor": "Cámara de Diputados",
-      "instruments": [
-        "CPEUM"
-      ],
-      "n_instruments": 1,
-      "obligation_reach": 5
-    },
-    {
-      "actor": "Senado de la República",
-      "instruments": [
-        "CPEUM"
-      ],
-      "n_instruments": 1,
-      "obligation_reach": 5
     },
     {
       "actor": "Auditoría Superior de la Federación",
@@ -161,6 +137,22 @@
       "obligation_reach": 5
     },
     {
+      "actor": "Congreso de la Unión",
+      "instruments": [
+        "CPEUM"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 5
+    },
+    {
+      "actor": "Cámara de Diputados",
+      "instruments": [
+        "CPEUM"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 5
+    },
+    {
       "actor": "Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI) / Transparencia para el Pueblo",
       "instruments": [
         "CPEUM",
@@ -170,7 +162,15 @@
       "obligation_reach": 5
     },
     {
-      "actor": "Secretaría de Gobernación",
+      "actor": "Senado de la República",
+      "instruments": [
+        "CPEUM"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 5
+    },
+    {
+      "actor": "Instituto Nacional de Migración",
       "instruments": [
         "LOAPF"
       ],
@@ -178,7 +178,7 @@
       "obligation_reach": 1
     },
     {
-      "actor": "Instituto Nacional de Migración",
+      "actor": "Secretaría de Gobernación",
       "instruments": [
         "LOAPF"
       ],
