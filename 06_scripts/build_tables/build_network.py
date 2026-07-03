@@ -91,9 +91,9 @@ def main():
             B[inst][obl]["rows"] += 1
         else:
             B.add_edge(inst, obl, weight=w, rows=1)
-    for n in inst_nodes:
+    for n in sorted(inst_nodes):
         B.add_node(n, mode="instrument", bipartite=0)
-    for n in obl_nodes:
+    for n in sorted(obl_nodes):
         B.add_node(n, mode="obligation", bipartite=1)
 
     # ---- Mode-aware degree (Borgatti & Everett 2-mode normalisation) --------
@@ -123,10 +123,15 @@ def main():
 
     # ---- Projection to obligation-obligation (shared instruments) -----------
     G_obl = bipartite.weighted_projected_graph(B, obl_nodes)
-    communities = greedy_modularity_communities(G_obl) if G_obl.number_of_edges() else []
+    raw_communities = greedy_modularity_communities(G_obl) if G_obl.number_of_edges() else []
+    # greedy_modularity_communities' output order (and therefore the community index
+    # each obligation gets) is not guaranteed stable across runs; sort communities by
+    # size (desc) then by their lexicographically-smallest member for a deterministic
+    # labeling. The partition itself (which nodes group together) does not change.
+    communities = sorted(raw_communities, key=lambda c: (-len(c), min(c)))
     obl_comm = {}
     for i, comm in enumerate(communities):
-        for node in comm:
+        for node in sorted(comm):
             obl_comm[node] = i
     modularity = nx.algorithms.community.modularity(G_obl, communities) if communities else None
 
@@ -138,7 +143,7 @@ def main():
     obs_c = centralisation(inst_deg)
     n_edges = B.number_of_edges()
     sims = []
-    inst_list, obl_list = list(inst_nodes), list(obl_nodes)
+    inst_list, obl_list = sorted(inst_nodes), sorted(obl_nodes)
     for _ in range(1000):
         R = nx.Graph()
         R.add_nodes_from(inst_list); R.add_nodes_from(obl_list)
@@ -150,11 +155,11 @@ def main():
 
     # ---- Assemble outputs ---------------------------------------------------
     node_registry = []
-    for n in inst_nodes:
+    for n in sorted(inst_nodes):
         node_registry.append({"node_id": n, "mode": "instrument",
                               "degree": inst_deg[n], "degree_norm": inst_deg_norm[n],
                               "betweenness": round(betw.get(n, 0), 4)})
-    for n in obl_nodes:
+    for n in sorted(obl_nodes):
         node_registry.append({"node_id": n, "mode": "obligation",
                               "degree": obl_deg[n], "degree_norm": obl_deg_norm[n],
                               "betweenness": round(betw.get(n, 0), 4),
@@ -173,10 +178,10 @@ def main():
         "instrument_degree_ranked": sorted(
             [{"instrument": n, "obligations_anchored": inst_deg[n],
               "degree_norm": inst_deg_norm[n], "betweenness": round(betw.get(n, 0), 4)}
-             for n in inst_nodes], key=lambda x: -x["obligations_anchored"]),
+             for n in inst_nodes], key=lambda x: (-x["obligations_anchored"], x["instrument"])),
         "actor_reach_ranked": sorted(
             [{"actor": a, **v} for a, v in actor_reach.items()],
-            key=lambda x: -x["obligation_reach"]),
+            key=lambda x: (-x["obligation_reach"], x["actor"])),
         "communities": {"n": len(communities), "modularity": round(modularity, 3) if modularity else None,
                         "sizes": [len(c) for c in communities]},
         "cug_test": {"measure": "instrument-degree centralisation",
