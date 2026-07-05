@@ -1,13 +1,16 @@
 import { useJsonData } from '../hooks/useData';
 import { Scale, TrendingDown, AlertCircle } from 'lucide-react';
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  LineChart, Line, ReferenceLine, Legend, LabelList,
+  LineChart, Line, ReferenceLine, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
 } from 'recharts';
 
 // Shape of 05_webapp/public/data/derived/spar_normtrace_divergence.json
 // (computed by 06_scripts/build_tables/spar_normtrace_bridge.py).
-interface DivergenceRow {
+// Scoped to CC1 only -- see the script's docstring and
+// network_methodology_rationale.md SS3.4 for why the other SPAR capacities
+// are not compared here (they measure operational capacity, a different
+// construct from NormTrace's legal-anchoring score).
+interface Cc1Row {
   capacity: string; cc_tag: string;
   spar_self_report_latest: number; spar_self_report_mean: number;
   normtrace_legal_anchoring_pct: number;
@@ -16,11 +19,10 @@ interface DivergenceRow {
 interface SparSeries { latest_year: number; latest: number; mean: number; max: number;
   trajectory: { year: number; value: number }[]; }
 interface Divergence {
-  country: string; thesis: string;
-  headline_cc1: DivergenceRow;
-  overall: { spar_all_latest: number; spar_all_mean: number; normtrace_overall_anchoring_pct: number };
-  divergence_table: DivergenceRow[];
-  spar_series: Record<string, SparSeries>;
+  country: string; scope_note: string; thesis: string;
+  headline_cc1: Cc1Row;
+  normtrace_corpus_anchoring_pct: number;
+  cc1_spar_series: SparSeries;
   caveats: string[];
 }
 
@@ -39,13 +41,7 @@ export default function SparBridge() {
   );
 
   const cc1 = data.headline_cc1;
-  const chartData = data.divergence_table.map(r => ({
-    name: r.capacity.replace(/^C\d+ /, ''),
-    'SPAR self-report': r.spar_self_report_mean,
-    'NormTrace legal anchoring': r.normtrace_legal_anchoring_pct,
-    divergence: r.divergence_mean,
-  }));
-  const cap1Traj = data.spar_series['spar_cap1']?.trajectory ?? [];
+  const cap1Traj = data.cc1_spar_series?.trajectory ?? [];
 
   return (
     <div className="space-y-8 pb-24">
@@ -55,10 +51,11 @@ export default function SparBridge() {
           <h1 className="text-4xl font-black text-slate-900 tracking-tight">SPAR ↔ Legal</h1>
         </div>
         <p className="text-lg text-slate-600 max-w-3xl">
-          Self-reported IHR capacity (WHO SPAR) versus the actual domestic <strong>legal anchoring</strong> of
-          the same obligations (NormTrace). A large positive gap flags capacity reported without a
-          sustainable legal-institutional base.
+          Self-reported CC1 (Legislation, policy &amp; financing) capacity (WHO SPAR) versus the actual domestic{' '}
+          <strong>legal anchoring</strong> of the same obligations (NormTrace). A large positive gap flags capacity
+          reported without a sustainable legal-institutional base.
         </p>
+        <p className="text-xs text-slate-400 max-w-3xl italic">{data.scope_note}</p>
       </header>
 
       {/* Headline cards */}
@@ -77,29 +74,6 @@ export default function SparBridge() {
           <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-1"><TrendingDown size={12} /> Divergence</div>
           <div className="mt-3 text-5xl font-black text-red-400">+{cc1.divergence_mean}</div>
           <div className="text-slate-400 text-sm mt-1">points, self-report above legal anchoring</div>
-        </div>
-      </div>
-
-      {/* Grouped bar: SPAR vs NormTrace per capacity */}
-      <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-4">
-        <h3 className="text-xl font-black text-slate-900">Self-report vs legal anchoring, by capacity</h3>
-        <p className="text-sm text-slate-500">Every mapped capacity sits far above its legal anchoring. Ordered by divergence.</p>
-        <div style={{ width: '100%', height: 380 }}>
-          <ResponsiveContainer>
-            <BarChart data={chartData} margin={{ top: 20, right: 20, bottom: 60, left: 30 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-              <XAxis dataKey="name" angle={-20} textAnchor="end" interval={0} height={70} tick={{ fontSize: 11 }} />
-              <YAxis domain={[0, 100]} tick={{ fontSize: 11 }} unit="%" />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="SPAR self-report" fill="#1e3a8a" radius={[4, 4, 0, 0]}>
-                <LabelList dataKey="SPAR self-report" position="top" fontSize={10} fill="#1e3a8a" formatter={(v: number) => `${v}%`} />
-              </Bar>
-              <Bar dataKey="NormTrace legal anchoring" fill="#d97706" radius={[4, 4, 0, 0]}>
-                <LabelList dataKey="NormTrace legal anchoring" position="top" fontSize={10} fill="#d97706" formatter={(v: number) => `${v}%`} />
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
         </div>
       </div>
 
@@ -126,31 +100,18 @@ export default function SparBridge() {
         </div>
       </div>
 
-      {/* Divergence table */}
-      <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-4 overflow-x-auto">
-        <h3 className="text-xl font-black text-slate-900">Divergence table</h3>
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="text-left text-[10px] font-black text-slate-400 uppercase tracking-wider border-b border-slate-200">
-              <th className="py-2 pr-4">Capacity</th>
-              <th className="py-2 px-2 text-right">SPAR mean</th>
-              <th className="py-2 px-2 text-right">NormTrace</th>
-              <th className="py-2 px-2 text-right">Divergence</th>
-              <th className="py-2 pl-2 text-right">Obligations</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.divergence_table.map((r) => (
-              <tr key={r.cc_tag} className="border-b border-slate-50">
-                <td className="py-3 pr-4 font-bold text-slate-800">{r.capacity}</td>
-                <td className="py-3 px-2 text-right text-slate-600">{r.spar_self_report_mean}%</td>
-                <td className="py-3 px-2 text-right text-slate-600">{r.normtrace_legal_anchoring_pct}%</td>
-                <td className="py-3 px-2 text-right font-black text-red-600">+{r.divergence_mean}</td>
-                <td className="py-3 pl-2 text-right text-slate-500">{r.n_obligations}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      {/* Corpus-wide NormTrace stat, explicitly not compared to SPAR */}
+      <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 space-y-2">
+        <h3 className="text-sm font-black text-slate-700 uppercase tracking-wider">For context — corpus-wide NormTrace anchoring</h3>
+        <div className="flex items-baseline gap-2">
+          <span className="text-3xl font-black text-slate-900">{data.normtrace_corpus_anchoring_pct}%</span>
+          <span className="text-sm text-slate-500">mean legal anchoring across all 45 IHR 2005 obligations</span>
+        </div>
+        <p className="text-xs text-slate-500 max-w-3xl">
+          This is NormTrace's own standalone statistic, not a SPAR comparison — SPAR's overall aggregate score
+          mixes in operational capacities (surveillance, points of entry, emergency management, etc.) that
+          NormTrace does not measure, so it is not construct-comparable to this figure.
+        </p>
       </div>
 
       {/* Caveats */}
