@@ -2,7 +2,7 @@ import { useJsonData } from '../hooks/useData';
 import { Scale, TrendingDown, AlertCircle } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  LineChart, Line, ReferenceLine, Legend,
+  LineChart, Line, ReferenceLine, Legend, LabelList,
 } from 'recharts';
 
 // Shape of 05_webapp/public/data/derived/spar_normtrace_divergence.json
@@ -84,16 +84,20 @@ export default function SparBridge() {
       <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-4">
         <h3 className="text-xl font-black text-slate-900">Self-report vs legal anchoring, by capacity</h3>
         <p className="text-sm text-slate-500">Every mapped capacity sits far above its legal anchoring. Ordered by divergence.</p>
-        <div style={{ width: '100%', height: 360 }}>
+        <div style={{ width: '100%', height: 380 }}>
           <ResponsiveContainer>
-            <BarChart data={chartData} margin={{ top: 10, right: 20, bottom: 60, left: 0 }}>
+            <BarChart data={chartData} margin={{ top: 20, right: 20, bottom: 60, left: 30 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
               <XAxis dataKey="name" angle={-20} textAnchor="end" interval={0} height={70} tick={{ fontSize: 11 }} />
               <YAxis domain={[0, 100]} tick={{ fontSize: 11 }} unit="%" />
               <Tooltip />
               <Legend />
-              <Bar dataKey="SPAR self-report" fill="#1e3a8a" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="NormTrace legal anchoring" fill="#d97706" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="SPAR self-report" fill="#1e3a8a" radius={[4, 4, 0, 0]}>
+                <LabelList dataKey="SPAR self-report" position="top" fontSize={10} fill="#1e3a8a" formatter={(v: number) => `${v}%`} />
+              </Bar>
+              <Bar dataKey="NormTrace legal anchoring" fill="#d97706" radius={[4, 4, 0, 0]}>
+                <LabelList dataKey="NormTrace legal anchoring" position="top" fontSize={10} fill="#d97706" formatter={(v: number) => `${v}%`} />
+              </Bar>
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -105,6 +109,7 @@ export default function SparBridge() {
         <p className="text-sm text-slate-500">
           Self-reported legislation capacity ran at 100% for most of 2011–2018. The dashed line is the
           NormTrace legal anchoring for the same obligations ({cc1.normtrace_legal_anchoring_pct}%) — the persistent gap is the point.
+          Each point is one yearly SPAR submission; the line connects discrete observations and should not be read as a continuous measure.
         </p>
         <div style={{ width: '100%', height: 320 }}>
           <ResponsiveContainer>
@@ -115,7 +120,7 @@ export default function SparBridge() {
               <Tooltip />
               <ReferenceLine y={cc1.normtrace_legal_anchoring_pct} stroke="#d97706" strokeDasharray="6 4"
                 label={{ value: `NormTrace anchoring ${cc1.normtrace_legal_anchoring_pct}%`, position: 'insideBottomRight', fontSize: 11, fill: '#d97706' }} />
-              <Line type="monotone" dataKey="value" name="SPAR CC1 self-report" stroke="#1e3a8a" strokeWidth={3} dot={{ r: 3 }} />
+              <Line type="linear" dataKey="value" name="SPAR CC1 self-report" stroke="#1e3a8a" strokeWidth={3} dot={{ r: 3 }} />
             </LineChart>
           </ResponsiveContainer>
         </div>

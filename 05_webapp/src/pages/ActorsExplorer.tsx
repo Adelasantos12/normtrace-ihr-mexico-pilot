@@ -144,7 +144,8 @@ function ComputedNetworkGraph({
       .force('charge', forceManyBody().strength(-40))
       .force('link', forceLink(simLinks as any).distance(40).strength(0.25))
       .force('x', forceX(width / 2).strength(0.03))
-      .force('collide', forceCollide((d: any) => d.size + 3))
+      .force('collide', forceCollide((d: any) =>
+        d.size + 3 + (d.mode === 'instrument' && d.size > 10 ? d.label.length * 2.2 : 0)))
       .stop();
     for (let i = 0; i < 260; i++) simulation.tick();
 
@@ -257,6 +258,7 @@ function ComputedNetworkGraph({
           {nodes.map((n) => {
             const style = MODE_COLOR[n.mode];
             const isSelected = selected === n.id;
+            const isHoveredClickable = n.mode === 'obligation' && hovered === n.id && !isSelected;
             const hasGap = n.mode === 'obligation' && HIGH_SEVERITY_GAPS.has(n.gapType);
             const dimmed = !!highlightSet && !isRelated(n.id);
             return (
@@ -268,11 +270,12 @@ function ComputedNetworkGraph({
                  onMouseEnter={() => setHovered(n.id)}
                  onMouseLeave={() => setHovered(null)}>
                 <circle
-                  r={n.size}
+                  r={isHoveredClickable ? n.size + 3 : n.size}
                   fill={style.fill}
-                  stroke={hasGap ? '#dc2626' : (isSelected ? '#2563eb' : style.stroke)}
-                  strokeWidth={isSelected ? 3 : hasGap ? 2 : 1.5}
+                  stroke={isSelected ? '#2563eb' : isHoveredClickable ? '#60a5fa' : hasGap ? '#dc2626' : style.stroke}
+                  strokeWidth={isSelected || isHoveredClickable ? 3 : hasGap ? 2 : 1.5}
                   strokeDasharray={hasGap ? '3 2' : undefined}
+                  className="transition-all duration-150"
                 />
                 {(n.size > 10 || hovered === n.id) && n.mode !== 'actor' && (
                   <text textAnchor="middle" dy=".3em" fontSize={8} fontWeight="900" fill={style.text} className="pointer-events-none">
@@ -814,6 +817,10 @@ export default function ActorsExplorer() {
                             fontWeight="900"
                             fill={style.textFill}
                             className="pointer-events-none"
+                            paintOrder="stroke"
+                            stroke={style.textFill === 'white' ? '#0f172a' : 'white'}
+                            strokeWidth={2.5}
+                            strokeLinejoin="round"
                           >
                             {n.label}
                           </text>
@@ -1210,9 +1217,12 @@ export default function ActorsExplorer() {
                   <span className="text-xs text-slate-500">obs vs {netMetrics.cug_test.random_mean.toFixed(2)} random</span>
                 </div>
                 <div className={`mt-2 inline-block px-2 py-0.5 rounded text-[10px] font-black ${netMetrics.cug_test.p_value_ge_random < 0.05 ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}`}>
-                  p(≥random) = {netMetrics.cug_test.p_value_ge_random.toFixed(3)}
+                  {netMetrics.cug_test.p_value_ge_random < 0.001
+                    ? 'p < 0.001 (1,000 permutations)'
+                    : `p(≥random) = ${netMetrics.cug_test.p_value_ge_random.toFixed(3)}`}
                 </div>
                 <p className="mt-2 text-[11px] text-slate-500 leading-snug">{netMetrics.cug_test.interpretation}</p>
+                <p className="mt-1 text-[10px] text-slate-400 italic leading-snug">Preliminary, single-coder pilot corpus (n=9 instruments) — a diagnostic signal, not a validated general finding.</p>
               </div>
               <div className="bg-white border border-slate-200 rounded-2xl p-6">
                 <div className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Communities (modularity)</div>
