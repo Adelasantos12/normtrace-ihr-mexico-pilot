@@ -1,252 +1,210 @@
 import { useNavigate } from 'react-router-dom';
 import {
-  Shield, ArrowRight, GitMerge, Activity, AlertTriangle,
-  Layers, ChevronRight, Zap, Scale, Network
+  ArrowRight, GitMerge, Activity, AlertTriangle,
+  Layers, ChevronRight, Scale, Network
 } from 'lucide-react';
 import { PreliminaryBanner } from '../components/PreliminaryBanner';
+
+const PIPELINE_STAGES = [
+  'IHR Obligation', 'Constitutional Bridge', 'Statutory Layer',
+  'Regulatory Layer', 'Institutional Actor', 'Implementation Mechanism',
+];
+
+const ADVANCED_LAYERS = [
+  {
+    icon: Layers,
+    title: 'Normative Hierarchy',
+    desc: "Mexico's 5-tier legal pyramid: CPEUM through acuerdos, with IHR anchoring by tier and constitutional bloc analysis",
+    path: '/normative-hierarchy',
+  },
+  {
+    icon: Activity,
+    title: 'Norm Diagnostic',
+    desc: 'Cross-matrix of IHR obligation × domestic norm: diagnostic status per pair — outdated, fragmented, orphaned, tier-mismatched',
+    path: '/norm-diagnostic',
+  },
+  {
+    icon: Network,
+    title: 'Actors & CAS Topology',
+    desc: 'Institutional network as a complex adaptive system: hubs, bridges, decoupled actors, and structural bottlenecks in health governance',
+    path: '/actors',
+  },
+  {
+    icon: Scale,
+    title: 'Political Brain',
+    desc: 'Institutional authority topology: formal mandates versus operational realities, reform feasibility, veto players, and political decoupling',
+    path: '/political-brain',
+  },
+  {
+    icon: GitMerge,
+    title: 'IHR Mapping Explorer',
+    desc: '45 obligations × 110 domestic provisions: anchoring scale, six fit dimensions, gap typology, IHR 2024 update pressure',
+    path: '/mapping',
+  },
+  {
+    icon: AlertTriangle,
+    title: 'Implementation Gap Map',
+    desc: '19 gap areas classified by type, responsible actor, update pressure, and capacity-building entry points for reform',
+    path: '/gap-map',
+  },
+];
 
 export default function LandingPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 overflow-x-hidden">
-      <div className="absolute top-0 right-0 -z-10 w-full lg:w-[55%] h-[35%] bg-gradient-to-bl from-blue-50/70 to-transparent" />
-
-      <div className="max-w-6xl mx-auto px-6 lg:px-8 pt-10 lg:pt-20 pb-24">
+    <div className="min-h-screen bg-white text-slate-900">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 pt-12 lg:pt-20 pb-24">
 
         {/* Header */}
-        <header className="flex justify-between items-center mb-16 lg:mb-20">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-blue-900 text-white font-black text-lg tracking-tighter">NT-IHR</div>
-            <div>
-              <div className="font-black text-base tracking-tight">NormTrace-IHR</div>
-              <div className="text-[9px] text-slate-400 font-mono opacity-70">DOI: 10.5281/zenodo.20085170</div>
-            </div>
+        <header className="flex justify-between items-center mb-20">
+          <div>
+            <div className="font-semibold text-lg tracking-tight text-slate-900">NormTrace-IHR</div>
+            <div className="text-xs text-slate-400">Mexico Pilot v0.1 · DOI 10.5281/zenodo.20085170</div>
           </div>
-          <div className="flex items-center gap-4">
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest hidden sm:block">Mexico Pilot v0.1</span>
-            <button
-              onClick={() => navigate('/dashboard')}
-              className="px-4 py-2 bg-slate-900 text-white rounded-lg text-[10px] font-bold hover:bg-blue-700 transition-colors"
-            >
-              Launch Platform
-            </button>
-          </div>
+          <button
+            onClick={() => navigate('/dashboard')}
+            className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors flex items-center gap-1.5"
+          >
+            Launch platform <ArrowRight size={14} />
+          </button>
         </header>
 
         {/* Hero */}
-        <div className="space-y-6 mb-16">
-          <div className="flex flex-wrap gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-[10px] font-bold border border-blue-100">
-              <Shield size={11} /> IHR Legal Traceability Infrastructure
-            </span>
-            <PreliminaryBanner />
-          </div>
+        <div className="space-y-6 mb-20 max-w-3xl">
+          <PreliminaryBanner />
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-slate-900">
             Legal capacity, reported<br />
-            <span className="text-blue-700 underline decoration-blue-100 underline-offset-8">vs. legal capacity, anchored</span>
+            <span className="text-blue-600">vs. legal capacity, anchored</span>
           </h1>
 
-          <p className="text-lg text-slate-500 max-w-3xl leading-relaxed font-medium">
-            NormTrace-IHR traces every IHR (2005) obligation to the specific domestic legal instrument that anchors it — constitution, statute, regulation, or none at all. For CC1 (Legislation, policy &amp; financing), Mexico self-reports 81% capacity to WHO SPAR; NormTrace finds 34% of the same obligations actually anchored in domestic law.
+          <p className="text-lg text-slate-500 leading-relaxed">
+            NormTrace-IHR traces every IHR (2005) obligation to the specific domestic legal instrument that
+            anchors it — constitution, statute, regulation, or none at all. For CC1 (Legislation, policy &amp;
+            financing), Mexico self-reports 81% capacity to WHO SPAR; NormTrace finds 34% of the same
+            obligations actually anchored in domestic law.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 pt-2">
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-3 pt-2">
             <button
               onClick={() => navigate('/actors')}
-              className="px-8 py-4 bg-blue-600 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-blue-700 transition-all shadow-xl shadow-blue-100 group"
+              className="px-6 py-3 bg-blue-600 text-white rounded-full font-medium flex items-center gap-2 hover:bg-blue-700 transition-colors"
             >
-              Explore Traceability Network <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              Explore the traceability network <ArrowRight size={16} />
             </button>
             <button
               onClick={() => navigate('/spar-bridge')}
-              className="px-8 py-4 bg-slate-900 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-slate-700 transition-all group"
+              className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors flex items-center gap-1"
             >
-              <Scale size={16} /> SPAR ↔ Legal <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              SPAR ↔ Legal <ChevronRight size={14} />
             </button>
             <button
               onClick={() => navigate('/methodology')}
-              className="px-8 py-4 bg-white text-slate-600 border border-slate-200 rounded-xl font-bold hover:bg-slate-50 transition-all"
+              className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors flex items-center gap-1"
             >
-              Methodology
+              Methodology <ChevronRight size={14} />
             </button>
           </div>
         </div>
 
-        {/* Key Findings — lead with the two hook numbers */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-16">
+        {/* Key findings — lead with the two hook numbers */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-slate-100 rounded-2xl overflow-hidden mb-20 border border-slate-100">
           {[
             {
               value: '81% vs 34%',
-              label: 'CC1 (Legislation): SPAR self-report vs legal anchoring',
-              sub: 'Mexico reports 80.6% mean legislative capacity to WHO SPAR; NormTrace finds 34.0% legal anchoring for the same 20 obligations — a +46.6pt gap. Scoped to CC1 only — SPAR\'s other capacities measure operational readiness, which NormTrace does not assess.',
               color: 'text-red-600',
-              bg: 'bg-red-50 border-red-100'
+              label: 'CC1 (Legislation): SPAR self-report vs legal anchoring',
+              sub: 'Mexico reports 80.6% mean legislative capacity to WHO SPAR; NormTrace finds 34.0% legal anchoring for the same 20 obligations — a +46.6pt gap. Scoped to CC1 only.',
             },
             {
               value: '1.76/5',
+              color: 'text-slate-900',
               label: 'Mean anchoring score',
               sub: '45 IHR 2005 obligations, corpus-wide: concentrated at L1–L2 (indirect/partial)',
-              color: 'text-amber-600',
-              bg: 'bg-amber-50 border-amber-100'
             },
             {
               value: '1985',
+              color: 'text-slate-900',
               label: 'Primary IHR instrument',
               sub: 'RLGS-SI predates IHR 2005 by 20 years and was never amended to reflect it',
-              color: 'text-blue-700',
-              bg: 'bg-blue-50 border-blue-100'
             },
           ].map((f, i) => (
-            <div key={i} className={`p-5 rounded-2xl border ${f.bg} space-y-2`}>
-              <div className={`text-3xl font-black ${f.color}`}>{f.value}</div>
-              <div className="text-xs font-bold text-slate-700">{f.label}</div>
-              <div className="text-[10px] text-slate-500 leading-relaxed">{f.sub}</div>
+            <div key={i} className="bg-white p-6 space-y-2">
+              <div className={`text-3xl font-bold ${f.color}`}>{f.value}</div>
+              <div className="text-sm font-medium text-slate-700">{f.label}</div>
+              <div className="text-xs text-slate-400 leading-relaxed">{f.sub}</div>
             </div>
           ))}
         </div>
 
         {/* Pipeline concept */}
-        <div className="bg-slate-900 text-white rounded-[2rem] p-10 mb-16 space-y-8">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-blue-600 rounded-xl shrink-0">
-              <Zap size={20} />
-            </div>
-            <div>
-              <h2 className="text-2xl font-black">The Normative Pipeline</h2>
-              <p className="text-slate-400 text-sm">Six-stage internalisation flow from international obligation to domestic implementation</p>
-            </div>
+        <div className="mb-20 space-y-6">
+          <div>
+            <h2 className="text-2xl font-semibold text-slate-900">The normative pipeline</h2>
+            <p className="text-slate-400 text-sm mt-1">Six-stage internalisation flow from international obligation to domestic implementation</p>
           </div>
 
-          <p className="text-slate-300 max-w-3xl leading-relaxed">
-            IHR obligations do not self-execute. Each must traverse a domestic normative pipeline: constitutional incorporation, statutory mandate, regulatory specification, institutional actor competence, procedural design, and implementation mechanism. NormTrace reconstructs this pipeline for each obligation, revealing where flow is blocked, where instruments are misaligned with their hierarchical level, and where actors have formal mandates without operational procedures.
+          <p className="text-slate-600 max-w-3xl leading-relaxed">
+            IHR obligations do not self-execute. Each must traverse a domestic normative pipeline: constitutional
+            incorporation, statutory mandate, regulatory specification, institutional actor competence, procedural
+            design, and implementation mechanism. NormTrace reconstructs this pipeline for each obligation,
+            revealing where flow is blocked, where instruments are misaligned with their hierarchical level, and
+            where actors have formal mandates without operational procedures.
           </p>
 
-          <div className="flex flex-wrap items-center gap-2 text-xs">
-            {[
-              { label: 'IHR Obligation', color: 'bg-blue-600' },
-              { label: '→' },
-              { label: 'Constitutional Bridge', color: 'bg-indigo-600' },
-              { label: '→' },
-              { label: 'Statutory Layer', color: 'bg-emerald-600' },
-              { label: '→' },
-              { label: 'Regulatory Layer', color: 'bg-teal-600' },
-              { label: '→' },
-              { label: 'Institutional Actor', color: 'bg-amber-600' },
-              { label: '→' },
-              { label: 'Implementation Mechanism', color: 'bg-orange-600' },
-            ].map((s, i) => (
-              'color' in s
-                ? <span key={i} className={`px-3 py-1.5 rounded-lg text-white font-bold ${s.color}`}>{s.label}</span>
-                : <span key={i} className="text-slate-500 font-bold text-base">{s.label}</span>
+          <ol className="flex flex-wrap items-center gap-x-2 gap-y-3 text-sm">
+            {PIPELINE_STAGES.map((stage, i) => (
+              <li key={stage} className="flex items-center gap-2">
+                <span className="flex items-center gap-2 text-slate-700 font-medium">
+                  <span className="w-5 h-5 rounded-full bg-slate-100 text-slate-500 text-[10px] font-semibold flex items-center justify-center shrink-0">{i + 1}</span>
+                  {stage}
+                </span>
+                {i < PIPELINE_STAGES.length - 1 && <ChevronRight size={14} className="text-slate-300" />}
+              </li>
             ))}
-          </div>
+          </ol>
 
-          <div className="pt-2">
-            <button
-              onClick={() => navigate('/pipeline')}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 rounded-xl text-sm font-bold transition-all group"
-            >
-              Explore Pipeline Analysis <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
+          <button
+            onClick={() => navigate('/pipeline')}
+            className="text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors flex items-center gap-1"
+          >
+            Explore pipeline analysis <ChevronRight size={14} />
+          </button>
         </div>
 
-        {/* Analytical Layers (Advanced group — see also the sidebar's collapsed "Advanced" nav) */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-black text-slate-900 mb-2">Advanced analytical layers</h2>
-          <p className="text-slate-500 text-sm mb-8">Supplementary views behind the four core sections above — useful for deep dives, not required for the headline finding</p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              {
-                icon: Layers,
-                title: 'Normative Hierarchy',
-                desc: "Mexico's 5-tier legal pyramid: CPEUM through acuerdos: with IHR anchoring by tier and constitutional bloc analysis",
-                path: '/normative-hierarchy',
-                color: 'text-indigo-600',
-                bg: 'bg-indigo-50',
-                tag: 'Legal Architecture'
-              },
-              {
-                icon: Activity,
-                title: 'Norm Diagnostic',
-                desc: 'Cross-matrix: IHR obligation × domestic norm: diagnostic status per pair: outdated, fragmented, orphaned, tier-mismatched',
-                path: '/norm-diagnostic',
-                color: 'text-blue-600',
-                bg: 'bg-blue-50',
-                tag: 'Diagnostic Layer'
-              },
-              {
-                icon: Network,
-                title: 'Actors & CAS Topology',
-                desc: 'Institutional network as a complex adaptive system: hubs, bridges, decoupled actors, and structural bottlenecks in health governance',
-                path: '/actors',
-                color: 'text-emerald-600',
-                bg: 'bg-emerald-50',
-                tag: 'Network Analysis'
-              },
-              {
-                icon: Scale,
-                title: 'Political Brain',
-                desc: "Institutional authority topology: formal mandates versus operational realities, reform feasibility, veto players, and political decoupling",
-                path: '/political-brain',
-                color: 'text-purple-600',
-                bg: 'bg-purple-50',
-                tag: 'Political Layer'
-              },
-              {
-                icon: GitMerge,
-                title: 'IHR Mapping Explorer',
-                desc: '45 obligations × 110 domestic provisions: anchoring scale, 6 fit dimensions, gap typology, IHR 2024 update pressure',
-                path: '/mapping',
-                color: 'text-amber-600',
-                bg: 'bg-amber-50',
-                tag: 'Obligation Mapping'
-              },
-              {
-                icon: AlertTriangle,
-                title: 'Implementation Gap Map',
-                desc: '19 gap areas classified by type, responsible actor, update pressure, and capacity-building entry points for reform',
-                path: '/gap-map',
-                color: 'text-red-600',
-                bg: 'bg-red-50',
-                tag: 'Gap Analysis'
-              },
-            ].map((item, i) => (
+        {/* Advanced analytical layers */}
+        <div className="mb-20">
+          <h2 className="text-2xl font-semibold text-slate-900 mb-1">Advanced analytical layers</h2>
+          <p className="text-slate-400 text-sm mb-8">Supplementary views behind the four core sections above — useful for deep dives, not required for the headline finding</p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6">
+            {ADVANCED_LAYERS.map((item) => (
               <button
-                key={i}
+                key={item.path}
                 onClick={() => navigate(item.path)}
-                className="group bg-white border border-slate-200 rounded-2xl p-6 text-left hover:border-blue-200 hover:shadow-md transition-all space-y-4"
+                className="group text-left space-y-1.5"
               >
-                <div className="flex items-start justify-between">
-                  <div className={`p-3 rounded-xl ${item.bg}`}>
-                    <item.icon size={20} className={item.color} />
-                  </div>
-                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider bg-slate-50 px-2 py-1 rounded border border-slate-100">{item.tag}</span>
+                <div className="flex items-center gap-2">
+                  <item.icon size={16} className="text-slate-400" />
+                  <h3 className="font-medium text-slate-900 group-hover:text-blue-600 transition-colors text-sm">{item.title}</h3>
+                  <ChevronRight size={13} className="text-slate-300 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all" />
                 </div>
-                <div>
-                  <h3 className="font-black text-slate-900 group-hover:text-blue-700 transition-colors text-base">{item.title}</h3>
-                  <p className="text-xs text-slate-500 leading-relaxed mt-1.5">{item.desc}</p>
-                </div>
-                <div className="flex items-center gap-1 text-xs font-bold text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
-                  Explore <ChevronRight size={13} />
-                </div>
+                <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
               </button>
             ))}
           </div>
         </div>
 
         {/* Why NormTrace */}
-        <div className="mb-16 p-8 bg-slate-50 border border-slate-200 rounded-[2rem] space-y-5">
-          <h2 className="text-xl font-black text-slate-900">The Problem NormTrace Addresses</h2>
+        <div className="mb-20 pt-10 border-t border-slate-100 space-y-5">
+          <h2 className="text-xl font-semibold text-slate-900">The problem NormTrace addresses</h2>
           <div className="grid md:grid-cols-2 gap-8 text-sm text-slate-600 leading-relaxed">
             <div className="space-y-3">
               <p>
-                The IHR Monitoring and Evaluation Framework (SPAR, JEE) assesses reported capacity levels. Bishowkarma et al. (2026) documented improved alignment between SPAR and JEE across most indicators in recent editions, while identifying that three capacity areas retain significant score disagreement: infection prevention and control, healthcare-associated infection surveillance, and <strong>national IHR focal point functions</strong>, precisely the capacities that depend most directly on legal-institutional anchoring.
+                The IHR Monitoring and Evaluation Framework (SPAR, JEE) assesses reported capacity levels. Bishowkarma et al. (2026) documented improved alignment between SPAR and JEE across most indicators in recent editions, while identifying that three capacity areas retain significant score disagreement: infection prevention and control, healthcare-associated infection surveillance, and <strong className="text-slate-900">national IHR focal point functions</strong> — precisely the capacities that depend most directly on legal-institutional anchoring.
               </p>
               <p>
-                Even when SPAR and JEE agree, neither instrument traces the domestic legal foundation of the capacity being measured. A country may score well on NFP functions because its DGE performs the role operationally, while lacking the statutory designation IHR Art. 4 requires. That is a real gap (invisible to aggregate scoring, visible through legal traceability).
+                Even when SPAR and JEE agree, neither instrument traces the domestic legal foundation of the capacity being measured. A country may score well on NFP functions because its DGE performs the role operationally, while lacking the statutory designation IHR Art. 4 requires — a real gap, invisible to aggregate scoring, visible through legal traceability.
               </p>
             </div>
             <div className="space-y-3">
@@ -258,30 +216,26 @@ export default function LandingPage() {
               </p>
             </div>
           </div>
-          <div className="flex flex-wrap gap-3 pt-2">
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Key reference:</span>
-            <span className="text-[10px] text-slate-500 italic">Bishowkarma K, et al. Estimating global public health security preparedness capacity: the contribution of SPAR and JEE. <em>Dialogues Health</em>. 2026;8:100282.</span>
-          </div>
+          <p className="text-xs text-slate-400 italic">
+            Key reference: Bishowkarma K, et al. Estimating global public health security preparedness capacity: the contribution of SPAR and JEE. <em>Dialogues Health</em>. 2026;8:100282.
+          </p>
         </div>
 
         {/* Footer */}
         <div className="border-t border-slate-100 pt-10 grid grid-cols-1 sm:grid-cols-3 gap-10">
           <div className="sm:col-span-2 space-y-3">
-            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Analytical Framework</h4>
+            <h4 className="text-xs font-medium text-slate-400 uppercase tracking-wide">Analytical framework</h4>
             <p className="text-xs text-slate-500 leading-relaxed">
               NormTrace-IHR applies legal-institutional traceability as its core methodology, drawing on multi-level governance theory (Hooghe and Marks, 2003), institutional decoupling analysis (Meyer and Rowan, 1977), and network science (Freeman, 1978; Granovetter, 1973) for the actor topology layer. The normative pipeline concept captures the cascading structure of domestic legal architectures without reducing them to a single compliance score. IHR compliance and reform scholarship, notably Habibi et al. (<em>Lancet</em>, 2020), informs the diagnostic framework for identifying where obligations are formally present but operationally blocked.
             </p>
           </div>
-          <div className="space-y-4">
-            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Mexico Pilot v0.1</h4>
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 text-amber-700 font-bold text-xs bg-amber-50 px-3 py-1.5 rounded-lg border border-amber-100 w-fit">
-                <AlertTriangle size={12} /> PASS_WITH_FINDINGS
-              </div>
-              <p className="text-[10px] text-slate-500">Proof-of-concept pilot. Framework designed for replication across legal systems.</p>
-              <p className="text-[10px] text-slate-400 font-mono opacity-60">DOI: 10.5281/zenodo.20085170</p>
-              <p className="text-[10px] text-slate-400 italic">Preliminary AI-assisted outputs. Expert legal review required before any policy application.</p>
+          <div className="space-y-2">
+            <h4 className="text-xs font-medium text-slate-400 uppercase tracking-wide">Mexico Pilot v0.1</h4>
+            <div className="flex items-center gap-1.5 text-amber-700 font-medium text-xs">
+              <AlertTriangle size={12} /> PASS_WITH_FINDINGS
             </div>
+            <p className="text-xs text-slate-500">Proof-of-concept pilot. Framework designed for replication across legal systems.</p>
+            <p className="text-xs text-slate-400 italic">Preliminary AI-assisted outputs. Expert legal review required before any policy application.</p>
           </div>
         </div>
       </div>
