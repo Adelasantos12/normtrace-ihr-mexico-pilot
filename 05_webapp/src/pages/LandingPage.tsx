@@ -49,15 +49,24 @@ const ADVANCED_LAYERS = [
   },
 ];
 
+const REFERENCES = [
+  'Bishowkarma K, et al. Estimating global public health security preparedness capacity: the contribution of SPAR and JEE. Dialogues Health. 2026;8:100282.',
+  'Habibi R, et al. Do not violate the International Health Regulations during the COVID-19 outbreak. Lancet. 2020;395(10225):664–6.',
+  'Hooghe L, Marks G. Multi-level governance and European integration. 2003.',
+  'Meyer JW, Rowan B. Institutionalized organizations: formal structure as myth and ceremony. Am J Sociol. 1977;83(2):340–363.',
+  'Freeman LC. Centrality in social networks: conceptual clarification. Social Networks. 1978.',
+  'Granovetter M. The strength of weak ties. Am J Sociol. 1973.',
+];
+
 export default function LandingPage() {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-white text-slate-900">
-      <div className="max-w-5xl mx-auto px-6 lg:px-8 pt-12 lg:pt-20 pb-24">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 pt-12 lg:pt-16">
 
         {/* Header */}
-        <header className="flex justify-between items-center mb-20">
+        <header className="flex justify-between items-center pb-6 mb-16 border-b border-slate-200">
           <div>
             <div className="font-semibold text-lg tracking-tight text-slate-900">NormTrace-IHR</div>
             <div className="text-xs text-slate-400">Mexico Pilot v0.1 · DOI 10.5281/zenodo.20085170</div>
@@ -71,8 +80,12 @@ export default function LandingPage() {
         </header>
 
         {/* Hero */}
-        <div className="space-y-6 mb-20 max-w-3xl">
+        <div className="space-y-6 mb-16 max-w-3xl">
           <PreliminaryBanner />
+
+          <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">
+            Mexico Pilot · IHR (2005) Legal Traceability
+          </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-slate-900">
             Legal capacity, reported<br />
@@ -108,38 +121,43 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Key findings — lead with the two hook numbers */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-slate-100 rounded-2xl overflow-hidden mb-20 border border-slate-100">
-          {[
-            {
-              value: '81% vs 34%',
-              color: 'text-red-600',
-              label: 'CC1 (Legislation): SPAR self-report vs legal anchoring',
-              sub: 'Mexico reports 80.6% mean legislative capacity to WHO SPAR; NormTrace finds 34.0% legal anchoring for the same 20 obligations — a +46.6pt gap. Scoped to CC1 only.',
-            },
-            {
-              value: '1.76/5',
-              color: 'text-slate-900',
-              label: 'Mean anchoring score',
-              sub: '45 IHR 2005 obligations, corpus-wide: concentrated at L1–L2 (indirect/partial)',
-            },
-            {
-              value: '1985',
-              color: 'text-slate-900',
-              label: 'Primary IHR instrument',
-              sub: 'RLGS-SI predates IHR 2005 by 20 years and was never amended to reflect it',
-            },
-          ].map((f, i) => (
-            <div key={i} className="bg-white p-6 space-y-2">
-              <div className={`text-3xl font-bold ${f.color}`}>{f.value}</div>
-              <div className="text-sm font-medium text-slate-700">{f.label}</div>
-              <div className="text-xs text-slate-400 leading-relaxed">{f.sub}</div>
+        {/* Key findings — one dominant pull-quote stat, two subordinate */}
+        <div className="border-t-2 border-slate-900 pt-10 mb-16">
+          <div className="grid md:grid-cols-5 gap-10 items-start">
+            <div className="md:col-span-3 border-l-4 border-blue-600 pl-6">
+              <div className="text-6xl sm:text-7xl font-bold text-red-600 leading-none tabular-nums">
+                81% <span className="text-slate-300 text-4xl sm:text-5xl align-middle">vs</span> 34%
+              </div>
+              <div className="text-base font-medium text-slate-700 mt-5">
+                CC1 (Legislation): SPAR self-report vs legal anchoring
+              </div>
+              <p className="text-sm text-slate-400 leading-relaxed mt-2 max-w-md">
+                Mexico reports 80.6% mean legislative capacity to WHO SPAR; NormTrace finds 34.0% legal anchoring
+                for the same 20 obligations — a +46.6pt gap. Scoped to CC1 only.
+              </p>
             </div>
-          ))}
+
+            <div className="md:col-span-2 md:pl-8 md:border-l md:border-slate-200 space-y-8">
+              <div>
+                <div className="text-3xl font-semibold text-slate-900">1.76<span className="text-lg text-slate-400">/5</span></div>
+                <div className="text-sm font-medium text-slate-700 mt-1">Mean anchoring score</div>
+                <div className="text-xs text-slate-400 leading-relaxed mt-1">
+                  45 IHR 2005 obligations, corpus-wide: concentrated at L1–L2 (indirect/partial)
+                </div>
+              </div>
+              <div>
+                <div className="text-3xl font-semibold text-slate-900">1985</div>
+                <div className="text-sm font-medium text-slate-700 mt-1">Primary IHR instrument</div>
+                <div className="text-xs text-slate-400 leading-relaxed mt-1">
+                  RLGS-SI predates IHR 2005 by 20 years and was never amended to reflect it
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Pipeline concept */}
-        <div className="mb-20 space-y-6">
+        <div className="pt-10 mb-16 border-t border-slate-200 space-y-6">
           <div>
             <h2 className="text-2xl font-semibold text-slate-900">The normative pipeline</h2>
             <p className="text-slate-400 text-sm mt-1">Six-stage internalisation flow from international obligation to domestic implementation</p>
@@ -174,7 +192,7 @@ export default function LandingPage() {
         </div>
 
         {/* Advanced analytical layers */}
-        <div className="mb-20">
+        <div className="pt-10 pb-16 border-t border-slate-200">
           <h2 className="text-2xl font-semibold text-slate-900 mb-1">Advanced analytical layers</h2>
           <p className="text-slate-400 text-sm mb-8">Supplementary views behind the four core sections above — useful for deep dives, not required for the headline finding</p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6">
@@ -194,14 +212,17 @@ export default function LandingPage() {
             ))}
           </div>
         </div>
+      </div>
 
-        {/* Why NormTrace */}
-        <div className="mb-20 pt-10 border-t border-slate-100 space-y-5">
-          <h2 className="text-xl font-semibold text-slate-900">The problem NormTrace addresses</h2>
-          <div className="grid md:grid-cols-2 gap-8 text-sm text-slate-600 leading-relaxed">
+      {/* Why NormTrace — full-bleed editorial panel */}
+      <div className="bg-slate-900 text-white py-16 sm:py-20">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8 space-y-6">
+          <div className="text-xs font-semibold uppercase tracking-widest text-blue-400">Why NormTrace</div>
+          <h2 className="text-2xl sm:text-3xl font-semibold">The problem NormTrace addresses</h2>
+          <div className="grid md:grid-cols-2 gap-10 text-sm text-slate-300 leading-relaxed">
             <div className="space-y-3">
               <p>
-                The IHR Monitoring and Evaluation Framework (SPAR, JEE) assesses reported capacity levels. Bishowkarma et al. (2026) documented improved alignment between SPAR and JEE across most indicators in recent editions, while identifying that three capacity areas retain significant score disagreement: infection prevention and control, healthcare-associated infection surveillance, and <strong className="text-slate-900">national IHR focal point functions</strong> — precisely the capacities that depend most directly on legal-institutional anchoring.
+                The IHR Monitoring and Evaluation Framework (SPAR, JEE) assesses reported capacity levels. Bishowkarma et al. (2026) documented improved alignment between SPAR and JEE across most indicators in recent editions, while identifying that three capacity areas retain significant score disagreement: infection prevention and control, healthcare-associated infection surveillance, and <strong className="text-white">national IHR focal point functions</strong> — precisely the capacities that depend most directly on legal-institutional anchoring.
               </p>
               <p>
                 Even when SPAR and JEE agree, neither instrument traces the domestic legal foundation of the capacity being measured. A country may score well on NFP functions because its DGE performs the role operationally, while lacking the statutory designation IHR Art. 4 requires — a real gap, invisible to aggregate scoring, visible through legal traceability.
@@ -216,17 +237,16 @@ export default function LandingPage() {
               </p>
             </div>
           </div>
-          <p className="text-xs text-slate-400 italic">
-            Key reference: Bishowkarma K, et al. Estimating global public health security preparedness capacity: the contribution of SPAR and JEE. <em>Dialogues Health</em>. 2026;8:100282.
-          </p>
         </div>
+      </div>
 
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 pb-24">
         {/* Footer */}
-        <div className="border-t border-slate-100 pt-10 grid grid-cols-1 sm:grid-cols-3 gap-10">
+        <div className="border-t-2 border-slate-900 pt-10 mt-16 grid grid-cols-1 sm:grid-cols-3 gap-10">
           <div className="sm:col-span-2 space-y-3">
             <h4 className="text-xs font-medium text-slate-400 uppercase tracking-wide">Analytical framework</h4>
             <p className="text-xs text-slate-500 leading-relaxed">
-              NormTrace-IHR applies legal-institutional traceability as its core methodology, drawing on multi-level governance theory (Hooghe and Marks, 2003), institutional decoupling analysis (Meyer and Rowan, 1977), and network science (Freeman, 1978; Granovetter, 1973) for the actor topology layer. The normative pipeline concept captures the cascading structure of domestic legal architectures without reducing them to a single compliance score. IHR compliance and reform scholarship, notably Habibi et al. (<em>Lancet</em>, 2020), informs the diagnostic framework for identifying where obligations are formally present but operationally blocked.
+              NormTrace-IHR applies legal-institutional traceability as its core methodology, drawing on multi-level governance theory, institutional decoupling analysis, and network science for the actor topology layer. The normative pipeline concept captures the cascading structure of domestic legal architectures without reducing them to a single compliance score. IHR compliance and reform scholarship informs the diagnostic framework for identifying where obligations are formally present but operationally blocked. Full references below.
             </p>
           </div>
           <div className="space-y-2">
@@ -237,6 +257,19 @@ export default function LandingPage() {
             <p className="text-xs text-slate-500">Proof-of-concept pilot. Framework designed for replication across legal systems.</p>
             <p className="text-xs text-slate-400 italic">Preliminary AI-assisted outputs. Expert legal review required before any policy application.</p>
           </div>
+        </div>
+
+        {/* References */}
+        <div className="border-t border-slate-200 pt-8 mt-10">
+          <h4 className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">References</h4>
+          <ol className="space-y-1.5">
+            {REFERENCES.map((ref, i) => (
+              <li key={i} className="text-xs text-slate-400 leading-relaxed flex gap-2">
+                <span className="text-slate-300 tabular-nums shrink-0">{i + 1}.</span>
+                <span>{ref}</span>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     </div>

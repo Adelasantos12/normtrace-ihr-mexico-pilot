@@ -47,6 +47,9 @@ export default function SparBridge() {
     <div className="space-y-16 pb-24">
       {/* Header */}
       <header className="space-y-4">
+        <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">
+          Construct-Validity Diagnostic
+        </div>
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900">SPAR ↔ Legal</h1>
         <p className="text-lg text-slate-500 max-w-2xl leading-relaxed">
           Self-reported CC1 (Legislation, policy &amp; financing) capacity from WHO SPAR, compared against the
@@ -56,27 +59,39 @@ export default function SparBridge() {
         <p className="text-xs text-slate-400 max-w-2xl italic">{data.scope_note}</p>
       </header>
 
-      {/* Headline numbers */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-slate-100 rounded-2xl overflow-hidden border border-slate-100">
-        <div className="bg-white p-6 space-y-2">
-          <div className="text-xs font-medium text-slate-400">CC1 · self-report (SPAR)</div>
-          <div className="text-3xl font-bold text-slate-900">{cc1.spar_self_report_mean}%</div>
-          <div className="text-xs text-slate-400">mean · {cc1.spar_self_report_latest}% latest</div>
-        </div>
-        <div className="bg-white p-6 space-y-2">
-          <div className="text-xs font-medium text-slate-400">CC1 · legal anchoring (NormTrace)</div>
-          <div className="text-3xl font-bold text-slate-900">{cc1.normtrace_legal_anchoring_pct}%</div>
-          <div className="text-xs text-slate-400">{cc1.n_obligations} obligations</div>
-        </div>
-        <div className="bg-white p-6 space-y-2">
-          <div className="text-xs font-medium text-slate-400">Divergence</div>
-          <div className="text-3xl font-bold text-red-600">+{cc1.divergence_mean}</div>
-          <div className="text-xs text-slate-400">points, self-report above anchoring</div>
+      {/* Headline — divergence as the dominant pull-quote, CC1 pair subordinate */}
+      <div className="border-t-2 border-slate-900 pt-10">
+        <div className="grid md:grid-cols-5 gap-10 items-start">
+          <div className="md:col-span-3 border-l-4 border-red-600 pl-6">
+            <div className="text-6xl sm:text-7xl font-bold text-red-600 leading-none tabular-nums">
+              +{cc1.divergence_mean}
+            </div>
+            <div className="text-base font-medium text-slate-700 mt-5">
+              Divergence — SPAR self-report above legal anchoring
+            </div>
+            <p className="text-sm text-slate-400 leading-relaxed mt-2 max-w-md">
+              Points of gap between Mexico's self-reported CC1 capacity and NormTrace's legal-anchoring score for
+              the same {cc1.n_obligations} obligations.
+            </p>
+          </div>
+
+          <div className="md:col-span-2 md:pl-8 md:border-l md:border-slate-200 space-y-8">
+            <div>
+              <div className="text-3xl font-semibold text-slate-900">{cc1.spar_self_report_mean}%</div>
+              <div className="text-sm font-medium text-slate-700 mt-1">CC1 · self-report (SPAR)</div>
+              <div className="text-xs text-slate-400 mt-1">mean · {cc1.spar_self_report_latest}% latest</div>
+            </div>
+            <div>
+              <div className="text-3xl font-semibold text-slate-900">{cc1.normtrace_legal_anchoring_pct}%</div>
+              <div className="text-sm font-medium text-slate-700 mt-1">CC1 · legal anchoring (NormTrace)</div>
+              <div className="text-xs text-slate-400 mt-1">{cc1.n_obligations} obligations</div>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* CC1 trajectory */}
-      <div className="space-y-4">
+      <div className="pt-10 border-t border-slate-200 space-y-4">
         <div>
           <h2 className="text-xl font-semibold text-slate-900">Mexico — SPAR CC1 (Legislation) over time</h2>
           <p className="text-sm text-slate-500 mt-1 max-w-2xl leading-relaxed">
@@ -102,7 +117,7 @@ export default function SparBridge() {
       </div>
 
       {/* Corpus-wide NormTrace stat, explicitly not compared to SPAR */}
-      <div className="pt-8 border-t border-slate-100 space-y-2">
+      <div className="pt-10 border-t border-slate-200 space-y-2">
         <h3 className="text-xs font-medium text-slate-400 uppercase tracking-wide">For context — corpus-wide NormTrace anchoring</h3>
         <div className="flex items-baseline gap-2">
           <span className="text-2xl font-bold text-slate-900">{data.normtrace_corpus_anchoring_pct}%</span>
