@@ -45,17 +45,18 @@ export default function ReportBuilder() {
   return (
     <div className="space-y-10 pb-20 max-w-4xl mx-auto print:max-w-none print:m-0 print:p-0">
       <header className="print:hidden space-y-4">
-         <h1 className="text-3xl font-bold text-slate-900">Printable Report Builder</h1>
+         <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">Custom Report Builder</div>
+         <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight">Printable Report Builder</h1>
          <p className="text-slate-500">Assemble a customized legal intelligence report from the Mexico Pilot v0.1 data.</p>
 
          <div className="flex gap-4 pt-2">
             <button
               onClick={handlePrint}
-              className="flex items-center gap-2 px-6 py-3 bg-blue-900 text-white rounded-xl text-sm font-bold hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20"
+              className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-full text-sm font-medium hover:bg-blue-700 transition-all"
             >
                <Printer size={16} /> Print / Export PDF
             </button>
-            <a href="/report/print" className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 text-slate-600 rounded-xl text-sm font-bold hover:bg-slate-50 transition-all">
+            <a href="/report/print" className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 text-slate-600 rounded-full text-sm font-medium hover:bg-slate-50 transition-all">
                <Printer size={16} /> Open print route
             </a>
          </div>
@@ -63,7 +64,7 @@ export default function ReportBuilder() {
 
       <div className="print:hidden grid grid-cols-1 md:grid-cols-2 gap-12 pt-8">
          <div className="space-y-6">
-            <h3 className="font-bold text-slate-900 px-1">Report Contents</h3>
+            <h3 className="font-semibold text-slate-900 px-1">Report Contents</h3>
             <div className="space-y-2">
                {SECTIONS.map((section) => (
                   <button

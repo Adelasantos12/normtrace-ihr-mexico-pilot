@@ -82,7 +82,7 @@ export default function CountrySnapshot() {
         </div>
       </header>
 
-      <section className="space-y-4 border-t border-slate-200 pt-8">
+      <section className="space-y-4">
         <h2 className="text-xl font-semibold text-slate-900 flex items-center gap-2">
            <Info size={20} className="text-blue-600" /> What this snapshot shows
         </h2>
@@ -170,7 +170,7 @@ export default function CountrySnapshot() {
         </section>
       </div>
 
-      <section className="space-y-4 border-t border-slate-200 pt-8">
+      <section className="space-y-4">
         <h2 className="text-xl font-semibold text-slate-900">Institutional Checklist Preview</h2>
         <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
           <div className="overflow-x-auto">
@@ -211,20 +211,18 @@ export default function CountrySnapshot() {
         </div>
       </section>
 
-      <div className="border-t-2 border-slate-900 pt-10">
-        <div className="bg-slate-900 rounded-2xl p-10 text-white flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="space-y-2">
-            <h2 className="text-2xl font-semibold">Policy Analysis Suite</h2>
-            <p className="text-slate-400 text-sm">Dive deeper into specific legal intelligence layers or build a tailored report.</p>
-          </div>
-          <div className="flex flex-wrap gap-4">
-            <Link to="/mapping" className="px-6 py-3 bg-white text-slate-900 rounded-full font-medium text-sm hover:bg-slate-100 transition-colors flex items-center gap-2">
-              Mapping Explorer <ArrowRight size={16} />
-            </Link>
-            <Link to="/report" className="px-6 py-3 border border-slate-700 text-white rounded-full font-medium text-sm hover:bg-slate-800 transition-colors flex items-center gap-2">
-              <FileBarChart size={16} /> Report Builder
-            </Link>
-          </div>
+      <div className="bg-slate-900 rounded-2xl p-10 text-white flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="space-y-2">
+          <h2 className="text-2xl font-semibold">Policy Analysis Suite</h2>
+          <p className="text-slate-400 text-sm">Dive deeper into specific legal intelligence layers or build a tailored report.</p>
+        </div>
+        <div className="flex flex-wrap gap-4">
+          <Link to="/mapping" className="px-6 py-3 bg-white text-slate-900 rounded-full font-medium text-sm hover:bg-slate-100 transition-colors flex items-center gap-2">
+            Mapping Explorer <ArrowRight size={16} />
+          </Link>
+          <Link to="/report" className="px-6 py-3 border border-slate-700 text-white rounded-full font-medium text-sm hover:bg-slate-800 transition-colors flex items-center gap-2">
+            <FileBarChart size={16} /> Report Builder
+          </Link>
         </div>
       </div>
 

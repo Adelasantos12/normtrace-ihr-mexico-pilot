@@ -58,17 +58,18 @@ export default function Methodology() {
 
   return (
     <div className="max-w-6xl mx-auto pb-24">
-      <header className="mb-12 border-b border-slate-200 pb-8">
-        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">NormTrace-IHR Methodology</h1>
-        <p className="text-lg text-slate-600 mt-4 max-w-3xl leading-relaxed">
+      <header className="mb-12 border-b-2 border-slate-900 pb-8 space-y-4">
+        <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">Methodology &amp; Limitations</div>
+        <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight">NormTrace-IHR Methodology</h1>
+        <p className="text-lg text-slate-600 max-w-3xl leading-relaxed">
           A structured methodological framework for legal-institutional traceability of International Health Regulations obligations in the Mexican domestic context.
         </p>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10 items-start">
         <aside className="lg:sticky lg:top-8 order-2 lg:order-1">
-          <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 shadow-sm">
-            <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">On this page</h2>
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 shadow-sm">
+            <h2 className="text-xs font-medium text-slate-400 uppercase tracking-widest mb-4">On this page</h2>
             <ul className="space-y-3">
               {sections.map((s) => (
                 <li key={s.id}>
@@ -83,8 +84,8 @@ export default function Methodology() {
             </ul>
           </div>
 
-          <div className="mt-6 p-5 bg-white border border-slate-200 rounded-xl shadow-sm mb-6">
-            <h3 className="text-sm font-bold text-slate-800 mb-3">Academic Resource</h3>
+          <div className="mt-6 p-5 bg-white border border-slate-200 rounded-2xl shadow-sm mb-6">
+            <h3 className="text-sm font-semibold text-slate-800 mb-3">Academic Resource</h3>
             <a
               href="/data/markdown/normtrace_ihr_methodology_full.md"
               target="_blank"
@@ -96,8 +97,8 @@ export default function Methodology() {
             </a>
           </div>
 
-          <div className="mt-6 p-5 bg-blue-50 border border-blue-100 rounded-xl">
-            <h3 className="text-sm font-bold text-blue-800 mb-2">Technical Status</h3>
+          <div className="mt-6 p-5 bg-blue-50 border border-blue-100 rounded-2xl">
+            <h3 className="text-sm font-semibold text-blue-800 mb-2">Technical Status</h3>
             <div className="flex items-center gap-2 text-xs text-blue-700 font-medium">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
               Audit Version: 0.1 (Stable)
@@ -142,9 +143,9 @@ export default function Methodology() {
             return (
               <section id={section.id} key={section.id} className="scroll-mt-6">
                 {isCollapsible ? (
-                  <details className="group bg-slate-50 border border-slate-200 rounded-xl overflow-hidden transition-all duration-300">
+                  <details className="group bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden transition-all duration-300">
                     <summary className="cursor-pointer p-5 flex items-center justify-between hover:bg-slate-100 transition-colors list-none">
-                      <h2 className="text-xl font-bold text-slate-800">{section.title}</h2>
+                      <h2 className="text-xl font-semibold text-slate-800">{section.title}</h2>
                       <span className="text-slate-400 group-open:rotate-180 transition-transform">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                       </span>
@@ -155,7 +156,7 @@ export default function Methodology() {
                   </details>
                 ) : (
                   <div className="bg-white">
-                    <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                    <h2 className="text-2xl font-semibold text-slate-900 mb-6 flex items-center gap-3">
                       <span className="w-1.5 h-8 bg-blue-600 rounded-full"></span>
                       {section.title}
                     </h2>
