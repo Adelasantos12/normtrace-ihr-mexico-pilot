@@ -105,17 +105,20 @@ export default function NormativeHierarchy() {
   return (
     <div className="space-y-10 pb-24">
       <header className="space-y-3">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-indigo-900 text-white rounded-xl"><Layers size={20} /></div>
-          <h1 className="text-4xl font-semibold text-slate-900 tracking-tight">Normative Hierarchy</h1>
+        <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">
+          Mexico's Legal Hierarchy
         </div>
-        <p className="text-lg text-slate-600 max-w-4xl">
+        <div className="flex items-center gap-3">
+          <Layers size={22} className="text-slate-400" />
+          <h1 className="text-4xl font-bold text-slate-900 tracking-tight">Normative Hierarchy</h1>
+        </div>
+        <p className="text-lg text-slate-500 max-w-4xl">
           Mexico's legal architecture for IHR implementation: from constitutional foundations to sub-regulatory instruments, with IHR anchoring analysis at each tier.
         </p>
       </header>
 
       {/* Mexico Constitutional System */}
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid md:grid-cols-2 gap-6 border-t-2 border-slate-900 pt-10">
         <div className="bg-slate-900 text-white rounded-2xl p-8 space-y-6">
           <div className="flex items-center gap-3">
             <Scale size={22} className="text-blue-400" />
@@ -354,35 +357,37 @@ export default function NormativeHierarchy() {
       </div>
 
       {/* Systemic implication */}
-      <div className="bg-slate-900 text-white rounded-2xl p-10 space-y-5">
-        <div className="flex items-center gap-3">
-          <Shield size={22} className="text-blue-400 shrink-0" />
-          <h3 className="text-2xl font-semibold">Structural Implication for IHR Internalisation</h3>
-        </div>
-        <div className="grid md:grid-cols-2 gap-6 text-sm text-slate-300 leading-relaxed">
-          <div className="space-y-3">
-            <p>
-              Mexico's IHR implementation rests primarily on general statutory mandate language (LGS) and a single regulatory instrument (RLGS-SI, 1985). This creates a structural vulnerability: the <strong>primary normative anchor is at the regulatory tier</strong>, which cannot be the foundation for obligations requiring specific actor competences, enforceable procedures, or individual rights safeguards.
-            </p>
-            <p>
-              Under Mexico's constitutional system, a <em>reglamento</em> implements a law: it cannot create obligations beyond what the statute authorises. Where the LGS uses general mandate language, the RLGS-SI can only operationalise it equally broadly. This explains why 63.8% of mapping rows show anchoring at Level 2 (indirect) and why procedural gaps account for 33.8% of all gap classifications.
+      <div className="border-t border-slate-200 pt-8">
+        <div className="bg-slate-900 text-white rounded-2xl p-10 space-y-5">
+          <div className="flex items-center gap-3">
+            <Shield size={22} className="text-blue-400 shrink-0" />
+            <h3 className="text-2xl font-semibold">Structural Implication for IHR Internalisation</h3>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6 text-sm text-slate-300 leading-relaxed">
+            <div className="space-y-3">
+              <p>
+                Mexico's IHR implementation rests primarily on general statutory mandate language (LGS) and a single regulatory instrument (RLGS-SI, 1985). This creates a structural vulnerability: the <strong>primary normative anchor is at the regulatory tier</strong>, which cannot be the foundation for obligations requiring specific actor competences, enforceable procedures, or individual rights safeguards.
+              </p>
+              <p>
+                Under Mexico's constitutional system, a <em>reglamento</em> implements a law: it cannot create obligations beyond what the statute authorises. Where the LGS uses general mandate language, the RLGS-SI can only operationalise it equally broadly. This explains why 63.8% of mapping rows show anchoring at Level 2 (indirect) and why procedural gaps account for 33.8% of all gap classifications.
+              </p>
+            </div>
+            <div className="space-y-3">
+              <p>
+                The pro-persona principle (Art. 1 CPEUM, 2011) does not resolve this structural problem. It ensures <em>interpretive</em> alignment with IHR human rights provisions, but does not substitute for the <em>operative</em> legal architecture: the designated authority, the defined procedure, the enforceable competence: that IHR implementation requires.
+              </p>
+              <p>
+                The most significant reform pathway identified by NormTrace is therefore not treaty ratification or administrative practice, but <strong>statutory reform</strong>: the LGS and specific sectoral laws need obligation-specific provisions at L4-L5 anchoring to close the gap between constitutional intent and operational capacity.
+              </p>
+            </div>
+          </div>
+          <div className="pt-2 flex items-center gap-3">
+            <CheckCircle size={16} className="text-blue-400" />
+            <p className="text-xs text-slate-400 italic">
+              Analysis derived from NormTrace-IHR Mexico Pilot v0.1. All outputs preliminary; expert legal validation required.
+              See methodology for anchoring scale definitions (L0-L5).
             </p>
           </div>
-          <div className="space-y-3">
-            <p>
-              The pro-persona principle (Art. 1 CPEUM, 2011) does not resolve this structural problem. It ensures <em>interpretive</em> alignment with IHR human rights provisions, but does not substitute for the <em>operative</em> legal architecture: the designated authority, the defined procedure, the enforceable competence: that IHR implementation requires.
-            </p>
-            <p>
-              The most significant reform pathway identified by NormTrace is therefore not treaty ratification or administrative practice, but <strong>statutory reform</strong>: the LGS and specific sectoral laws need obligation-specific provisions at L4-L5 anchoring to close the gap between constitutional intent and operational capacity.
-            </p>
-          </div>
-        </div>
-        <div className="pt-2 flex items-center gap-3">
-          <CheckCircle size={16} className="text-blue-400" />
-          <p className="text-xs text-slate-400 italic">
-            Analysis derived from NormTrace-IHR Mexico Pilot v0.1. All outputs preliminary; expert legal validation required.
-            See methodology for anchoring scale definitions (L0-L5).
-          </p>
         </div>
       </div>
     </div>

@@ -240,17 +240,20 @@ export default function NormDiagnostic() {
   return (
     <div className="space-y-8 pb-24">
       <header className="space-y-3">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-blue-900 text-white rounded-xl"><Activity size={20} /></div>
-          <h1 className="text-4xl font-semibold text-slate-900 tracking-tight">Norm Diagnostic</h1>
+        <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">
+          Obligation × Norm Diagnostic
         </div>
-        <p className="text-lg text-slate-600 max-w-4xl">
+        <div className="flex items-center gap-3">
+          <Activity size={22} className="text-slate-400" />
+          <h1 className="text-4xl font-bold text-slate-900 tracking-tight">Norm Diagnostic</h1>
+        </div>
+        <p className="text-lg text-slate-500 max-w-4xl">
           Cross-diagnostic matrix: IHR obligation × domestic norm. Each pairing is classified by diagnostic status: from well-anchored to orphaned, with identification of tier mismatches, outdated instruments, procedural gaps, and fragmented anchoring.
         </p>
       </header>
 
       {/* Diagnostic summary */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 border-t-2 border-slate-900 pt-10">
         {(Object.values(DIAGNOSTICS) as DiagnosticDef[]).map(d => {
           const count = diagnosticCounts[d.code] || 0;
           if (count === 0) return null;
@@ -276,7 +279,7 @@ export default function NormDiagnostic() {
       </div>
 
       {/* View switcher */}
-      <div className="flex flex-wrap items-center gap-4">
+      <div className="flex flex-wrap items-center gap-4 border-t border-slate-200 pt-8">
         <div className="flex bg-slate-100 p-1 rounded-xl w-fit">
           {[
             { id: 'obligation', label: 'By Obligation' },
