@@ -617,7 +617,8 @@ export default function ActorsExplorer() {
   return (
     <div className="space-y-8 pb-24">
       <header className="space-y-2">
-        <h1 className="text-4xl font-black text-slate-900 tracking-tight">Actors Explorer</h1>
+        <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">Actors &amp; CAS Topology</div>
+        <h1 className="text-4xl font-bold text-slate-900 tracking-tight">Actors Explorer</h1>
         <p className="text-lg text-slate-600">
           Analyze the legal-institutional network of health governance and pandemic response in Mexico.
         </p>
