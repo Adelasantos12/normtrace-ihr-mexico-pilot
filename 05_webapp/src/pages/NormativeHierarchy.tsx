@@ -107,7 +107,7 @@ export default function NormativeHierarchy() {
       <header className="space-y-3">
         <div className="flex items-center gap-3">
           <div className="p-2.5 bg-indigo-900 text-white rounded-xl"><Layers size={20} /></div>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tight">Normative Hierarchy</h1>
+          <h1 className="text-4xl font-semibold text-slate-900 tracking-tight">Normative Hierarchy</h1>
         </div>
         <p className="text-lg text-slate-600 max-w-4xl">
           Mexico's legal architecture for IHR implementation: from constitutional foundations to sub-regulatory instruments, with IHR anchoring analysis at each tier.
@@ -116,10 +116,10 @@ export default function NormativeHierarchy() {
 
       {/* Mexico Constitutional System */}
       <div className="grid md:grid-cols-2 gap-6">
-        <div className="bg-slate-900 text-white rounded-[2rem] p-8 space-y-6">
+        <div className="bg-slate-900 text-white rounded-2xl p-8 space-y-6">
           <div className="flex items-center gap-3">
             <Scale size={22} className="text-blue-400" />
-            <h2 className="text-xl font-black">Mexico's Constitutional System</h2>
+            <h2 className="text-xl font-semibold">Mexico's Constitutional System</h2>
           </div>
           <div className="space-y-4 text-sm">
             {[
@@ -145,7 +145,7 @@ export default function NormativeHierarchy() {
               }
             ].map((item, i) => (
               <div key={i} className="p-4 bg-white/5 rounded-xl space-y-1">
-                <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{item.label}</div>
+                <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">{item.label}</div>
                 <div className="font-bold text-white">{item.value}</div>
                 <div className="text-[10px] text-slate-400">{item.note}</div>
               </div>
@@ -155,10 +155,10 @@ export default function NormativeHierarchy() {
 
         <div className="space-y-4">
           {/* International Law Incorporation */}
-          <div className="bg-blue-50 border border-blue-200 rounded-[2rem] p-8 space-y-4">
+          <div className="bg-blue-50 border border-blue-200 rounded-2xl p-8 space-y-4">
             <div className="flex items-center gap-3">
               <Globe size={20} className="text-blue-700" />
-              <h3 className="text-lg font-black text-blue-900">International Law Incorporation</h3>
+              <h3 className="text-lg font-semibold text-blue-900">International Law Incorporation</h3>
             </div>
             <div className="space-y-3 text-sm">
               <div className="p-3 bg-white rounded-xl border border-blue-100">
@@ -189,7 +189,7 @@ export default function NormativeHierarchy() {
           <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6 flex gap-4">
             <AlertTriangle size={20} className="text-amber-600 shrink-0 mt-0.5" />
             <div className="space-y-1">
-              <div className="text-xs font-black text-amber-900 uppercase tracking-wider">Critical Finding: Tier Mismatch</div>
+              <div className="text-xs font-semibold text-amber-900 uppercase tracking-wider">Critical Finding: Tier Mismatch</div>
               <p className="text-xs text-amber-800 leading-relaxed">
                 The primary IHR implementation instrument (RLGS-SI, 1985) sits at the <strong>regulatory tier (Level 3)</strong>. IHR 2005 obligations requiring specific procedural design, enforceable actor competences, and rights-safeguard provisions need <strong>statutory anchoring (Level 4-5)</strong>. This tier mismatch is the single most important structural finding from the Mexico pilot.
               </p>
@@ -199,8 +199,8 @@ export default function NormativeHierarchy() {
       </div>
 
       {/* Normative Pyramid */}
-      <div className="bg-white border border-slate-200 rounded-[2rem] p-10 shadow-sm space-y-6">
-        <h2 className="text-2xl font-black text-slate-900">Normative Hierarchy Pyramid</h2>
+      <div className="bg-white border border-slate-200 rounded-2xl p-10 shadow-sm space-y-6">
+        <h2 className="text-2xl font-semibold text-slate-900">Normative Hierarchy Pyramid</h2>
         <p className="text-sm text-slate-500">Each tier shows: instruments in corpus · IHR obligations anchored · mean anchoring score</p>
 
         {/* Visual pyramid */}
@@ -225,20 +225,20 @@ export default function NormativeHierarchy() {
                     isExp ? 'ring-4 ring-blue-300' : 'hover:opacity-90'
                   )}>
                     <div className="text-left">
-                      <div className="font-black text-base">{tier.label}</div>
+                      <div className="font-semibold text-base">{tier.label}</div>
                       <div className="text-[10px] opacity-75 font-medium mt-0.5">{tier.sublabel}</div>
                     </div>
                     <div className="flex items-center gap-4 text-right">
                       <div className="hidden sm:block">
-                        <div className="text-xl font-black">{stats.instruments.length}</div>
+                        <div className="text-xl font-semibold">{stats.instruments.length}</div>
                         <div className="text-[9px] opacity-75 uppercase tracking-wider">instruments</div>
                       </div>
                       <div className="hidden sm:block">
-                        <div className="text-xl font-black">{stats.obligationsAnchored.size}</div>
+                        <div className="text-xl font-semibold">{stats.obligationsAnchored.size}</div>
                         <div className="text-[9px] opacity-75 uppercase tracking-wider">obligations</div>
                       </div>
                       <div>
-                        <div className="text-xl font-black">{meanAnchoring}</div>
+                        <div className="text-xl font-semibold">{meanAnchoring}</div>
                         <div className="text-[9px] opacity-75 uppercase tracking-wider">mean L</div>
                       </div>
                       <div className="opacity-70 group-hover:opacity-100 transition-opacity">
@@ -253,13 +253,13 @@ export default function NormativeHierarchy() {
                   <div className={cn('w-full mt-1 mb-3 rounded-2xl border p-6 space-y-5', tier.light)}>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-3">
-                        <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Legal Function</div>
+                        <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-widest">Legal Function</div>
                         <p className="text-sm text-slate-700 leading-relaxed">{tier.description}</p>
-                        <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest mt-3">IHR Relevance</div>
+                        <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-widest mt-3">IHR Relevance</div>
                         <p className="text-sm text-slate-600 leading-relaxed">{tier.ihrRelevance}</p>
                       </div>
                       <div className="space-y-3">
-                        <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Instruments in Corpus ({stats.instruments.length})</div>
+                        <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-widest">Instruments in Corpus ({stats.instruments.length})</div>
                         <div className="space-y-2">
                           {stats.instruments.length > 0 ? stats.instruments.map((inst: any, j: number) => (
                             <div key={j} className="p-3 bg-white rounded-xl border border-slate-100 space-y-1">
@@ -299,9 +299,9 @@ export default function NormativeHierarchy() {
       </div>
 
       {/* IHR Anchoring by Tier: summary table */}
-      <div className="bg-white border border-slate-200 rounded-[2rem] overflow-hidden shadow-sm">
+      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
         <div className="p-8 border-b border-slate-100">
-          <h2 className="text-xl font-black text-slate-900">IHR Anchoring by Normative Tier</h2>
+          <h2 className="text-xl font-semibold text-slate-900">IHR Anchoring by Normative Tier</h2>
           <p className="text-sm text-slate-500 mt-1">Distribution of IHR 2005 mapping rows and mean anchoring score across Mexico's normative tiers</p>
         </div>
         <div className="overflow-x-auto">
@@ -323,7 +323,7 @@ export default function NormativeHierarchy() {
                 return (
                   <tr key={tier.id} className="hover:bg-slate-50">
                     <td className="p-5">
-                      <span className={cn('px-3 py-1.5 rounded-lg text-xs font-black', tier.color)}>{tier.label}</span>
+                      <span className={cn('px-3 py-1.5 rounded-lg text-xs font-semibold', tier.color)}>{tier.label}</span>
                     </td>
                     <td className="p-5 font-bold text-slate-900">{stats.instruments.length}</td>
                     <td className="p-5 font-bold text-slate-900">{stats.obligationsAnchored.size}</td>
@@ -354,10 +354,10 @@ export default function NormativeHierarchy() {
       </div>
 
       {/* Systemic implication */}
-      <div className="bg-slate-900 text-white rounded-[2rem] p-10 space-y-5">
+      <div className="bg-slate-900 text-white rounded-2xl p-10 space-y-5">
         <div className="flex items-center gap-3">
           <Shield size={22} className="text-blue-400 shrink-0" />
-          <h3 className="text-2xl font-black">Structural Implication for IHR Internalisation</h3>
+          <h3 className="text-2xl font-semibold">Structural Implication for IHR Internalisation</h3>
         </div>
         <div className="grid md:grid-cols-2 gap-6 text-sm text-slate-300 leading-relaxed">
           <div className="space-y-3">

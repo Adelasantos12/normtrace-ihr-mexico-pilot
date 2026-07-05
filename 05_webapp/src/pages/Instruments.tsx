@@ -33,7 +33,8 @@ export default function Instruments() {
   return (
     <div className="space-y-10 pb-20">
       <header>
-         <h1 className="text-3xl font-bold text-slate-900">International Instruments</h1>
+         <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">International Legal Framework</div>
+         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900 mt-2">International Instruments</h1>
          <p className="text-slate-500 mt-1">Foundational and emerging international legal frameworks for global health security.</p>
       </header>
 
@@ -43,7 +44,7 @@ export default function Instruments() {
             key={tab.id}
             onClick={() => { setActiveTab(tab.id); setSearch(""); }}
             className={cn(
-              "flex items-center gap-3 px-6 py-3 rounded-xl text-xs font-bold transition-all whitespace-nowrap",
+              "flex items-center gap-3 px-6 py-3 rounded-xl text-xs font-medium transition-all whitespace-nowrap",
               activeTab === tab.id ? "bg-blue-600 text-white shadow-lg shadow-blue-100" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
             )}
           >
@@ -53,10 +54,10 @@ export default function Instruments() {
         ))}
       </div>
 
-      <div className="bg-white border border-slate-200 rounded-[2rem] shadow-sm overflow-hidden">
+      <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
         <div className="p-8 border-b border-slate-100 bg-slate-50/50 flex flex-col md:flex-row md:items-center justify-between gap-6">
            <div className="space-y-1">
-              <h3 className="font-bold text-slate-900">{currentTab.label} Registry</h3>
+              <h3 className="font-semibold text-slate-900">{currentTab.label} Registry</h3>
               <p className="text-[10px] text-slate-500 font-mono uppercase tracking-widest">{currentTab.file}</p>
            </div>
            <div className="relative w-full md:w-96">
@@ -79,7 +80,7 @@ export default function Instruments() {
                 <thead className="bg-white border-b border-slate-100">
                    <tr>
                       {data.length > 0 && Object.keys(data[0]).slice(0, 5).map(key => (
-                         <th key={key} className="p-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest">{key.replace(/_/g, ' ')}</th>
+                         <th key={key} className="p-6 text-[10px] font-semibold text-slate-400 uppercase tracking-widest">{key.replace(/_/g, ' ')}</th>
                       ))}
                    </tr>
                 </thead>

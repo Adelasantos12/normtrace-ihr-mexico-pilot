@@ -277,17 +277,20 @@ export default function NormPipeline() {
   return (
     <div className="space-y-8 pb-24">
       <header className="space-y-3">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-blue-900 text-white rounded-xl"><Zap size={20} /></div>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tight">Normative Pipeline</h1>
+        <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">
+          Normative Pipeline Analysis
         </div>
-        <p className="text-lg text-slate-600 max-w-4xl">
+        <div className="flex items-center gap-3">
+          <Zap size={22} className="text-slate-400" />
+          <h1 className="text-4xl font-bold text-slate-900 tracking-tight">Normative Pipeline</h1>
+        </div>
+        <p className="text-lg text-slate-500 max-w-4xl">
           For each IHR 2005 obligation, trace the normative flow through Mexico's legal architecture: from international source to constitutional bridge, statutory layer, regulatory specification, institutional actor, and implementation mechanism.
         </p>
       </header>
 
       {/* Pipeline stats */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-4 border-t-2 border-slate-900 pt-10">
         {[
           { label: 'Flowing', value: stats.flowing, color: 'text-emerald-600', bg: 'bg-emerald-50 border-emerald-100', id: 'flowing' },
           { label: 'Partial / Incomplete', value: stats.partial, color: 'text-amber-600', bg: 'bg-amber-50 border-amber-100', id: 'partial' },
@@ -298,14 +301,14 @@ export default function NormPipeline() {
             onClick={() => setFilter(filter === s.id as any ? 'all' : s.id as any)}
             className={cn('p-5 rounded-2xl border text-left transition-all', s.bg, filter === s.id ? 'ring-2 ring-blue-400' : 'hover:opacity-80')}
           >
-            <div className={`text-3xl font-black ${s.color}`}>{s.value}</div>
-            <div className="text-xs font-bold text-slate-600 mt-1">{s.label}</div>
+            <div className={`text-3xl font-semibold ${s.color}`}>{s.value}</div>
+            <div className="text-xs font-medium text-slate-600 mt-1">{s.label}</div>
           </button>
         ))}
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-3 items-center">
+      <div className="flex flex-wrap gap-3 items-center border-t border-slate-200 pt-8">
         <select
           value={domainFilter}
           onChange={e => setDomainFilter(e.target.value)}
@@ -326,7 +329,7 @@ export default function NormPipeline() {
 
       {/* Legend */}
       <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5">
-        <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Pipeline Status Legend</div>
+        <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-3">Pipeline Status Legend</div>
         <div className="flex flex-wrap gap-4">
           {(['green', 'amber', 'red', 'grey'] as PipelineStatus[]).map(s => (
             <div key={s} className="flex items-center gap-2">
@@ -361,7 +364,7 @@ export default function NormPipeline() {
                 className="w-full p-5 flex items-center gap-4 text-left hover:bg-slate-50/50 transition-colors"
               >
                 <div className="shrink-0">
-                  <span className={cn('px-2.5 py-1 rounded-lg text-[10px] font-black border', overall.color)}>
+                  <span className={cn('px-2.5 py-1 rounded-lg text-[10px] font-semibold border', overall.color)}>
                     {overall.label}
                   </span>
                 </div>
@@ -369,12 +372,12 @@ export default function NormPipeline() {
                 <div className="flex-1 min-w-0 space-y-0.5">
                   <div className="flex items-baseline gap-2 flex-wrap">
                     {p.article && (
-                      <span className="font-black text-blue-700 text-sm shrink-0">{p.article}</span>
+                      <span className="font-semibold text-blue-700 text-sm shrink-0">{p.article}</span>
                     )}
                     {p.articleTitle && (
                       <span className="font-bold text-slate-900 text-sm">{p.articleTitle}</span>
                     )}
-                    {!p.article && <span className="font-black text-slate-500 text-xs font-mono">{p.obligationId}</span>}
+                    {!p.article && <span className="font-semibold text-slate-500 text-xs font-mono">{p.obligationId}</span>}
                   </div>
                   {p.obligationText && (
                     <div className="text-[11px] text-slate-500 leading-snug line-clamp-2 max-w-xl">{p.obligationText}</div>
@@ -411,10 +414,10 @@ export default function NormPipeline() {
                   {(p.obligationText || p.minimumRequirement) && (
                     <div className="p-5 bg-blue-50 border border-blue-200 rounded-2xl space-y-3">
                       <div className="flex items-center gap-2">
-                        <span className="px-2.5 py-1 bg-blue-900 text-white text-[10px] font-black rounded-lg">{p.article || p.obligationId}</span>
+                        <span className="px-2.5 py-1 bg-blue-900 text-white text-[10px] font-semibold rounded-lg">{p.article || p.obligationId}</span>
                         {p.articleTitle && <span className="font-bold text-blue-900 text-sm">{p.articleTitle}</span>}
                         {p.legalForce && (
-                          <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-[9px] font-black rounded uppercase tracking-wider">{p.legalForce}</span>
+                          <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-[9px] font-semibold rounded uppercase tracking-wider">{p.legalForce}</span>
                         )}
                       </div>
                       {p.obligationText && (
@@ -422,7 +425,7 @@ export default function NormPipeline() {
                       )}
                       {p.minimumRequirement && (
                         <div className="pt-2 border-t border-blue-100">
-                          <div className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-1">Minimum domestic legal requirement</div>
+                          <div className="text-[10px] font-semibold text-blue-600 uppercase tracking-widest mb-1">Minimum domestic legal requirement</div>
                           <p className="text-xs text-blue-700 leading-relaxed">{p.minimumRequirement}</p>
                         </div>
                       )}
@@ -448,7 +451,7 @@ export default function NormPipeline() {
                             <div className={cn('w-9 h-9 rounded-full flex items-center justify-center', STAGE_COLORS[stage.status])}>
                               {STATUS_ICONS[stage.status]}
                             </div>
-                            <div className="text-[10px] font-black text-slate-900 leading-tight">{stage.label}</div>
+                            <div className="text-[10px] font-semibold text-slate-900 leading-tight">{stage.label}</div>
                             <div className="text-[9px] text-slate-500 leading-tight">{stage.sublabel}</div>
                             {stage.issue && (
                               <div className="mt-1">
@@ -500,7 +503,7 @@ export default function NormPipeline() {
                           <div className={cn('w-7 h-7 rounded-full flex items-center justify-center text-xs', STAGE_COLORS[stage.status])}>
                             {STATUS_ICONS[stage.status]}
                           </div>
-                          <span className="font-black text-slate-900">{stage.label}</span>
+                          <span className="font-semibold text-slate-900">{stage.label}</span>
                           <span className={cn('px-2 py-0.5 rounded text-[10px] font-bold', STAGE_COLORS[stage.status])}>
                             {STATUS_LABELS[stage.status]}
                           </span>
@@ -532,7 +535,7 @@ export default function NormPipeline() {
 
                   {/* Source rows summary */}
                   <div className="space-y-2">
-                    <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Mapping Rows ({p.rows.length})</div>
+                    <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Mapping Rows ({p.rows.length})</div>
                     <div className="overflow-x-auto">
                       <table className="w-full text-xs">
                         <thead>
@@ -550,7 +553,7 @@ export default function NormPipeline() {
                               <td className="py-2 pr-4 font-mono text-[10px] text-slate-700">{r.domestic_provision_id}</td>
                               <td className="py-2 pr-4 font-medium text-slate-900 max-w-[180px] truncate">{r.domestic_norm}</td>
                               <td className="py-2 pr-4">
-                                <span className={cn('px-1.5 py-0.5 rounded text-[10px] font-black',
+                                <span className={cn('px-1.5 py-0.5 rounded text-[10px] font-semibold',
                                   parseInt(r.anchoring_level) >= 4 ? 'bg-emerald-100 text-emerald-700' :
                                   parseInt(r.anchoring_level) >= 2 ? 'bg-amber-100 text-amber-700' :
                                   'bg-red-100 text-red-700'
@@ -578,17 +581,19 @@ export default function NormPipeline() {
       </div>
 
       {/* Methodological note */}
-      <div className="bg-slate-900 text-white rounded-[2rem] p-10 space-y-4">
-        <div className="flex items-center gap-3">
-          <Info size={22} className="text-blue-400 shrink-0" />
-          <h3 className="text-xl font-black">Methodological Note: Pipeline Analysis</h3>
+      <div className="border-t border-slate-200 pt-8">
+        <div className="bg-slate-900 text-white rounded-2xl p-10 space-y-4">
+          <div className="flex items-center gap-3">
+            <Info size={22} className="text-blue-400 shrink-0" />
+            <h3 className="text-xl font-semibold">Methodological Note: Pipeline Analysis</h3>
+          </div>
+          <p className="text-slate-300 leading-relaxed max-w-4xl text-sm">
+            The normative pipeline reconstructs the legal pathway each IHR obligation must traverse to produce domestic operational effect. Stage status is derived from the anchoring scale (L0-L5), fit dimension scores (actor, procedure, coordination, enforcement, rights-safeguard, federalism), and gap type classification in the NormTrace mapping dataset. The pipeline does not assess operational performance: a "Connected" stage indicates textual legal-institutional anchoring in the available corpus, not confirmed operational implementation. The primary diagnostic value lies in identifying <strong>where the pipeline breaks</strong>: obligations that traverse the constitutional and statutory stages but fail at the regulatory or procedural level reveal a structurally different reform challenge than obligations with legal silence at the statutory level.
+          </p>
+          <p className="text-slate-400 text-xs italic">
+            Outputs are preliminary AI-assisted and require expert legal validation. See <span className="font-bold">Habibi et al., Lancet, 2020</span> for IHR compliance analysis informing this diagnostic approach.
+          </p>
         </div>
-        <p className="text-slate-300 leading-relaxed max-w-4xl text-sm">
-          The normative pipeline reconstructs the legal pathway each IHR obligation must traverse to produce domestic operational effect. Stage status is derived from the anchoring scale (L0-L5), fit dimension scores (actor, procedure, coordination, enforcement, rights-safeguard, federalism), and gap type classification in the NormTrace mapping dataset. The pipeline does not assess operational performance: a "Connected" stage indicates textual legal-institutional anchoring in the available corpus, not confirmed operational implementation. The primary diagnostic value lies in identifying <strong>where the pipeline breaks</strong>: obligations that traverse the constitutional and statutory stages but fail at the regulatory or procedural level reveal a structurally different reform challenge than obligations with legal silence at the statutory level.
-        </p>
-        <p className="text-slate-400 text-xs italic">
-          Outputs are preliminary AI-assisted and require expert legal validation. See <span className="font-bold">Habibi et al., Lancet, 2020</span> for IHR compliance analysis informing this diagnostic approach.
-        </p>
       </div>
     </div>
   );

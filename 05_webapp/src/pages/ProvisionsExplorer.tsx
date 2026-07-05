@@ -57,7 +57,10 @@ export default function ProvisionsExplorer() {
 
   return (
     <div className="space-y-8 pb-20">
-      <header>
+      <header className="space-y-1">
+         <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">
+           Domestic Provisions Corpus
+         </div>
          <h1 className="text-3xl font-bold text-slate-900">Legal Provisions Explorer</h1>
          <p className="text-slate-500 mt-1">Granular extraction of IHR-relevant provisions from the Mexican legal corpus.</p>
       </header>
@@ -166,22 +169,22 @@ export default function ProvisionsExplorer() {
                                <div className="space-y-6">
                                   <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Power, Duty & Procedure</h4>
                                   <div className="space-y-4">
-                                     <div className="flex gap-4 items-start">
-                                        <div className="p-2 bg-blue-100 text-blue-700 rounded-lg shrink-0"><ShieldCheck size={14} /></div>
+                                     <div className="flex gap-3 items-start">
+                                        <ShieldCheck size={14} className="text-slate-400 shrink-0 mt-0.5" />
                                         <div>
                                            <p className="text-[9px] font-bold text-slate-400 uppercase">Power Granted</p>
                                            <p className="text-xs text-slate-700 font-medium">{row.power_granted || "Not specified"}</p>
                                         </div>
                                      </div>
-                                     <div className="flex gap-4 items-start">
-                                        <div className="p-2 bg-slate-100 text-slate-700 rounded-lg shrink-0"><Database size={14} /></div>
+                                     <div className="flex gap-3 items-start">
+                                        <Database size={14} className="text-slate-400 shrink-0 mt-0.5" />
                                         <div>
                                            <p className="text-[9px] font-bold text-slate-400 uppercase">Duty Created</p>
                                            <p className="text-xs text-slate-700 font-medium">{row.duty_created || "Not specified"}</p>
                                         </div>
                                      </div>
-                                     <div className="flex gap-4 items-start">
-                                        <div className="p-2 bg-indigo-100 text-indigo-700 rounded-lg shrink-0"><Layers size={14} /></div>
+                                     <div className="flex gap-3 items-start">
+                                        <Layers size={14} className="text-slate-400 shrink-0 mt-0.5" />
                                         <div>
                                            <p className="text-[9px] font-bold text-slate-400 uppercase">Procedure Created</p>
                                            <p className="text-xs text-slate-700 font-medium">{row.procedure_created || "Not specified"}</p>
@@ -193,22 +196,22 @@ export default function ProvisionsExplorer() {
                                <div className="space-y-6">
                                   <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Governance & Compliance</h4>
                                   <div className="space-y-4">
-                                     <div className="flex gap-4 items-start">
-                                        <div className="p-2 bg-emerald-100 text-emerald-700 rounded-lg shrink-0"><Users size={14} /></div>
+                                     <div className="flex gap-3 items-start">
+                                        <Users size={14} className="text-slate-400 shrink-0 mt-0.5" />
                                         <div>
                                            <p className="text-[9px] font-bold text-slate-400 uppercase">Coordination Mechanism</p>
                                            <p className="text-xs text-slate-700 font-medium">{row.coordination_mechanism || "Not specified"}</p>
                                         </div>
                                      </div>
-                                     <div className="flex gap-4 items-start">
-                                        <div className="p-2 bg-red-100 text-red-700 rounded-lg shrink-0"><ShieldCheck size={14} /></div>
+                                     <div className="flex gap-3 items-start">
+                                        <ShieldCheck size={14} className="text-slate-400 shrink-0 mt-0.5" />
                                         <div>
                                            <p className="text-[9px] font-bold text-slate-400 uppercase">Enforcement or Sanction</p>
                                            <p className="text-xs text-slate-700 font-medium">{row.enforcement_or_sanction || "Not specified"}</p>
                                         </div>
                                      </div>
-                                     <div className="flex gap-4 items-start">
-                                        <div className="p-2 bg-blue-100 text-blue-700 rounded-lg shrink-0"><FileText size={14} /></div>
+                                     <div className="flex gap-3 items-start">
+                                        <FileText size={14} className="text-slate-400 shrink-0 mt-0.5" />
                                         <div>
                                            <p className="text-[9px] font-bold text-slate-400 uppercase">Rights Safeguard</p>
                                            <p className="text-xs text-slate-700 font-medium">{row.rights_safeguard || "Not specified"}</p>
