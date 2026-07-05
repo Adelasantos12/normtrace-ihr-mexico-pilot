@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell
+  PieChart, Pie, Cell, LabelList
 } from 'recharts';
 import { useCsvData } from '../hooks/useData';
 import { cn, getAnchoringLabel } from '../lib/utils';
@@ -199,7 +199,9 @@ export default function Dashboard() {
                         return null;
                       }}
                     />
-                    <Bar dataKey="value" fill="#1e40af" radius={[0, 4, 4, 0]} barSize={24} />
+                    <Bar dataKey="value" fill="#1e40af" radius={[0, 4, 4, 0]} barSize={24}>
+                      <LabelList dataKey="value" position="right" fontSize={11} fontWeight="bold" fill="#1e293b" />
+                    </Bar>
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -237,11 +239,13 @@ export default function Dashboard() {
           <h3 className="font-bold text-slate-900 px-1 text-sm">Top Legal Domains</h3>
           <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 h-72">
              <ResponsiveContainer width="100%" height="100%">
-               <BarChart data={stats.domains.slice(0, 5)} layout="vertical">
+               <BarChart data={stats.domains.slice(0, 5)} layout="vertical" margin={{ right: 20 }}>
                  <XAxis type="number" hide />
-                 <YAxis dataKey="name" type="category" width={110} tick={{fontSize: 8, fontWeight: 'bold'}} axisLine={false} tickLine={false} />
+                 <YAxis dataKey="name" type="category" width={110} tick={{fontSize: 9, fontWeight: 'bold'}} axisLine={false} tickLine={false} />
                  <Tooltip cursor={{fill: '#f8fafc'}} />
-                 <Bar dataKey="value" fill="#3b82f6" radius={[0, 4, 4, 0]} barSize={12} />
+                 <Bar dataKey="value" fill="#3b82f6" radius={[0, 4, 4, 0]} barSize={12}>
+                   <LabelList dataKey="value" position="right" fontSize={10} fontWeight="bold" fill="#1e293b" />
+                 </Bar>
                </BarChart>
              </ResponsiveContainer>
           </div>
@@ -273,7 +277,7 @@ export default function Dashboard() {
                 {stats.confidence.map((entry, i) => (
                   <div key={i} className="flex items-center gap-1.5">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: ['#1e40af', '#3b82f6', '#94a3b8'][i % 3] }} />
-                    <span className="text-[10px] font-bold text-slate-500">{entry.name}</span>
+                    <span className="text-[10px] font-bold text-slate-500">{entry.name} ({entry.value})</span>
                   </div>
                 ))}
              </div>
