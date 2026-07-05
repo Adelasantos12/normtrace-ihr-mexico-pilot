@@ -49,7 +49,7 @@ export default function LandingPage() {
           </h1>
 
           <p className="text-lg text-slate-500 max-w-3xl leading-relaxed font-medium">
-            NormTrace-IHR traces every IHR (2005) obligation to the specific domestic legal instrument that anchors it — constitution, statute, regulation, or none at all. Mexico self-reports 81% legislative capacity to WHO SPAR; NormTrace finds 35% of the same obligations actually anchored in domestic law.
+            NormTrace-IHR traces every IHR (2005) obligation to the specific domestic legal instrument that anchors it — constitution, statute, regulation, or none at all. For CC1 (Legislation, policy &amp; financing), Mexico self-reports 81% capacity to WHO SPAR; NormTrace finds 34% of the same obligations actually anchored in domestic law.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-2">
@@ -78,9 +78,9 @@ export default function LandingPage() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-16">
           {[
             {
-              value: '81% vs 35%',
-              label: 'SPAR self-report vs legal anchoring',
-              sub: 'CC1 Legislation: Mexico reports 80.6% mean capacity; NormTrace finds 34.0% anchoring for the same obligations — a +46.6pt gap',
+              value: '81% vs 34%',
+              label: 'CC1 (Legislation): SPAR self-report vs legal anchoring',
+              sub: 'Mexico reports 80.6% mean legislative capacity to WHO SPAR; NormTrace finds 34.0% legal anchoring for the same 20 obligations — a +46.6pt gap. Scoped to CC1 only — SPAR\'s other capacities measure operational readiness, which NormTrace does not assess.',
               color: 'text-red-600',
               bg: 'bg-red-50 border-red-100'
             },

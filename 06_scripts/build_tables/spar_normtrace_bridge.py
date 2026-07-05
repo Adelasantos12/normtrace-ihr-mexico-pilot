@@ -14,6 +14,21 @@ for Mexico:
 This turns the qualitative claim ("Mexico reports perfect legislation capacity
 while its main instrument dates to 1985") into a measured divergence.
 
+Scope: CC1 only. NormTrace's anchoring score measures one specific construct --
+whether a domestic legal instrument exists for an obligation. SPAR's CC1
+("Legislation, policy & financing") measures that same construct, so the two
+are directly comparable. SPAR's other capacities (surveillance, points of
+entry, emergency management, IHR coordination, etc.) measure operational
+capacity -- staffed systems, infrastructure, running programmes -- which is a
+different construct NormTrace does not measure at all. An obligation can be
+tagged to CC2/CC4/CC5/PoE in the corpus (implementation_domain) and still have
+a legal-anchoring score, but pairing that score against SPAR's operational
+score for the same capacity would compare two different things and imply
+NormTrace assesses operational readiness, which it does not. A prior version
+of this script computed that comparison for five capacities; it was removed
+(see network_methodology_rationale.md SS3.4) because only the CC1 pairing is
+construct-valid.
+
 Inputs:
   02_data/raw/spar_americas_clean.csv           (SPAR panel, Americas)
   03_tables/country_legal_mapping/mexico_ihr2005_mapping.csv
@@ -21,7 +36,7 @@ Inputs:
 
 Output:
   04_outputs/exports/spar_normtrace_divergence.json
-  05_webapp/public/data/derived/spar_normtrace_divergence.csv
+  05_webapp/public/data/derived/spar_normtrace_divergence.json
 """
 from __future__ import annotations
 import csv, json, os, statistics
@@ -35,22 +50,8 @@ OUT_EXP = os.path.join(ROOT, "04_outputs/exports")
 OUT_WEB = os.path.join(ROOT, "05_webapp/public/data/derived")
 os.makedirs(OUT_EXP, exist_ok=True); os.makedirs(OUT_WEB, exist_ok=True)
 
-# SPAR 15-capacity labels (WHO SPAR 2018+ tool)
-SPAR_CAPS = {
-    "spar_cap1": "C1 Legislation, policy & financing",
-    "spar_cap2": "C2 IHR coordination & NFP",
-    "spar_cap6": "C6 Surveillance",
-    "spar_cap8": "C8 Health emergency management",
-    "spar_cap11": "C11 Points of entry",
-}
-# NormTrace CC tag -> SPAR column (only the clean, defensible crosswalks)
-CC_TO_SPAR = {
-    "CC1": "spar_cap1",
-    "CC2": "spar_cap2",
-    "CC5": "spar_cap6",   # surveillance
-    "CC4": "spar_cap8",   # response / emergency mgmt
-    "PoE": "spar_cap11",
-}
+CC1_LABEL = "C1 Legislation, policy & financing"
+CC1_SPAR_COL = "spar_cap1"
 
 
 def norm_anchoring_by_obligation():
@@ -87,7 +88,7 @@ def obligation_domains():
 
 
 def mexico_spar():
-    """Mexico SPAR rows -> {year: {cap: value}} and latest/mean per cap."""
+    """Mexico SPAR rows, sorted by year."""
     rows = []
     with open(SPAR, newline="", encoding="utf-8") as f:
         for r in csv.DictReader(f):
@@ -109,92 +110,78 @@ def main():
     domains = obligation_domains()
     spar_rows = mexico_spar()
 
-    # SPAR latest + mean per capacity (over available years)
-    spar_series = {}
-    for cap in sorted(set(CC_TO_SPAR.values()) | {"spar_all"}):
-        vals = [(int(r["year"]), to_float(r.get(cap))) for r in spar_rows]
-        vals = [(y, v) for y, v in vals if v is not None]
-        if vals:
-            spar_series[cap] = {"latest_year": vals[-1][0], "latest": vals[-1][1],
-                                "mean": round(statistics.mean(v for _, v in vals), 1),
-                                "max": max(v for _, v in vals),
-                                "trajectory": [{"year": y, "value": v} for y, v in vals]}
+    # CC1 SPAR series (latest + mean over available years).
+    vals = [(int(r["year"]), to_float(r.get(CC1_SPAR_COL))) for r in spar_rows]
+    vals = [(y, v) for y, v in vals if v is not None]
+    cc1_series = {
+        "latest_year": vals[-1][0], "latest": vals[-1][1],
+        "mean": round(statistics.mean(v for _, v in vals), 1),
+        "max": max(v for _, v in vals),
+        "trajectory": [{"year": y, "value": v} for y, v in vals],
+    }
 
-    # NormTrace anchoring % per CC domain (mean over obligations tagged with that CC)
-    cc_anchoring = {}
-    for cc in CC_TO_SPAR:
-        oids = [oid for oid, tags in domains.items() if cc in tags]
-        scores = [anchoring.get(oid, 0) for oid in oids]
-        if scores:
-            cc_anchoring[cc] = {"n_obligations": len(scores),
-                                "mean_anchoring_0_5": round(statistics.mean(scores), 2),
-                                "mean_anchoring_pct": round(statistics.mean(scores) / 5 * 100, 1)}
+    # NormTrace legal anchoring for the obligations tagged CC1.
+    cc1_oids = [oid for oid, tags in domains.items() if "CC1" in tags]
+    cc1_scores = [anchoring.get(oid, 0) for oid in cc1_oids]
+    cc1_anchoring_pct = round(statistics.mean(cc1_scores) / 5 * 100, 1)
 
-    # Divergence table
-    table = []
-    for cc, cap in CC_TO_SPAR.items():
-        if cc in cc_anchoring and cap in spar_series:
-            spar_latest = spar_series[cap]["latest"]
-            spar_mean = spar_series[cap]["mean"]
-            nt = cc_anchoring[cc]["mean_anchoring_pct"]
-            table.append({
-                "capacity": SPAR_CAPS[cap], "cc_tag": cc,
-                "spar_self_report_latest": spar_latest,
-                "spar_self_report_mean": spar_mean,
-                "normtrace_legal_anchoring_pct": nt,
-                "divergence_latest": round(spar_latest - nt, 1),
-                "divergence_mean": round(spar_mean - nt, 1),
-                "n_obligations": cc_anchoring[cc]["n_obligations"],
-            })
-    table.sort(key=lambda x: -x["divergence_mean"])
+    headline = {
+        "capacity": CC1_LABEL, "cc_tag": "CC1",
+        "spar_self_report_latest": cc1_series["latest"],
+        "spar_self_report_mean": cc1_series["mean"],
+        "normtrace_legal_anchoring_pct": cc1_anchoring_pct,
+        "divergence_latest": round(cc1_series["latest"] - cc1_anchoring_pct, 1),
+        "divergence_mean": round(cc1_series["mean"] - cc1_anchoring_pct, 1),
+        "n_obligations": len(cc1_scores),
+    }
 
-    overall_nt = round(statistics.mean(anchoring.values()) / 5 * 100, 1)
-    headline = None
-    for row in table:
-        if row["cc_tag"] == "CC1":
-            headline = row
+    # Corpus-wide mean anchoring, reported as a standalone NormTrace statistic
+    # (NOT paired against SPAR's overall aggregate score, which mixes in
+    # operational capacities NormTrace does not measure -- same construct
+    # mismatch as the removed multi-capacity table above).
+    normtrace_corpus_anchoring_pct = round(statistics.mean(anchoring.values()) / 5 * 100, 1)
+
     result = {
         "generated_by": "06_scripts/build_tables/spar_normtrace_bridge.py",
         "country": "Mexico",
-        "thesis": ("SPAR self-report measures reported capacity; NormTrace measures "
-                   "domestic legal anchoring. A large positive divergence flags capacity "
-                   "reported without a sustainable legal-institutional base."),
+        "scope_note": (
+            "Comparison is limited to CC1 (Legislation, policy & financing), the only "
+            "SPAR capacity that measures the same construct as NormTrace's legal-anchoring "
+            "score (does a domestic legal instrument exist for the obligation). SPAR's "
+            "other capacities measure operational capacity, which NormTrace does not "
+            "assess; an earlier version of this bridge compared five capacities and has "
+            "been narrowed to CC1 for construct validity."
+        ),
+        "thesis": ("SPAR CC1 self-report measures reported legislative/policy capacity; "
+                   "NormTrace measures domestic legal anchoring for the same obligations. "
+                   "A large positive divergence flags capacity reported without a "
+                   "sustainable legal-institutional base."),
         "headline_cc1": headline,
-        "overall": {"spar_all_latest": spar_series.get("spar_all", {}).get("latest"),
-                    "spar_all_mean": spar_series.get("spar_all", {}).get("mean"),
-                    "normtrace_overall_anchoring_pct": overall_nt},
-        "divergence_table": table,
-        "spar_series": spar_series,
-        "caveats": ["SPAR-to-CC crosswalk is a defensible approximation, not an official "
-                    "WHO mapping; only high-confidence pairings are reported.",
+        "normtrace_corpus_anchoring_pct": normtrace_corpus_anchoring_pct,
+        "cc1_spar_series": cc1_series,
+        "caveats": ["This comparison covers CC1 only; NormTrace does not measure the "
+                    "operational capacities SPAR's other core capacities assess "
+                    "(surveillance systems, points-of-entry infrastructure, emergency "
+                    "management, etc.), so no divergence claim is made for them.",
                     "NormTrace anchoring is preliminary_ai_assisted and unvalidated by a "
                     "domestic public-health-law expert.",
                     "SPAR cap1 methodology changed across editions; interpret the "
                     "trajectory, not single-year points."],
     }
 
-    with open(os.path.join(OUT_EXP, "spar_normtrace_divergence.json"), "w", encoding="utf-8") as f:
-        json.dump(result, f, indent=2, ensure_ascii=False)
     for folder in (OUT_EXP, OUT_WEB):
         with open(os.path.join(folder, "spar_normtrace_divergence.json"), "w", encoding="utf-8") as f:
             json.dump(result, f, indent=2, ensure_ascii=False)
-    with open(os.path.join(OUT_WEB, "spar_normtrace_divergence.csv"), "w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=list(table[0].keys()))
-        w.writeheader(); w.writerows(table)
 
-    print("=== SPAR (self-report) vs NormTrace (legal anchoring) — Mexico ===\n")
-    print(f"{'Capacity':<38}{'SPAR mean':>10}{'NT anchor%':>12}{'Diverg':>9}")
-    for row in table:
-        print(f"{row['capacity']:<38}{row['spar_self_report_mean']:>10}"
-              f"{row['normtrace_legal_anchoring_pct']:>12}{row['divergence_mean']:>9}")
-    if headline:
-        print(f"\nHEADLINE (CC1 Legislation): Mexico self-reported "
-              f"{headline['spar_self_report_mean']}% (mean) / "
-              f"{headline['spar_self_report_latest']}% (latest) legislation capacity, "
-              f"while NormTrace legal anchoring = {headline['normtrace_legal_anchoring_pct']}% "
-              f"-> divergence {headline['divergence_mean']} pts (mean).")
-    print(f"\nOverall: SPAR_all mean {result['overall']['spar_all_mean']}% vs "
-          f"NormTrace overall anchoring {overall_nt}%.")
+    print("=== SPAR CC1 (self-report) vs NormTrace (legal anchoring) — Mexico ===\n")
+    print(f"HEADLINE (CC1 Legislation): Mexico self-reported "
+          f"{headline['spar_self_report_mean']}% (mean) / "
+          f"{headline['spar_self_report_latest']}% (latest) legislation capacity, "
+          f"while NormTrace legal anchoring = {headline['normtrace_legal_anchoring_pct']}% "
+          f"(n={headline['n_obligations']} obligations) "
+          f"-> divergence {headline['divergence_mean']} pts (mean).")
+    print(f"\nCorpus-wide NormTrace anchoring (all 45 obligations, standalone stat, "
+          f"not compared to SPAR): {normtrace_corpus_anchoring_pct}%.")
 
 
 if __name__ == "__main__":

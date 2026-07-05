@@ -132,7 +132,7 @@ The critical structural finding: Mexico's primary IHR implementation instrument 
 
 ### SPAR self-report vs legal anchoring
 
-Mexico's self-reported WHO SPAR capacity runs well above NormTrace legal anchoring for the same obligations: CC1 (Legislation, policy & financing) at 80.6% (SPAR mean) vs 34.0% (NormTrace anchoring) — a +46.6-point divergence; overall, 81.3% vs 35.1%. This is a **construct-validity diagnostic** — reported capacity can exceed the domestic legal base for the obligations it claims to cover — not a claim that SPAR self-reports are inflated or false (independent SPAR–JEE comparisons show this gap has narrowed in recent editions). See `/spar-bridge` in the webapp and `00_project/network_methodology_rationale.md` §4 for the full guardrails.
+Scoped to CC1 (Legislation, policy & financing) only, the one SPAR capacity that measures the same construct as NormTrace's legal-anchoring score — SPAR's other capacities assess operational readiness, which NormTrace does not measure. Mexico's self-reported CC1 capacity runs well above NormTrace legal anchoring for the same 20 obligations: 80.6% (SPAR mean) vs 34.0% (NormTrace anchoring) — a +46.6-point divergence. This is a **construct-validity diagnostic** — reported capacity can exceed the domestic legal base for the obligations it claims to cover — not a claim that SPAR self-reports are inflated or false (independent SPAR–JEE comparisons show this gap has narrowed in recent editions). See `/spar-bridge` in the webapp and `00_project/network_methodology_rationale.md` §4 for the full guardrails.
 
 ---
 

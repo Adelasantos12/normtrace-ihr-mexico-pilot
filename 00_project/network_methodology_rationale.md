@@ -114,14 +114,29 @@ Next step in R is a **QAP/MRQAP** regression of `anchoring_level` on instrument 
 pre-2005 dummy, to test formally whether older/lower-rank instruments predict weaker anchoring
 (the 1985 RLGS-SI claim).
 
-### 3.4 The SPAR↔legal bridge → construct-validity probe
+### 3.4 The SPAR↔legal bridge → construct-validity probe, CC1 only
 `spar_normtrace_bridge.py` compares Mexico's SPAR self-report (0–100) with NormTrace legal
-anchoring (0–5→%) for the obligations in each capacity. Every mapped capacity sits far above
-its legal anchoring; **CC1 Legislation: self-report 80.6% mean vs anchoring 34.0% → +46.6 pts**;
-overall SPAR 81.3% vs anchoring 35.1%. This is the pilot's construct-validity contribution:
-a capacity can be reported as present while the obligation lacks a sustainable legal base.
-**Implication:** the divergence is a *diagnostic of legal coverage*, not a claim that SPAR is
-"wrong" or that outcomes are predicted (see §4).
+anchoring (0–5→%), **scoped to CC1 (Legislation, policy & financing) only**: **CC1 Legislation:
+self-report 80.6% mean vs anchoring 34.0% (n=20 obligations) → +46.6 pts**. This is the pilot's
+construct-validity contribution: a capacity can be reported as present while the obligation
+lacks a sustainable legal base. **Implication:** the divergence is a *diagnostic of legal
+coverage*, not a claim that SPAR is "wrong" or that outcomes are predicted (see §4).
+
+**Why CC1 only, and not the other SPAR capacities.** An earlier version of this bridge also
+compared NormTrace anchoring against SPAR's CC2 (IHR coordination), CC5/C6 (surveillance),
+CC4/C8 (emergency management), and PoE/C11 (points of entry) — and separately paired a
+corpus-wide NormTrace mean against SPAR's overall aggregate score. Both comparisons were
+removed: SPAR's non-CC1 capacities assess *operational* capacity (staffed surveillance
+systems, running points-of-entry infrastructure, functioning emergency-response programmes),
+which NormTrace does not measure at all — it only assesses whether a domestic legal instrument
+exists for an obligation. CC1 is the one capacity where SPAR's own construct ("legislation,
+policy and financing") and NormTrace's construct ("legal anchoring") genuinely coincide, so it
+is the only pairing that is construct-valid. Pairing NormTrace's legal-anchoring score against
+an operational-capacity score for the other capacities — or against SPAR's overall aggregate,
+which mixes in those same operational capacities — would imply NormTrace assesses operational
+readiness, which it does not. NormTrace's corpus-wide mean anchoring (35.1% across all 45
+obligations) is still reported in `spar_normtrace_divergence.json` as a standalone descriptive
+statistic, but is no longer paired against any SPAR figure.
 
 ---
 
@@ -161,9 +176,9 @@ computed network/divergence numbers as validated measurement.
   rose from 8 to 9; communities went from 2 (Q=0.293) to 3 (Q=0.286); CUG test observed
   centralisation moved from 0.5952 to 0.6402 (still p<0.001 vs random). The correction
   is a ≤1-obligation rounding, not a change to the substantive finding.
-- **SPAR→CC crosswalk** is a defensible approximation, not an official WHO mapping; only
-  high-confidence capacity pairings are reported, and SPAR methodology changed across
-  editions (interpret trajectories, not single years).
+- **SPAR→CC crosswalk is CC1 only** (§3.4) — the one capacity pairing that is construct-valid;
+  it is a defensible approximation, not an official WHO mapping. SPAR methodology also
+  changed across editions (interpret trajectories, not single years).
 - All anchoring inputs remain **preliminary_ai_assisted** and unvalidated by a domestic
   public-health-law expert.
 
