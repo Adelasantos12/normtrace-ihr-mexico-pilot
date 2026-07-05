@@ -1,54 +1,58 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import {
-  Home, LayoutDashboard, Search, BookOpen, Users,
+  Home, LayoutDashboard, Search, BookOpen,
   Map, FileText, Globe, Shield, Info, AlertCircle, FileBarChart, X, Menu,
-  Zap, Layers, Activity, Scale
+  Zap, Layers, Activity, Scale, ChevronDown, Share2
 } from 'lucide-react';
 import { cn } from './lib/utils';
+import { PreliminaryBanner } from './components/PreliminaryBanner';
 
-const navGroups = [
-  {
-    label: 'Overview',
-    items: [
-      { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-      { path: '/snapshot', label: 'Country Snapshot', icon: FileText },
-    ]
-  },
-  {
-    label: 'Analytical Layers',
-    items: [
-      { path: '/pipeline', label: 'Normative Pipeline', icon: Zap },
-      { path: '/normative-hierarchy', label: 'Normative Hierarchy', icon: Layers },
-      { path: '/norm-diagnostic', label: 'Norm Diagnostic', icon: Activity },
-      { path: '/political-brain', label: 'Political Brain', icon: Scale },
-    ]
-  },
-  {
-    label: 'Intelligence Layers',
-    items: [
-      { path: '/mapping', label: 'International Mapping', icon: Search },
-      { path: '/provisions', label: 'Legal Provisions', icon: BookOpen },
-      { path: '/actors', label: 'Actors & Network', icon: Users },
-      { path: '/spar-bridge', label: 'SPAR ↔ Legal', icon: Scale },
-      { path: '/gap-map', label: 'Implementation Gap Map', icon: Map },
-      { path: '/capacity', label: 'Capacity Brief', icon: Info },
-      { path: '/international', label: 'International Instruments', icon: Globe },
-    ]
-  },
-  {
-    label: 'Documentation',
-    items: [
-      { path: '/methodology', label: 'Methodology', icon: Shield },
-      { path: '/report', label: 'Report & Citation', icon: FileBarChart },
-    ]
-  }
+// Phase 3-UX: five core sections up front (Home + these four), everything
+// else demoted to a collapsed "Advanced" group rather than a flat list of
+// 15 top-level links.
+const coreItems = [
+  { path: '/actors', label: 'Traceability Network', icon: Share2 },
+  { path: '/spar-bridge', label: 'SPAR ↔ Legal', icon: Scale },
+  { path: '/mapping', label: 'Mapping Explorer', icon: Search },
+  { path: '/methodology', label: 'Methodology & Limitations', icon: Shield },
 ];
+
+const advancedItems = [
+  { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { path: '/snapshot', label: 'Country Snapshot', icon: FileText },
+  { path: '/pipeline', label: 'Normative Pipeline', icon: Zap },
+  { path: '/normative-hierarchy', label: 'Normative Hierarchy', icon: Layers },
+  { path: '/norm-diagnostic', label: 'Norm Diagnostic', icon: Activity },
+  { path: '/political-brain', label: 'Political Brain', icon: Scale },
+  { path: '/provisions', label: 'Legal Provisions', icon: BookOpen },
+  { path: '/gap-map', label: 'Implementation Gap Map', icon: Map },
+  { path: '/capacity', label: 'Capacity Brief', icon: Info },
+  { path: '/international', label: 'International Instruments', icon: Globe },
+  { path: '/report', label: 'Report & Citation', icon: FileBarChart },
+];
+
+function NavItem({ path, label, icon: Icon }: { path: string; label: string; icon: any }) {
+  return (
+    <NavLink
+      to={path}
+      className={({ isActive }) => cn(
+        "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all duration-200",
+        isActive ? "bg-blue-50 text-blue-700 shadow-sm" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+      )}
+    >
+      <Icon size={18} /> {label}
+    </NavLink>
+  );
+}
 
 export default function Layout() {
   const [showCaveat, setShowCaveat] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const [isAdvancedOpen, setIsAdvancedOpen] = useState(() =>
+    advancedItems.some((item) => item.path === location.pathname)
+  );
 
   // Close mobile menu on navigation
   useEffect(() => {
@@ -94,48 +98,27 @@ export default function Layout() {
         </div>
 
         <nav className="flex-1 overflow-y-auto p-4 space-y-1">
-          <NavLink
-            to="/"
-            className={({ isActive }) => cn(
-              "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all duration-200",
-              isActive ? "bg-blue-50 text-blue-700" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
-            )}
-          >
-            <Home size={18} /> Home
-          </NavLink>
+          <NavItem path="/" label="Home" icon={Home} />
 
-          {navGroups.map((group) => (
-            <div key={group.label}>
-              <div className="pt-4 pb-2 px-4">
-                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{group.label}</span>
-              </div>
-              {group.items.map((item) => (
-                <NavLink
-                  key={item.path}
-                  to={item.path}
-                  className={({ isActive }) => cn(
-                    "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all duration-200",
-                    isActive ? "bg-blue-50 text-blue-700 shadow-sm" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
-                  )}
-                >
-                  <item.icon size={18} /> {item.label}
-                </NavLink>
-              ))}
-            </div>
-          ))}
+          <div className="pt-4 pb-2 px-4">
+            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Core</span>
+          </div>
+          {coreItems.map((item) => <NavItem key={item.path} {...item} />)}
+
+          <button
+            onClick={() => setIsAdvancedOpen((v) => !v)}
+            className="w-full flex items-center justify-between pt-4 pb-2 px-4 text-left"
+          >
+            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">
+              Advanced ({advancedItems.length})
+            </span>
+            <ChevronDown size={12} className={cn("text-slate-400 transition-transform", isAdvancedOpen && "rotate-180")} />
+          </button>
+          {isAdvancedOpen && advancedItems.map((item) => <NavItem key={item.path} {...item} />)}
         </nav>
 
         <div className="p-4 border-t border-slate-100">
-           <button
-             onClick={() => setShowCaveat(true)}
-             className="w-full p-4 bg-amber-50 rounded-2xl border border-amber-100 flex gap-3 hover:bg-amber-100 transition-colors text-left"
-           >
-              <AlertCircle size={14} className="text-amber-500 shrink-0 mt-0.5" />
-              <p className="text-[9px] font-bold text-amber-800 uppercase tracking-tight leading-tight">
-                 Preliminary Expert Review <br/>
-                 <span className="text-amber-600 font-normal mt-1 block">View Legal Caveats</span>
-              </p>
-           </button>
+          <PreliminaryBanner variant="sidebar" onClick={() => setShowCaveat(true)} />
         </div>
       </aside>
 
