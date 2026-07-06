@@ -68,7 +68,7 @@ export default function Methodology() {
 
       <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10 items-start">
         <aside className="lg:sticky lg:top-8 order-2 lg:order-1">
-          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 shadow-sm">
+          <div className="border border-slate-200 rounded-2xl p-5">
             <h2 className="text-xs font-medium text-slate-400 uppercase tracking-widest mb-4">On this page</h2>
             <ul className="space-y-3">
               {sections.map((s) => (
@@ -82,26 +82,23 @@ export default function Methodology() {
                 </li>
               ))}
             </ul>
-          </div>
 
-          <div className="mt-6 p-5 bg-white border border-slate-200 rounded-2xl shadow-sm mb-6">
-            <h3 className="text-sm font-semibold text-slate-800 mb-3">Academic Resource</h3>
-            <a
-              href="/data/markdown/normtrace_ihr_methodology_full.md"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs flex items-center gap-2 text-blue-600 hover:text-blue-800 font-bold transition-colors"
-            >
-              <FileText size={14} />
-              View full academic methodology draft
-            </a>
-          </div>
+            <div className="mt-6 pt-5 border-t border-slate-200">
+              <h3 className="text-xs font-medium text-slate-400 uppercase tracking-widest mb-2">Academic resource</h3>
+              <a
+                href="/data/markdown/normtrace_ihr_methodology_full.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium transition-colors"
+              >
+                <FileText size={14} />
+                View full academic methodology draft
+              </a>
+            </div>
 
-          <div className="mt-6 p-5 bg-blue-50 border border-blue-100 rounded-2xl">
-            <h3 className="text-sm font-semibold text-blue-800 mb-2">Technical Status</h3>
-            <div className="flex items-center gap-2 text-xs text-blue-700 font-medium">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-              Audit Version: 0.1 (Stable)
+            <div className="mt-6 pt-5 border-t border-slate-200 flex items-center gap-2 text-xs text-slate-500">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+              Audit version 0.1 (stable)
             </div>
           </div>
         </aside>
@@ -155,9 +152,8 @@ export default function Methodology() {
                     </div>
                   </details>
                 ) : (
-                  <div className="bg-white">
-                    <h2 className="text-2xl font-semibold text-slate-900 mb-6 flex items-center gap-3">
-                      <span className="w-1.5 h-8 bg-blue-600 rounded-full"></span>
+                  <div>
+                    <h2 className="text-2xl font-semibold text-slate-900 mb-6 pb-3 border-b border-slate-200">
                       {section.title}
                     </h2>
                     {body}
