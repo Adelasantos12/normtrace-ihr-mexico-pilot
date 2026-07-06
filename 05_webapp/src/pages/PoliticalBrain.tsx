@@ -210,10 +210,7 @@ export default function PoliticalBrain() {
         <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">
           Institutional Authority Topology
         </div>
-        <div className="flex items-center gap-3">
-          <Scale size={22} className="text-slate-400" />
-          <h1 className="text-4xl font-bold text-slate-900 tracking-tight">Political Brain</h1>
-        </div>
+        <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight">Political Brain</h1>
         <p className="text-lg text-slate-600 max-w-4xl">
           Institutional authority topology for IHR implementation in Mexico: mapping the distance between formal legal mandates and operational realities, identifying decoupled actors, structural bottlenecks, and reform feasibility pathways.
         </p>

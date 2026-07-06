@@ -252,7 +252,7 @@ export default function LandingPage() {
           <div className="space-y-2">
             <h4 className="text-xs font-medium text-slate-400 uppercase tracking-wide">Mexico Pilot v0.1</h4>
             <div className="flex items-center gap-1.5 text-amber-700 font-medium text-xs">
-              <AlertTriangle size={12} /> PASS_WITH_FINDINGS
+              <AlertTriangle size={12} /> Pass, with findings
             </div>
             <p className="text-xs text-slate-500">Proof-of-concept pilot. Framework designed for replication across legal systems.</p>
             <p className="text-xs text-slate-400 italic">Preliminary AI-assisted outputs. Expert legal review required before any policy application.</p>

@@ -78,14 +78,9 @@ export default function ReportBuilder() {
                     )}
                   >
                      <div className="flex items-center gap-4">
-                        <div className={cn(
-                          "p-2 rounded-lg transition-colors",
-                          selected.has(section.id) ? "bg-blue-50 text-blue-600" : "bg-slate-100 text-slate-400"
-                        )}>
-                           <section.icon size={18} />
-                        </div>
+                        <section.icon size={18} className={selected.has(section.id) ? "text-blue-600" : "text-slate-400"} />
                         <div>
-                           <p className="text-xs font-bold">{section.label}</p>
+                           <p className="text-xs font-semibold">{section.label}</p>
                            {section.always && <p className="text-[10px] text-slate-400 font-medium">Required Section</p>}
                         </div>
                      </div>
@@ -96,7 +91,7 @@ export default function ReportBuilder() {
          </div>
 
          <div className="space-y-6">
-            <h3 className="font-bold text-slate-900 px-1">Live Preview</h3>
+            <h3 className="font-semibold text-slate-900 px-1">Live Preview</h3>
             <div className="bg-slate-800 rounded-2xl p-8 aspect-[1/1.4] shadow-2xl relative overflow-hidden border border-slate-700">
                <div className="absolute top-0 left-0 w-full h-1 bg-blue-500" />
                <div className="space-y-8 animate-in fade-in duration-500">
@@ -159,7 +154,7 @@ export default function ReportBuilder() {
                   <div className="space-y-4">
                      <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-2">Data Package</h3>
                      <p className="text-lg font-bold text-slate-800">v0.1 (Audited)</p>
-                     <p className="text-sm text-slate-500">Verdict: PASS_WITH_DOCUMENTED_FINDINGS</p>
+                     <p className="text-sm text-slate-500">Verdict: Pass, with documented findings</p>
                   </div>
                </div>
 
@@ -264,7 +259,7 @@ export default function ReportBuilder() {
                   <div className="grid grid-cols-2 gap-8">
                      <div className="p-6 bg-red-50 rounded-xl border border-red-100 space-y-4">
                         <h4 className="font-bold text-red-900 uppercase tracking-widest text-[10px]">Audit Verdict</h4>
-                        <p className="text-xl font-bold text-red-700">PASS_WITH_DOCUMENTED_FINDINGS</p>
+                        <p className="text-xl font-bold text-red-700">Pass, with documented findings</p>
                      </div>
                      <div className="p-6 bg-blue-50 rounded-xl border border-blue-100 space-y-4">
                         <h4 className="font-bold text-blue-900 uppercase tracking-widest text-[10px]">Mapping Version</h4>

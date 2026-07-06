@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useCsvData } from '../hooks/useData';
-import { Activity, Filter, Info, AlertTriangle, CheckCircle, XCircle, Clock, ChevronDown, ChevronRight } from 'lucide-react';
+import { Filter, Info, AlertTriangle, CheckCircle, XCircle, Clock, ChevronDown, ChevronRight } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 // --- Diagnostic categories ---
@@ -243,10 +243,7 @@ export default function NormDiagnostic() {
         <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">
           Obligation × Norm Diagnostic
         </div>
-        <div className="flex items-center gap-3">
-          <Activity size={22} className="text-slate-400" />
-          <h1 className="text-4xl font-bold text-slate-900 tracking-tight">Norm Diagnostic</h1>
-        </div>
+        <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight">Norm Diagnostic</h1>
         <p className="text-lg text-slate-500 max-w-4xl">
           Cross-diagnostic matrix: IHR obligation × domestic norm. Each pairing is classified by diagnostic status: from well-anchored to orphaned, with identification of tier mismatches, outdated instruments, procedural gaps, and fragmented anchoring.
         </p>

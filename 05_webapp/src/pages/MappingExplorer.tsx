@@ -87,7 +87,7 @@ export default function MappingExplorer() {
           <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">
             IHR 2005 Mapping Explorer
           </div>
-          <h1 className="text-4xl font-bold text-slate-900 tracking-tight mt-1">International Legal Mapping</h1>
+          <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight mt-1">International Legal Mapping</h1>
           <p className="text-lg text-slate-600 mt-2 max-w-4xl">
             Trace IHR 2005 obligations, IHR 2024 update pressure, and Pandemic Agreement/PABS readiness against Mexico’s domestic legal corpus.
           </p>

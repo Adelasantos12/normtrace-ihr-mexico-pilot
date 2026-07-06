@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useCsvData } from '../hooks/useData';
-import { Layers, Scale, Globe, ChevronDown, ChevronRight, Info, Shield, CheckCircle, AlertTriangle } from 'lucide-react';
+import { Scale, Globe, ChevronDown, ChevronRight, Info, Shield, CheckCircle, AlertTriangle } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 // Tier configuration
@@ -108,10 +108,7 @@ export default function NormativeHierarchy() {
         <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">
           Mexico's Legal Hierarchy
         </div>
-        <div className="flex items-center gap-3">
-          <Layers size={22} className="text-slate-400" />
-          <h1 className="text-4xl font-bold text-slate-900 tracking-tight">Normative Hierarchy</h1>
-        </div>
+        <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight">Normative Hierarchy</h1>
         <p className="text-lg text-slate-500 max-w-4xl">
           Mexico's legal architecture for IHR implementation: from constitutional foundations to sub-regulatory instruments, with IHR anchoring analysis at each tier.
         </p>

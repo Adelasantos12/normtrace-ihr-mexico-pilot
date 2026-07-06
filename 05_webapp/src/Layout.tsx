@@ -64,9 +64,9 @@ export default function Layout() {
       {/* Mobile Header */}
       <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between z-30">
          <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-900 text-white font-black text-xs">NT-IHR</div>
+            <div className="p-2 bg-blue-900 text-white font-semibold text-xs">NT-IHR</div>
             <div className="flex flex-col">
-               <h2 className="font-black text-slate-900 tracking-tight text-sm leading-tight">NormTrace-IHR</h2>
+               <h2 className="font-semibold text-slate-900 tracking-tight text-sm leading-tight">NormTrace-IHR</h2>
                <p className="text-[7px] text-slate-400 font-mono opacity-60">DOI: 10.5281/zenodo.20085170</p>
             </div>
          </div>
@@ -78,10 +78,10 @@ export default function Layout() {
          </button>
       </header>
 
-      {/* Sidebar Overlay for Mobile */}
+      {/* Sidebar Overlay for Mobile — starts below the header so the close button stays visible */}
       {isMobileMenuOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 transition-opacity"
+          className="lg:hidden fixed inset-x-0 top-16 bottom-0 bg-slate-900/60 backdrop-blur-sm z-40 transition-opacity"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
@@ -92,8 +92,8 @@ export default function Layout() {
         isMobileMenuOpen ? "translate-x-0 w-72" : "-translate-x-full w-64"
       )}>
         <div className="p-8 border-b border-slate-100 bg-white">
-          <h2 className="text-xl font-black text-[#0f172a] tracking-tight">NormTrace-IHR</h2>
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1">Mexico Pilot v0.1</p>
+          <h2 className="text-xl font-semibold text-slate-900 tracking-tight">NormTrace-IHR</h2>
+          <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-[0.2em] mt-1">Mexico Pilot v0.1</p>
           <p className="text-[8px] text-slate-400 font-mono mt-2 opacity-60">DOI: 10.5281/zenodo.20085170</p>
         </div>
 
@@ -174,7 +174,7 @@ export default function Layout() {
             <div className="p-6 bg-slate-50 border-t border-slate-200 flex justify-end">
               <button
                 onClick={() => setShowCaveat(false)}
-                className="px-8 py-3 bg-[#0f172a] text-white rounded-xl text-sm font-bold hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20 active:scale-95"
+                className="px-8 py-3 bg-slate-900 text-white rounded-full text-sm font-medium hover:bg-blue-800 transition-all active:scale-95"
               >
                 Understood
               </button>

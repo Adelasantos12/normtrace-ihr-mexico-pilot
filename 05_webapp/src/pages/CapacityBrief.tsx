@@ -31,9 +31,7 @@ export default function CapacityBrief() {
       international: 'IHR 2005 Part IV / IHR 2024 Annex 1',
       status: 'High priority',
       validation: 'Review inter-agency SOPs vs. statutory mandates',
-      icon: MapPin,
-      color: 'text-blue-600',
-      bg: 'bg-blue-50'
+      icon: MapPin
     },
     {
       title: 'Intersectoral coordination',
@@ -42,9 +40,7 @@ export default function CapacityBrief() {
       international: 'IHR 2005 Art. 4 / IHR 2024 implementation layer',
       status: 'Medium priority',
       validation: 'Assess coordination committee legal status',
-      icon: Users,
-      color: 'text-emerald-600',
-      bg: 'bg-emerald-50'
+      icon: Users
     },
     {
       title: 'Sustainable IHR financing / planning',
@@ -53,9 +49,7 @@ export default function CapacityBrief() {
       international: 'IHR 2024 Art. 44 (New financing obligation)',
       status: 'Medium priority',
       validation: 'Map IHR core capacities to PEF budget lines',
-      icon: DollarSign,
-      color: 'text-amber-600',
-      bg: 'bg-amber-50'
+      icon: DollarSign
     },
     {
       title: 'PABS and health product readiness',
@@ -65,8 +59,6 @@ export default function CapacityBrief() {
       status: 'Provisional',
       validation: 'Cross-reference COFEPRIS mandates with PA draft',
       icon: Package,
-      color: 'text-purple-600',
-      bg: 'bg-purple-50',
       caveat: 'Provisional: pending final normative consolidation.'
     }
   ];
@@ -150,7 +142,7 @@ export default function CapacityBrief() {
                     <div className="text-[9px] text-slate-600 leading-tight italic">{card.validation}</div>
                  </div>
                  {card.caveat && (
-                    <div className="text-[9px] font-bold text-purple-600 bg-purple-50 px-2 py-1 rounded">
+                    <div className="text-[9px] font-semibold text-amber-700 bg-amber-50 px-2 py-1 rounded">
                        {card.caveat}
                     </div>
                  )}

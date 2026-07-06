@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useCsvData } from '../hooks/useData';
-import { Zap, ChevronDown, ChevronRight, AlertTriangle, CheckCircle, Info, XCircle, Clock } from 'lucide-react';
+import { ChevronDown, ChevronRight, AlertTriangle, CheckCircle, Info, XCircle, Clock } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 // --- Tier inference ---
@@ -280,10 +280,7 @@ export default function NormPipeline() {
         <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">
           Normative Pipeline Analysis
         </div>
-        <div className="flex items-center gap-3">
-          <Zap size={22} className="text-slate-400" />
-          <h1 className="text-4xl font-bold text-slate-900 tracking-tight">Normative Pipeline</h1>
-        </div>
+        <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight">Normative Pipeline</h1>
         <p className="text-lg text-slate-500 max-w-4xl">
           For each IHR 2005 obligation, trace the normative flow through Mexico's legal architecture: from international source to constitutional bridge, statutory layer, regulatory specification, institutional actor, and implementation mechanism.
         </p>

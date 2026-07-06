@@ -20,8 +20,12 @@ export default function GapMap() {
          <p className="text-slate-500 mt-1">Policy-facing analysis of structural-legal gaps in Mexico's IHR internalisation.</p>
       </header>
 
-      <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
-        <div className="overflow-x-auto">
+      <p className="text-xs text-slate-400 flex items-center gap-1">
+        Scroll horizontally to see all columns <ChevronRight size={12} />
+      </p>
+
+      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+        <div className="overflow-x-auto [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-slate-100 [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar-thumb]:rounded-full">
           <table className="w-full text-left border-collapse min-w-[1200px]">
             <thead className="bg-slate-50 border-b border-slate-200">
               <tr>

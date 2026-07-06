@@ -179,7 +179,7 @@ export default function Dashboard() {
            <h3 className="font-semibold text-slate-900 px-1">Mexico Anchoring Profile</h3>
            <div className="bg-white p-8 border border-slate-200 rounded-2xl shadow-sm space-y-8">
               <div className="h-64">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" debounce={200} initialDimension={{ width: 500, height: 256 }}>
                   <BarChart data={stats.anchoring} layout="vertical">
                     <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f1f5f9" />
                     <XAxis type="number" hide />
@@ -237,7 +237,7 @@ export default function Dashboard() {
         <div className="lg:col-span-1 space-y-6">
           <h3 className="font-semibold text-slate-900 px-1 text-sm">Top Legal Domains</h3>
           <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 h-72">
-             <ResponsiveContainer width="100%" height="100%">
+             <ResponsiveContainer width="100%" height="100%" debounce={200} initialDimension={{ width: 320, height: 288 }}>
                <BarChart data={stats.domains.slice(0, 5)} layout="vertical" margin={{ right: 20 }}>
                  <XAxis type="number" hide />
                  <YAxis dataKey="name" type="category" width={110} tick={{fontSize: 9, fontWeight: 'bold'}} axisLine={false} tickLine={false} />
@@ -255,7 +255,7 @@ export default function Dashboard() {
           <h3 className="font-semibold text-slate-900 px-1 text-sm">Assessment Confidence</h3>
           <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 h-72 flex flex-col justify-center">
              <div className="h-48">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" debounce={200} initialDimension={{ width: 288, height: 192 }}>
                   <PieChart>
                     <Pie
                       data={stats.confidence}
