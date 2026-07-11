@@ -145,13 +145,15 @@ function ComputedNetworkGraph({
       .force('link', forceLink(simLinks as any).distance(40).strength(0.25))
       .force('x', forceX(width / 2).strength(0.03))
       .force('collide', forceCollide((d: any) =>
-        d.size + 3 + (d.mode === 'instrument' && d.size > 10 ? d.label.length * 2.2 : 0)))
+        d.size + 3
+        + (d.mode === 'instrument' && d.size > 10 ? d.label.length * 2.2 : 0)
+        + (d.mode === 'actor' ? Math.min(d.label.length, 16) * 1.5 : 0)))
       .stop();
     for (let i = 0; i < 260; i++) simulation.tick();
 
     const nodes: GraphNode[] = simNodes.map((n) => ({
       id: n.id, mode: n.mode, label: n.label, full: n.full, size: n.size, gapType: n.gapType,
-      x: Math.max(36, Math.min(width - 36, n.x)), y: n.y,
+      x: Math.max(55, Math.min(width - 55, n.x)), y: n.y,
     }));
     const edges: GraphEdge[] = simLinks.map((l) => ({
       source: (l.source as any).id, target: (l.target as any).id, weight: l.weight, isGap: l.isGap,
@@ -261,6 +263,14 @@ function ComputedNetworkGraph({
             const isHoveredClickable = n.mode === 'obligation' && hovered === n.id && !isSelected;
             const hasGap = n.mode === 'obligation' && HIGH_SEVERITY_GAPS.has(n.gapType);
             const dimmed = !!highlightSet && !isRelated(n.id);
+            const r = isHoveredClickable ? n.size + 3 : n.size;
+            // Actor labels are always shown below the node (never fit inside the
+            // circle); obligation/instrument labels stay inline, gated by size/hover
+            // to avoid crowding the dense top band.
+            const belowLabel = n.mode === 'actor'
+              ? (n.label.length > 16 ? n.label.slice(0, 14) + '…' : n.label)
+              : null;
+            const belowLabelWidth = belowLabel ? belowLabel.length * 5.2 + 8 : 0;
             return (
               <g key={n.id}
                  transform={`translate(${n.x},${n.y})`}
@@ -270,7 +280,7 @@ function ComputedNetworkGraph({
                  onMouseEnter={() => setHovered(n.id)}
                  onMouseLeave={() => setHovered(null)}>
                 <circle
-                  r={isHoveredClickable ? n.size + 3 : n.size}
+                  r={r}
                   fill={style.fill}
                   stroke={isSelected ? '#2563eb' : isHoveredClickable ? '#60a5fa' : hasGap ? '#dc2626' : style.stroke}
                   strokeWidth={isSelected || isHoveredClickable ? 3 : hasGap ? 2 : 1.5}
@@ -281,6 +291,29 @@ function ComputedNetworkGraph({
                   <text textAnchor="middle" dy=".3em" fontSize={8} fontWeight="900" fill={style.text} className="pointer-events-none">
                     {n.label}
                   </text>
+                )}
+                {belowLabel && (
+                  <>
+                    <rect
+                      x={-belowLabelWidth / 2}
+                      y={r + 3}
+                      width={belowLabelWidth}
+                      height={13}
+                      rx={3}
+                      fill="rgba(255,255,255,0.9)"
+                      className="pointer-events-none"
+                    />
+                    <text
+                      y={r + 12}
+                      textAnchor="middle"
+                      fontSize={8}
+                      fontWeight={700}
+                      fill="#1e293b"
+                      className="pointer-events-none"
+                    >
+                      {belowLabel}
+                    </text>
+                  </>
                 )}
               </g>
             );
