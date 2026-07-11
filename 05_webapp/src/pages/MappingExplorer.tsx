@@ -84,27 +84,28 @@ export default function MappingExplorer() {
     <div className="space-y-8 pb-24">
       <header className="space-y-4">
         <div>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tight">International Legal Mapping</h1>
+          <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">
+            IHR 2005 Mapping Explorer
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight mt-1">International Legal Mapping</h1>
           <p className="text-lg text-slate-600 mt-2 max-w-4xl">
             Trace IHR 2005 obligations, IHR 2024 update pressure, and Pandemic Agreement/PABS readiness against Mexico’s domestic legal corpus.
           </p>
         </div>
 
         {/* Summary Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-slate-100 rounded-2xl overflow-hidden border border-slate-100">
           {[
-            { label: 'IHR 2005 Obligations', value: stats.obligations, icon: Globe, color: 'text-blue-600' },
-            { label: 'Domestic Anchors', value: stats.anchors, icon: Shield, color: 'text-emerald-600' },
-            { label: 'Review-Sensitive', value: stats.sensitive, icon: AlertTriangle, color: 'text-amber-600' },
-            { label: 'Primary Gap Types', value: stats.gaps, icon: Activity, color: 'text-purple-600' }
+            { label: 'IHR 2005 Obligations', value: stats.obligations, icon: Globe },
+            { label: 'Domestic Anchors', value: stats.anchors, icon: Shield },
+            { label: 'Review-Sensitive', value: stats.sensitive, icon: AlertTriangle },
+            { label: 'Primary Gap Types', value: stats.gaps, icon: Activity }
           ].map((s, i) => (
-            <div key={i} className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm flex items-center gap-4">
-              <div className={cn("p-3 rounded-xl bg-slate-50", s.color)}>
-                <s.icon size={20} />
-              </div>
+            <div key={i} className="bg-white p-5 flex items-center gap-4">
+              <s.icon size={18} className="text-slate-400" />
               <div>
-                <div className="text-2xl font-black text-slate-900">{s.value}</div>
-                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{s.label}</div>
+                <div className="text-2xl font-semibold text-slate-900">{s.value}</div>
+                <div className="text-[10px] font-medium text-slate-400 uppercase tracking-wider">{s.label}</div>
               </div>
             </div>
           ))}
@@ -183,7 +184,7 @@ export default function MappingExplorer() {
                       <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
                         <div className="space-y-2 flex-1">
                           <div className="flex items-center gap-2">
-                            <span className="px-2 py-0.5 bg-slate-900 text-white rounded text-[10px] font-black uppercase tracking-widest">
+                            <span className="px-2 py-0.5 bg-slate-900 text-white rounded text-[10px] font-semibold uppercase tracking-widest">
                               {r.instrument}: {r.article}
                             </span>
                             <span className="text-[10px] font-bold text-slate-400">ID: {r.obligation_id}</span>
@@ -235,7 +236,7 @@ export default function MappingExplorer() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                           <div className="space-y-6">
                             <section className="space-y-2">
-                              <h4 className="text-xs font-black text-slate-900 uppercase tracking-widest flex items-center gap-2">
+                              <h4 className="text-xs font-semibold text-slate-900 uppercase tracking-widest flex items-center gap-2">
                                 <Info size={14} className="text-blue-600"/> Assessment Details
                               </h4>
                               <div className="space-y-4">
@@ -261,7 +262,7 @@ export default function MappingExplorer() {
                             </section>
 
                             <section className="space-y-2">
-                              <h4 className="text-xs font-black text-slate-900 uppercase tracking-widest">Implications</h4>
+                              <h4 className="text-xs font-semibold text-slate-900 uppercase tracking-widest">Implications</h4>
                               <div className="grid grid-cols-2 gap-4">
                                 <div>
                                   <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Implementation domain</div>
@@ -284,7 +285,7 @@ export default function MappingExplorer() {
                           </div>
 
                           <section className="space-y-4">
-                            <h4 className="text-xs font-black text-slate-900 uppercase tracking-widest">Structural Fit Analysis</h4>
+                            <h4 className="text-xs font-semibold text-slate-900 uppercase tracking-widest">Structural Fit Analysis</h4>
                             <div className="space-y-3">
                               {Object.entries(FIT_LABELS).map(([key, label]: [string, any]) => (
                                 <div key={key} className="flex items-center justify-between group">
@@ -307,7 +308,7 @@ export default function MappingExplorer() {
                               ))}
                             </div>
                             <div className="mt-6 p-4 bg-white border border-slate-200 rounded-xl">
-                               <h5 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Full Obligation Text</h5>
+                               <h5 className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-2">Full Obligation Text</h5>
                                <p className="text-xs text-slate-600 leading-relaxed">{r.obligation_text_short}</p>
                             </div>
                           </section>
@@ -340,7 +341,7 @@ export default function MappingExplorer() {
               <div key={i} className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4 hover:border-blue-200 transition-colors">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                    <div className="flex items-center gap-3">
-                      <span className="px-2 py-0.5 bg-blue-900 text-white rounded text-[10px] font-black uppercase tracking-widest">
+                      <span className="px-2 py-0.5 bg-blue-900 text-white rounded text-[10px] font-semibold uppercase tracking-widest">
                         {r.article_or_annex}
                       </span>
                       <span className={cn(
@@ -395,14 +396,14 @@ export default function MappingExplorer() {
 
           <section className="space-y-6">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-slate-900 text-white rounded-lg flex items-center justify-center font-black text-xs">PA</div>
+              <div className="w-8 h-8 bg-slate-900 text-white rounded-lg flex items-center justify-center font-semibold text-xs">PA</div>
               <h2 className="text-xl font-bold text-slate-900">Pandemic Agreement Obligations</h2>
             </div>
             <div className="grid gap-4">
               {pa.map((r, i) => (
                 <div key={i} className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-black uppercase tracking-widest">
+                    <span className="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-semibold uppercase tracking-widest">
                       Article {r.article}
                     </span>
                     <span className="text-[10px] font-bold text-slate-400 uppercase">{r.theme}</span>
@@ -436,14 +437,14 @@ export default function MappingExplorer() {
 
           <section className="space-y-6">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center font-black text-xs">PABS</div>
+              <div className="w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center font-semibold text-xs">PABS</div>
               <h2 className="text-xl font-bold text-slate-900">PABS Draft Obligations</h2>
             </div>
             <div className="grid gap-4">
               {pabs.map((r, i) => (
                 <div key={i} className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
                    <div className="flex items-center justify-between">
-                    <span className="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-black uppercase tracking-widest">
+                    <span className="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-semibold uppercase tracking-widest">
                       Section {r.section}
                     </span>
                     <span className="text-[10px] font-bold text-slate-400 uppercase">{r.draft_element}</span>

@@ -37,8 +37,8 @@ function NavItem({ path, label, icon: Icon }: { path: string; label: string; ico
     <NavLink
       to={path}
       className={({ isActive }) => cn(
-        "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all duration-200",
-        isActive ? "bg-blue-50 text-blue-700 shadow-sm" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+        "flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
+        isActive ? "bg-slate-800 text-sky-400" : "text-slate-400 hover:bg-slate-800/50 hover:text-white"
       )}
     >
       <Icon size={18} /> {label}
@@ -62,46 +62,43 @@ export default function Layout() {
   return (
     <div className="flex min-h-screen bg-slate-50 text-slate-900 font-sans relative">
       {/* Mobile Header */}
-      <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between z-30">
-         <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-900 text-white font-black text-xs">NT-IHR</div>
-            <div className="flex flex-col">
-               <h2 className="font-black text-slate-900 tracking-tight text-sm leading-tight">NormTrace-IHR</h2>
-               <p className="text-[7px] text-slate-400 font-mono opacity-60">DOI: 10.5281/zenodo.20085170</p>
-            </div>
+      <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-slate-900 border-b border-slate-800 px-6 flex items-center justify-between z-30">
+         <div className="flex flex-col">
+            <h2 className="font-bold text-sky-400 tracking-tight text-sm leading-tight">NormTrace-IHR</h2>
+            <p className="text-[7px] text-slate-500 font-mono">DOI: 10.5281/zenodo.20085170</p>
          </div>
          <button
            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-           className="p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors"
+           className="p-2 text-slate-300 hover:bg-slate-800 rounded-lg transition-colors"
          >
            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
          </button>
       </header>
 
-      {/* Sidebar Overlay for Mobile */}
+      {/* Sidebar Overlay for Mobile — starts below the header so the close button stays visible */}
       {isMobileMenuOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 transition-opacity"
+          className="lg:hidden fixed inset-x-0 top-16 bottom-0 bg-slate-900/60 backdrop-blur-sm z-40 transition-opacity"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <aside className={cn(
-        "bg-white border-r border-slate-200 flex flex-col fixed inset-y-0 z-50 print:hidden transition-transform duration-300 ease-in-out lg:translate-x-0 lg:w-64",
+        "bg-slate-900 border-r border-slate-800 flex flex-col fixed inset-y-0 z-50 print:hidden transition-transform duration-300 ease-in-out lg:translate-x-0 lg:w-64",
         isMobileMenuOpen ? "translate-x-0 w-72" : "-translate-x-full w-64"
       )}>
-        <div className="p-8 border-b border-slate-100 bg-white">
-          <h2 className="text-xl font-black text-[#0f172a] tracking-tight">NormTrace-IHR</h2>
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1">Mexico Pilot v0.1</p>
-          <p className="text-[8px] text-slate-400 font-mono mt-2 opacity-60">DOI: 10.5281/zenodo.20085170</p>
+        <div className="p-6 border-b border-slate-800">
+          <h2 className="text-xl font-bold text-sky-400 tracking-tight">NormTrace-IHR</h2>
+          <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-[0.2em] mt-1">Mexico Pilot v0.1</p>
+          <p className="text-[8px] text-slate-600 font-mono mt-2">DOI: 10.5281/zenodo.20085170</p>
         </div>
 
         <nav className="flex-1 overflow-y-auto p-4 space-y-1">
           <NavItem path="/" label="Home" icon={Home} />
 
           <div className="pt-4 pb-2 px-4">
-            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Core</span>
+            <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Core</span>
           </div>
           {coreItems.map((item) => <NavItem key={item.path} {...item} />)}
 
@@ -109,15 +106,15 @@ export default function Layout() {
             onClick={() => setIsAdvancedOpen((v) => !v)}
             className="w-full flex items-center justify-between pt-4 pb-2 px-4 text-left"
           >
-            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">
+            <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">
               Advanced ({advancedItems.length})
             </span>
-            <ChevronDown size={12} className={cn("text-slate-400 transition-transform", isAdvancedOpen && "rotate-180")} />
+            <ChevronDown size={12} className={cn("text-slate-500 transition-transform", isAdvancedOpen && "rotate-180")} />
           </button>
           {isAdvancedOpen && advancedItems.map((item) => <NavItem key={item.path} {...item} />)}
         </nav>
 
-        <div className="p-4 border-t border-slate-100">
+        <div className="p-4 border-t border-slate-800">
           <PreliminaryBanner variant="sidebar" onClick={() => setShowCaveat(true)} />
         </div>
       </aside>
@@ -174,7 +171,7 @@ export default function Layout() {
             <div className="p-6 bg-slate-50 border-t border-slate-200 flex justify-end">
               <button
                 onClick={() => setShowCaveat(false)}
-                className="px-8 py-3 bg-[#0f172a] text-white rounded-xl text-sm font-bold hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20 active:scale-95"
+                className="px-8 py-3 bg-slate-900 text-white rounded-full text-sm font-medium hover:bg-blue-800 transition-all active:scale-95"
               >
                 Understood
               </button>

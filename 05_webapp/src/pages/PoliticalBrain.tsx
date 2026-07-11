@@ -207,10 +207,10 @@ export default function PoliticalBrain() {
   return (
     <div className="space-y-8 pb-24">
       <header className="space-y-3">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-purple-900 text-white rounded-xl"><Scale size={20} /></div>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tight">Political Brain</h1>
+        <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">
+          Institutional Authority Topology
         </div>
+        <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight">Political Brain</h1>
         <p className="text-lg text-slate-600 max-w-4xl">
           Institutional authority topology for IHR implementation in Mexico: mapping the distance between formal legal mandates and operational realities, identifying decoupled actors, structural bottlenecks, and reform feasibility pathways.
         </p>
@@ -247,8 +247,8 @@ export default function PoliticalBrain() {
       {/* AUTHORITY TOPOLOGY */}
       {tab === 'topology' && (
         <div className="space-y-6">
-          <div className="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm space-y-6">
-            <h2 className="text-xl font-black text-slate-900">Institutional Authority Map: IHR Mexico</h2>
+          <div className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm space-y-6">
+            <h2 className="text-xl font-semibold text-slate-900">Institutional Authority Map: IHR Mexico</h2>
             <p className="text-sm text-slate-500 max-w-3xl">
               Formal authority (legal mandate strength) versus operational influence (effective role in IHR implementation). Distance between the two signals decoupling risk.
             </p>
@@ -265,24 +265,24 @@ export default function PoliticalBrain() {
                       className="w-full p-5 flex items-center gap-4 text-left hover:bg-slate-50/50 transition-colors"
                     >
                       <div className="flex-1 min-w-0">
-                        <div className="font-black text-slate-900">{actor.name}</div>
+                        <div className="font-semibold text-slate-900">{actor.name}</div>
                         <div className="text-[10px] text-slate-500 uppercase tracking-wider mt-0.5 font-medium">{actor.mandateType}</div>
                       </div>
                       <div className="hidden md:flex items-center gap-4 shrink-0 text-right">
                         <div>
                           <div className="text-[9px] font-bold text-slate-400 uppercase">Formal</div>
-                          <span className={cn('px-2 py-0.5 rounded text-[10px] font-black', formal.bg, formal.color)}>{formal.label}</span>
+                          <span className={cn('px-2 py-0.5 rounded text-[10px] font-semibold', formal.bg, formal.color)}>{formal.label}</span>
                         </div>
                         <div>
                           <div className="text-[9px] font-bold text-slate-400 uppercase">Operational</div>
-                          <span className={cn('px-2 py-0.5 rounded text-[10px] font-black', operational.bg, operational.color)}>{operational.label}</span>
+                          <span className={cn('px-2 py-0.5 rounded text-[10px] font-semibold', operational.bg, operational.color)}>{operational.label}</span>
                         </div>
                         <div>
                           <div className="text-[9px] font-bold text-slate-400 uppercase">Decoupling</div>
-                          <span className={cn('px-2 py-0.5 rounded text-[10px] font-black border', decouple.bg, decouple.border, decouple.color)}>{decouple.label}</span>
+                          <span className={cn('px-2 py-0.5 rounded text-[10px] font-semibold border', decouple.bg, decouple.border, decouple.color)}>{decouple.label}</span>
                         </div>
                         {actor.bottleneck && (
-                          <span className="px-2 py-0.5 bg-red-100 text-red-700 rounded text-[9px] font-black">BOTTLENECK</span>
+                          <span className="px-2 py-0.5 bg-red-100 text-red-700 rounded text-[9px] font-semibold">BOTTLENECK</span>
                         )}
                       </div>
                       {isExp ? <ChevronDown size={18} className="text-slate-400 shrink-0" /> : <ChevronRight size={18} className="text-slate-400 shrink-0" />}
@@ -290,20 +290,20 @@ export default function PoliticalBrain() {
                     {isExp && (
                       <div className="border-t border-slate-100 p-6 grid md:grid-cols-2 gap-5 bg-slate-50/30">
                         <div className="space-y-3">
-                          <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Legal Basis</div>
+                          <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Legal Basis</div>
                           <p className="text-xs font-medium text-slate-700">{actor.constitutionalBasis}</p>
-                          <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-3">IHR Role</div>
+                          <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mt-3">IHR Role</div>
                           <p className="text-xs text-slate-600 leading-relaxed">{actor.ihrRole}</p>
                         </div>
                         <div className="space-y-3">
                           <div className={cn('p-4 rounded-xl border', decouple.bg, decouple.border)}>
-                            <div className={cn('text-[10px] font-black uppercase tracking-wider mb-2', decouple.color)}>
+                            <div className={cn('text-[10px] font-semibold uppercase tracking-wider mb-2', decouple.color)}>
                               Decoupling Analysis: {decouple.label} Risk
                             </div>
                             <p className="text-xs text-slate-700 leading-relaxed">{actor.decouplingNote}</p>
                           </div>
                           <div className="p-4 rounded-xl bg-white border border-slate-100">
-                            <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Reform Pathway</div>
+                            <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-2">Reform Pathway</div>
                             <p className="text-xs text-slate-600 leading-relaxed">{actor.reformNotes}</p>
                           </div>
                         </div>
@@ -320,8 +320,8 @@ export default function PoliticalBrain() {
       {/* INSTITUTIONAL DECOUPLING */}
       {tab === 'decoupling' && (
         <div className="space-y-6">
-          <div className="bg-slate-900 text-white rounded-[2rem] p-10 space-y-5">
-            <h2 className="text-2xl font-black">Institutional Decoupling in IHR Implementation</h2>
+          <div className="bg-slate-900 text-white rounded-2xl p-10 space-y-5">
+            <h2 className="text-2xl font-semibold">Institutional Decoupling in IHR Implementation</h2>
             <p className="text-slate-300 leading-relaxed max-w-4xl text-sm">
               Institutional decoupling (Meyer &amp; Rowan, 1977; Weick, 1976) describes the gap between formal organisational structure and operational practice. In IHR implementation, decoupling occurs when: (1) an actor holds a formal legal mandate but does not operationally perform the IHR function; (2) a legal procedure exists on paper but has no operational correlate; (3) a coordination mechanism is legally established but not activated; or (4) a law is enacted without the cascading legislative changes needed to operationalise it at lower normative tiers.
             </p>
@@ -330,14 +330,14 @@ export default function PoliticalBrain() {
           <div className="grid md:grid-cols-2 gap-6">
             {/* High-decoupling actors */}
             <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm">
-              <h3 className="text-lg font-black text-slate-900">High-Decoupling Actors</h3>
+              <h3 className="text-lg font-semibold text-slate-900">High-Decoupling Actors</h3>
               {INSTITUTIONAL_ACTORS.filter(a => a.decouplingRisk === 'HIGH' || a.decouplingRisk === 'VERY_HIGH').map(actor => {
                 const decouple = DECOUPLING_LEVELS[actor.decouplingRisk];
                 return (
                   <div key={actor.id} className={cn('p-5 rounded-2xl border space-y-2', decouple.bg, decouple.border)}>
                     <div className="flex items-center justify-between">
-                      <span className="font-black text-slate-900 text-sm">{actor.name}</span>
-                      <span className={cn('px-2 py-0.5 rounded text-[9px] font-black border', decouple.bg, decouple.border, decouple.color)}>{decouple.label}</span>
+                      <span className="font-semibold text-slate-900 text-sm">{actor.name}</span>
+                      <span className={cn('px-2 py-0.5 rounded text-[9px] font-semibold border', decouple.bg, decouple.border, decouple.color)}>{decouple.label}</span>
                     </div>
                     <p className="text-xs text-slate-600 leading-relaxed">{actor.decouplingNote}</p>
                   </div>
@@ -347,13 +347,13 @@ export default function PoliticalBrain() {
 
             {/* Structural bottlenecks */}
             <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm">
-              <h3 className="text-lg font-black text-slate-900">Structural Bottlenecks</h3>
+              <h3 className="text-lg font-semibold text-slate-900">Structural Bottlenecks</h3>
               <p className="text-xs text-slate-500 leading-relaxed">Actors that anchor multiple IHR obligations but whose institutional position creates implementation blockages: either due to decoupling, coordination failures, or normative insufficiency.</p>
               {bottlenecks.map(actor => (
                 <div key={actor.id} className="p-5 rounded-2xl bg-red-50 border border-red-200 space-y-2">
                   <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 bg-red-100 text-red-700 rounded text-[9px] font-black">BOTTLENECK</span>
-                    <span className="font-black text-slate-900 text-sm">{actor.name}</span>
+                    <span className="px-2 py-0.5 bg-red-100 text-red-700 rounded text-[9px] font-semibold">BOTTLENECK</span>
+                    <span className="font-semibold text-slate-900 text-sm">{actor.name}</span>
                   </div>
                   <p className="text-xs text-slate-600 leading-relaxed">{actor.reformNotes}</p>
                 </div>
@@ -362,8 +362,8 @@ export default function PoliticalBrain() {
           </div>
 
           {/* Decoupling typology */}
-          <div className="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm space-y-6">
-            <h3 className="text-xl font-black text-slate-900">Decoupling Typology: Mexico IHR Findings</h3>
+          <div className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm space-y-6">
+            <h3 className="text-xl font-semibold text-slate-900">Decoupling Typology: Mexico IHR Findings</h3>
             <div className="grid md:grid-cols-2 gap-5">
               {[
                 {
@@ -392,7 +392,7 @@ export default function PoliticalBrain() {
                 }
               ].map((d, i) => (
                 <div key={i} className={cn('p-5 rounded-2xl border space-y-2', d.color)}>
-                  <div className="font-black text-slate-900 text-sm">{d.type}</div>
+                  <div className="font-semibold text-slate-900 text-sm">{d.type}</div>
                   <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Example</div>
                   <p className="text-xs text-slate-600 italic">{d.example}</p>
                   <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Implementation impact</div>
@@ -407,8 +407,8 @@ export default function PoliticalBrain() {
       {/* REFORM FEASIBILITY */}
       {tab === 'feasibility' && (
         <div className="space-y-6">
-          <div className="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm space-y-6">
-            <h2 className="text-xl font-black text-slate-900">Reform Feasibility Matrix</h2>
+          <div className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm space-y-6">
+            <h2 className="text-xl font-semibold text-slate-900">Reform Feasibility Matrix</h2>
             <p className="text-sm text-slate-500 max-w-3xl">Six priority reform pathways ranked by feasibility, urgency, and political cost. Derived from NormTrace gap analysis and institutional authority mapping.</p>
             <div className="space-y-4">
               {FEASIBILITY_MATRIX.map((r, i) => {
@@ -421,9 +421,9 @@ export default function PoliticalBrain() {
                       onClick={() => setExpanded(isExp ? null : `reform-${i}`)}
                       className="w-full p-5 flex items-center gap-4 text-left hover:bg-slate-50/50 transition-colors"
                     >
-                      <span className="text-[10px] font-black text-slate-300 w-5">{i + 1}</span>
+                      <span className="text-[10px] font-semibold text-slate-300 w-5">{i + 1}</span>
                       <div className="flex-1 min-w-0">
-                        <div className="font-black text-slate-900 text-sm">{r.reform}</div>
+                        <div className="font-semibold text-slate-900 text-sm">{r.reform}</div>
                         <div className="flex flex-wrap gap-2 mt-1">
                           {r.actors.map((a, j) => (
                             <span key={j} className="px-1.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[9px] font-bold">{a}</span>
@@ -433,15 +433,15 @@ export default function PoliticalBrain() {
                       <div className="hidden md:flex items-center gap-3 shrink-0">
                         <div className="text-right">
                           <div className="text-[9px] font-bold text-slate-400 uppercase">Feasibility</div>
-                          <span className={cn('px-2 py-0.5 rounded text-[10px] font-black border', feasibility.bg, feasibility.border, feasibility.color)}>{feasibility.label}</span>
+                          <span className={cn('px-2 py-0.5 rounded text-[10px] font-semibold border', feasibility.bg, feasibility.border, feasibility.color)}>{feasibility.label}</span>
                         </div>
                         <div className="text-right">
                           <div className="text-[9px] font-bold text-slate-400 uppercase">Urgency</div>
-                          <span className={cn('px-2 py-0.5 rounded text-[10px] font-black', urgency.bg, urgency.color)}>{urgency.label}</span>
+                          <span className={cn('px-2 py-0.5 rounded text-[10px] font-semibold', urgency.bg, urgency.color)}>{urgency.label}</span>
                         </div>
                         <div className="text-right">
                           <div className="text-[9px] font-bold text-slate-400 uppercase">Pol. Cost</div>
-                          <span className={cn('px-2 py-0.5 rounded text-[10px] font-black',
+                          <span className={cn('px-2 py-0.5 rounded text-[10px] font-semibold',
                             r.politicalCost === 'LOW' ? 'bg-emerald-100 text-emerald-700' :
                             r.politicalCost === 'MEDIUM' ? 'bg-amber-100 text-amber-700' :
                             'bg-red-100 text-red-700'
@@ -466,17 +466,17 @@ export default function PoliticalBrain() {
       {/* ANALYTICAL FRAMEWORK */}
       {tab === 'theory' && (
         <div className="space-y-6">
-          <div className="bg-slate-900 text-white rounded-[2rem] p-10 space-y-8">
-            <h2 className="text-2xl font-black">Analytical Framework: Cerebro Jurídico × Cerebro Político</h2>
+          <div className="bg-slate-900 text-white rounded-2xl p-10 space-y-8">
+            <h2 className="text-2xl font-semibold">Analytical Framework: Cerebro Jurídico × Cerebro Político</h2>
             <div className="grid md:grid-cols-2 gap-8 text-sm text-slate-300 leading-relaxed">
               <div className="space-y-4">
-                <h3 className="text-white font-black text-lg">The Juridical Brain (Cerebro Jurídico)</h3>
+                <h3 className="text-white font-semibold text-lg">The Juridical Brain (Cerebro Jurídico)</h3>
                 <p>The juridical brain encodes the country's normative architecture: constitutional structure, legal hierarchy, treaty incorporation mechanisms, legislative drafting conventions, jurisdictional distribution, and the logical chain through which an international obligation can be traced to a domestic operative provision.</p>
                 <p>For Mexico, this brain is encoded in: CPEUM (especially Arts. 1, 4, 40, 73(XVI), 133), LGS, LOAPF, and the Romano-Germanic civil law tradition that governs how statutory language creates operative rights and duties.</p>
                 <p>NormTrace's corpus analysis: the anchoring scale, fit dimensions, and gap typology: operates through the juridical brain. It answers: <em>is there a legally competent actor with a legally defined procedure rooted in a legally appropriate instrument?</em></p>
               </div>
               <div className="space-y-4">
-                <h3 className="text-white font-black text-lg">The Political Brain (Cerebro Político)</h3>
+                <h3 className="text-white font-semibold text-lg">The Political Brain (Cerebro Político)</h3>
                 <p>The political brain encodes the operational power structure: who actually controls agenda-setting and resource allocation, where political will concentrates, which actors function as veto players, what institutional incentives shape compliance behaviour, and where formal-informal gaps create decoupling.</p>
                 <p>For Mexico's IHR governance, the political brain highlights: the SSA-DGE functional dominance without adequate statutory basis; the CSG's constitutional authority versus its operational episodic character; the SSA-INM coordination deficit; and the federal-state power distribution that leaves state-level implementation legally unspecified.</p>
                 <p>This Political Brain layer is preliminary. Full development requires political science analysis of each actor's incentive structure, accountability mechanisms, and historical patterns of IHR-related decision-making.</p>
@@ -486,7 +486,7 @@ export default function PoliticalBrain() {
 
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm">
-              <h3 className="text-lg font-black text-slate-900">Complex Adaptive Systems Framework</h3>
+              <h3 className="text-lg font-semibold text-slate-900">Complex Adaptive Systems Framework</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 NormTrace applies a complex adaptive systems (CAS) lens to legal-institutional analysis. A domestic legal architecture for IHR implementation is not a simple hierarchical chain: it is a multi-agent system with emergent properties, feedback loops, and non-linear responses to change.
               </p>
@@ -499,7 +499,7 @@ export default function PoliticalBrain() {
                   { label: 'Decoupling', value: 'Formally coupled system components (law + regulation + actor + procedure) that operate as loosely coupled in practice' }
                 ].map((item, i) => (
                   <div key={i} className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-wider">{item.label}: </span>
+                    <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">{item.label}: </span>
                     <span className="text-xs text-slate-700 leading-relaxed">{item.value}</span>
                   </div>
                 ))}
@@ -507,7 +507,7 @@ export default function PoliticalBrain() {
             </div>
 
             <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm">
-              <h3 className="text-lg font-black text-slate-900">Key References</h3>
+              <h3 className="text-lg font-semibold text-slate-900">Key References</h3>
               <div className="space-y-3 text-xs text-slate-600 leading-relaxed">
                 <div className="p-3 bg-blue-50 rounded-xl border border-blue-100">
                   <p className="font-bold text-blue-900">Habibi R, et al. (2020)</p>

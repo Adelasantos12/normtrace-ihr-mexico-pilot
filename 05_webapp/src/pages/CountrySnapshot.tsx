@@ -66,32 +66,33 @@ export default function CountrySnapshot() {
   return (
     <div className="space-y-10 pb-24">
       <header className="space-y-4">
-        <h1 className="text-4xl font-black text-slate-900 tracking-tight">Mexico: Legal Internalisation Profile for Pandemic Governance</h1>
+        <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">Country Snapshot</div>
+        <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight">Mexico: Legal Internalisation Profile for Pandemic Governance</h1>
         <p className="text-lg text-slate-600 max-w-4xl">
           IHR 2005 baseline, IHR 2024 update pressure, and Pandemic Agreement/PABS readiness.
         </p>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px bg-slate-100 rounded-2xl overflow-hidden border border-slate-100">
           {snapshotMetrics.map((m, i) => (
-            <div key={i} className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
-              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">{m.label}</div>
-              <div className="text-sm font-black text-slate-900">{m.value}</div>
+            <div key={i} className="bg-white p-4">
+              <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1">{m.label}</div>
+              <div className="text-sm font-semibold text-slate-900">{m.value}</div>
             </div>
           ))}
         </div>
       </header>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+        <h2 className="text-xl font-semibold text-slate-900 flex items-center gap-2">
            <Info size={20} className="text-blue-600" /> What this snapshot shows
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {purposes.map((p, i) => (
             <div key={i} className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-3">
-              <div className={cn("w-10 h-10 rounded-xl flex items-center justify-center", p.bg, p.color)}>
-                <p.icon size={20} />
+              <div className="flex items-center gap-2">
+                <p.icon size={18} className="text-slate-400" />
+                <h3 className="font-semibold text-slate-900">{p.title}</h3>
               </div>
-              <h3 className="font-bold text-slate-900">{p.title}</h3>
               <p className="text-xs text-slate-500 leading-relaxed">{p.desc}</p>
             </div>
           ))}
@@ -100,7 +101,7 @@ export default function CountrySnapshot() {
 
       <div className="grid lg:grid-cols-2 gap-10">
         <section className="space-y-4">
-          <h2 className="text-xl font-bold text-slate-900">Anchoring Profile</h2>
+          <h2 className="text-xl font-semibold text-slate-900">Anchoring Profile</h2>
           <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
             <table className="w-full text-sm">
               <thead className="bg-slate-50 border-b border-slate-200">
@@ -115,7 +116,7 @@ export default function CountrySnapshot() {
                   <tr key={l} className={cn("hover:bg-slate-50/50 transition-colors", !byLevel[l] && "opacity-40")}>
                     <td className="p-4">
                       <span className={cn(
-                        "px-2 py-0.5 rounded text-[10px] font-black border",
+                        "px-2 py-0.5 rounded text-[10px] font-bold border",
                         parseInt(l) >= 4 ? "bg-emerald-50 text-emerald-700 border-emerald-100" :
                         parseInt(l) >= 2 ? "bg-blue-50 text-blue-700 border-blue-100" :
                         parseInt(l) >= 1 ? "bg-amber-50 text-amber-700 border-amber-100" :
@@ -134,7 +135,7 @@ export default function CountrySnapshot() {
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-xl font-bold text-slate-900">Institutional Salience</h2>
+          <h2 className="text-xl font-semibold text-slate-900">Institutional Salience</h2>
           <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
              <div>
                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Key Actors</h3>
@@ -150,7 +151,7 @@ export default function CountrySnapshot() {
                </div>
              </div>
 
-             <div className="pt-6 border-t border-slate-100">
+             <div className="pt-6 border-t border-slate-200">
                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Stronger Anchoring Areas</h3>
                <div className="space-y-2">
                  {gaps.filter((g: any) => String(g.current_ihr2005_anchoring_pattern || '').includes('L4') || String(g.current_ihr2005_anchoring_pattern || '').includes('L5')).length > 0 ? (
@@ -170,7 +171,7 @@ export default function CountrySnapshot() {
       </div>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-bold text-slate-900">Institutional Checklist Preview</h2>
+        <h2 className="text-xl font-semibold text-slate-900">Institutional Checklist Preview</h2>
         <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -210,16 +211,16 @@ export default function CountrySnapshot() {
         </div>
       </section>
 
-      <div className="bg-slate-900 rounded-[2rem] p-10 text-white flex flex-col md:flex-row items-center justify-between gap-8">
+      <div className="bg-slate-900 rounded-2xl p-10 text-white flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="space-y-2">
-          <h2 className="text-2xl font-black">Policy Analysis Suite</h2>
+          <h2 className="text-2xl font-semibold">Policy Analysis Suite</h2>
           <p className="text-slate-400 text-sm">Dive deeper into specific legal intelligence layers or build a tailored report.</p>
         </div>
         <div className="flex flex-wrap gap-4">
-          <Link to="/mapping" className="px-6 py-3 bg-white text-slate-900 rounded-xl font-bold text-sm hover:bg-slate-100 transition-colors flex items-center gap-2">
+          <Link to="/mapping" className="px-6 py-3 bg-white text-slate-900 rounded-full font-medium text-sm hover:bg-slate-100 transition-colors flex items-center gap-2">
             Mapping Explorer <ArrowRight size={16} />
           </Link>
-          <Link to="/report" className="px-6 py-3 border border-slate-700 text-white rounded-xl font-bold text-sm hover:bg-slate-800 transition-colors flex items-center gap-2">
+          <Link to="/report" className="px-6 py-3 border border-slate-700 text-white rounded-full font-medium text-sm hover:bg-slate-800 transition-colors flex items-center gap-2">
             <FileBarChart size={16} /> Report Builder
           </Link>
         </div>
@@ -241,7 +242,7 @@ export default function CountrySnapshot() {
           </div>
           <ChevronRight size={18} className="text-slate-400 group-open:rotate-90 transition-transform" />
         </summary>
-        <div className="px-6 pb-6 pt-2 border-t border-slate-100">
+        <div className="px-6 pb-6 pt-2 border-t border-slate-200">
           <pre className="whitespace-pre-wrap text-xs text-slate-600 bg-slate-50 p-6 rounded-xl border border-slate-100 font-mono">
             {appendix}
           </pre>

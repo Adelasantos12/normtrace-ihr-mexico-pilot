@@ -45,17 +45,18 @@ export default function ReportBuilder() {
   return (
     <div className="space-y-10 pb-20 max-w-4xl mx-auto print:max-w-none print:m-0 print:p-0">
       <header className="print:hidden space-y-4">
-         <h1 className="text-3xl font-bold text-slate-900">Printable Report Builder</h1>
+         <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">Custom Report Builder</div>
+         <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight">Printable Report Builder</h1>
          <p className="text-slate-500">Assemble a customized legal intelligence report from the Mexico Pilot v0.1 data.</p>
 
          <div className="flex gap-4 pt-2">
             <button
               onClick={handlePrint}
-              className="flex items-center gap-2 px-6 py-3 bg-blue-900 text-white rounded-xl text-sm font-bold hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20"
+              className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-full text-sm font-medium hover:bg-blue-700 transition-all"
             >
                <Printer size={16} /> Print / Export PDF
             </button>
-            <a href="/report/print" className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 text-slate-600 rounded-xl text-sm font-bold hover:bg-slate-50 transition-all">
+            <a href="/report/print" className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 text-slate-600 rounded-full text-sm font-medium hover:bg-slate-50 transition-all">
                <Printer size={16} /> Open print route
             </a>
          </div>
@@ -63,7 +64,7 @@ export default function ReportBuilder() {
 
       <div className="print:hidden grid grid-cols-1 md:grid-cols-2 gap-12 pt-8">
          <div className="space-y-6">
-            <h3 className="font-bold text-slate-900 px-1">Report Contents</h3>
+            <h3 className="font-semibold text-slate-900 px-1">Report Contents</h3>
             <div className="space-y-2">
                {SECTIONS.map((section) => (
                   <button
@@ -77,14 +78,9 @@ export default function ReportBuilder() {
                     )}
                   >
                      <div className="flex items-center gap-4">
-                        <div className={cn(
-                          "p-2 rounded-lg transition-colors",
-                          selected.has(section.id) ? "bg-blue-50 text-blue-600" : "bg-slate-100 text-slate-400"
-                        )}>
-                           <section.icon size={18} />
-                        </div>
+                        <section.icon size={18} className={selected.has(section.id) ? "text-blue-600" : "text-slate-400"} />
                         <div>
-                           <p className="text-xs font-bold">{section.label}</p>
+                           <p className="text-xs font-semibold">{section.label}</p>
                            {section.always && <p className="text-[10px] text-slate-400 font-medium">Required Section</p>}
                         </div>
                      </div>
@@ -95,7 +91,7 @@ export default function ReportBuilder() {
          </div>
 
          <div className="space-y-6">
-            <h3 className="font-bold text-slate-900 px-1">Live Preview</h3>
+            <h3 className="font-semibold text-slate-900 px-1">Live Preview</h3>
             <div className="bg-slate-800 rounded-2xl p-8 aspect-[1/1.4] shadow-2xl relative overflow-hidden border border-slate-700">
                <div className="absolute top-0 left-0 w-full h-1 bg-blue-500" />
                <div className="space-y-8 animate-in fade-in duration-500">
@@ -158,7 +154,7 @@ export default function ReportBuilder() {
                   <div className="space-y-4">
                      <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-2">Data Package</h3>
                      <p className="text-lg font-bold text-slate-800">v0.1 (Audited)</p>
-                     <p className="text-sm text-slate-500">Verdict: PASS_WITH_DOCUMENTED_FINDINGS</p>
+                     <p className="text-sm text-slate-500">Verdict: Pass, with documented findings</p>
                   </div>
                </div>
 
@@ -263,7 +259,7 @@ export default function ReportBuilder() {
                   <div className="grid grid-cols-2 gap-8">
                      <div className="p-6 bg-red-50 rounded-xl border border-red-100 space-y-4">
                         <h4 className="font-bold text-red-900 uppercase tracking-widest text-[10px]">Audit Verdict</h4>
-                        <p className="text-xl font-bold text-red-700">PASS_WITH_DOCUMENTED_FINDINGS</p>
+                        <p className="text-xl font-bold text-red-700">Pass, with documented findings</p>
                      </div>
                      <div className="p-6 bg-blue-50 rounded-xl border border-blue-100 space-y-4">
                         <h4 className="font-bold text-blue-900 uppercase tracking-widest text-[10px]">Mapping Version</h4>

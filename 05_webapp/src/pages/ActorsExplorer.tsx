@@ -145,14 +145,39 @@ function ComputedNetworkGraph({
       .force('link', forceLink(simLinks as any).distance(40).strength(0.25))
       .force('x', forceX(width / 2).strength(0.03))
       .force('collide', forceCollide((d: any) =>
-        d.size + 3 + (d.mode === 'instrument' && d.size > 10 ? d.label.length * 2.2 : 0)))
+        d.size + 3
+        + (d.mode === 'instrument' && d.size > 10 ? d.label.length * 2.2 : 0)
+        + (d.mode === 'actor' ? Math.min(d.label.length, 16) * 1.5 : 0)))
       .stop();
     for (let i = 0; i < 260; i++) simulation.tick();
 
     const nodes: GraphNode[] = simNodes.map((n) => ({
       id: n.id, mode: n.mode, label: n.label, full: n.full, size: n.size, gapType: n.gapType,
-      x: Math.max(24, Math.min(width - 24, n.x)), y: n.y,
+      x: Math.max(55, Math.min(width - 55, n.x)), y: n.y,
     }));
+
+    // The collide force approximates label width as extra circle radius, but it's
+    // a physics approximation and can still leave adjacent actor labels touching
+    // or overlapping depending on how the simulation settles. Guarantee no overlap
+    // with a deterministic left-to-right sweep on the actor row's below-node labels.
+    const actorLabelWidth = (label: string) => {
+      const truncated = label.length > 16 ? label.slice(0, 14) + '…' : label;
+      return truncated.length * 5.2 + 8;
+    };
+    const actorNodes = nodes.filter((n) => n.mode === 'actor').sort((a, b) => a.x - b.x);
+    for (let i = 1; i < actorNodes.length; i++) {
+      const prev = actorNodes[i - 1], cur = actorNodes[i];
+      const minGap = actorLabelWidth(prev.label) / 2 + actorLabelWidth(cur.label) / 2 + 6;
+      if (cur.x - prev.x < minGap) cur.x = prev.x + minGap;
+    }
+    if (actorNodes.length) {
+      const rightmost = actorNodes[actorNodes.length - 1];
+      if (rightmost.x > width - 55) {
+        const overflow = rightmost.x - (width - 55);
+        actorNodes.forEach((n) => { n.x -= overflow; });
+      }
+    }
+
     const edges: GraphEdge[] = simLinks.map((l) => ({
       source: (l.source as any).id, target: (l.target as any).id, weight: l.weight, isGap: l.isGap,
     }));
@@ -212,7 +237,7 @@ function ComputedNetworkGraph({
 
       <div className="flex">
         <div className="w-52 shrink-0 border-r border-slate-100 p-4 space-y-2 text-[9px]" style={{ height }}>
-          <div className="font-black text-slate-500 uppercase tracking-widest">Legend</div>
+          <div className="font-semibold text-slate-500 uppercase tracking-widest">Legend</div>
           {([
             { label: 'Obligation', bg: '#f0fdf4', border: '#16a34a' },
             { label: 'Instrument', bg: '#eef2ff', border: '#4338ca' },
@@ -261,6 +286,14 @@ function ComputedNetworkGraph({
             const isHoveredClickable = n.mode === 'obligation' && hovered === n.id && !isSelected;
             const hasGap = n.mode === 'obligation' && HIGH_SEVERITY_GAPS.has(n.gapType);
             const dimmed = !!highlightSet && !isRelated(n.id);
+            const r = isHoveredClickable ? n.size + 3 : n.size;
+            // Actor labels are always shown below the node (never fit inside the
+            // circle); obligation/instrument labels stay inline, gated by size/hover
+            // to avoid crowding the dense top band.
+            const belowLabel = n.mode === 'actor'
+              ? (n.label.length > 16 ? n.label.slice(0, 14) + '…' : n.label)
+              : null;
+            const belowLabelWidth = belowLabel ? belowLabel.length * 5.2 + 8 : 0;
             return (
               <g key={n.id}
                  transform={`translate(${n.x},${n.y})`}
@@ -270,7 +303,7 @@ function ComputedNetworkGraph({
                  onMouseEnter={() => setHovered(n.id)}
                  onMouseLeave={() => setHovered(null)}>
                 <circle
-                  r={isHoveredClickable ? n.size + 3 : n.size}
+                  r={r}
                   fill={style.fill}
                   stroke={isSelected ? '#2563eb' : isHoveredClickable ? '#60a5fa' : hasGap ? '#dc2626' : style.stroke}
                   strokeWidth={isSelected || isHoveredClickable ? 3 : hasGap ? 2 : 1.5}
@@ -282,6 +315,29 @@ function ComputedNetworkGraph({
                     {n.label}
                   </text>
                 )}
+                {belowLabel && (
+                  <>
+                    <rect
+                      x={-belowLabelWidth / 2}
+                      y={r + 3}
+                      width={belowLabelWidth}
+                      height={13}
+                      rx={3}
+                      fill="rgba(255,255,255,0.9)"
+                      className="pointer-events-none"
+                    />
+                    <text
+                      y={r + 12}
+                      textAnchor="middle"
+                      fontSize={8}
+                      fontWeight={700}
+                      fill="#1e293b"
+                      className="pointer-events-none"
+                    >
+                      {belowLabel}
+                    </text>
+                  </>
+                )}
               </g>
             );
           })}
@@ -291,14 +347,14 @@ function ComputedNetworkGraph({
         {selectedNode && (
           <div className="absolute top-4 right-4 bg-white border border-blue-200 p-5 rounded-2xl shadow-2xl w-72 space-y-3 animate-in fade-in slide-in-from-top-4 duration-200">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest">Obligation chain</span>
+              <span className="text-[10px] font-semibold text-blue-600 uppercase tracking-widest">Obligation chain</span>
               <button onClick={() => setSelected(null)} className="text-slate-400 hover:text-slate-700 text-xs">✕</button>
             </div>
-            <h4 className="text-lg font-black text-slate-900">{selectedNode.label}</h4>
+            <h4 className="text-lg font-semibold text-slate-900">{selectedNode.label}</h4>
             <div>
               <div className="text-[10px] font-bold text-slate-400 uppercase mb-1">Gap type</div>
               <span className={cn(
-                "inline-block px-2 py-0.5 rounded text-[10px] font-black uppercase",
+                "inline-block px-2 py-0.5 rounded text-[10px] font-semibold uppercase",
                 selectedNode.gapType !== 'none' ? 'bg-red-50 text-red-700' : 'bg-emerald-50 text-emerald-700'
               )}>{selectedNode.gapType || 'none'}</span>
             </div>
@@ -617,7 +673,8 @@ export default function ActorsExplorer() {
   return (
     <div className="space-y-8 pb-24">
       <header className="space-y-2">
-        <h1 className="text-4xl font-black text-slate-900 tracking-tight">Actors Explorer</h1>
+        <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">Actors &amp; CAS Topology</div>
+        <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight">Actors Explorer</h1>
         <p className="text-lg text-slate-600">
           Analyze the legal-institutional network of health governance and pandemic response in Mexico.
         </p>
@@ -683,7 +740,7 @@ export default function ActorsExplorer() {
           <div className="space-y-6">
           <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-wrap items-end gap-6">
              <div className="space-y-2 flex-1 min-w-[200px]">
-                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Network View</label>
+                <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Network View</label>
                 <div className="flex bg-slate-100 p-1 rounded-xl">
                    {[
                      { id: 'actor-instrument', label: 'Actor / Instrument' },
@@ -704,7 +761,7 @@ export default function ActorsExplorer() {
                 </div>
              </div>
              <div className="space-y-2 flex-1 min-w-[150px]">
-                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Relationship Type</label>
+                <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Relationship Type</label>
                 <select
                   value={filters.relationship_type}
                   onChange={e => setFilters({...filters, relationship_type: e.target.value})}
@@ -717,7 +774,7 @@ export default function ActorsExplorer() {
                 </select>
              </div>
              <div className="space-y-2 flex-1 min-w-[150px]">
-                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">IHR Area</label>
+                <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">IHR Area</label>
                 <select
                   value={filters.ihr_area}
                   onChange={e => setFilters({...filters, ihr_area: e.target.value})}
@@ -833,8 +890,8 @@ export default function ActorsExplorer() {
                 {hoveredNode && (
                    <div className="absolute top-6 right-6 bg-white border border-blue-200 p-6 rounded-2xl shadow-2xl w-72 space-y-4 animate-in fade-in slide-in-from-top-4 duration-200">
                       <div className="space-y-1">
-                         <div className="text-[10px] font-black text-blue-600 uppercase tracking-widest">{hoveredNode.type}</div>
-                         <h4 className="text-lg font-black text-slate-900 leading-tight">{hoveredNode.full}</h4>
+                         <div className="text-[10px] font-semibold text-blue-600 uppercase tracking-widest">{hoveredNode.type}</div>
+                         <h4 className="text-lg font-semibold text-slate-900 leading-tight">{hoveredNode.full}</h4>
                       </div>
                       <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-50">
                          <div>
@@ -856,22 +913,22 @@ export default function ActorsExplorer() {
 
                 {hoveredEdge && (
                    <div className="absolute bottom-6 right-6 bg-white border border-slate-200 p-4 rounded-xl shadow-xl space-y-2 animate-in fade-in duration-200">
-                      <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Relationship</div>
+                      <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Relationship</div>
                       <div className="flex items-center gap-2">
                          <span className="text-sm font-bold text-slate-900">{hoveredEdge.source}</span>
                          <ArrowRight size={14} className="text-slate-400" />
                          <span className="text-sm font-bold text-slate-900">{hoveredEdge.target}</span>
                       </div>
                       <div className="flex gap-2">
-                         <span className="px-2 py-0.5 bg-blue-50 text-blue-700 text-[9px] font-black rounded uppercase">{hoveredEdge.relationship_type}</span>
-                         <span className="px-2 py-0.5 bg-slate-100 text-slate-500 text-[9px] font-black rounded uppercase">Conf: {hoveredEdge.confidence}</span>
+                         <span className="px-2 py-0.5 bg-blue-50 text-blue-700 text-[9px] font-semibold rounded uppercase">{hoveredEdge.relationship_type}</span>
+                         <span className="px-2 py-0.5 bg-slate-100 text-slate-500 text-[9px] font-semibold rounded uppercase">Conf: {hoveredEdge.confidence}</span>
                       </div>
                    </div>
                 )}
 
                 {/* Legend */}
                 <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-md border border-slate-200 p-4 rounded-2xl shadow-xl space-y-3 text-[9px]">
-                   <div className="font-black text-slate-500 uppercase tracking-widest">Legend</div>
+                   <div className="font-semibold text-slate-500 uppercase tracking-widest">Legend</div>
                    <div className="space-y-1.5">
                      <div className="text-[8px] font-bold text-slate-400 uppercase tracking-wider">Node type</div>
                      {([
@@ -921,23 +978,23 @@ export default function ActorsExplorer() {
 
              <div className="p-8 grid md:grid-cols-3 gap-8 bg-white border-t border-slate-100">
                 <div className="space-y-2">
-                   <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Most Legally Salient Actor</div>
+                   <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Most Legally Salient Actor</div>
                    <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                      <div className="font-black text-slate-900">Secretaría de Salud (SSA)</div>
+                      <div className="font-semibold text-slate-900">Secretaría de Salud (SSA)</div>
                       <div className="text-[10px] text-slate-500">Top actor by degree in analyzed corpus.</div>
                    </div>
                 </div>
                 <div className="space-y-2">
-                   <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Most Central Legal Instrument</div>
+                   <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Most Central Legal Instrument</div>
                    <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                      <div className="font-black text-slate-900">Ley General de Salud (LGS)</div>
+                      <div className="font-semibold text-slate-900">Ley General de Salud (LGS)</div>
                       <div className="text-[10px] text-slate-500">Primary statutory anchor for IHR obligations.</div>
                    </div>
                 </div>
                 <div className="space-y-2">
-                   <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Most Frequent Gap Type</div>
+                   <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Most Frequent Gap Type</div>
                    <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                      <div className="font-black text-slate-900 text-amber-700">Procedural Gap</div>
+                      <div className="font-semibold text-slate-900 text-amber-700">Procedural Gap</div>
                       <div className="text-[10px] text-slate-500">Most frequent linked gap in implementation map.</div>
                    </div>
                 </div>
@@ -952,7 +1009,7 @@ export default function ActorsExplorer() {
                   <Target size={18} />
                 </div>
                 <div>
-                  <h3 className="font-black text-base">What this network reveals</h3>
+                  <h3 className="font-semibold text-base">What this network reveals</h3>
                   <p className="text-slate-400 text-xs">Three structural findings visible in the graph above</p>
                 </div>
               </div>
@@ -990,8 +1047,8 @@ export default function ActorsExplorer() {
               ].map((f, i) => (
                 <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-black text-sm text-white">{f.node}</span>
-                    <span className={`px-2 py-0.5 rounded text-[9px] font-black text-white ${f.badgeColor}`}>{f.badge}</span>
+                    <span className="font-semibold text-sm text-white">{f.node}</span>
+                    <span className={`px-2 py-0.5 rounded text-[9px] font-semibold text-white ${f.badgeColor}`}>{f.badge}</span>
                   </div>
                   <p className="text-xs text-slate-300 leading-relaxed">{f.finding}</p>
                   <div className="text-[10px] font-bold text-blue-400 uppercase tracking-wider">{f.link}</div>
@@ -1087,9 +1144,9 @@ export default function ActorsExplorer() {
                <div key={i} className="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm hover:border-blue-200 transition-all space-y-6">
                   <div className="flex justify-between items-start gap-4">
                      <div className="space-y-1">
-                        <h3 className="text-xl font-black text-slate-900 leading-tight">{a.actor_name || 'Unnamed Actor'}</h3>
+                        <h3 className="text-xl font-semibold text-slate-900 leading-tight">{a.actor_name || 'Unnamed Actor'}</h3>
                         <div className="flex gap-2">
-                           <span className="px-2 py-0.5 bg-blue-900 text-white rounded text-[9px] font-black uppercase tracking-widest">ID: {a.actor_id}</span>
+                           <span className="px-2 py-0.5 bg-blue-900 text-white rounded text-[9px] font-semibold uppercase tracking-widest">ID: {a.actor_id}</span>
                            <span className="px-2 py-0.5 bg-slate-100 text-slate-500 rounded text-[9px] font-bold uppercase tracking-widest">{a.legal_nature}</span>
                         </div>
                      </div>
@@ -1136,7 +1193,7 @@ export default function ActorsExplorer() {
                     {metrics.topActors.map(([id, count], i) => (
                       <div key={id} className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
                          <div className="flex items-center gap-4">
-                            <span className="text-xs font-black text-slate-300 w-4">{i + 1}</span>
+                            <span className="text-xs font-semibold text-slate-300 w-4">{i + 1}</span>
                             <span className="font-bold text-slate-900">{id}</span>
                          </div>
                          <div className="flex items-center gap-2">
@@ -1161,7 +1218,7 @@ export default function ActorsExplorer() {
                     {metrics.topInstruments.map(([id, count], i) => (
                       <div key={id} className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
                          <div className="flex items-center gap-4">
-                            <span className="text-xs font-black text-slate-300 w-4">{i + 1}</span>
+                            <span className="text-xs font-semibold text-slate-300 w-4">{i + 1}</span>
                             <span className="text-xs font-bold text-slate-900 truncate max-w-[200px]">{id}</span>
                          </div>
                          <div className="flex items-center gap-2">
@@ -1179,7 +1236,7 @@ export default function ActorsExplorer() {
            <div className="bg-slate-900 text-white rounded-[2rem] p-10 space-y-6">
               <div className="flex items-center gap-3">
                  <Info size={24} className="text-blue-400" />
-                 <h3 className="text-2xl font-black">Network Interpretation Limits</h3>
+                 <h3 className="text-2xl font-semibold">Network Interpretation Limits</h3>
               </div>
               <p className="text-slate-400 leading-relaxed max-w-4xl">
                  High degree indicates that the node is frequently connected in the legal-institutional corpus.
@@ -1197,7 +1254,7 @@ export default function ActorsExplorer() {
           <div className="bg-slate-900 text-white rounded-[2rem] p-10 space-y-6">
             <div className="flex items-center gap-3">
               <Target size={24} className="text-blue-400" />
-              <h2 className="text-2xl font-black">Network Topology: Analytical Interpretation</h2>
+              <h2 className="text-2xl font-semibold">Network Topology: Analytical Interpretation</h2>
             </div>
             <p className="text-slate-300 leading-relaxed max-w-4xl">
               The legal-institutional network derived from the NormTrace corpus is analysed here as a complex adaptive system (CAS). Nodes are actors and legal instruments; edges are corpus-derived relationships (oversight, subordination, coordination, reporting, anchoring). CAS topology analysis identifies: <strong>hubs</strong> (high-centrality nodes whose failure cascades), <strong>bridges</strong> (nodes connecting otherwise disconnected components), <strong>structural holes</strong> (weak coordination ties), and <strong>decoupled sub-networks</strong> (formally connected but operationally isolated clusters).
@@ -1211,12 +1268,12 @@ export default function ActorsExplorer() {
           {netMetrics && (
             <div className="grid sm:grid-cols-3 gap-4">
               <div className="bg-white border border-slate-200 rounded-2xl p-6">
-                <div className="text-[10px] font-black text-slate-400 uppercase tracking-wider">CUG test — centralisation vs random</div>
+                <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">CUG test — centralisation vs random</div>
                 <div className="mt-2 flex items-baseline gap-2">
-                  <span className="text-3xl font-black text-slate-900">{netMetrics.cug_test.observed.toFixed(2)}</span>
+                  <span className="text-3xl font-bold text-slate-900">{netMetrics.cug_test.observed.toFixed(2)}</span>
                   <span className="text-xs text-slate-500">obs vs {netMetrics.cug_test.random_mean.toFixed(2)} random</span>
                 </div>
-                <div className={`mt-2 inline-block px-2 py-0.5 rounded text-[10px] font-black ${netMetrics.cug_test.p_value_ge_random < 0.05 ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}`}>
+                <div className={`mt-2 inline-block px-2 py-0.5 rounded text-[10px] font-semibold ${netMetrics.cug_test.p_value_ge_random < 0.05 ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}`}>
                   {netMetrics.cug_test.p_value_ge_random < 0.001
                     ? 'p < 0.001 (1,000 permutations)'
                     : `p(≥random) = ${netMetrics.cug_test.p_value_ge_random.toFixed(3)}`}
@@ -1225,17 +1282,17 @@ export default function ActorsExplorer() {
                 <p className="mt-1 text-[10px] text-slate-400 italic leading-snug">Preliminary, single-coder pilot corpus (n=9 instruments) — a diagnostic signal, not a validated general finding.</p>
               </div>
               <div className="bg-white border border-slate-200 rounded-2xl p-6">
-                <div className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Communities (modularity)</div>
+                <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Communities (modularity)</div>
                 <div className="mt-2 flex items-baseline gap-2">
-                  <span className="text-3xl font-black text-slate-900">{netMetrics.communities.n}</span>
+                  <span className="text-3xl font-bold text-slate-900">{netMetrics.communities.n}</span>
                   <span className="text-xs text-slate-500">Q = {netMetrics.communities.modularity ?? '—'}</span>
                 </div>
                 <p className="mt-2 text-[11px] text-slate-500 leading-snug">Obligation clusters sharing anchoring instruments (greedy modularity).</p>
               </div>
               <div className="bg-white border border-slate-200 rounded-2xl p-6">
-                <div className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Two-mode network</div>
+                <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Two-mode network</div>
                 <div className="mt-2 flex items-baseline gap-2">
-                  <span className="text-3xl font-black text-slate-900">{netMetrics.network.n_instruments}×{netMetrics.network.n_obligations}</span>
+                  <span className="text-3xl font-bold text-slate-900">{netMetrics.network.n_instruments}×{netMetrics.network.n_obligations}</span>
                   <span className="text-xs text-slate-500">density {netMetrics.network.density}</span>
                 </div>
                 <p className="mt-2 text-[11px] text-slate-500 leading-snug">Instruments × obligations, {netMetrics.network.n_edges} anchoring edges. Computed, not hand-set.</p>
@@ -1246,16 +1303,16 @@ export default function ActorsExplorer() {
           {/* Hub analysis */}
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm space-y-5">
-              <h3 className="text-xl font-black text-slate-900">Network Hubs: Critical Nodes</h3>
+              <h3 className="text-xl font-semibold text-slate-900">Network Hubs: Critical Nodes</h3>
               <p className="text-sm text-slate-500">Nodes with highest degree centrality. In a CAS framework, hubs are both resilience anchors and systemic vulnerabilities: their failure cascades across multiple IHR implementation pathways simultaneously.</p>
               <div className="space-y-3">
                 {!netMetrics && <p className="text-xs text-slate-400 italic">Loading computed metrics…</p>}
                 {netMetrics && buildHubs(netMetrics).map((h, i) => (
                   <div key={i} className="p-4 border border-slate-100 rounded-2xl space-y-2">
                     <div className="flex items-center justify-between gap-3">
-                      <span className="font-black text-slate-900 text-sm">{h.node}</span>
+                      <span className="font-semibold text-slate-900 text-sm">{h.node}</span>
                       <div className="flex items-center gap-2 shrink-0">
-                        <span className={`px-2 py-0.5 rounded text-[10px] font-black ${h.color}`}>{h.role}</span>
+                        <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${h.color}`}>{h.role}</span>
                         <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">{h.metricLabel}={h.degree}</span>
                       </div>
                     </div>
@@ -1266,7 +1323,7 @@ export default function ActorsExplorer() {
             </div>
 
             <div className="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm space-y-5">
-              <h3 className="text-xl font-black text-slate-900">Structural Properties</h3>
+              <h3 className="text-xl font-semibold text-slate-900">Structural Properties</h3>
               <div className="space-y-4">
                 {[
                   {
@@ -1297,7 +1354,7 @@ export default function ActorsExplorer() {
                   <div key={i} className={`p-4 rounded-2xl border ${s.color} space-y-2`}>
                     <div className="flex items-center gap-2 text-slate-700">
                       {s.icon}
-                      <span className="font-black text-sm">{s.label}</span>
+                      <span className="font-semibold text-sm">{s.label}</span>
                     </div>
                     <p className="text-xs text-slate-600 leading-relaxed">{s.content}</p>
                   </div>
@@ -1308,7 +1365,7 @@ export default function ActorsExplorer() {
 
           {/* Decoupling and bottlenecks */}
           <div className="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm space-y-6">
-            <h3 className="text-xl font-black text-slate-900">Institutional Decoupling & Bottleneck Analysis</h3>
+            <h3 className="text-xl font-semibold text-slate-900">Institutional Decoupling & Bottleneck Analysis</h3>
             <p className="text-sm text-slate-500 max-w-3xl">
               In CAS analysis, decoupling occurs when formally connected components operate independently in practice. Bottlenecks are high-centrality nodes where implementation constraints concentrate: obligated to perform critical IHR functions but without the normative specification or coordination capacity to do so.
             </p>
@@ -1338,12 +1395,12 @@ export default function ActorsExplorer() {
               ].map((d, i) => (
                 <div key={i} className={`p-5 rounded-2xl border ${d.color} space-y-3`}>
                   <div>
-                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-wider">{d.type}</span>
-                    <h4 className="font-black text-slate-900 text-sm mt-1">{d.title}</h4>
+                    <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">{d.type}</span>
+                    <h4 className="font-semibold text-slate-900 text-sm mt-1">{d.title}</h4>
                   </div>
                   <p className="text-xs text-slate-600 leading-relaxed">{d.desc}</p>
                   <div className="p-3 bg-white/70 rounded-xl border border-slate-100">
-                    <span className="text-[9px] font-black text-slate-500 uppercase">Reform pathway: </span>
+                    <span className="text-[9px] font-semibold text-slate-500 uppercase">Reform pathway: </span>
                     <span className="text-xs text-slate-700">{d.reform}</span>
                   </div>
                 </div>
@@ -1352,7 +1409,7 @@ export default function ActorsExplorer() {
           </div>
 
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 space-y-2">
-            <h4 className="font-black text-slate-900 text-sm">Figure reference</h4>
+            <h4 className="font-semibold text-slate-900 text-sm">Figure reference</h4>
             <p className="text-xs text-slate-600 leading-relaxed max-w-4xl">
               The network figure and its caption (Figure 1) appear in the <strong>Relationship Map</strong> tab, directly below the visualization. The analysis above interprets that figure through network science concepts: hub centrality (Freeman, 1978), structural holes (Burt, 1992), weak ties (Granovetter, 1973), and CAS cascade dynamics (Paina &amp; Peters, 2012). The three topology findings (hub fragility, temporal decoupling, SSA-INM structural hole) correspond to patterns visible in the Actor / Instrument view of the map.
             </p>

@@ -118,12 +118,13 @@ export default function Dashboard() {
   return (
     <div className="space-y-10 pb-20">
       <header>
-         <h1 className="text-3xl font-bold text-slate-900">Mexico Legal Brain Dashboard</h1>
+         <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">Corpus Overview</div>
+         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900 mt-2">Mexico Legal Brain Dashboard</h1>
          <p className="text-slate-500 mt-1">Legal Internalisation Metrics for Mexico Pilot v0.1</p>
       </header>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-6 gap-px bg-slate-100 rounded-2xl overflow-hidden border border-slate-100">
         {[
           { label: "IHR Obligations", value: stats.totalObligations, icon: GitMerge },
           { label: "Legal Provisions", value: stats.totalProvisions, icon: FileText },
@@ -132,13 +133,11 @@ export default function Dashboard() {
           { label: "Gaps Found", value: stats.totalGaps, icon: AlertTriangle },
           { label: "Human Review", value: stats.reviewRequired, icon: Info, color: "text-amber-600 bg-amber-50" },
         ].map((stat, i) => (
-          <div key={i} className={cn("p-6 bg-white border border-slate-200 rounded-2xl shadow-sm space-y-3", stat.color)}>
-            <div className="p-2 bg-slate-50 w-fit rounded-lg text-slate-500">
-               <stat.icon size={20} />
-            </div>
+          <div key={i} className={cn("p-6 bg-white space-y-3", stat.color)}>
+            <stat.icon size={18} className="text-slate-400" />
             <div>
-              <p className="text-2xl font-bold text-slate-900">{stat.value}</p>
-              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{stat.label}</p>
+              <p className="text-2xl font-semibold text-slate-900">{stat.value}</p>
+              <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-widest">{stat.label}</p>
             </div>
           </div>
         ))}
@@ -149,8 +148,8 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Instrument Layers */}
         <div className="lg:col-span-1 space-y-6">
-           <h3 className="font-bold text-slate-900 flex items-center gap-2 px-1">
-              <Layers size={18} className="text-blue-600" />
+           <h3 className="font-semibold text-slate-900 flex items-center gap-2 px-1">
+              <Layers size={18} className="text-slate-400" />
               Instrument Layers
            </h3>
            <div className="space-y-4">
@@ -159,10 +158,10 @@ export default function Dashboard() {
                 { title: "IHR 2024 Amendment Pressure", description: "Impact of 2024 amendments on domestic law", status: "Update-review layer", color: "bg-amber-500" },
                 { title: "Pandemic Agreement / PABS", description: "Readiness for emerging international standards", status: "Provisional readiness", color: "bg-slate-500" },
               ].map((layer, i) => (
-                <div key={i} className="p-5 bg-white border border-slate-200 rounded-xl shadow-sm space-y-3 hover:border-blue-200 transition-colors group">
+                <div key={i} className="p-5 bg-white border border-slate-200 rounded-2xl shadow-sm space-y-3 hover:border-blue-200 transition-colors group">
                   <div className="flex justify-between items-start">
                     <div>
-                      <span className="text-xs font-bold text-slate-900 group-hover:text-blue-700 transition-colors">{layer.title}</span>
+                      <span className="text-xs font-semibold text-slate-900 group-hover:text-blue-700 transition-colors">{layer.title}</span>
                       <p className="text-[10px] text-slate-500 mt-1">{layer.description}</p>
                     </div>
                     <div className={cn("w-2 h-2 rounded-full mt-1", layer.color)} />
@@ -177,10 +176,10 @@ export default function Dashboard() {
 
         {/* Mexico Anchoring Profile */}
         <div className="lg:col-span-2 space-y-6">
-           <h3 className="font-bold text-slate-900 px-1">Mexico Anchoring Profile</h3>
+           <h3 className="font-semibold text-slate-900 px-1">Mexico Anchoring Profile</h3>
            <div className="bg-white p-8 border border-slate-200 rounded-2xl shadow-sm space-y-8">
               <div className="h-64">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" debounce={200} initialDimension={{ width: 500, height: 256 }}>
                   <BarChart data={stats.anchoring} layout="vertical">
                     <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f1f5f9" />
                     <XAxis type="number" hide />
@@ -205,10 +204,10 @@ export default function Dashboard() {
                   </BarChart>
                 </ResponsiveContainer>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t border-slate-100">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-slate-200">
                  <div className="space-y-3">
-                    <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                       <TrendingUp size={14} className="text-blue-500" />
+                    <h4 className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                       <TrendingUp size={14} className="text-slate-400" />
                        Anchoring Pattern Analysis
                     </h4>
                     <p className="text-xs text-slate-700 leading-relaxed font-medium italic">
@@ -216,7 +215,7 @@ export default function Dashboard() {
                     </p>
                  </div>
                  <div className="space-y-3">
-                    <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Anchoring Scale Guide</h4>
+                    <h4 className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Anchoring Scale Guide</h4>
                     <div className="grid grid-cols-1 gap-2">
                        <div className="flex justify-between items-center bg-slate-50 px-3 py-2 rounded-lg">
                           <span className="text-[10px] font-bold text-slate-500">L0-L2</span>
@@ -236,9 +235,9 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {/* Top Legal Domains */}
         <div className="lg:col-span-1 space-y-6">
-          <h3 className="font-bold text-slate-900 px-1 text-sm">Top Legal Domains</h3>
+          <h3 className="font-semibold text-slate-900 px-1 text-sm">Top Legal Domains</h3>
           <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 h-72">
-             <ResponsiveContainer width="100%" height="100%">
+             <ResponsiveContainer width="100%" height="100%" debounce={200} initialDimension={{ width: 320, height: 288 }}>
                <BarChart data={stats.domains.slice(0, 5)} layout="vertical" margin={{ right: 20 }}>
                  <XAxis type="number" hide />
                  <YAxis dataKey="name" type="category" width={110} tick={{fontSize: 9, fontWeight: 'bold'}} axisLine={false} tickLine={false} />
@@ -253,10 +252,10 @@ export default function Dashboard() {
 
         {/* Confidence Distribution */}
         <div className="lg:col-span-1 space-y-6">
-          <h3 className="font-bold text-slate-900 px-1 text-sm">Assessment Confidence</h3>
+          <h3 className="font-semibold text-slate-900 px-1 text-sm">Assessment Confidence</h3>
           <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 h-72 flex flex-col justify-center">
              <div className="h-48">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" debounce={200} initialDimension={{ width: 288, height: 192 }}>
                   <PieChart>
                     <Pie
                       data={stats.confidence}
@@ -286,7 +285,7 @@ export default function Dashboard() {
 
         {/* Top Domestic Norms */}
         <div className="lg:col-span-1 space-y-6">
-          <h3 className="font-bold text-slate-900 px-1 text-sm">High-Impact Norms</h3>
+          <h3 className="font-semibold text-slate-900 px-1 text-sm">High-Impact Norms</h3>
           <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden divide-y divide-slate-50 h-72">
              {stats.norms.map((norm, i) => (
                 <div key={i} className="px-5 py-3.5 flex items-center justify-between hover:bg-slate-50 transition-colors group">
@@ -301,7 +300,7 @@ export default function Dashboard() {
 
         {/* Top Actors */}
         <div className="lg:col-span-1 space-y-6">
-          <h3 className="font-bold text-slate-900 px-1 text-sm">Most Frequent Actors</h3>
+          <h3 className="font-semibold text-slate-900 px-1 text-sm">Most Frequent Actors</h3>
           <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden divide-y divide-slate-50 h-72">
              {stats.topActors.map((actor, i) => (
                 <div key={i} className="px-5 py-3.5 flex items-center justify-between hover:bg-slate-50 transition-colors group">
