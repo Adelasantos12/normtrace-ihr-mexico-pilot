@@ -155,6 +155,29 @@ function ComputedNetworkGraph({
       id: n.id, mode: n.mode, label: n.label, full: n.full, size: n.size, gapType: n.gapType,
       x: Math.max(55, Math.min(width - 55, n.x)), y: n.y,
     }));
+
+    // The collide force approximates label width as extra circle radius, but it's
+    // a physics approximation and can still leave adjacent actor labels touching
+    // or overlapping depending on how the simulation settles. Guarantee no overlap
+    // with a deterministic left-to-right sweep on the actor row's below-node labels.
+    const actorLabelWidth = (label: string) => {
+      const truncated = label.length > 16 ? label.slice(0, 14) + '…' : label;
+      return truncated.length * 5.2 + 8;
+    };
+    const actorNodes = nodes.filter((n) => n.mode === 'actor').sort((a, b) => a.x - b.x);
+    for (let i = 1; i < actorNodes.length; i++) {
+      const prev = actorNodes[i - 1], cur = actorNodes[i];
+      const minGap = actorLabelWidth(prev.label) / 2 + actorLabelWidth(cur.label) / 2 + 6;
+      if (cur.x - prev.x < minGap) cur.x = prev.x + minGap;
+    }
+    if (actorNodes.length) {
+      const rightmost = actorNodes[actorNodes.length - 1];
+      if (rightmost.x > width - 55) {
+        const overflow = rightmost.x - (width - 55);
+        actorNodes.forEach((n) => { n.x -= overflow; });
+      }
+    }
+
     const edges: GraphEdge[] = simLinks.map((l) => ({
       source: (l.source as any).id, target: (l.target as any).id, weight: l.weight, isGap: l.isGap,
     }));
