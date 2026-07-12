@@ -122,7 +122,7 @@ export default function ReportBuilder() {
 
                <div className="absolute bottom-8 left-8 right-8 flex justify-between items-end">
                   <div className="text-[8px] text-slate-500 font-mono">
-                     TBD: 10.5281/zenodo.0000000
+                     DOI: 10.5281/zenodo.20085170
                   </div>
                   <div className="text-right">
                      <p className="text-[8px] text-slate-400 font-bold">PRELIMINARY VERSION</p>
@@ -298,7 +298,7 @@ export default function ReportBuilder() {
                <h3 className="text-xl font-bold">Citation & Versioning</h3>
                <div className="p-8 bg-slate-900 text-white rounded-2xl font-mono text-xs leading-relaxed">
                   NormTrace-IHR (2025). Mexico Legal Internalisation Mapping: Pilot v0.1 Data Package.
-                  Digital Object Identifier: TBD (10.5281/zenodo.0000000).
+                  Digital Object Identifier: 10.5281/zenodo.20085170.
                   Repository: Local Build / Non-Public Audit.
                   Status: Preliminary / Not for public circulation.
                </div>
