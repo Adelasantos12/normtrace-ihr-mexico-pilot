@@ -33,3 +33,6 @@ outputs_temp/
 .idea/
 *.swp
 *.swo
+
+# Agent tooling (subagent worktrees, local session state)
+.claude/
