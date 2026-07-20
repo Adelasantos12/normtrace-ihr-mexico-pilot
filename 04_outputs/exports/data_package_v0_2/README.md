@@ -88,7 +88,7 @@ exceed the S3a counts by exactly 2 in both fields.
 
 ## Known limitations
 
-- 12 of S2's 18 instruments still carry `TBD_REVIEW` for one date field (publication or last-amendment date) pending verification against the cited `official_source`. See `CHANGELOG_v0_1_to_v0_2.md` for the full list and status.
+- All 12 of S2's original `TBD_REVIEW` date fields are now closed, verified against the primary source documents in `01_sources/mexico/md/` (see `date_verification_note` column in S2 and `CHANGELOG_v0_1_to_v0_2.md` for evidence per row). Verification surfaced two things to flag for the author, not silently resolved: (1) MEX-009 (LOAPF) — S2's existing amendment date is confirmed correct; S3a's date for the same instrument disagrees and should be corrected there; (2) MEX-007 (LGPDPPSO) — the corpus entry's source PDF is a 2025 replacement law, not the 2017 text S3a's `official_publication_date` pointed to; confirm which version the S3a mapping records actually cite.
 - `official_source_url` values in S3a resolve to well-formed URLs on the two expected official domains (`www.diputados.gob.mx`, `www.dof.gob.mx`); live HTTP reachability could not be automatically confirmed in this environment (both domains return 403 to automated fetches, consistent with bot-protection rather than broken links).
 
 ## Corpus scope note

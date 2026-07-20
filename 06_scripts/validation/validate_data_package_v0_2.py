@@ -211,8 +211,8 @@ def main():
           s2_status.get("in_force") == 16 and s2_status.get("superseded") == 2,
           f"got {dict(s2_status)}")
     tbd_count = sum(1 for r in s2 for col in ("publication_date", "last_amendment_date") if r[col] == "TBD_REVIEW")
-    print(f"[INFO] S2 still has {tbd_count} TBD_REVIEW date fields pending author verification "
-          f"(see CHANGELOG_v0_1_to_v0_2.md).")
+    check(failures, "S2 has 0 remaining TBD_REVIEW date fields (all 12 closed against primary source)",
+          tbd_count == 0, f"got {tbd_count} remaining")
 
     print()
     if failures:

@@ -50,47 +50,63 @@ The remaining six `correspondence_type` values (`direct statutory`,
 All v0.2 files are comma-delimited. `04_outputs/exports/data_package_v0_1/ihr_2005_obligations.csv`
 used `;` with quoted fields; this is a v0.1-only artifact, not carried into v0.2.
 
-## S2 gaps closed this release
+## S2 gaps closed this release — all 12, against primary source text
 
-12 of S2's 18 rows carried `TBD_REVIEW` for a publication or amendment date.
-5 were closed by cross-referencing S3a's own author-verified
-`official_publication_date` field (`verification_date` 2026-07-15) for the
-same instrument — not from external lookup:
+12 of S2's 18 rows carried `TBD_REVIEW` for a publication or amendment
+date. All 12 are now closed, verified directly against the actual
+instrument text in `01_sources/mexico/md/` (the converted DOF/Cámara de
+Diputados source documents already in this repo — the "Nueva Ley
+publicada..." / "Última Reforma DOF..." header line every one of these
+documents carries), not from external lookup or from memory:
 
-| norm_id | Instrument | Field closed | Value | Source |
+| norm_id | Instrument | Field closed | Value | Evidence |
 |---|---|---|---|---|
-| MEX-002 | Ley General de Salud | `publication_date` | 1984-02-07 | S3a `official_publication_date` |
-| MEX-004 | CPEUM | `publication_date` | 1917-02-05 | S3a `official_publication_date` |
-| MEX-007 | LGPDPPSO | `publication_date` | 2017-01-26 | S3a `official_publication_date` |
-| MEX-009 | LOAPF | `publication_date` | 1976-12-29 | S3a `official_publication_date` |
-| MEX-015 | Reglamento LGS Materia de Investigación para la Salud | `publication_date` | 1987-01-06 | S3a `official_publication_date` |
+| MEX-001 | Ley de aprobación de tratados en materia económica | `last_amendment_date` | 2004-09-02 (= publication) | Source header shows only "Nueva Ley DOF 02-09-2004", no "Última Reforma" line — no subsequent reform published |
+| MEX-002 | Ley General de Salud | `publication_date` | 1984-02-07 | Source header: "Nueva Ley publicada...el 7 de febrero de 1984" |
+| MEX-003 | Ley sobre la Celebración de Tratados | `publication_date` | 1992-01-02 | Source header: "Nueva Ley publicada...el 2 de enero de 1992" |
+| MEX-004 | CPEUM | `publication_date` | 1917-02-05 | Source header: "Constitución publicada...el 5 de febrero de 1917" |
+| MEX-005 | Ley Federal de Procedimiento Administrativo | `publication_date` | 1994-08-04 | Source header: "Nueva Ley publicada...el 4 de agosto de 1994" |
+| MEX-006 | Ley Federal de Presupuesto y Responsabilidad Hacendaria | `publication_date` | 2006-03-30 | Source header: "Nueva Ley publicada...el 30 de marzo de 2006" |
+| MEX-007 | LGPDPPSO | `publication_date` | 2025-03-20 | Source header: "Nueva Ley publicada...el 20 de marzo de 2025" — see correction note below |
+| MEX-009 | LOAPF | `publication_date` | 1976-12-29 | Source header: "Nueva Ley publicada...el 29 de diciembre de 1976" (also independently supplied by the author) |
+| MEX-010 | Ley de Planeación | `publication_date` | 1983-01-05 | Source header: "Nueva Ley publicada...el 5 de enero de 1983" |
+| MEX-012 | NOM-017-SSA2-2012 | `last_amendment_date` | 2013-02-19 (= publication) | No "Última Reforma" line in source header — no subsequent modification published |
+| MEX-015 | Reglamento LGS Materia de Investigación para la Salud | `publication_date` | 1987-01-06 | Source header: "Nuevo Reglamento publicado...el 6 de enero de 1987" |
+| MEX-016 | Reglamento de la LGS en Materia de Sanidad Internacional (RLGS-SI) | `last_amendment_date` | 1985-07-10 | Source header: "Fe de erratas DOF 10-07-1985" — a published correction notice, not a substantive amendment (RLGS-SI has had no substantive reform since 1985, consistent with the pilot's central finding) |
 
-**Discrepancy found, not resolved — for the author:** MEX-009 (LOAPF)'s
-existing `last_amendment_date` in S2 is `2025-07-16`, but S3a's
-`version_or_last_reform_date` for the same instrument (used by mapping
-records `MEX_MAP_IHR2005_*` that cite LOAPF) is `2025-06-20`. Per the
-project's own rule ("toda discrepancia se reporta, nunca se ajusta en
-silencio"), S2's `last_amendment_date` for MEX-009 was left unchanged
-pending author clarification of which date is correct.
+Full evidence and reasoning for each row is in
+`04_outputs/exports/data_package_v0_2/S2_mexican_corpus_18.csv`'s new
+`date_verification_note` column.
 
-**7 fields remain `TBD_REVIEW`**, unresolved this release:
+### Discrepancy 1 — resolved: MEX-009 (LOAPF)
 
-| norm_id | Instrument | Field | Why not closed |
-|---|---|---|---|
-| MEX-001 | Ley de aprobación de tratados en materia económica | `last_amendment_date` | Instrument does not appear in any S3a mapping record; no author-verified date available to cross-reference |
-| MEX-003 | Ley sobre la Celebración de Tratados | `publication_date` | Same |
-| MEX-005 | Ley Federal de Procedimiento Administrativo | `publication_date` | Same |
-| MEX-006 | Ley Federal de Presupuesto y Responsabilidad Hacendaria | `publication_date` | Same |
-| MEX-010 | Ley de Planeación | `publication_date` | Same |
-| MEX-012 | NOM-017-SSA2-2012 | `last_amendment_date` | S3a records `official_publication_date` == `version_or_last_reform_date` (both 2013-02-19) for this instrument — consistent with "no amendment on record," but that is an absence-of-evidence inference, not a verified reform date. Left as `TBD_REVIEW` rather than asserting a date; author should confirm whether "no amendment" is itself the intended value |
-| MEX-016 | Reglamento de la LGS en Materia de Sanidad Internacional (RLGS-SI) | `last_amendment_date` | Same situation as MEX-012 (both dates 1985-02-18 in S3a) — consistent with the project's own established finding that RLGS-SI has never been amended since 1985, but left as `TBD_REVIEW` for the same reason |
+S2's existing `last_amendment_date` (`2025-07-16`) is **confirmed correct**
+against the primary source header ("Últimas reformas publicadas DOF
+16-07-2025", i.e. 2025-07-16 in DD-MM-YYYY). S3a's
+`version_or_last_reform_date` for the same instrument (`2025-06-20`)
+disagrees and appears to be the error — **flagged for the author to
+correct in S3a**, not silently changed here.
 
-Automated verification of these via `www.diputados.gob.mx` / `www.dof.gob.mx`
-was attempted and blocked by a 403 response (bot-protection) in this
-environment — see the v0.2 package README for detail. **Action needed from
-the author**: either supply the 7 dates directly, or soften the Methods
-claim that every instrument is recorded with its date, per the original
-task instructions' own fallback.
+### Discrepancy 2 — found during verification: MEX-007 (LGPDPPSO)
+
+Initially filled `publication_date` as `2017-01-26` from S3a's own
+`official_publication_date` field. Verifying against the primary source
+(`G_LGPDPPSO.pdf`, the actual PDF this corpus entry is converted from)
+surfaced a conflict: its header reads "Nueva Ley publicada en el Diario
+Oficial de la Federación el 20 de marzo de 2025" — a full replacement law,
+not an amendment to a 2017 text. `publication_date` was corrected to
+`2025-03-20` (the date directly evidenced by the document this corpus
+entry actually represents). Note this is the same date Mexico's LGTAIP
+(`MEX-008`) was newly published, consistent with the 2025 transparency/
+data-protection legal reform replacing both frameworks together. **Flagged
+for the author**: confirm whether S3a's mapping records for LGPDPPSO cite
+the new (2025) or the prior, superseded (2017) version of the law — the
+`formal_source_level`/`gap_type` coding may need revisiting if it was
+based on the 2017 text.
+
+No automated external fetch was needed to close these 12 gaps — all
+evidence came from source documents already present in this repository
+(`01_sources/mexico/md/` and `metadata/`).
 
 ## S2 additions
 

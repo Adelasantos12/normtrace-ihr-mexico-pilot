@@ -49,12 +49,13 @@ One row per domestic legal instrument in the Mexican corpus. 18 rows.
 | `government_level` | string | federal / federal and subnational |
 | `territorial_scope` | string | Free text describing territorial application |
 | `issuing_authority` | string | Body/official that issued the instrument |
-| `publication_date` | date or `TBD_REVIEW` | Original publication date. **7 instruments still carry `TBD_REVIEW`** — see Known Limitations below |
-| `last_amendment_date` | date or `TBD_REVIEW` | Most recent reform/amendment date |
+| `publication_date` | date | Original publication date. All 18 rows verified against the primary source documents in `01_sources/mexico/md/` (no `TBD_REVIEW` remaining as of this release) |
+| `last_amendment_date` | date | Most recent reform/amendment date. Same verification status as `publication_date` |
 | `official_source` | string | Provenance note (source file / converting authority) |
 | `carried_mappings` | string | `yes` if the instrument anchors ≥1 obligation in S3/S3a, `screened_only` if it was reviewed but carries no mapping |
 | `source_status` | string | **New in v0.2.** `in_force` / `superseded` — derived from `mexico_normative_corpus_index.csv`'s existing status field. 16 in_force, 2 superseded (`MEX-013`, `MEX-014`, both reform texts later folded into the current instruments) |
 | `cutoff_note` | string | **New in v0.2.** Non-empty only for `MEX-004` (CPEUM): notes that the consolidated constitutional text reflects a 2026-04-23 reform, after the pilot's 31 Jan 2026 domestic-law cutoff — same note as recorded per-record in S3a for the 5 constitutional mapping records |
+| `date_verification_note` | string | **New in v0.2.** Non-empty for the 12 rows whose dates were closed this release: cites the exact primary-source header text used as evidence, or flags a cross-table discrepancy (see `CHANGELOG_v0_1_to_v0_2.md`) |
 
 **Deriving the pilot's working corpus of 16 active instruments:** filter on
 `source_status == "in_force"`.
@@ -131,14 +132,15 @@ safeguard mechanism), not an error.
 
 ## Known limitations
 
-- **7 of S2's 18 instruments still carry `TBD_REVIEW`** for a publication or
-  amendment date (down from 12 — 5 were closed this release by
-  cross-referencing S3a's own author-verified `official_publication_date`
-  field for the same instrument). See `CHANGELOG_v0_1_to_v0_2.md` for the
-  full list, including one date **discrepancy** (`MEX-009` LOAPF) between
-  S2's pre-existing `last_amendment_date` and S3a's
-  `version_or_last_reform_date` for the same instrument, flagged for the
-  author rather than silently resolved.
+- All 12 of S2's originally-`TBD_REVIEW` date fields are closed this
+  release, verified against the primary source documents in
+  `01_sources/mexico/md/`. Verification surfaced two things flagged for the
+  author rather than silently resolved — see `CHANGELOG_v0_1_to_v0_2.md`:
+  (1) a date **discrepancy** between S2 and S3a for `MEX-009` (LOAPF),
+  resolved in favour of S2 (confirmed by primary source); (2) a version
+  **conflict** for `MEX-007` (LGPDPPSO) — the corpus entry's source PDF is
+  a 2025 replacement law, not the 2017 text S3a's
+  `official_publication_date` pointed to.
 - `official_source_url` values in S3a resolve to well-formed URLs on the two
   expected official domains; live HTTP reachability could not be
   automatically confirmed in this environment (both domains return 403 to
