@@ -1,0 +1,14 @@
+mapping_id,obligation_id,domestic_norm,domestic_article,correspondence_type,review_priority,review_status
+MEX_MAP_IHR2005_003_002,IHR-OBL-003,Ley General de Salud,"Art. 136, fracciones I-IV",indirect statutory,low,requires_human_review
+MEX_MAP_IHR2005_008_001,IHR-OBL-008,Reglamento Interior de la Secretaría de Salud,"Art. 35, frac. XIX",actor-only,low,requires_human_review
+MEX_MAP_IHR2005_009_001,IHR-OBL-009,Reglamento Interior de la Secretaría de Salud,"Art. 35, frac. XIX",actor-only,low,requires_human_review
+MEX_MAP_IHR2005_011_001,IHR-OBL-011,,,no correspondence,high,requires_human_review
+MEX_MAP_IHR2005_020_001,IHR-OBL-020,Reglamento de la Ley General de Salud en Materia de Sanidad Internacional,Art. 44,regulatory,low,requires_human_review
+MEX_MAP_IHR2005_021_001,IHR-OBL-021,Ley General de Salud,Art. 359,indirect statutory,low,requires_human_review
+MEX_MAP_IHR2005_033_001,IHR-OBL-033,Reglamento de la Ley General de Salud en Materia de Sanidad Internacional,Artículo 3o.,regulatory,low,requires_human_review
+MEX_MAP_IHR2005_036_001,IHR-OBL-036,Reglamento de la Ley General de Salud en Materia de Sanidad Internacional,Art. 44,regulatory,low,requires_human_review
+MEX_MAP_IHR2005_037_001,IHR-OBL-037,,,no correspondence,high,requires_human_review
+MEX_MAP_IHR2005_038_001,IHR-OBL-038,Ley Aduanera,"Art. 56, párrafo 4 (regulaciones y restricciones no arancelarias / sanidad)",contextual support,low,requires_human_review
+MEX_MAP_IHR2005_041_001,IHR-OBL-041,Reglamento Interior de la Secretaría de Salud,"Art. 35, frac. XIX",actor-only,low,requires_human_review
+MEX_MAP_IHR2005_042_001,IHR-OBL-042,Ley General de Salud,"Art. 184, fracciones I-V",indirect statutory,low,requires_human_review
+MEX_MAP_IHR2005_045_001,IHR-OBL-045,Reglamento de la Ley General de Salud en Materia de Investigación para la Salud,Art. 11,indirect statutory,low,requires_human_review

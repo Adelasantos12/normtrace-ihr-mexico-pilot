@@ -61,6 +61,14 @@ The first country under analysis is **México**. The pilot will map IHR obligati
 
 All outputs in this repository are **work in progress and require expert review**. Version history and change logs are maintained through Git. Dataset version numbers are recorded in the data dictionary (`00_project/data_dictionary.md`).
 
+**Current data package: v0.2.0-pilot.** The manuscript's six authoritative
+tables (obligation inventory, domestic corpus, full mapping attempt,
+provision-linked supplement, consistency audit) live in
+`04_outputs/exports/data_package_v0_2/` — see that directory's `README.md`
+for what each table answers, and `CHANGELOG_v0_1_to_v0_2.md` for the full
+migration history from the earlier v0.1 file set. Validate the package with
+`06_scripts/validation/validate_data_package_v0_2.py`.
+
 ---
 
 ## Citation

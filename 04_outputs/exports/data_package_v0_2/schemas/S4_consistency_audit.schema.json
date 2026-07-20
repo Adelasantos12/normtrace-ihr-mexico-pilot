@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "S4_consistency_audit",
+  "description": "The 7-rule consistency/plausibility audit run over S3/S3a.",
+  "unit_of_analysis": "one row per audit rule",
+  "type": "object",
+  "properties": {
+    "rule": {
+      "type": "string",
+      "enum": [
+        "coordination gap does not co-occur with a strong coordination fit",
+        "obligation_id resolves to the obligation table",
+        "provision reference resolves (excl. 2 unmatched records)",
+        "recognition-level (strong) rights-safeguard fit is present (ontology diagnostic; 8 of 10 also carry a rights-safeguard gap, not pass/fail)",
+        "source_rank matches the instrument's source_type",
+        "unmatched record carries missing source_rank and none_identified correspondence",
+        "unmatched record carries no_substantive_coverage"
+      ]
+    },
+    "rule_type": {
+      "type": "string",
+      "enum": [
+        "by-definition",
+        "diagnostic",
+        "integrity",
+        "plausibility"
+      ]
+    },
+    "evidentiary_status": {
+      "type": "string",
+      "enum": [
+        "deterministic constraint",
+        "non-independent plausibility check",
+        "ontology diagnostic",
+        "structural integrity check"
+      ]
+    },
+    "applicable_n": {
+      "type": "integer"
+    },
+    "passed": {
+      "type": "integer"
+    },
+    "failed": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "rule",
+    "rule_type",
+    "evidentiary_status",
+    "applicable_n",
+    "passed",
+    "failed"
+  ]
+}

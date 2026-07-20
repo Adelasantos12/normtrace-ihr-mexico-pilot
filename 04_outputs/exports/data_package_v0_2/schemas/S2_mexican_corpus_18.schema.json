@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "S2_mexican_corpus_18",
+  "description": "The 18-instrument Mexican domestic legal corpus index.",
+  "unit_of_analysis": "one row per domestic legal instrument",
+  "type": "object",
+  "properties": {
+    "norm_id": {
+      "type": "string"
+    },
+    "norm_title": {
+      "type": "string"
+    },
+    "short_title": {
+      "type": "string"
+    },
+    "instrument_type": {
+      "type": "string",
+      "enum": [
+        "administrative_agreement",
+        "constitution",
+        "decree",
+        "federal_law",
+        "general_law",
+        "internal_regulation",
+        "nom_official_mexican_standard",
+        "organic_law",
+        "regulation"
+      ]
+    },
+    "normative_hierarchy": {
+      "type": "string",
+      "enum": [
+        "administrative_agreement",
+        "constitution",
+        "federal_or_national_law",
+        "general_law",
+        "internal_regulation",
+        "nom_or_technical_standard",
+        "regulation"
+      ]
+    },
+    "government_level": {
+      "type": "string",
+      "enum": [
+        "federal",
+        "federal and subnational"
+      ]
+    },
+    "territorial_scope": {
+      "type": "string",
+      "enum": [
+        "federal",
+        "federal administration",
+        "national",
+        "national — federal and subnational public authorities",
+        "national — federal, state and municipal obligated subjects",
+        "national — ports, airports, border crossings and international health points"
+      ]
+    },
+    "issuing_authority": {
+      "type": "string",
+      "enum": [
+        "Congreso de la Unión",
+        "Congreso de los Estados Unidos Mexicanos",
+        "Congress of the Union / Cámara de Diputados",
+        "Consejo de Salubridad General",
+        "Cámara de Diputados del H. Congreso de la Unión / Secretaría de Servicios Parlamentarios",
+        "Presidencia de la República / Secretaría de Salud",
+        "Presidencia de la República — Presidenta Claudia Sheinbaum Pardo; refrendado por David Kershenobich Stalnikowitz, Secretario de Salud",
+        "Secretaría de Salud"
+      ]
+    },
+    "publication_date": {
+      "type": "string",
+      "enum": [
+        "1985-02-18",
+        "1995-12-15",
+        "2004-09-02",
+        "2013-02-19",
+        "2018-02-07",
+        "2020-07-01",
+        "2023-06-30",
+        "2025-02-27",
+        "2025-03-20",
+        "TBD_REVIEW"
+      ]
+    },
+    "last_amendment_date": {
+      "type": "string"
+    },
+    "official_source": {
+      "type": "string"
+    },
+    "carried_mappings": {
+      "type": "string",
+      "enum": [
+        "screened_only",
+        "yes"
+      ]
+    },
+    "source_status": {
+      "type": "string",
+      "enum": [
+        "in_force",
+        "superseded"
+      ]
+    },
+    "cutoff_note": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "curated consolidated text reflects a reform dated 2026-04-23, after the pilot's 31 Jan 2026 domestic-law cutoff; article existence is confirmed but wording should be read against the version in force at cutoff (see S3a verification_note on the 5 constitutional mapping records)",
+        null
+      ]
+    }
+  },
+  "required": [
+    "norm_id",
+    "norm_title",
+    "short_title",
+    "instrument_type",
+    "normative_hierarchy",
+    "government_level",
+    "territorial_scope",
+    "issuing_authority",
+    "publication_date",
+    "last_amendment_date",
+    "official_source",
+    "carried_mappings",
+    "source_status",
+    "cutoff_note"
+  ]
+}
