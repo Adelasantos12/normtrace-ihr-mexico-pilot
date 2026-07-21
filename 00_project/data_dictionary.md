@@ -128,6 +128,36 @@ carry `rights_safeguard_fit = strong`, of which 8 also carry a
 `rights safeguard gap` — an ontological observation (recognition without a
 safeguard mechanism), not an error.
 
+## S5 — `S5_network_metrics.json` (+ `S5_node_registry.csv`, `S5_network_edges.csv`)
+
+Instrument × obligation two-mode network, computed (not hand-authored) from
+S3a by `06_scripts/build_tables/build_network.py`. Added 2026-07-21.
+
+| Field | Type | Description |
+|---|---|---|
+| `network.n_instruments` | integer | Distinct instruments with ≥1 anchoring edge (9) |
+| `network.n_obligations` | integer | Distinct obligations with ≥1 anchoring edge (43 of 45) |
+| `network.n_edges` | integer | Distinct instrument-obligation pairs (68) |
+| `network.density` | number | `n_edges / (n_instruments × n_obligations)` (0.176) |
+| `instrument_degree_ranked[].degree_norm` | number | Degree normalised against the *opposite mode's* size (Borgatti & Everett, 1997) — obligations_anchored / n_obligations, not against total n |
+| `communities` | object | Greedy-modularity communities on the **one-mode obligation-obligation projection** (shared instrument) — not the multimodal network itself; per Knoke, Diani, Hollway & Christopoulos (2021), read as descriptive clustering, not a validated structural-hole/clustering statistic |
+| `cug_test` | object | Conditional-uniform-graph permutation test (1,000 draws) on instrument-degree centralisation vs. a random bipartite graph with the same dimensions |
+| `S5_node_registry.csv` | table | One row per node: `node_id`, `mode` (instrument/obligation), `degree`, `degree_norm`, `betweenness`, `community` (obligation-mode nodes only) |
+| `S5_network_edges.csv` | table | One row per anchoring edge: `source` (instrument), `target` (obligation), `type`, `weight` (max `formal_source_level` across collapsed rows), `rows` (count of S3a rows collapsed into this edge) |
+
+**Deliberately excluded from S5** (see package README for the reasoning):
+the actor layer (actor × instrument reach — webapp-only, Political Brain /
+Actors Explorer) and the SPAR-comparison bridge (its existing metric relies
+on the abolished 0–5 anchoring scale and is not construct-valid under v0.2).
+
+All S5 figures — including the 9/43/68/0.176 network summary, the 9
+per-instrument degrees, the 37 distinct provisions (17 single-mapping), the
+7 obligations anchored by RIS Art. 35 frac. XIX, the 34-of-43 LGS∪RLGS-SI
+reach, the 24/17/0 max-substantive-level distribution, and the CC1 subset
+(20 total / 16 substantive / 12 law-or-above / 3 complete / 2 uncorresponded)
+— were independently re-verified against S3a and S1 on 2026-07-21 with **zero
+discrepancies**: see `06_scripts/validation/validate_network_s5.py`.
+
 ---
 
 ## Known limitations

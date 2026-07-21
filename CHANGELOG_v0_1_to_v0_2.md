@@ -157,3 +157,46 @@ evidence came from source documents already present in this repository
 All counts in this changelog and in the v0.2 README were independently
 recomputed by `06_scripts/validation/validate_data_package_v0_2.py`, not
 copied from manuscript prose. Run it after any further edit to the package.
+
+## Adenda (2026-07-21) — network layer (S5)
+
+Added `S5_network_metrics.json` (+ `S5_node_registry.csv`,
+`S5_network_edges.csv`), a two-mode instrument × obligation network computed
+by `06_scripts/build_tables/build_network.py` from
+`S3a_provision_linked_records_78.csv`.
+
+- Brought the script over from `claude/normtrace-phase-f-ci` (the
+  non-determinism-fixed version from PR #13) and adapted it: reads S3a v0.2
+  instead of the pre-manuscript mapping CSV, uses `formal_source_level`
+  (v0.2 name) as edge weight instead of the old `anchoring_level`, and
+  **removes the actor overlay entirely** — the actor layer stays a
+  webapp-only presentation layer and does not belong in the paper's
+  supplementary package.
+- Verified deterministic: byte-identical `S5_network_metrics.json` and
+  `S5_node_registry.csv` across two consecutive runs and under
+  `PYTHONHASHSEED=999999`.
+- Every value the author specified as expected for this layer — 9
+  instruments, 43 obligations, 68 edges, density 0.176; per-instrument
+  degrees (LGS 21, RLGS-SI 19, RIS 11, NOM-017 6, CPEUM 5, Ley Aduanera 3,
+  LOAPF 1, LGPDPPSO 1, RLGS-Inv 1); 37 distinct provisions (17
+  single-mapping); RIS Art. 35 frac. XIX anchoring exactly
+  {OBL-001,003,005,007,008,009,041}; LGS∪RLGS-SI reach 34/43; max
+  substantive `formal_source_level` distribution 24 at level 2 / 17 at
+  level 1 / 0 at level 3; the CC1 subset (20 obligations, 16 with a
+  substantive anchor, 12 at law-level or above, 3 with a complete
+  component, 2 uncorresponded — both CC1) — was independently recomputed
+  directly from S3a/S1 and matched with **zero discrepancies**. See
+  `06_scripts/validation/validate_network_s5.py`.
+- **Not published in v0.2**: the actor layer (webapp-only) and the SPAR-
+  comparison bridge (its existing metric expresses the abolished 0–5
+  anchoring scale as a percentage, which is not construct-valid under the
+  v0.2 `formal_source_level` 1–3 architecture). If the author adopts the
+  optional Discussion block comparing against WHO SPAR CC1, the bridge
+  needs rederiving against the CC1 counts above, with the SPAR panel's
+  exact provenance logged first — see package README.
+- The Methods' new `[REF-MPN]` reference (Knoke, Diani, Hollway &
+  Christopoulos, 2021, *Multimodal Political Networks*, Cambridge
+  University Press, doi:10.1017/9781108985000) is cited identically in
+  `S5_network_metrics.schema.json`'s `provenance_note`. The author assigns
+  the final reference number in the manuscript; this repo does not
+  renumber it.

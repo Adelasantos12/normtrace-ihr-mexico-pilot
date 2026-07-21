@@ -16,10 +16,51 @@ manuscript.
 | `S3_mappings_80.csv` | Full mapping attempt, incl. sentinels | one obligation→provision mapping attempt | 80 (78 + 2 unmatched-obligation sentinels) |
 | `S3a_provision_linked_records_78.csv` | **Canonical** analytical supplement | one obligation→provision mapping with an identified domestic provision | 78 |
 | `S4_consistency_audit.csv` | Consistency/plausibility audit | one audit rule | 7 (2 by-definition, 3 integrity, 1 plausibility, 1 diagnostic) |
+| `S5_network_metrics.json` (+ `S5_node_registry.csv`, `S5_network_edges.csv`) | Network representation (two-mode, instrument × obligation) | one network summary object; companion CSVs give one row per node / per anchoring edge | 9 instruments × 43 obligations, 68 edges |
 
 `S3a_substantive_mappings_78.csv` (an intermediate file with the same 78
 records under pre-manuscript column names) is **not** part of this package —
 see `99_archive/superseded_sources/data_package_v0_2_intermediate/SUPERSEDED.md`.
+
+## S5 — network layer (added 2026-07-21)
+
+`S5_network_metrics.json` is computed from `S3a_provision_linked_records_78.csv`
+by `06_scripts/build_tables/build_network.py` (adapted from
+`claude/normtrace-phase-f-ci`'s non-determinism-fixed version — verified
+byte-identical across repeated runs and across different `PYTHONHASHSEED`
+values). It is a **two-mode network only**: 9 domestic legal instruments ×
+43 IHR obligations, 68 anchoring edges, density 0.176. Degree is normalised
+against the opposite mode's size (Borgatti & Everett, 1997), not against
+total n. All figures — including the community/modularity statistic, which
+is computed on a one-mode obligation–obligation projection and is not a
+validated structural-hole/clustering finding on the multimodal network —
+independently re-verified against S3a on 2026-07-21 with zero discrepancies
+(see `06_scripts/validation/validate_network_s5.py`).
+
+**Two things this package deliberately excludes from S5, and why:**
+
+- **The actor layer** (actor × instrument reach, node/edge data behind the
+  webapp's Political Brain / Actors Explorer pages) is a webapp-only
+  presentation layer with its own disclaimers and is not part of this
+  academic supplement. Mixing it into S5 would conflate a corpus-derived
+  legal-institutional network with a UI-facing analytical layer that carries
+  different caveats.
+- **The SPAR-comparison bridge** (`spar_normtrace_bridge.py`) is not
+  published in v0.2 as-is: its existing metric expresses NormTrace's
+  anchoring on the abolished 0–5 scale as a percentage, which the Methods
+  no longer supports under the v0.2 (`formal_source_level` 1–3) architecture.
+  If the author adopts the optional Discussion block comparing against WHO
+  SPAR CC1, the bridge needs to be rederived against the CC1 counts verified
+  here (20 CC1 obligations, 16 with a substantive anchor, 12 at law-level or
+  above, 3 with a complete component, 2 with no correspondence — both CC1),
+  with the SPAR panel's exact provenance (`02_data/raw/spar_americas_clean.csv`
+  — WHO source and download date) logged before anything is published.
+
+The Methods' new reference to Knoke, Diani, Hollway & Christopoulos (2021),
+*Multimodal Political Networks* (Cambridge University Press,
+doi:10.1017/9781108985000), marked `[REF-MPN]` pending the author's own
+numbering, is cited identically in `S5_network_metrics.schema.json`'s
+`provenance_note` description.
 
 ## S3 vs S3a — why both exist
 
