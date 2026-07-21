@@ -228,6 +228,13 @@ function ComputedNetworkGraph({
             width = anchoring strength. Click an obligation to trace its chain to the responsible actor and see its
             gap type.
           </p>
+          <p className="text-[10px] text-slate-400 italic max-w-2xl leading-relaxed">
+            This is a multimodal legal-institutional network: obligations, instruments, and actors are distinct modes,
+            each with its own node population. Degree/reach for a node is normalised against the size of the opposite
+            mode it connects to, not against total n — a two-mode-centrality convention after Borgatti &amp; Everett
+            (1997); see also Knoke, Diani, Hollway &amp; Christopoulos, <em>Multimodal Political Networks</em> (Cambridge
+            University Press, 2021).
+          </p>
         </div>
         <div className="flex gap-2">
           <span className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded text-[10px] font-bold border border-slate-200">{nodes.length} NODES</span>
@@ -388,8 +395,10 @@ function ComputedNetworkGraph({
           Layout computed by d3-force (obligations pinned to the top band, instruments to the middle band, actors to
           the bottom band; horizontal position and spacing resolved by simulated repulsion, link attraction, and
           collision avoidance). Node size and edge width are computed from <code>network_metrics.json</code> and{' '}
-          <code>network_edges.csv</code> (build_network.py), not hand-set. This is a corpus-derived
-          legal-institutional traceability network, not observed coordination or political authority.
+          <code>network_edges.csv</code> (build_network.py), not hand-set. This is a corpus-derived, multimodal
+          legal-institutional traceability network (obligation × instrument × actor; see Knoke, Diani, Hollway &amp;
+          Christopoulos, <em>Multimodal Political Networks</em>, Cambridge University Press, 2021), not observed
+          coordination or political authority.
         </p>
       </div>
     </div>
@@ -1260,7 +1269,7 @@ export default function ActorsExplorer() {
               The legal-institutional network derived from the NormTrace corpus is analysed here as a complex adaptive system (CAS). Nodes are actors and legal instruments; edges are corpus-derived relationships (oversight, subordination, coordination, reporting, anchoring). CAS topology analysis identifies: <strong>hubs</strong> (high-centrality nodes whose failure cascades), <strong>bridges</strong> (nodes connecting otherwise disconnected components), <strong>structural holes</strong> (weak coordination ties), and <strong>decoupled sub-networks</strong> (formally connected but operationally isolated clusters).
             </p>
             <p className="text-slate-400 text-xs italic">
-              Informed by: Habibi R, et al. <em>Lancet</em> 2020; Paina L &amp; Peters DH, <em>Implementation Science</em> 2012; Freeman LC, <em>Social Networks</em> 1978. Two-mode centrality after Borgatti &amp; Everett 1997; CUG test after Knoke, Diani, Hollway &amp; Christopoulos 2021.
+              Informed by: Habibi R, et al. <em>Lancet</em> 2020; Paina L &amp; Peters DH, <em>Implementation Science</em> 2012; Freeman LC, <em>Social Networks</em> 1978. Two-mode centrality after Borgatti &amp; Everett 1997; multimodal network framing and CUG test after Knoke, Diani, Hollway &amp; Christopoulos, <em>Multimodal Political Networks</em> (Cambridge University Press, 2021).
             </p>
           </div>
 
@@ -1288,6 +1297,7 @@ export default function ActorsExplorer() {
                   <span className="text-xs text-slate-500">Q = {netMetrics.communities.modularity ?? '—'}</span>
                 </div>
                 <p className="mt-2 text-[11px] text-slate-500 leading-snug">Obligation clusters sharing anchoring instruments (greedy modularity).</p>
+                <p className="mt-1 text-[10px] text-slate-400 italic leading-snug">Computed on a one-mode projection (obligation–obligation via shared instrument), not the multimodal network itself. Projections collapse the shared-instrument node and inflate triangles, so this modularity score should be read as descriptive clustering, not interpreted as a validated structural-hole or clustering statistic.</p>
               </div>
               <div className="bg-white border border-slate-200 rounded-2xl p-6">
                 <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Two-mode network</div>
