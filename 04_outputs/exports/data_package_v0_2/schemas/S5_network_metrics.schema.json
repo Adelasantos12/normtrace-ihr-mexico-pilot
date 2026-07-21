@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "S5_network_metrics",
+  "description": "Instrument x obligation two-mode network computed from S3a_provision_linked_records_78.csv by 06_scripts/build_tables/build_network.py. Not hand-authored. Excludes the actor layer (webapp-only) and the SPAR-comparison bridge (not derived in v0.2 — see package README).",
+  "unit_of_analysis": "one network summary object (not row-per-record); companion tables S5_node_registry.csv (one row per instrument/obligation node) and S5_network_edges.csv (one row per instrument-obligation anchoring edge) provide the row-level detail",
+  "type": "object",
+  "properties": {
+    "generated_by": { "type": "string" },
+    "source_table": { "type": "string" },
+    "network": {
+      "type": "object",
+      "properties": {
+        "modes": { "type": "array", "items": { "type": "string", "enum": ["instrument", "obligation"] } },
+        "n_instruments": { "type": "integer", "description": "Distinct domestic legal instruments with at least one anchoring edge. Expected: 9." },
+        "n_obligations": { "type": "integer", "description": "Distinct IHR 2005 obligations with at least one anchoring edge (of 45 in S1). Expected: 43." },
+        "n_edges": { "type": "integer", "description": "Distinct instrument-obligation pairs. Expected: 68." },
+        "density": { "type": "number", "description": "n_edges / (n_instruments * n_obligations). Expected: 0.176." }
+      }
+    },
+    "instrument_degree_ranked": {
+      "type": "array",
+      "description": "One entry per instrument, ranked by obligations_anchored descending. Expected obligations_anchored: LGS 21, RLGS-SI 19, RIS 11, NOM-017 6, CPEUM 5, Ley Aduanera 3, LOAPF 1, LGPDPPSO 1, RLGS-Inv 1.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "instrument": { "type": "string" },
+          "obligations_anchored": { "type": "integer" },
+          "degree_norm": { "type": "number", "description": "obligations_anchored / n_obligations — Borgatti & Everett (1997) two-mode-centrality normalisation, i.e. against the opposite mode's size, not total n." },
+          "betweenness": { "type": "number" }
+        }
+      }
+    },
+    "communities": {
+      "type": "object",
+      "description": "Greedy-modularity communities computed on the one-mode obligation-obligation projection (shared-instrument weighted projection), NOT the multimodal network itself. Per Knoke, Diani, Hollway & Christopoulos (2021), projections collapse the shared node and inflate triangles — read this as descriptive clustering, not a validated structural-hole/clustering statistic.",
+      "properties": {
+        "n": { "type": "integer" },
+        "modularity": { "type": ["number", "null"] },
+        "sizes": { "type": "array", "items": { "type": "integer" } },
+        "computed_on": { "type": "string" }
+      }
+    },
+    "cug_test": {
+      "type": "object",
+      "description": "Conditional-uniform-graph (CUG) permutation test (1,000 draws, seed=42): is observed instrument-degree centralisation distinguishable from a random bipartite graph with the same n_instruments/n_obligations/n_edges?",
+      "properties": {
+        "measure": { "type": "string" },
+        "observed": { "type": "number" },
+        "random_mean": { "type": "number" },
+        "p_value_ge_random": { "type": "number" },
+        "interpretation": { "type": "string" }
+      }
+    },
+    "provenance_note": {
+      "type": "string",
+      "description": "States the source table, the exclusion of the actor layer and SPAR bridge from this table, and cites Knoke, Diani, Hollway & Christopoulos, Multimodal Political Networks (Cambridge University Press, 2021, doi:10.1017/9781108985000) — the same citation the manuscript marks [REF-MPN]; the author assigns the final reference number in the manuscript."
+      }
+  },
+  "companion_files": {
+    "S5_node_registry.csv": "one row per node (node_id, mode, degree, degree_norm, betweenness, community — community populated for obligation-mode nodes only)",
+    "S5_network_edges.csv": "one row per instrument-obligation anchoring edge (source, target, type, weight=formal_source_level max over collapsed rows, rows=count of S3a rows collapsed into this edge)"
+  }
+}

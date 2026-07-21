@@ -1,0 +1,245 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "S3a_provision_linked_records_78",
+  "description": "CANONICAL supplement. The 78 provision-linked mapping records (S3 minus the 2 sentinels), in manuscript vocabulary, with the per-record reference-verification audit trail.",
+  "unit_of_analysis": "one row per obligation-to-provision mapping with an identified domestic provision",
+  "type": "object",
+  "properties": {
+    "mapping_id": {
+      "type": "string"
+    },
+    "obligation_id": {
+      "type": "string"
+    },
+    "domestic_norm": {
+      "type": "string",
+      "enum": [
+        "Constitución Política de los Estados Unidos Mexicanos",
+        "Ley Aduanera",
+        "Ley General de Protección de Datos Personales en Posesión de Sujetos Obligados",
+        "Ley General de Salud",
+        "Ley Orgánica de la Administración Pública Federal",
+        "NOM-017-SSA2-2012, Para la vigilancia epidemiológica",
+        "Reglamento Interior de la Secretaría de Salud",
+        "Reglamento de la Ley General de Salud en Materia de Investigación para la Salud",
+        "Reglamento de la Ley General de Salud en Materia de Sanidad Internacional"
+      ]
+    },
+    "domestic_article": {
+      "type": "string"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "NOM",
+        "constitution",
+        "regulation",
+        "statute"
+      ]
+    },
+    "formal_source_level": {
+      "type": "integer"
+    },
+    "correspondence_status": {
+      "type": "string",
+      "enum": [
+        "identified"
+      ]
+    },
+    "substantive_anchor_status": {
+      "type": "string",
+      "enum": [
+        "identified",
+        "not_identified"
+      ]
+    },
+    "correspondence_role": {
+      "type": "string",
+      "enum": [
+        "contextual_or_enabling",
+        "substantive"
+      ]
+    },
+    "mapping_coverage": {
+      "type": "string",
+      "enum": [
+        "complete_component",
+        "contextual_only",
+        "partial_component"
+      ]
+    },
+    "actor_fit": {
+      "type": "string",
+      "enum": [
+        "partial",
+        "strong",
+        "weak"
+      ]
+    },
+    "procedure_fit": {
+      "type": "string",
+      "enum": [
+        "none identified",
+        "partial",
+        "strong",
+        "weak"
+      ]
+    },
+    "coordination_fit": {
+      "type": "string",
+      "enum": [
+        "none identified",
+        "partial",
+        "weak"
+      ]
+    },
+    "enforcement_fit": {
+      "type": "string",
+      "enum": [
+        "none identified",
+        "partial",
+        "strong",
+        "weak"
+      ]
+    },
+    "rights_safeguard_fit": {
+      "type": "string",
+      "enum": [
+        "not directly implicated",
+        "partial",
+        "strong"
+      ]
+    },
+    "vertical_mandate_specification": {
+      "type": "string",
+      "enum": [
+        "not directly implicated",
+        "partial"
+      ]
+    },
+    "gap_type": {
+      "type": "string",
+      "enum": [
+        "coordination gap",
+        "full gap",
+        "none",
+        "partial regulatory gap",
+        "procedural gap",
+        "regulatory gap",
+        "rights safeguard gap"
+      ]
+    },
+    "review_priority": {
+      "type": "string",
+      "enum": [
+        "high",
+        "low",
+        "medium"
+      ]
+    },
+    "review_status": {
+      "type": "string",
+      "enum": [
+        "preliminary_ai_assisted",
+        "requires_human_review"
+      ]
+    },
+    "official_source_url": {
+      "type": "string",
+      "enum": [
+        "https://www.diputados.gob.mx/LeyesBiblio/ref/cpeum.htm",
+        "https://www.diputados.gob.mx/LeyesBiblio/ref/ladua.htm",
+        "https://www.diputados.gob.mx/LeyesBiblio/ref/lgpdppso.htm",
+        "https://www.diputados.gob.mx/LeyesBiblio/ref/lgs.htm",
+        "https://www.diputados.gob.mx/LeyesBiblio/ref/loapf.htm",
+        "https://www.diputados.gob.mx/LeyesBiblio/regla.htm",
+        "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MIS.pdf",
+        "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf",
+        "https://www.dof.gob.mx/nota_detalle.php?codigo=5288225"
+      ]
+    },
+    "official_publication_date": {
+      "type": "string",
+      "enum": [
+        "1917-02-05",
+        "1976-12-29",
+        "1984-02-07",
+        "1985-02-18",
+        "1987-01-06",
+        "1995-12-15",
+        "2004-01-19",
+        "2013-02-19",
+        "2017-01-26"
+      ]
+    },
+    "version_or_last_reform_date": {
+      "type": "string",
+      "enum": [
+        "1985-02-18",
+        "2013-02-19",
+        "2014-04-02",
+        "2025-01-31",
+        "2025-03-20",
+        "2025-06-20",
+        "2025-11-19",
+        "2026-01-15",
+        "2026-04-23"
+      ]
+    },
+    "verification_date": {
+      "type": "string",
+      "enum": [
+        "2026-07-15"
+      ]
+    },
+    "verified_by": {
+      "type": "string",
+      "enum": [
+        "automated existence check against author-curated consolidated text (Cámara de Diputados / DOF); substantive correspondence pending expert review"
+      ]
+    },
+    "verification_outcome": {
+      "type": "string",
+      "enum": [
+        "confirmed",
+        "confirmed_with_citation_correction"
+      ]
+    },
+    "verification_note": {
+      "type": "string",
+      "enum": [
+        "article located in consolidated text at stated reform date",
+        "article located in consolidated text at stated reform date; NOTE: curated consolidated text reflects a reform dated 2026-04-23, after the pilot's 31 Jan 2026 domestic-law cutoff, so the article's existence is confirmed but its wording should be read against the version in force at cutoff",
+        "citation abbreviates the official ordinal form (Art. 9o.)"
+      ]
+    }
+  },
+  "required": [
+    "mapping_id",
+    "obligation_id",
+    "domestic_norm",
+    "domestic_article",
+    "source_type",
+    "formal_source_level",
+    "correspondence_status",
+    "substantive_anchor_status",
+    "correspondence_role",
+    "mapping_coverage",
+    "actor_fit",
+    "procedure_fit",
+    "coordination_fit",
+    "enforcement_fit",
+    "rights_safeguard_fit",
+    "vertical_mandate_specification",
+    "gap_type",
+    "review_priority",
+    "review_status",
+    "official_source_url",
+    "official_publication_date",
+    "version_or_last_reform_date",
+    "verification_date",
+    "verified_by",
+    "verification_outcome",
+    "verification_note"
+  ]
+}

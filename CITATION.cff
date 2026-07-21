@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 message: "If you use this work, please cite it as below."
 title: "NormTrace-IHR: Legal Internalisation Mapping Infrastructure for International Health Regulations"
-version: "0.1.0-pilot"
-date-released: "2026-05-05"
+version: "0.2.0-pilot"
+date-released: "2026-07-20"
 type: software
 authors:
   - family-names: "Santos"
@@ -23,4 +23,4 @@ keywords:
   - México
   - human rights
 license: CC-BY-4.0
-repository-code: "TBD"
+repository-code: "https://github.com/Adelasantos12/normtrace-ihr-mexico-pilot"

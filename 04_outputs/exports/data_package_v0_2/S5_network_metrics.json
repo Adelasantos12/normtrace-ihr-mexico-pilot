@@ -1,0 +1,88 @@
+{
+  "generated_by": "06_scripts/build_tables/build_network.py",
+  "source_table": "04_outputs/exports/data_package_v0_2/S3a_provision_linked_records_78.csv",
+  "network": {
+    "modes": [
+      "instrument",
+      "obligation"
+    ],
+    "n_instruments": 9,
+    "n_obligations": 43,
+    "n_edges": 68,
+    "density": 0.176
+  },
+  "instrument_degree_ranked": [
+    {
+      "instrument": "LGS",
+      "obligations_anchored": 21,
+      "degree_norm": 0.488,
+      "betweenness": 0.5711
+    },
+    {
+      "instrument": "RLGS-SI",
+      "obligations_anchored": 19,
+      "degree_norm": 0.442,
+      "betweenness": 0.482
+    },
+    {
+      "instrument": "RIS",
+      "obligations_anchored": 11,
+      "degree_norm": 0.256,
+      "betweenness": 0.2292
+    },
+    {
+      "instrument": "NOM-017",
+      "obligations_anchored": 6,
+      "degree_norm": 0.14,
+      "betweenness": 0.0455
+    },
+    {
+      "instrument": "CPEUM",
+      "obligations_anchored": 5,
+      "degree_norm": 0.116,
+      "betweenness": 0.0879
+    },
+    {
+      "instrument": "Ley Aduanera",
+      "obligations_anchored": 3,
+      "degree_norm": 0.07,
+      "betweenness": 0.0383
+    },
+    {
+      "instrument": "LGPDPPSO",
+      "obligations_anchored": 1,
+      "degree_norm": 0.023,
+      "betweenness": 0.0
+    },
+    {
+      "instrument": "LOAPF",
+      "obligations_anchored": 1,
+      "degree_norm": 0.023,
+      "betweenness": 0.0
+    },
+    {
+      "instrument": "RLGS-Inv",
+      "obligations_anchored": 1,
+      "degree_norm": 0.023,
+      "betweenness": 0.0
+    }
+  ],
+  "communities": {
+    "n": 3,
+    "modularity": 0.286,
+    "sizes": [
+      22,
+      20,
+      1
+    ],
+    "computed_on": "one-mode projection (obligation-obligation via shared instrument); not the multimodal network itself, see provenance_note"
+  },
+  "cug_test": {
+    "measure": "instrument-degree centralisation",
+    "observed": 0.6402,
+    "random_mean": 0.328,
+    "p_value_ge_random": 0.0,
+    "interpretation": "centralisation significantly ABOVE random"
+  },
+  "provenance_note": "All figures computed from S3a_provision_linked_records_78.csv (v0.2 data package). This is a two-mode (instrument x obligation) network; the actor layer (actor x instrument reach, used by the webapp's Political Brain / Actors Explorer) is a separate, webapp-only presentation layer and is not part of this supplementary table. The SPAR-comparison bridge is likewise not derived here (see package README). Community/modularity figures are computed on a one-mode projection and should not be read as a validated structural-hole or clustering statistic on the multimodal network (Knoke, Diani, Hollway & Christopoulos, Multimodal Political Networks, Cambridge University Press, 2021, doi:10.1017/9781108985000)."
+}

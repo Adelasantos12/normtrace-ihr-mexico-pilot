@@ -1,0 +1,161 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "S3_mappings_80",
+  "description": "All 80 analytical mapping records, including the 2 unmatched-obligation sentinel rows and the legacy correspondence_type field.",
+  "unit_of_analysis": "one row per obligation-to-provision mapping attempt, including sentinels",
+  "type": "object",
+  "properties": {
+    "mapping_id": {
+      "type": "string"
+    },
+    "obligation_id": {
+      "type": "string"
+    },
+    "domestic_norm": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Constitución Política de los Estados Unidos Mexicanos",
+        "Ley Aduanera",
+        "Ley General de Protección de Datos Personales en Posesión de Sujetos Obligados",
+        "Ley General de Salud",
+        "Ley Orgánica de la Administración Pública Federal",
+        "NOM-017-SSA2-2012, Para la vigilancia epidemiológica",
+        "Reglamento Interior de la Secretaría de Salud",
+        "Reglamento de la Ley General de Salud en Materia de Investigación para la Salud",
+        "Reglamento de la Ley General de Salud en Materia de Sanidad Internacional",
+        null
+      ]
+    },
+    "domestic_article": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "anchor_status": {
+      "type": "string",
+      "enum": [
+        "identified",
+        "not_identified"
+      ]
+    },
+    "formal_source_level": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "correspondence_type": {
+      "type": "string",
+      "enum": [
+        "actor-only",
+        "constitutional basis",
+        "contextual support",
+        "coordination",
+        "direct statutory",
+        "indirect statutory",
+        "no correspondence",
+        "regulatory"
+      ]
+    },
+    "actor_fit": {
+      "type": "string",
+      "enum": [
+        "none identified",
+        "partial",
+        "strong",
+        "weak"
+      ]
+    },
+    "procedure_fit": {
+      "type": "string",
+      "enum": [
+        "none identified",
+        "partial",
+        "strong",
+        "weak"
+      ]
+    },
+    "coordination_fit": {
+      "type": "string",
+      "enum": [
+        "none identified",
+        "partial",
+        "weak"
+      ]
+    },
+    "enforcement_fit": {
+      "type": "string",
+      "enum": [
+        "none identified",
+        "partial",
+        "strong",
+        "weak"
+      ]
+    },
+    "rights_safeguard_fit": {
+      "type": "string",
+      "enum": [
+        "not directly implicated",
+        "partial",
+        "strong"
+      ]
+    },
+    "vertical_mandate_specification": {
+      "type": "string",
+      "enum": [
+        "not directly implicated",
+        "partial"
+      ]
+    },
+    "gap_type": {
+      "type": "string",
+      "enum": [
+        "coordination gap",
+        "full gap",
+        "no correspondence identified in corpus",
+        "none",
+        "partial regulatory gap",
+        "procedural gap",
+        "regulatory gap",
+        "rights safeguard gap"
+      ]
+    },
+    "review_priority": {
+      "type": "string",
+      "enum": [
+        "high",
+        "low",
+        "medium"
+      ]
+    },
+    "review_status": {
+      "type": "string",
+      "enum": [
+        "preliminary_ai_assisted",
+        "requires_human_review"
+      ]
+    }
+  },
+  "required": [
+    "mapping_id",
+    "obligation_id",
+    "domestic_norm",
+    "domestic_article",
+    "anchor_status",
+    "formal_source_level",
+    "correspondence_type",
+    "actor_fit",
+    "procedure_fit",
+    "coordination_fit",
+    "enforcement_fit",
+    "rights_safeguard_fit",
+    "vertical_mandate_specification",
+    "gap_type",
+    "review_priority",
+    "review_status"
+  ]
+}

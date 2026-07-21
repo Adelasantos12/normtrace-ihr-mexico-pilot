@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "S1_ihr_obligations_45",
+  "description": "The 45 IHR (2005) obligations analysed by the manuscript.",
+  "unit_of_analysis": "one row per IHR 2005 obligation",
+  "type": "object",
+  "properties": {
+    "obligation_id": {
+      "type": "string"
+    },
+    "article": {
+      "type": "string"
+    },
+    "article_title": {
+      "type": "string"
+    },
+    "obligation_text_short": {
+      "type": "string"
+    },
+    "obligation_type": {
+      "type": "string"
+    },
+    "legal_force": {
+      "type": "string",
+      "enum": [
+        "Binding",
+        "Binding (as a permission; presupposes functional NFP capacity)",
+        "Binding (conditional on 'national law' and 'imminent public health risk')",
+        "Binding (qualified by 'all practicable measures')",
+        "Binding (qualified by 'as far as practicable')",
+        "Binding (qualified by 'subject to national law' and 'taking into account relevant international guidelines')",
+        "Binding (qualified by 'to the extent possible')",
+        "Binding (subject to State Party's decision to require or waive)",
+        "Binding for designation process; soft obligation ('should consider') for bilateral agreements"
+      ]
+    },
+    "requires_domestic_legal_anchoring": {
+      "type": "string",
+      "enum": [
+        "Partial/Context-dependent",
+        "Yes"
+      ]
+    },
+    "implementation_domain": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "obligation_id",
+    "article",
+    "article_title",
+    "obligation_text_short",
+    "obligation_type",
+    "legal_force",
+    "requires_domestic_legal_anchoring",
+    "implementation_domain"
+  ]
+}
