@@ -1,0 +1,8 @@
+source,target,relationship_type,ihr_area,legal_basis,source_norm,source_article,confidence,notes
+CSG,SSA,oversight,steering,LGS Art 4,Ley General de Salud,Art 4,high,CSG is the highest sanitary authority under President
+SSA,DGE,subordination,surveillance / NFP,RI-SS-2025 Art 35,RI-SS-2025,Art 35,high,DGE is the IHR Focal Point liaison
+SSA,COFEPRIS,oversight,sanitary control / PoEs,LGS Art 17 Bis,Ley General de Salud,Art 17 Bis,high,COFEPRIS is a deconcentrated body with sanitary control powers
+SSA,CENAPRECE,subordination,emergency response,RI-SS-2025 Art 52,RI-SS-2025,Art 52,high,CENAPRECE handles programs for prevention and control
+SSA,SRE,coordination,international liaison,LGS Art 7,Ley General de Salud,Art 7,medium,Secretaría de Salud coordinates international representation with SRE
+SSA,Customs,coordination,Points of Entry,Ley Aduanera,Ley Aduanera,,medium,Requires coordination for health products and international sanitary control
+DGE,WHO,reporting,notification,IHR 2005 Art 4,IHR 2005,Art 4,high,NFP role for international reporting
