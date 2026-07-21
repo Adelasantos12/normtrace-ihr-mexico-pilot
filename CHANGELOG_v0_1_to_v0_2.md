@@ -200,3 +200,46 @@ by `06_scripts/build_tables/build_network.py` from
   `S5_network_metrics.schema.json`'s `provenance_note`. The author assigns
   the final reference number in the manuscript; this repo does not
   renumber it.
+
+## Adenda (2026-07-21), continued — points 6 and 7
+
+**Point 6 — `fig2_matrix.py` (Figure 2, two-mode incidence matrix): blocked,
+not written.** The instructions describe this script as author-delivered
+("lo entrega la autora"); it was not attached to the task and does not
+exist in this repository on any branch (checked all local and remote
+branches). Writing a Figure 2 matrix-generation script from scratch and
+presenting it as the author's delivered artifact would misattribute
+analytical work that is hers to produce, not mine to invent on her behalf.
+This point is on hold pending the actual file. Once it's provided, it can
+be placed in `06_scripts/`, pointed at the v0.2 paths, and verified against
+the same S5 recomputation this package already carries: 68 cells, the
+7-obligation cluster anchored by RIS Art. 35 frac. XIX (ring), the 2
+columns with no correspondence (`IHR-OBL-011`, `IHR-OBL-037`), and the
+per-row (per-instrument) degrees in `06_scripts/validation/validate_network_s5.py`.
+
+**Point 7 — Stage-1 exhaustiveness overclaim: fixed, but not on this
+branch.** "All 45 operative IHR 2005 obligations were extracted from the
+treaty text" lives in `normtrace_ihr_methodology_full.md`, which does not
+exist anywhere in this data-package branch (`sync-methods-v0.2`) — only on
+the webapp branches. Fixed directly there instead, in both tracked copies
+of the file (`00_project/` and `05_webapp/public/data/markdown/`):
+- `claude/beautiful-sagan-etT0C` (the repo's default branch, commit `721a6c3`)
+- `webapp-integrated` (the branch behind PR #19, commit `b584807`)
+
+Replaced with the bounded-selection framing and the exact named exclusions
+given in the Adenda: WHO-directed provisions (Arts. 11, 12, 14, 15–18, 29),
+State-Party-directed provisions outside the coded selection (Arts. 25, 26,
+28, 33, 34, 54(1)), and Art. 13(5) treated as a soft ("should") obligation,
+not a hard exclusion.
+
+**Not addressed**: those same two copies of `normtrace_ihr_methodology_full.md`
+also still describe the pre-v0.2 architecture in their Abstract and
+Methods sections (the abolished 0–5 anchoring scale, "validated anchoring
+scale", mean 1.76/5) — the broader Step 6 rewrite this task originally
+asked for, applied only to `methodology_note.md` (archived) because
+`normtrace_ihr_methodology_full.md` was believed not to exist on any
+branch at the time. That belief was wrong; the file exists on the webapp
+branches and was never brought in line with v0.2. Flagging this for the
+author rather than rewriting substantive Results/Methods text
+unilaterally — this is a bigger content decision than the single overclaim
+sentence in point 7.
