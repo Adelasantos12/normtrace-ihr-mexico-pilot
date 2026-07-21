@@ -78,6 +78,40 @@ Full evidence and reasoning for each row is in
 `04_outputs/exports/data_package_v0_2/S2_mexican_corpus_18.csv`'s new
 `date_verification_note` column.
 
+### Correction — MEX-016 / RLGS-SI errata date missed on first pass
+
+The first verification pass truncated each instrument's `status` field
+when scanning for a later date, and missed that the RLGS-SI (Reglamento de
+la Ley General de Salud en Materia de Sanidad Internacional) metadata's
+`status` field reads "Current text; new regulation DOF 1985-02-18, **errata
+DOF 1985-07-10**" — i.e. the regulation's true last modification is a
+published erratum, not its original publication date. A full re-read of
+all 16 corpus metadata YAMLs (not truncated) confirmed this was the only
+instrument where a later date had been missed; the other two ambiguous
+cases were checked and confirmed *not* to need a change:
+
+- Ley Aduanera's 2025-12-27 date is a customs-value update under the
+  Reglas Generales de Comercio Exterior, not a reform to the statute
+  itself — `last_amendment_date` correctly stays `2025-11-19`.
+- Reglamento Interior de la Secretaría de Salud's 2018/2023 dates are the
+  superseded partial-reform files (`MEX-013`, `MEX-014`), which the
+  corpus metadata already explicitly marks as archived —
+  `last_amendment_date` correctly stays `2025-02-27`.
+
+Fixed:
+- **S2 (`MEX-016`)**: `last_amendment_date` `1985-02-18` → `1985-07-10`.
+- **S3a**: `version_or_last_reform_date` was also `1985-02-18` (same
+  root cause) on all 24 RLGS-SI mapping records; corrected to
+  `1985-07-10`, with `verification_note` updated to state the last
+  modification is the errata DOF 10-07-1985 to the new regulation DOF
+  18-02-1985.
+
+All 9 distinct reform dates now appearing across S3a's instruments were
+re-checked against the full (untruncated) authoritative YAMLs and agree.
+`verification_outcome` distribution is unchanged (75 confirmed + 3
+confirmed_with_citation_correction) — this was a date correction, not a
+change to the confirmed/citation-correction classification.
+
 ### Discrepancy 1 — resolved: MEX-009 (LOAPF)
 
 S2's existing `last_amendment_date` (`2025-07-16`) is **confirmed correct**

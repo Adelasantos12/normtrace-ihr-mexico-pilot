@@ -192,6 +192,16 @@ def main():
           len(aduanera) > 0 and all(r["formal_source_level"] == "2" for r in aduanera),
           f"got {[(r['mapping_id'], r['formal_source_level']) for r in aduanera]}")
 
+    # --- RLGS-SI errata: last modification is DOF 1985-07-10, not the 1985-02-18 publication date ---
+    rsi = [r for r in s3a if "Sanidad Internacional" in r["domestic_norm"]]
+    check(failures, "S3a RLGS-SI rows carry the errata date (1985-07-10), not the publication date",
+          len(rsi) > 0 and all(r["version_or_last_reform_date"] == "1985-07-10" for r in rsi),
+          f"got {sorted(set(r['version_or_last_reform_date'] for r in rsi))} across {len(rsi)} rows")
+    s2_rsi = next((r for r in s2 if r["norm_id"] == "MEX-016"), None)
+    check(failures, "S2 MEX-016 (RLGS-SI) last_amendment_date = 1985-07-10 (errata)",
+          s2_rsi is not None and s2_rsi["last_amendment_date"] == "1985-07-10",
+          f"got {s2_rsi['last_amendment_date'] if s2_rsi else 'MEX-016 not found'}")
+
     # --- official_source_url domains ---
     bad_domains = []
     for r in s3a:
