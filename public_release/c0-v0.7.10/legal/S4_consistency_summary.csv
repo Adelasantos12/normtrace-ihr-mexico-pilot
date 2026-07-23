@@ -1,0 +1,8 @@
+rule,rule_type,evidentiary_status,applicable_n,passed,failed
+unmatched record carries missing source_rank and none_identified correspondence,by-definition,deterministic constraint,2,2,0
+unmatched record carries no_substantive_coverage,by-definition,deterministic constraint,2,2,0
+source_rank matches the instrument's source_type,integrity,structural integrity check,78,78,0
+obligation_id resolves to the obligation table,integrity,structural integrity check,80,80,0
+provision reference resolves (excl. 2 unmatched records),integrity,structural integrity check,78,78,0
+coordination gap does not co-occur with a strong coordination fit,plausibility,non-independent plausibility check,2,2,0
+"recognition-level (strong) rights-safeguard fit is present (ontology diagnostic; 8 of 10 also carry a rights-safeguard gap, not pass/fail)",diagnostic,ontology diagnostic,10,10,0
