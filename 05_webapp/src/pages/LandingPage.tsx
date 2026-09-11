@@ -4,15 +4,21 @@ import {
   Layers, ChevronRight, Scale, Network, TrendingDown, Shield, Clock
 } from 'lucide-react';
 import { PreliminaryBanner } from '../components/PreliminaryBanner';
+import { useJsonData } from '../hooks/useData';
+
+// Shape of 05_webapp/public/data/derived/spar_normtrace_divergence.json
+// (computed by 06_scripts/build_tables/spar_normtrace_bridge.py). Never
+// hard-code the CC1 self-report or divergence figures here -- read them so
+// this page always matches /spar-bridge and regenerates automatically when
+// the source SPAR panel (02_data/raw/spar_americas_clean.csv) is corrected.
+interface Cc1Headline {
+  spar_self_report_latest: number; spar_self_report_mean: number;
+  normtrace_legal_anchoring_pct: number;
+  divergence_latest: number; divergence_mean: number;
+}
+interface Divergence { headline_cc1: Cc1Headline; cc1_spar_series: { latest_year: number } }
 
 const HERO_TAGS = ['Federal presidential republic', 'Romano-Germanic civil law', 'Constitution 1917', 'CPEUM Art. 4 + 73(XVI)'];
-
-const KPI_STATS = [
-  { label: 'CC1 divergence', value: '+46.6 pts', icon: TrendingDown, color: '#dc2626', sub: 'SPAR self-report above legal anchoring' },
-  { label: 'Mean anchoring score', value: '1.76 / 5', icon: Activity, color: '#0ea5e9', sub: '45 IHR 2005 obligations, corpus-wide' },
-  { label: 'Primary IHR instrument', value: '1985', icon: Clock, color: '#f59e0b', sub: 'RLGS-SI predates IHR 2005 by 20 years' },
-  { label: 'IHR obligations mapped', value: '45', icon: Shield, color: '#10b981', sub: '110 domestic provisions, 18 instruments' },
-];
 
 const PIPELINE_STAGES = [
   'IHR Obligation', 'Constitutional Bridge', 'Statutory Layer',
@@ -69,6 +75,20 @@ const REFERENCES = [
 
 export default function LandingPage() {
   const navigate = useNavigate();
+  const { data: spar } = useJsonData<Divergence>('derived/spar_normtrace_divergence.json');
+  const cc1 = spar?.headline_cc1;
+
+  const KPI_STATS = [
+    {
+      label: 'CC1 divergence (mean)',
+      value: cc1 ? `+${cc1.divergence_mean} pts` : '…',
+      icon: TrendingDown, color: '#dc2626',
+      sub: cc1 ? `SPAR mean self-report vs legal anchoring · latest (${spar?.cc1_spar_series.latest_year}): +${cc1.divergence_latest} pts` : 'SPAR self-report above legal anchoring',
+    },
+    { label: 'Mean anchoring score', value: '1.76 / 5', icon: Activity, color: '#0ea5e9', sub: '45 IHR 2005 obligations, corpus-wide' },
+    { label: 'Primary IHR instrument', value: '1985', icon: Clock, color: '#f59e0b', sub: 'RLGS-SI predates IHR 2005 by 20 years' },
+    { label: 'IHR obligations mapped', value: '45', icon: Shield, color: '#10b981', sub: '110 domestic provisions, 18 instruments' },
+  ];
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
@@ -106,8 +126,10 @@ export default function LandingPage() {
           <p className="text-sm sm:text-base text-slate-400 max-w-2xl leading-relaxed">
             NormTrace-IHR traces every IHR (2005) obligation to the specific domestic legal instrument that
             anchors it — constitution, statute, regulation, or none at all. For CC1 (Legislation, policy &amp;
-            financing), Mexico self-reports 81% capacity to WHO SPAR; NormTrace finds 34% of the same
-            obligations actually anchored in domestic law.
+            financing), Mexico self-reports {cc1 ? `${cc1.spar_self_report_mean}% mean` : '…'} capacity to WHO
+            SPAR ({cc1 ? `${cc1.spar_self_report_latest}% latest, ${spar?.cc1_spar_series.latest_year}` : '…'});
+            NormTrace finds {cc1 ? `${cc1.normtrace_legal_anchoring_pct}%` : '…'} of the same obligations
+            actually anchored in domestic law.
           </p>
 
           <div className="flex flex-wrap gap-2">
