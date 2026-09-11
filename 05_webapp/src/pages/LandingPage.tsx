@@ -80,10 +80,10 @@ export default function LandingPage() {
 
   const KPI_STATS = [
     {
-      label: 'CC1 divergence (mean)',
-      value: cc1 ? `+${cc1.divergence_mean} pts` : '…',
+      label: `CC1 divergence (${spar?.cc1_spar_series.latest_year ?? 'latest'})`,
+      value: cc1 ? `+${cc1.divergence_latest} pts` : '…',
       icon: TrendingDown, color: '#dc2626',
-      sub: cc1 ? `SPAR mean self-report vs legal anchoring · latest (${spar?.cc1_spar_series.latest_year}): +${cc1.divergence_latest} pts` : 'SPAR self-report above legal anchoring',
+      sub: cc1 ? `SPAR latest self-report vs legal anchoring · historical mean: +${cc1.divergence_mean} pts` : 'SPAR self-report above legal anchoring',
     },
     { label: 'Mean anchoring score', value: '1.76 / 5', icon: Activity, color: '#0ea5e9', sub: '45 IHR 2005 obligations, corpus-wide' },
     { label: 'Primary IHR instrument', value: '1985', icon: Clock, color: '#f59e0b', sub: 'RLGS-SI predates IHR 2005 by 20 years' },
@@ -126,10 +126,10 @@ export default function LandingPage() {
           <p className="text-sm sm:text-base text-slate-400 max-w-2xl leading-relaxed">
             NormTrace-IHR traces every IHR (2005) obligation to the specific domestic legal instrument that
             anchors it — constitution, statute, regulation, or none at all. For CC1 (Legislation, policy &amp;
-            financing), Mexico self-reports {cc1 ? `${cc1.spar_self_report_mean}% mean` : '…'} capacity to WHO
-            SPAR ({cc1 ? `${cc1.spar_self_report_latest}% latest, ${spar?.cc1_spar_series.latest_year}` : '…'});
-            NormTrace finds {cc1 ? `${cc1.normtrace_legal_anchoring_pct}%` : '…'} of the same obligations
-            actually anchored in domestic law.
+            financing), Mexico's latest self-report to WHO SPAR ({cc1 ? `${cc1.spar_self_report_latest}%, ${spar?.cc1_spar_series.latest_year}` : '…'})
+            runs well above what NormTrace finds actually anchored in domestic law
+            ({cc1 ? `${cc1.normtrace_legal_anchoring_pct}%` : '…'} of the same obligations) — a current-state
+            comparison, not against SPAR's historical mean ({cc1 ? `${cc1.spar_self_report_mean}%` : '…'}).
           </p>
 
           <div className="flex flex-wrap gap-2">

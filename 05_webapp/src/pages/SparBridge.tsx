@@ -20,6 +20,7 @@ interface SparSeries { latest_year: number; latest: number; mean: number; max: n
   trajectory: { year: number; value: number }[]; }
 interface Divergence {
   country: string; scope_note: string; thesis: string;
+  primary_comparison: string; comparison_rationale: string;
   headline_cc1: Cc1Row;
   normtrace_corpus_anchoring_pct: number;
   cc1_spar_series: SparSeries;
@@ -41,6 +42,7 @@ export default function SparBridge() {
   );
 
   const cc1 = data.headline_cc1;
+  const latestYear = data.cc1_spar_series?.latest_year;
   const cap1Traj = data.cc1_spar_series?.trajectory ?? [];
 
   return (
@@ -59,27 +61,33 @@ export default function SparBridge() {
         <p className="text-xs text-slate-400 max-w-2xl italic">{data.scope_note}</p>
       </header>
 
-      {/* Headline — divergence as the dominant pull-quote, CC1 pair subordinate */}
+      {/* Headline — divergence as the dominant pull-quote, CC1 pair subordinate.
+          Primary comparison is latest vs. NormTrace, not mean vs. NormTrace:
+          NormTrace's anchoring score is a current-state snapshot, not a
+          multi-year average, so it is paired against SPAR's latest submission
+          -- see data.comparison_rationale. */}
       <div className="border-t-2 border-slate-900 pt-10">
         <div className="grid md:grid-cols-5 gap-10 items-start">
           <div className="md:col-span-3 border-l-4 border-red-600 pl-6">
             <div className="text-6xl sm:text-7xl font-bold text-red-600 leading-none tabular-nums">
-              +{cc1.divergence_mean}
+              +{cc1.divergence_latest}
             </div>
             <div className="text-base font-medium text-slate-700 mt-5">
-              Divergence — SPAR self-report above legal anchoring
+              Divergence — SPAR {latestYear} self-report above legal anchoring
             </div>
             <p className="text-sm text-slate-400 leading-relaxed mt-2 max-w-md">
-              Points of gap between Mexico's self-reported CC1 capacity and NormTrace's legal-anchoring score for
-              the same {cc1.n_obligations} obligations.
+              Points of gap between Mexico's latest ({latestYear}) self-reported CC1 capacity and NormTrace's
+              legal-anchoring score for the same {cc1.n_obligations} obligations. NormTrace's score is a current-state
+              snapshot, not a multi-year average, so it is compared against SPAR's latest submission, not SPAR's
+              historical mean.
             </p>
           </div>
 
           <div className="md:col-span-2 md:pl-8 md:border-l md:border-slate-200 space-y-8">
             <div>
-              <div className="text-3xl font-semibold text-slate-900">{cc1.spar_self_report_mean}%</div>
-              <div className="text-sm font-medium text-slate-700 mt-1">CC1 · self-report (SPAR)</div>
-              <div className="text-xs text-slate-400 mt-1">mean · {cc1.spar_self_report_latest}% latest</div>
+              <div className="text-3xl font-semibold text-slate-900">{cc1.spar_self_report_latest}%</div>
+              <div className="text-sm font-medium text-slate-700 mt-1">CC1 · self-report (SPAR, {latestYear})</div>
+              <div className="text-xs text-slate-400 mt-1">historical mean {cc1.spar_self_report_mean}% (2010–{latestYear}) · not the comparison basis</div>
             </div>
             <div>
               <div className="text-3xl font-semibold text-slate-900">{cc1.normtrace_legal_anchoring_pct}%</div>
@@ -96,9 +104,11 @@ export default function SparBridge() {
           <h2 className="text-xl font-semibold text-slate-900">Mexico — SPAR CC1 (Legislation) over time</h2>
           <p className="text-sm text-slate-500 mt-1 max-w-2xl leading-relaxed">
             Self-reported legislation capacity ran at 100% for most of 2011–2018. The dashed line is the
-            NormTrace legal anchoring for the same obligations ({cc1.normtrace_legal_anchoring_pct}%) — the
-            persistent gap is the point. Each point is one yearly SPAR submission; the line connects discrete
-            observations and should not be read as a continuous measure.
+            NormTrace legal anchoring for the same obligations ({cc1.normtrace_legal_anchoring_pct}%) — since that
+            score is a current-state snapshot rather than a multi-year measure, the relevant comparison point is
+            the trajectory's rightmost ({latestYear}) observation, not its historical average. Each point is one
+            yearly SPAR submission; the line connects discrete observations and should not be read as a
+            continuous measure.
           </p>
         </div>
         <div style={{ width: '100%', height: 300 }}>
