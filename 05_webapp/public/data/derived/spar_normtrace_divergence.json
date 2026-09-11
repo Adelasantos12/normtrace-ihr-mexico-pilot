@@ -6,18 +6,18 @@
   "headline_cc1": {
     "capacity": "C1 Legislation, policy & financing",
     "cc_tag": "CC1",
-    "spar_self_report_latest": 60.0,
-    "spar_self_report_mean": 80.6,
+    "spar_self_report_latest": 56.0,
+    "spar_self_report_mean": 80.4,
     "normtrace_legal_anchoring_pct": 34.0,
-    "divergence_latest": 26.0,
-    "divergence_mean": 46.6,
+    "divergence_latest": 22.0,
+    "divergence_mean": 46.4,
     "n_obligations": 20
   },
   "normtrace_corpus_anchoring_pct": 35.1,
   "cc1_spar_series": {
     "latest_year": 2025,
-    "latest": 60.0,
-    "mean": 80.6,
+    "latest": 56.0,
+    "mean": 80.4,
     "max": 100.0,
     "trajectory": [
       {
@@ -82,7 +82,7 @@
       },
       {
         "year": 2025,
-        "value": 60.0
+        "value": 56.0
       }
     ]
   },
