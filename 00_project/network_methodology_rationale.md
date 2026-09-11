@@ -117,7 +117,7 @@ pre-2005 dummy, to test formally whether older/lower-rank instruments predict we
 ### 3.4 The SPAR↔legal bridge → construct-validity probe, CC1 only
 `spar_normtrace_bridge.py` compares Mexico's SPAR self-report (0–100) with NormTrace legal
 anchoring (0–5→%), **scoped to CC1 (Legislation, policy & financing) only**: **CC1 Legislation:
-self-report 80.6% mean vs anchoring 34.0% (n=20 obligations) → +46.6 pts**. This is the pilot's
+self-report 80.4% mean / 56.0% latest (2025) vs anchoring 34.0% (n=20 obligations) → +46.4 pts (mean); +22.0 pts (latest)**. This is the pilot's
 construct-validity contribution: a capacity can be reported as present while the obligation
 lacks a sustainable legal base. **Implication:** the divergence is a *diagnostic of legal
 coverage*, not a claim that SPAR is "wrong" or that outcomes are predicted (see §4).
