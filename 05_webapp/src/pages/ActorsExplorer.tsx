@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { forceSimulation, forceManyBody, forceLink, forceX, forceCollide } from 'd3-force';
+import { forceSimulation, forceManyBody, forceLink, forceX, forceY, forceCollide } from 'd3-force';
 import { useCsvData, useJsonData } from '../hooks/useData';
 
 // Shape of 04_outputs/figures/network_metrics.json (computed by
@@ -38,11 +38,16 @@ function buildHubs(m: NetworkMetrics) {
 
 // --- Computed obligation network (force-directed, Phase 1-fig) ------------
 // Reads node_registry.csv + network_edges.csv (computed by build_network.py),
-// never the hand-authored actor_network_edges_derived.csv. Lanes by mode:
-// obligations (top) -> instruments (middle) -> actors (bottom), so the
-// anchoring chain reads top to bottom. Node size = degree_norm / obligation
-// reach; edge thickness = anchoring weight; obligations with a high-severity
-// gap type get a red dashed ring and their anchoring edges are drawn dashed red.
+// never the hand-authored actor_network_edges_derived.csv. Modes are pulled
+// toward a soft vertical target (obligations near the top, instruments the
+// middle, actors the bottom, per forceY below) but are NOT pinned to a fixed
+// row: x AND y both settle from real repulsion/link/collision forces, so
+// well-connected nodes migrate toward each other rather than sitting in an
+// evenly-spaced row. Node shape encodes mode (circle/square/triangle) in
+// addition to color, following the shape-by-type convention in Hollway's
+// {manynet}/{migraph} plots. Node size = degree_norm / obligation reach;
+// edge thickness = anchoring weight; obligations with a high-severity gap
+// type get a red dashed ring and their anchoring edges are drawn dashed red.
 type GraphMode = 'obligation' | 'instrument' | 'actor';
 
 interface GraphNode {
@@ -54,6 +59,11 @@ interface GraphNode {
   gapType: string;
   x: number;
   y: number;
+  degree?: number;
+  degreeNorm?: number;
+  betweenness?: number;
+  reach?: number;
+  nInstruments?: number;
 }
 interface GraphEdge {
   source: string;
@@ -70,6 +80,20 @@ const MODE_COLOR: Record<GraphMode, { fill: string; stroke: string; text: string
 };
 // gap types that represent a materially unresolved gap, vs. minor/partial ones
 const HIGH_SEVERITY_GAPS = new Set(['full_gap', 'legal_silence', 'coordination_gap']);
+
+// Renders a node's shape (mode-encoded) as an SVG primitive centered at (0,0).
+// Shape is purely visual encoding, redundant with color, for accessibility.
+function NodeMark({ mode, r, ...rest }: { mode: GraphMode; r: number } & React.SVGProps<SVGCircleElement | SVGRectElement | SVGPolygonElement>) {
+  if (mode === 'instrument') {
+    const s = r * 1.7;
+    return <rect x={-s / 2} y={-s / 2} width={s} height={s} rx={3} {...(rest as any)} />;
+  }
+  if (mode === 'actor') {
+    const w = r * 2.15, h = r * 1.95;
+    return <polygon points={`0,${-h / 2} ${w / 2},${h / 2} ${-w / 2},${h / 2}`} {...(rest as any)} />;
+  }
+  return <circle r={r} {...(rest as any)} />;
+}
 
 function ComputedNetworkGraph({
   nodeRegistry, netEdges, netMetrics, obligationGap,
@@ -103,7 +127,10 @@ function ComputedNetworkGraph({
         label: String(r.node_id).replace('IHR-OBL-', 'OBL-'), full: r.node_id,
         size: 6 + dn * 14,
         gapType: obligationGap[r.node_id] || 'none',
-        x: ((i + 0.5) / obligationRows.length) * width, y: LANE_Y.obligation, fy: LANE_Y.obligation,
+        degree: parseInt(r.degree, 10) || 0, degreeNorm: dn, betweenness: parseFloat(r.betweenness) || 0,
+        // Soft starting position near the obligation lane; NOT pinned (no fy) --
+        // forceY below pulls toward it, real connections can move nodes off it.
+        x: ((i + 0.5) / obligationRows.length) * width, y: LANE_Y.obligation,
       });
     });
     instrumentRows.forEach((r, i) => {
@@ -111,7 +138,8 @@ function ComputedNetworkGraph({
       simNodes.push({
         id: r.node_id, mode: 'instrument' as GraphMode, label: r.node_id, full: r.node_id,
         size: 8 + dn * 18, gapType: 'none',
-        x: ((i + 0.5) / instrumentRows.length) * width, y: LANE_Y.instrument, fy: LANE_Y.instrument,
+        degree: parseInt(r.degree, 10) || 0, degreeNorm: dn, betweenness: parseFloat(r.betweenness) || 0,
+        x: ((i + 0.5) / instrumentRows.length) * width, y: LANE_Y.instrument,
       });
     });
     actorRows.forEach((a, i) => {
@@ -119,7 +147,8 @@ function ComputedNetworkGraph({
         id: a.actor, mode: 'actor' as GraphMode,
         label: a.actor.length > 26 ? a.actor.slice(0, 24) + '…' : a.actor, full: a.actor,
         size: 8 + (a.obligation_reach / maxReach) * 18, gapType: 'none',
-        x: ((i + 0.5) / actorRows.length) * width, y: LANE_Y.actor, fy: LANE_Y.actor,
+        reach: a.obligation_reach, nInstruments: a.n_instruments,
+        x: ((i + 0.5) / actorRows.length) * width, y: LANE_Y.actor,
       });
     });
 
@@ -140,20 +169,46 @@ function ComputedNetworkGraph({
       });
     });
 
+    // Genuine force-directed layout: modes are a soft pull (forceY toward the
+    // lane center), not a hard constraint (no fy) -- real repulsion, link
+    // attraction (stronger anchoring = shorter, tighter link), and collision
+    // avoidance determine both x AND y, so hubs and their neighbors cluster
+    // organically instead of sitting in a mechanically evenly-spaced row.
     const simulation = forceSimulation(simNodes as any)
-      .force('charge', forceManyBody().strength(-40))
-      .force('link', forceLink(simLinks as any).distance(40).strength(0.25))
-      .force('x', forceX(width / 2).strength(0.03))
+      .force('charge', forceManyBody().strength(-110))
+      .force('link', forceLink(simLinks as any)
+        .distance((d: any) => 85 - Math.min(55, (d.weight || 1) * 16))
+        .strength(0.4))
+      .force('y', forceY((d: any) => LANE_Y[d.mode as GraphMode]).strength(0.14))
+      .force('x', forceX(width / 2).strength(0.02))
       .force('collide', forceCollide((d: any) =>
         d.size + 3
         + (d.mode === 'instrument' && d.size > 10 ? d.label.length * 2.2 : 0)
         + (d.mode === 'actor' ? Math.min(d.label.length, 16) * 1.5 : 0)))
       .stop();
-    for (let i = 0; i < 260; i++) simulation.tick();
+    for (let i = 0; i < 320; i++) simulation.tick();
+
+    // Fit the organically-settled bounding box to the drawing area (rather
+    // than just clamping x), since without fy the layout no longer spans
+    // exactly [0,width]x[laneY] by construction.
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    simNodes.forEach((n) => {
+      minX = Math.min(minX, n.x); maxX = Math.max(maxX, n.x);
+      minY = Math.min(minY, n.y); maxY = Math.max(maxY, n.y);
+    });
+    const marginX = 70, marginY = 55;
+    const scaleX = (width - marginX * 2) / Math.max(1, maxX - minX);
+    const scaleY = (height - marginY * 2) / Math.max(1, maxY - minY);
+    simNodes.forEach((n) => {
+      n.x = marginX + (n.x - minX) * scaleX;
+      n.y = marginY + (n.y - minY) * scaleY;
+    });
 
     const nodes: GraphNode[] = simNodes.map((n) => ({
       id: n.id, mode: n.mode, label: n.label, full: n.full, size: n.size, gapType: n.gapType,
-      x: Math.max(55, Math.min(width - 55, n.x)), y: n.y,
+      degree: n.degree, degreeNorm: n.degreeNorm, betweenness: n.betweenness,
+      reach: n.reach, nInstruments: n.nInstruments,
+      x: Math.max(marginX, Math.min(width - marginX, n.x)), y: n.y,
     }));
 
     // The collide force approximates label width as extra circle radius, but it's
@@ -189,6 +244,43 @@ function ComputedNetworkGraph({
     const m: Record<string, GraphNode> = {};
     nodes.forEach((n) => { m[n.id] = n; });
     return m;
+  }, [nodes]);
+
+  // Quantitative size-legend reference points, computed from the real
+  // instrument-degree distribution (min / median / max), not hand-picked --
+  // the instrument shape (square) is the most legible mode for a size key.
+  const sizeLegend = useMemo(() => {
+    const ranked = netMetrics?.instrument_degree_ranked;
+    if (!ranked || !ranked.length || !netMetrics) return null;
+    const degrees = ranked.map((r) => r.obligations_anchored).sort((a, b) => a - b);
+    const nObl = netMetrics.network.n_obligations || 1;
+    const pick = (d: number) => ({ degree: d, r: 8 + (d / nObl) * 18 });
+    const min = pick(degrees[0]);
+    const max = pick(degrees[degrees.length - 1]);
+    const med = pick(degrees[Math.floor((degrees.length - 1) / 2)]);
+    return [min, med, max];
+  }, [netMetrics]);
+
+  // Degree distributions for the two-mode network, per Borgatti & Everett
+  // (1997): each mode's degree is a distinct distribution, not pooled --
+  // instruments (n=9) read as a rank-ordered bar chart (hub dominance is the
+  // story at this n); obligations (n=43) as a proper frequency histogram.
+  const instrumentDegreeBars = useMemo(() => {
+    const ranked = netMetrics?.instrument_degree_ranked;
+    if (!ranked || !ranked.length) return null;
+    const maxDeg = Math.max(...ranked.map((r) => r.obligations_anchored));
+    return { rows: ranked, maxDeg };
+  }, [netMetrics]);
+
+  const obligationDegreeHistogram = useMemo(() => {
+    const obl = nodes.filter((n) => n.mode === 'obligation' && n.degree !== undefined);
+    if (!obl.length) return null;
+    const counts = new Map<number, number>();
+    obl.forEach((n) => counts.set(n.degree!, (counts.get(n.degree!) || 0) + 1));
+    const maxDeg = Math.max(...counts.keys());
+    const bins = Array.from({ length: maxDeg + 1 }, (_, d) => ({ degree: d, count: counts.get(d) || 0 }));
+    const maxCount = Math.max(...bins.map((b) => b.count));
+    return { bins, maxCount, n: obl.length };
   }, [nodes]);
 
   // Click an obligation -> highlight its chain: anchoring instruments, and the
@@ -243,24 +335,58 @@ function ComputedNetworkGraph({
       </div>
 
       <div className="flex">
-        <div className="w-52 shrink-0 border-r border-slate-100 p-4 space-y-2 text-[9px]" style={{ height }}>
-          <div className="font-semibold text-slate-500 uppercase tracking-widest">Legend</div>
-          {([
-            { label: 'Obligation', bg: '#f0fdf4', border: '#16a34a' },
-            { label: 'Instrument', bg: '#eef2ff', border: '#4338ca' },
-            { label: 'Actor', bg: '#1e3a5f', border: '#1e3a5f' },
-          ] as any[]).map((l) => (
-            <div key={l.label} className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full shrink-0 border" style={{ background: l.bg, borderColor: l.border }} />
-              <span className="font-bold text-slate-600">{l.label}</span>
+        <div className="w-52 shrink-0 border-r border-slate-100 p-4 space-y-3 text-[9px] overflow-y-auto" style={{ height }}>
+          <div>
+            <div className="font-semibold text-slate-500 uppercase tracking-widest mb-1.5">Mode (shape + color)</div>
+            {([
+              { label: 'Obligation', mode: 'obligation' as GraphMode, bg: '#f0fdf4', border: '#16a34a' },
+              { label: 'Instrument', mode: 'instrument' as GraphMode, bg: '#eef2ff', border: '#4338ca' },
+              { label: 'Actor', mode: 'actor' as GraphMode, bg: '#1e3a5f', border: '#1e3a5f' },
+            ]).map((l) => (
+              <div key={l.label} className="flex items-center gap-2 py-0.5">
+                <svg width={14} height={14} viewBox="-7 -7 14 14" className="shrink-0">
+                  <NodeMark mode={l.mode} r={5.5} fill={l.bg} stroke={l.border} strokeWidth={1.5} />
+                </svg>
+                <span className="font-bold text-slate-600">{l.label}</span>
+              </div>
+            ))}
+            <div className="flex items-center gap-2 pt-2 mt-1 border-t border-slate-100">
+              <div className="w-5 h-0.5 shrink-0 rounded border-t-2 border-dashed" style={{ borderColor: '#dc2626' }} />
+              <span className="font-bold text-slate-600">Gap-exposed obligation</span>
             </div>
-          ))}
-          <div className="flex items-center gap-2 pt-2 border-t border-slate-100">
-            <div className="w-5 h-0.5 shrink-0 rounded border-t-2 border-dashed" style={{ borderColor: '#dc2626' }} />
-            <span className="font-bold text-slate-600">Gap-exposed obligation</span>
           </div>
-          <div className="text-slate-400 italic pt-1 border-t border-slate-100">Hover to reveal labels; node size scales with degree/reach.</div>
-          <div className="text-slate-400 italic pt-1 border-t border-slate-100">Click an obligation node (top band) to trace its chain.</div>
+
+          {sizeLegend && (
+            <div className="pt-2 border-t border-slate-100">
+              <div className="font-semibold text-slate-500 uppercase tracking-widest mb-1.5">Node size (instrument degree)</div>
+              <div className="flex items-end gap-3 pt-1 pb-0.5">
+                {sizeLegend.map((s) => (
+                  <div key={s.degree} className="flex flex-col items-center gap-1">
+                    <svg width={40} height={40} viewBox="-20 -20 40 40">
+                      <NodeMark mode="instrument" r={s.r} fill="#eef2ff" stroke="#4338ca" strokeWidth={1.5} />
+                    </svg>
+                    <span className="font-bold text-slate-600">{s.degree}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="text-slate-400 italic">deg = obligations anchored (min/median/max). Other modes scaled independently — see hover.</div>
+            </div>
+          )}
+
+          <div className="pt-2 border-t border-slate-100">
+            <div className="font-semibold text-slate-500 uppercase tracking-widest mb-1.5">Edge width (anchoring level)</div>
+            {[1, 2, 3].map((lvl) => (
+              <div key={lvl} className="flex items-center gap-2 py-0.5">
+                <svg width={28} height={10}>
+                  <line x1={2} y1={5} x2={26} y2={5} stroke="#94a3b8" strokeWidth={Math.max(0.75, lvl * 0.9)} />
+                </svg>
+                <span className="font-bold text-slate-600">Level {lvl}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-slate-400 italic pt-2 border-t border-slate-100">Hover any node for its exact degree/betweenness/reach. Layout is force-directed (not hand-placed): mode sets a soft vertical pull, real connections do the rest.</div>
+          <div className="text-slate-400 italic pt-1 border-t border-slate-100">Click an obligation to trace its chain.</div>
         </div>
         <div className="relative flex-1 bg-slate-50/50 overflow-auto" style={{ height }}>
         <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ minWidth: width, minHeight: height }}>
@@ -301,6 +427,13 @@ function ComputedNetworkGraph({
               ? (n.label.length > 16 ? n.label.slice(0, 14) + '…' : n.label)
               : null;
             const belowLabelWidth = belowLabel ? belowLabel.length * 5.2 + 8 : 0;
+            // Exact numeric values on hover -- the visual encoding (size/shape)
+            // is approximate by design; analysts need the real number too.
+            const tooltip = n.mode === 'obligation'
+              ? `${n.full} — degree ${n.degree} of ${netMetrics?.network.n_instruments ?? '?'} instruments · betweenness ${n.betweenness?.toFixed(3)} · gap: ${n.gapType}`
+              : n.mode === 'instrument'
+              ? `${n.full} — degree ${n.degree} of ${netMetrics?.network.n_obligations ?? '?'} obligations · degree_norm ${n.degreeNorm?.toFixed(3)} · betweenness ${n.betweenness?.toFixed(3)}`
+              : `${n.full} — obligation_reach ${n.reach} of ${netMetrics?.network.n_obligations ?? '?'} · via ${n.nInstruments} instrument${n.nInstruments === 1 ? '' : 's'}`;
             return (
               <g key={n.id}
                  transform={`translate(${n.x},${n.y})`}
@@ -309,7 +442,9 @@ function ComputedNetworkGraph({
                  onClick={() => n.mode === 'obligation' && setSelected(isSelected ? null : n.id)}
                  onMouseEnter={() => setHovered(n.id)}
                  onMouseLeave={() => setHovered(null)}>
-                <circle
+                <title>{tooltip}</title>
+                <NodeMark
+                  mode={n.mode}
                   r={r}
                   fill={style.fill}
                   stroke={isSelected ? '#2563eb' : isHoveredClickable ? '#60a5fa' : hasGap ? '#dc2626' : style.stroke}
@@ -389,16 +524,64 @@ function ComputedNetworkGraph({
         </div>
       </div>
 
+      {/* Degree distributions — one per mode, per Borgatti & Everett (1997):
+          a two-mode network has two distinct degree distributions, never pooled. */}
+      {(instrumentDegreeBars || obligationDegreeHistogram) && (
+        <div className="grid md:grid-cols-2 gap-6 p-6 border-t border-slate-100 bg-slate-50/40">
+          {instrumentDegreeBars && (
+            <div>
+              <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-widest mb-2">
+                Instrument degree (rank-ordered, n={instrumentDegreeBars.rows.length})
+              </div>
+              <div className="space-y-1">
+                {instrumentDegreeBars.rows.map((r) => (
+                  <div key={r.instrument} className="flex items-center gap-2 text-[10px]">
+                    <span className="w-20 shrink-0 truncate font-medium text-slate-600" title={r.instrument}>{r.instrument}</span>
+                    <div className="flex-1 bg-slate-100 rounded-sm h-3 overflow-hidden">
+                      <div className="h-full bg-indigo-400 rounded-sm" style={{ width: `${(r.obligations_anchored / instrumentDegreeBars.maxDeg) * 100}%` }} />
+                    </div>
+                    <span className="w-5 shrink-0 text-right font-bold text-slate-600 tabular-nums">{r.obligations_anchored}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="text-[9px] text-slate-400 italic mt-1.5">Obligations anchored per instrument — hub dominance (LGS/RLGS-SI) is visible directly, not asserted.</div>
+            </div>
+          )}
+          {obligationDegreeHistogram && (
+            <div>
+              <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-widest mb-2">
+                Obligation degree distribution (n={obligationDegreeHistogram.n})
+              </div>
+              <div className="flex items-end gap-1.5" style={{ height: 72 }}>
+                {obligationDegreeHistogram.bins.map((b) => (
+                  <div key={b.degree} className="flex-1 flex flex-col items-center justify-end gap-1 h-full">
+                    <span className="text-[9px] font-bold text-slate-500 tabular-nums">{b.count}</span>
+                    <div
+                      className="w-full bg-emerald-400 rounded-t-sm"
+                      style={{ height: Math.max(2, (b.count / obligationDegreeHistogram.maxCount) * 44) }}
+                    />
+                    <span className="text-[9px] font-medium text-slate-500">{b.degree}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="text-[9px] text-slate-400 italic mt-1.5">Number of distinct instruments anchoring each obligation (x-axis = degree, y-axis = obligation count).</div>
+            </div>
+          )}
+        </div>
+      )}
+
       <div className="px-8 py-4 bg-slate-50 border-t border-slate-100">
         <p className="text-[10px] text-slate-500 leading-relaxed max-w-5xl">
           <strong className="text-slate-700">Figure 1 (computed). Force-directed instrument×obligation×actor network.</strong>{' '}
-          Layout computed by d3-force (obligations pinned to the top band, instruments to the middle band, actors to
-          the bottom band; horizontal position and spacing resolved by simulated repulsion, link attraction, and
-          collision avoidance). Node size and edge width are computed from <code>network_metrics.json</code> and{' '}
-          <code>network_edges.csv</code> (build_network.py), not hand-set. This is a corpus-derived, multimodal
-          legal-institutional traceability network (obligation × instrument × actor; see Knoke, Diani, Hollway &amp;
-          Christopoulos, <em>Multimodal Political Networks</em>, Cambridge University Press, 2021), not observed
-          coordination or political authority.
+          Layout computed by d3-force: mode sets a soft vertical target (obligations toward the top, instruments the
+          middle, actors the bottom via <code>forceY</code>), while horizontal AND vertical position within that pull
+          are resolved by simulated repulsion, link attraction (stronger anchoring draws nodes closer), and collision
+          avoidance — nodes are not pinned to a row. Shape encodes mode (circle/square/triangle) redundantly with
+          color. Node size and edge width are computed from <code>network_metrics.json</code> and{' '}
+          <code>network_edges.csv</code> (build_network.py), not hand-set; hover any node for its exact degree,
+          degree_norm, and betweenness. This is a corpus-derived, multimodal legal-institutional traceability network
+          (obligation × instrument × actor; see Knoke, Diani, Hollway &amp; Christopoulos, <em>Multimodal Political
+          Networks</em>, Cambridge University Press, 2021), not observed coordination or political authority.
         </p>
       </div>
     </div>
