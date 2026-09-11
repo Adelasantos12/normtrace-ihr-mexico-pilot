@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { forceSimulation, forceManyBody, forceLink, forceX, forceY, forceCollide } from 'd3-force';
 import { useCsvData, useJsonData } from '../hooks/useData';
 
@@ -105,6 +105,15 @@ function ComputedNetworkGraph({
 }) {
   const [selected, setSelected] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
+
+  // Pan/zoom: the SVG's viewBox already fits the whole graph to the visible
+  // area by default (no horizontal scrolling needed to see every node), and
+  // this transform layers interactive zoom-in/pan on top -- like Gephi/Kumu/
+  // Obsidian's graph view, not a fixed-size canvas you have to scroll around.
+  const svgRef = useRef<SVGSVGElement>(null);
+  const [zoom, setZoom] = useState({ scale: 1, x: 0, y: 0 });
+  const [isPanning, setIsPanning] = useState(false);
+  const panStart = useRef<{ x: number; y: number } | null>(null);
 
   const { nodes, edges, width, height } = useMemo(() => {
     if (!nodeRegistry.length || !netEdges.length || !netMetrics) {
@@ -300,6 +309,77 @@ function ComputedNetworkGraph({
     return { obligation: selected, instruments, actors };
   }, [selected, edges, posById]);
 
+  // --- Pan/zoom mechanics -----------------------------------------------
+  const ZOOM_MIN = 0.4, ZOOM_MAX = 5;
+  const clampScale = (s: number) => Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, s));
+  const toGraphPoint = (clientX: number, clientY: number) => {
+    const svg = svgRef.current;
+    if (!svg) return { x: 0, y: 0 };
+    const rect = svg.getBoundingClientRect();
+    return { x: ((clientX - rect.left) / rect.width) * width, y: ((clientY - rect.top) / rect.height) * height };
+  };
+  const zoomAt = (clientX: number, clientY: number, factor: number) => {
+    setZoom((z) => {
+      const newScale = clampScale(z.scale * factor);
+      if (newScale === z.scale) return z;
+      const p = toGraphPoint(clientX, clientY);
+      const worldX = (p.x - z.x) / z.scale;
+      const worldY = (p.y - z.y) / z.scale;
+      return { scale: newScale, x: p.x - worldX * newScale, y: p.y - worldY * newScale };
+    });
+  };
+  // React attaches synthetic wheel listeners as passive, so e.preventDefault()
+  // inside a React onWheel prop is a no-op (and warns) -- attach a real,
+  // non-passive native listener instead so scrolling over the graph zooms it
+  // rather than scrolling the page underneath it.
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    const onNativeWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      const rect = svg.getBoundingClientRect();
+      const factor = Math.exp(-e.deltaY * 0.0015);
+      setZoom((z) => {
+        const newScale = clampScale(z.scale * factor);
+        if (newScale === z.scale) return z;
+        const px = ((e.clientX - rect.left) / rect.width) * width;
+        const py = ((e.clientY - rect.top) / rect.height) * height;
+        const worldX = (px - z.x) / z.scale;
+        const worldY = (py - z.y) / z.scale;
+        return { scale: newScale, x: px - worldX * newScale, y: py - worldY * newScale };
+      });
+    };
+    svg.addEventListener('wheel', onNativeWheel, { passive: false });
+    return () => svg.removeEventListener('wheel', onNativeWheel);
+  }, [width, height]);
+  const handleBackgroundMouseDown = (e: React.MouseEvent<SVGSVGElement>) => {
+    if ((e.target as Element).getAttribute('data-bg') !== 'true') return;
+    panStart.current = { x: e.clientX, y: e.clientY };
+    setIsPanning(true);
+  };
+  useEffect(() => {
+    if (!isPanning) return;
+    const onMove = (e: MouseEvent) => {
+      if (!panStart.current || !svgRef.current) return;
+      const rect = svgRef.current.getBoundingClientRect();
+      const dx = ((e.clientX - panStart.current.x) / rect.width) * width;
+      const dy = ((e.clientY - panStart.current.y) / rect.height) * height;
+      panStart.current = { x: e.clientX, y: e.clientY };
+      setZoom((z) => ({ ...z, x: z.x + dx, y: z.y + dy }));
+    };
+    const onUp = () => { setIsPanning(false); panStart.current = null; };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+    return () => { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); };
+  }, [isPanning, width, height]);
+  const zoomButton = (factor: number) => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    const rect = svg.getBoundingClientRect();
+    zoomAt(rect.left + rect.width / 2, rect.top + rect.height / 2, factor);
+  };
+  const resetZoom = () => setZoom({ scale: 1, x: 0, y: 0 });
+
   if (!nodes.length) {
     return <div className="p-8 text-slate-400 text-sm italic">Loading computed network…</div>;
   }
@@ -385,17 +465,30 @@ function ComputedNetworkGraph({
             ))}
           </div>
 
-          <div className="text-slate-400 italic pt-2 border-t border-slate-100">Hover any node for its exact degree/betweenness/reach. Layout is force-directed (not hand-placed): mode sets a soft vertical pull, real connections do the rest.</div>
+          <div className="text-slate-400 italic pt-2 border-t border-slate-100">Scroll/pinch to zoom, drag to pan, "FIT" to reset — the whole network is visible by default, zoom in to read long actor names in full.</div>
+          <div className="text-slate-400 italic pt-1 border-t border-slate-100">Hover any node for its exact degree/betweenness/reach. Layout is force-directed (not hand-placed): mode sets a soft vertical pull, real connections do the rest.</div>
           <div className="text-slate-400 italic pt-1 border-t border-slate-100">Click an obligation to trace its chain.</div>
         </div>
-        <div className="relative flex-1 bg-slate-50/50 overflow-auto" style={{ height }}>
-        <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ minWidth: width, minHeight: height }}>
-          <rect x={0} y={LANE_Y.obligation - 45} width={width} height={85} fill="#16a34a" opacity={0.04} />
-          <rect x={0} y={LANE_Y.instrument - 45} width={width} height={85} fill="#4338ca" opacity={0.04} />
-          <rect x={0} y={LANE_Y.actor - 45} width={width} height={85} fill="#1e3a5f" opacity={0.04} />
-          <text x={12} y={LANE_Y.obligation - 52} fontSize="10" fontWeight="900" fill="#16a34a">OBLIGATIONS</text>
-          <text x={12} y={LANE_Y.instrument - 52} fontSize="10" fontWeight="900" fill="#4338ca">INSTRUMENTS</text>
-          <text x={12} y={LANE_Y.actor - 52} fontSize="10" fontWeight="900" fill="#1e3a5f">ACTORS</text>
+        <div className="relative flex-1 bg-slate-50/50 overflow-hidden" style={{ height }}>
+        {/* viewBox fits the ENTIRE graph to the visible area by default (no
+            scrolling to see every node); the inner <g transform> layers
+            interactive zoom/pan on top, like Gephi/Kumu/Obsidian's graph view. */}
+        <svg
+          ref={svgRef}
+          width="100%" height="100%"
+          viewBox={`0 0 ${width} ${height}`}
+          preserveAspectRatio="xMidYMid meet"
+          data-bg="true"
+          onMouseDown={handleBackgroundMouseDown}
+          style={{ display: 'block', cursor: isPanning ? 'grabbing' : 'grab', touchAction: 'none' }}
+        >
+        <g transform={`translate(${zoom.x},${zoom.y}) scale(${zoom.scale})`}>
+          <rect data-bg="true" x={0} y={LANE_Y.obligation - 45} width={width} height={85} fill="#16a34a" opacity={0.04} />
+          <rect data-bg="true" x={0} y={LANE_Y.instrument - 45} width={width} height={85} fill="#4338ca" opacity={0.04} />
+          <rect data-bg="true" x={0} y={LANE_Y.actor - 45} width={width} height={85} fill="#1e3a5f" opacity={0.04} />
+          <text data-bg="true" x={12} y={LANE_Y.obligation - 52} fontSize="10" fontWeight="900" fill="#16a34a">OBLIGATIONS</text>
+          <text data-bg="true" x={12} y={LANE_Y.instrument - 52} fontSize="10" fontWeight="900" fill="#4338ca">INSTRUMENTS</text>
+          <text data-bg="true" x={12} y={LANE_Y.actor - 52} fontSize="10" fontWeight="900" fill="#1e3a5f">ACTORS</text>
 
           {edges.map((e, i) => {
             const s = posById[e.source], t = posById[e.target];
@@ -422,9 +515,12 @@ function ComputedNetworkGraph({
             const r = isHoveredClickable ? n.size + 3 : n.size;
             // Actor labels are always shown below the node (never fit inside the
             // circle); obligation/instrument labels stay inline, gated by size/hover
-            // to avoid crowding the dense top band.
+            // to avoid crowding the dense top band. Truncation length grows with
+            // zoom: at the fit-to-view scale, short is legible; zoomed in, show
+            // more of the real name instead of clipping it at a fixed length.
+            const actorMaxChars = zoom.scale >= 2.2 ? 60 : zoom.scale >= 1.4 ? 30 : 16;
             const belowLabel = n.mode === 'actor'
-              ? (n.label.length > 16 ? n.label.slice(0, 14) + '…' : n.label)
+              ? (n.full.length > actorMaxChars ? n.full.slice(0, actorMaxChars - 2) + '…' : n.full)
               : null;
             const belowLabelWidth = belowLabel ? belowLabel.length * 5.2 + 8 : 0;
             // Exact numeric values on hover -- the visual encoding (size/shape)
@@ -483,7 +579,27 @@ function ComputedNetworkGraph({
               </g>
             );
           })}
+        </g>
         </svg>
+
+        {/* Zoom controls — floating, top-right of the graph area */}
+        <div className="absolute top-3 right-3 flex flex-col bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+          <button
+            onClick={() => zoomButton(1.3)}
+            className="w-8 h-8 flex items-center justify-center text-slate-600 hover:bg-slate-50 border-b border-slate-100 font-bold"
+            title="Zoom in"
+          >+</button>
+          <button
+            onClick={() => zoomButton(1 / 1.3)}
+            className="w-8 h-8 flex items-center justify-center text-slate-600 hover:bg-slate-50 border-b border-slate-100 font-bold"
+            title="Zoom out"
+          >−</button>
+          <button
+            onClick={resetZoom}
+            className="w-8 h-8 flex items-center justify-center text-slate-600 hover:bg-slate-50 text-[9px] font-bold"
+            title="Fit to view"
+          >FIT</button>
+        </div>
 
         {/* Side panel: obligation chain on click */}
         {selectedNode && (
@@ -579,7 +695,9 @@ function ComputedNetworkGraph({
           avoidance — nodes are not pinned to a row. Shape encodes mode (circle/square/triangle) redundantly with
           color. Node size and edge width are computed from <code>network_metrics.json</code> and{' '}
           <code>network_edges.csv</code> (build_network.py), not hand-set; hover any node for its exact degree,
-          degree_norm, and betweenness. This is a corpus-derived, multimodal legal-institutional traceability network
+          degree_norm, and betweenness. The view fits the entire network by default (no scrolling required to see
+          every node); scroll/pinch to zoom into a cluster and drag to pan — actor names lengthen as you zoom in
+          rather than staying clipped. This is a corpus-derived, multimodal legal-institutional traceability network
           (obligation × instrument × actor; see Knoke, Diani, Hollway &amp; Christopoulos, <em>Multimodal Political
           Networks</em>, Cambridge University Press, 2021), not observed coordination or political authority.
         </p>
