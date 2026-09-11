@@ -3,6 +3,8 @@
   "country": "Mexico",
   "scope_note": "Comparison is limited to CC1 (Legislation, policy & financing), the only SPAR capacity that measures the same construct as NormTrace's legal-anchoring score (does a domestic legal instrument exist for the obligation). SPAR's other capacities measure operational capacity, which NormTrace does not assess; an earlier version of this bridge compared five capacities and has been narrowed to CC1 for construct validity.",
   "thesis": "SPAR CC1 self-report measures reported legislative/policy capacity; NormTrace measures domestic legal anchoring for the same obligations. A large positive divergence flags capacity reported without a sustainable legal-institutional base.",
+  "primary_comparison": "latest",
+  "comparison_rationale": "NormTrace's legal-anchoring score is a snapshot of the CURRENT legal-institutional state, not a multi-year average -- it does not have a 'historical mean' the way a repeated yearly submission does. The construct-valid pairing is therefore NormTrace anchoring against SPAR's most recent (latest-year) CC1 submission, not against SPAR's historical mean, which mixes years the anchoring score was never computed for. spar_self_report_mean / divergence_mean are retained as historical context for the SPAR trajectory only -- they are not the headline figure.",
   "headline_cc1": {
     "capacity": "C1 Legislation, policy & financing",
     "cc_tag": "CC1",
@@ -89,6 +91,6 @@
   "caveats": [
     "This comparison covers CC1 only; NormTrace does not measure the operational capacities SPAR's other core capacities assess (surveillance systems, points-of-entry infrastructure, emergency management, etc.), so no divergence claim is made for them.",
     "NormTrace anchoring is preliminary_ai_assisted and unvalidated by a domestic public-health-law expert.",
-    "SPAR cap1 methodology changed across editions; interpret the trajectory, not single-year points."
+    "SPAR cap1 methodology changed across editions, so within-SPAR year-over-year swings should be read as trajectory context, not compared point-by-point across years. That is separate from the headline pairing above: NormTrace anchoring is itself a current snapshot, so it is deliberately compared against SPAR's latest submission (not the SPAR historical mean)."
   ]
 }

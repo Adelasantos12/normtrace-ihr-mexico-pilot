@@ -29,6 +29,13 @@ of this script computed that comparison for five capacities; it was removed
 (see network_methodology_rationale.md SS3.4) because only the CC1 pairing is
 construct-valid.
 
+Primary comparison year: latest, not mean. NormTrace's anchoring score is a
+snapshot of the current legal state, not a multi-year average, so the
+headline divergence pairs it against SPAR's latest CC1 submission
+(spar_self_report_latest / divergence_latest). spar_self_report_mean /
+divergence_mean are computed and retained only as historical context for
+the SPAR trajectory -- see comparison_rationale in the output JSON.
+
 Inputs:
   02_data/raw/spar_americas_clean.csv           (SPAR panel, Americas)
   03_tables/country_legal_mapping/mexico_ihr2005_mapping.csv
@@ -156,6 +163,17 @@ def main():
                    "NormTrace measures domestic legal anchoring for the same obligations. "
                    "A large positive divergence flags capacity reported without a "
                    "sustainable legal-institutional base."),
+        "primary_comparison": "latest",
+        "comparison_rationale": (
+            "NormTrace's legal-anchoring score is a snapshot of the CURRENT legal-"
+            "institutional state, not a multi-year average -- it does not have a "
+            "'historical mean' the way a repeated yearly submission does. The "
+            "construct-valid pairing is therefore NormTrace anchoring against SPAR's "
+            "most recent (latest-year) CC1 submission, not against SPAR's historical "
+            "mean, which mixes years the anchoring score was never computed for. "
+            "spar_self_report_mean / divergence_mean are retained as historical "
+            "context for the SPAR trajectory only -- they are not the headline figure."
+        ),
         "headline_cc1": headline,
         "normtrace_corpus_anchoring_pct": normtrace_corpus_anchoring_pct,
         "cc1_spar_series": cc1_series,
@@ -165,8 +183,12 @@ def main():
                     "management, etc.), so no divergence claim is made for them.",
                     "NormTrace anchoring is preliminary_ai_assisted and unvalidated by a "
                     "domestic public-health-law expert.",
-                    "SPAR cap1 methodology changed across editions; interpret the "
-                    "trajectory, not single-year points."],
+                    "SPAR cap1 methodology changed across editions, so within-SPAR "
+                    "year-over-year swings should be read as trajectory context, not "
+                    "compared point-by-point across years. That is separate from the "
+                    "headline pairing above: NormTrace anchoring is itself a current "
+                    "snapshot, so it is deliberately compared against SPAR's latest "
+                    "submission (not the SPAR historical mean)."],
     }
 
     for folder in (OUT_EXP, OUT_WEB):
@@ -175,11 +197,12 @@ def main():
 
     print("=== SPAR CC1 (self-report) vs NormTrace (legal anchoring) — Mexico ===\n")
     print(f"HEADLINE (CC1 Legislation): Mexico self-reported "
-          f"{headline['spar_self_report_mean']}% (mean) / "
-          f"{headline['spar_self_report_latest']}% (latest) legislation capacity, "
-          f"while NormTrace legal anchoring = {headline['normtrace_legal_anchoring_pct']}% "
+          f"{headline['spar_self_report_latest']}% (latest, {cc1_series['latest_year']}) legislation "
+          f"capacity, while NormTrace legal anchoring = {headline['normtrace_legal_anchoring_pct']}% "
           f"(n={headline['n_obligations']} obligations) "
-          f"-> divergence {headline['divergence_mean']} pts (mean).")
+          f"-> divergence {headline['divergence_latest']} pts (primary, vs. latest). "
+          f"[Historical context: SPAR mean {headline['spar_self_report_mean']}% -> "
+          f"{headline['divergence_mean']} pts vs. mean.]")
     print(f"\nCorpus-wide NormTrace anchoring (all 45 obligations, standalone stat, "
           f"not compared to SPAR): {normtrace_corpus_anchoring_pct}%.")
 
