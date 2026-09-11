@@ -127,9 +127,10 @@ export default function LandingPage() {
             NormTrace-IHR traces every IHR (2005) obligation to the specific domestic legal instrument that
             anchors it — constitution, statute, regulation, or none at all. For CC1 (Legislation, policy &amp;
             financing), Mexico's latest self-report to WHO SPAR ({cc1 ? `${cc1.spar_self_report_latest}%, ${spar?.cc1_spar_series.latest_year}` : '…'})
-            runs well above what NormTrace finds actually anchored in domestic law
-            ({cc1 ? `${cc1.normtrace_legal_anchoring_pct}%` : '…'} of the same obligations) — a current-state
-            comparison, not against SPAR's historical mean ({cc1 ? `${cc1.spar_self_report_mean}%` : '…'}).
+            runs well above what NormTrace finds actually anchored in domestic law for that same general capacity
+            area ({cc1 ? `${cc1.normtrace_legal_anchoring_pct}%` : '…'}, averaged over the obligations NormTrace
+            tags CC1 — a thematic pairing, not a verified equivalent-denominator one) — a current-state comparison,
+            not against SPAR's historical mean ({cc1 ? `${cc1.spar_self_report_mean}%` : '…'}).
           </p>
 
           <div className="flex flex-wrap gap-2">

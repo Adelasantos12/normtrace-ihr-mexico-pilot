@@ -30,7 +30,8 @@ obligation anchored?" But it does not, on its own, answer three structural quest
 2. **Community structure** — do obligations cluster around shared instruments in a way
    that reveals *policy communities* rather than isolated articles?
 3. **Construct validity of capacity scores** — does the reported IHR capacity (SPAR)
-   correspond to the actual legal anchoring of the same obligations, or diverge from it?
+   correspond to the actual legal anchoring NormTrace finds for the same general capacity
+   area, or diverge from it? (Thematic question, not one of equivalent denominators — see 3.4.)
 
 Questions 1–2 are network questions. Question 3 is the bridge to the existing IHR
 monitoring ecosystem (SPAR/JEE) and is the pilot's clearest contribution claim.
@@ -114,17 +115,27 @@ Next step in R is a **QAP/MRQAP** regression of `anchoring_level` on instrument 
 pre-2005 dummy, to test formally whether older/lower-rank instruments predict weaker anchoring
 (the 1985 RLGS-SI claim).
 
-### 3.4 The SPAR↔legal bridge → construct-validity probe, CC1 only
+### 3.4 The SPAR↔legal bridge → thematic construct-validity probe, CC1 only, NOT an equivalent-denominator comparison
 `spar_normtrace_bridge.py` compares Mexico's SPAR self-report (0–100) with NormTrace legal
 anchoring (0–5→%), **scoped to CC1 (Legislation, policy & financing) only**: **CC1 Legislation:
-self-report 56.0% latest (2025) vs anchoring 34.0% (n=20 obligations) → +22.0 pts**. NormTrace's
-anchoring score is a current-state snapshot, not a multi-year average, so the primary comparison
-is against SPAR's *latest* submission, not SPAR's 2010–2025 historical mean (80.4%, reported
-separately as trajectory context, → +46.4 pts if paired against it, which is not the headline
-figure). This is the pilot's construct-validity contribution: a capacity can be reported as
-present while the obligation lacks a sustainable legal base. **Implication:** the divergence is
-a *diagnostic of legal coverage*, not a claim that SPAR is "wrong" or that outcomes are
-predicted (see §4).
+self-report 56.0% latest (2025) vs anchoring 34.0% (n=20 obligations) → +22.0 pts**. This is a
+**thematic** pairing, not a verified equivalent-denominator one: SPAR's CC1 is a single
+country-level self-report answer for the capacity area as a whole, not decomposed into the
+individual IHR obligations that compose it; NormTrace's 34.0% is the mean anchoring score across
+the 20 obligations that NormTrace's own corpus tags `implementation_domain=CC1` — an internal
+categorisation used to scope NormTrace's own analysis, not a checked, item-level crosswalk
+against SPAR's specific indicator content. No evidence in this repo (or found in the literature)
+confirms SPAR's C1 score is itself computed from exactly these 20 treaty obligations. Report the
+pairing as "two lenses on the same named capacity area," never as "the same obligations" or "the
+same construct" (that phrasing implies a denominator equivalence that has not been verified).
+NormTrace's anchoring score is also a current-state snapshot, not a multi-year average, so the
+primary comparison is against SPAR's *latest* submission, not SPAR's 2010–2025 historical mean
+(80.4%, reported separately as trajectory context, → +46.4 pts if paired against it, which is
+not the headline figure). This is the pilot's construct-validity contribution: a capacity can be
+reported as present while the obligations associated with it lack a sustainable legal base.
+**Implication:** the divergence is a *diagnostic of legal coverage on the same general theme*,
+not a claim that SPAR is "wrong," that outcomes are predicted, or that the two scores share a
+verified denominator (see §4).
 
 **Why CC1 only, and not the other SPAR capacities.** An earlier version of this bridge also
 compared NormTrace anchoring against SPAR's CC2 (IHR coordination), CC5/C6 (surveillance),
@@ -133,9 +144,11 @@ corpus-wide NormTrace mean against SPAR's overall aggregate score. Both comparis
 removed: SPAR's non-CC1 capacities assess *operational* capacity (staffed surveillance
 systems, running points-of-entry infrastructure, functioning emergency-response programmes),
 which NormTrace does not measure at all — it only assesses whether a domestic legal instrument
-exists for an obligation. CC1 is the one capacity where SPAR's own construct ("legislation,
-policy and financing") and NormTrace's construct ("legal anchoring") genuinely coincide, so it
-is the only pairing that is construct-valid. Pairing NormTrace's legal-anchoring score against
+exists for an obligation. CC1 is the one capacity where SPAR's own named construct
+("legislation, policy and financing") and NormTrace's named construct ("legal anchoring") share
+the same theme, so it is the only pairing worth reporting even thematically — not because it has
+been verified as an equivalent-denominator comparison (see 3.4 above: no crosswalk confirms
+SPAR's C1 score is built from NormTrace's specific 20 CC1-tagged obligations). Pairing NormTrace's legal-anchoring score against
 an operational-capacity score for the other capacities — or against SPAR's overall aggregate,
 which mixes in those same operational capacities — would imply NormTrace assesses operational
 readiness, which it does not. NormTrace's corpus-wide mean anchoring (35.1% across all 45
@@ -153,6 +166,7 @@ is mapped to an allowed claim:
 |--------|---------------|----------------------|
 | CUG p<0.001 centralisation | "Legal anchoring is significantly concentrated on a few instruments." | Not "predicts implementation failure." |
 | SPAR–anchoring divergence | "Reported capacity can exceed legal anchoring — a construct-validity gap." | Not "SPAR scores are inflated/false" (memo: gap has narrowed in 2022–23). |
+| SPAR CC1 vs. NormTrace CC1-tagged anchoring | "Two lenses on the same named capacity area (Legislation, policy & financing)." | Not "the same obligations," "the same construct," or "an equivalent-denominator comparison" — no crosswalk verifies SPAR's C1 score is computed from NormTrace's specific 20 CC1-tagged obligations (see §3.4). Per the adversarial memo's own objection #2, SPAR/JEE score at the country-capacity-area level, NormTrace at the obligation level — that unit-of-analysis difference is the defensible delta, not something to paper over by implying a shared denominator. |
 | RLGS-SI (1985) as a top hub | "Primary IHR instrument predates IHR 2005 — an *update-review* gap." | Not "first to find this"; cite Menon 2018, Gostin 2019. |
 | Actor obligation-reach (SS=24) | "SS is the corpus-central actor for IHR anchoring." | Not "measures operational authority or power." |
 | Mean anchoring 1.76/5; overall 35% | "Legal coverage on the books is thin and general." | Not "measures enforcement, implementation, or outcomes." |

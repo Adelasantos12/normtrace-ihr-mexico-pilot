@@ -55,8 +55,15 @@ export default function SparBridge() {
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900">SPAR ↔ Legal</h1>
         <p className="text-lg text-slate-500 max-w-2xl leading-relaxed">
           Self-reported CC1 (Legislation, policy &amp; financing) capacity from WHO SPAR, compared against the
-          actual domestic <strong className="text-slate-900 font-medium">legal anchoring</strong> of the same
-          obligations. A large positive gap flags capacity reported without a sustainable legal-institutional base.
+          actual domestic <strong className="text-slate-900 font-medium">legal anchoring</strong> NormTrace finds
+          for the same general capacity area. A large positive gap flags capacity reported without a sustainable
+          legal-institutional base.
+        </p>
+        <p className="text-xs text-amber-700 max-w-2xl leading-relaxed">
+          These are two lenses on the same named capacity area, not scores over a verified equivalent denominator:
+          SPAR's CC1 is one self-reported value for the capacity as a whole; NormTrace's figure averages its own
+          obligation-level anchoring across the obligations it tags CC1. No crosswalk confirms SPAR's score is
+          itself built from these specific obligations.
         </p>
         <p className="text-xs text-slate-400 max-w-2xl italic">{data.scope_note}</p>
       </header>
@@ -77,9 +84,10 @@ export default function SparBridge() {
             </div>
             <p className="text-sm text-slate-400 leading-relaxed mt-2 max-w-md">
               Points of gap between Mexico's latest ({latestYear}) self-reported CC1 capacity and NormTrace's
-              legal-anchoring score for the same {cc1.n_obligations} obligations. NormTrace's score is a current-state
-              snapshot, not a multi-year average, so it is compared against SPAR's latest submission, not SPAR's
-              historical mean.
+              legal-anchoring score, averaged over the {cc1.n_obligations} obligations NormTrace tags CC1 — a
+              thematic pairing on the same named capacity area, not a verified equivalent-denominator comparison.
+              NormTrace's score is also a current-state snapshot, not a multi-year average, so it is compared
+              against SPAR's latest submission, not SPAR's historical mean.
             </p>
           </div>
 
@@ -103,10 +111,11 @@ export default function SparBridge() {
         <div>
           <h2 className="text-xl font-semibold text-slate-900">Mexico — SPAR CC1 (Legislation) over time</h2>
           <p className="text-sm text-slate-500 mt-1 max-w-2xl leading-relaxed">
-            Self-reported legislation capacity ran at 100% for most of 2011–2018. The dashed line is the
-            NormTrace legal anchoring for the same obligations ({cc1.normtrace_legal_anchoring_pct}%) — since that
-            score is a current-state snapshot rather than a multi-year measure, the relevant comparison point is
-            the trajectory's rightmost ({latestYear}) observation, not its historical average. Each point is one
+            Self-reported legislation capacity ran at 100% for most of 2011–2018. The dashed line is NormTrace's
+            legal anchoring, averaged over the obligations it tags CC1 ({cc1.normtrace_legal_anchoring_pct}%) — the
+            same named capacity area as SPAR's C1, not a decomposition of SPAR's own score. Since that figure is a
+            current-state snapshot rather than a multi-year measure, the relevant comparison point is the
+            trajectory's rightmost ({latestYear}) observation, not its historical average. Each point is one
             yearly SPAR submission; the line connects discrete observations and should not be read as a
             continuous measure.
           </p>
