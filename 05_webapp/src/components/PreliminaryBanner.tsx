@@ -4,7 +4,7 @@ import { cn } from '../lib/utils';
 // Single source of truth for the "preliminary pilot" messaging (Phase 3-UX).
 // Previously this wording/styling was duplicated ad hoc in LandingPage and
 // Layout; both now render this component instead of independent copies.
-export const PRELIMINARY_BANNER_TEXT = 'Preliminary pilot — expert review required';
+export const PRELIMINARY_BANNER_TEXT = 'Preliminary pilot';
 
 export function PreliminaryBanner({
   variant = 'pill',

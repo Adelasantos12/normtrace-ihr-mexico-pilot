@@ -149,12 +149,16 @@ export default function Layout() {
                 <p className="font-bold text-slate-900">NormTrace-IHR Mexico Pilot v0.1</p>
                 <p>
                   This application provides a structural mapping of domestic legal anchoring for international health obligations.
+                  It reconstructs what domestic law formally establishes — a legal-textual reading, not an observation of
+                  institutional performance — and its purpose is to inform analysis and flag gaps for focused attention, not
+                  to score, rank, or assess compliance.
                 </p>
               </div>
 
               <ul className="space-y-3">
                 {[
-                  "Not a compliance assessment: Measures anchoring, not performance.",
+                  "Not a performance score: Anchoring reflects what is written in law, not observed institutional performance or capacity.",
+                  "Not a compliance assessment: Flags gaps for review, does not certify or rate compliance.",
                   "Not legal advice: Provided for research and policy analysis.",
                   "Validation pending: Mapping requires expert legal review.",
                   "Preliminary AI-assisted: Rows marked as such require human expert review.",
