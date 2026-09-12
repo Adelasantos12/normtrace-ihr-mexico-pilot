@@ -22,6 +22,12 @@ export default function CountrySnapshot() {
   const { data: actors } = useCsvData<any>('mexico_health_governance_actors_clean.csv');
   const { data: gaps } = useCsvData<any>('mexico_implementation_gap_map_clean.csv');
   const { content: appendix } = useMarkdownData('mexico_legal_internalisation_snapshot.md');
+  // Article + title per obligation_id: mexico_ihr2005_mapping_clean.csv has
+  // neither field, so without this join the table below always fell back to
+  // the bare IHR-OBL-XXX id in both its "Area" and "Reference" columns.
+  const { data: obligationDefs } = useCsvData<any>('ihr_2005_obligations_clean.csv');
+  const oblMap: Record<string, any> = {};
+  obligationDefs.forEach((o: any) => { if (o.obligation_id) oblMap[o.obligation_id.trim()] = o; });
 
   const obligations = new Set(mapping.map((m: any) => m.obligation_id)).size;
   const byLevel: Record<string, number> = {};
@@ -187,8 +193,8 @@ export default function CountrySnapshot() {
               <tbody className="divide-y divide-slate-100">
                 {mapping.slice(0, 8).map((m: any, i: number) => (
                   <tr key={i} className="hover:bg-slate-50/50 transition-colors">
-                    <td className="p-4 font-bold text-slate-900">{m.article_title || m.obligation_id}</td>
-                    <td className="p-4 text-xs font-medium text-slate-500">{m.obligation_id}</td>
+                    <td className="p-4 font-bold text-slate-900">{oblMap[m.obligation_id]?.article_title || m.obligation_id}</td>
+                    <td className="p-4 text-xs font-medium text-slate-500">{oblMap[m.obligation_id]?.article || m.obligation_id}</td>
                     <td className="p-4 text-xs">{m.domestic_norm}</td>
                     <td className="p-4">
                       <span className="px-2 py-0.5 bg-blue-50 text-blue-700 border border-blue-100 rounded text-[10px] font-bold">

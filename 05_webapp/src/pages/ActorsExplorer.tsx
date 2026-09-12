@@ -96,12 +96,13 @@ function NodeMark({ mode, r, ...rest }: { mode: GraphMode; r: number } & React.S
 }
 
 function ComputedNetworkGraph({
-  nodeRegistry, netEdges, netMetrics, obligationGap,
+  nodeRegistry, netEdges, netMetrics, obligationGap, oblLookup,
 }: {
   nodeRegistry: any[];
   netEdges: any[];
   netMetrics: NetworkMetrics | null;
   obligationGap: Record<string, string>;
+  oblLookup: Record<string, { article: string; articleTitle: string }>;
 }) {
   const [selected, setSelected] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
@@ -131,9 +132,19 @@ function ComputedNetworkGraph({
     const simNodes: any[] = [];
     obligationRows.forEach((r, i) => {
       const dn = parseFloat(r.degree_norm) || 0;
+      const obl = oblLookup[r.node_id];
+      // Short in-shape label: the article reference (e.g. "Art. 4"), trimmed
+      // of any parenthetical detail if that would overflow the node; the
+      // internal id is a fallback only for the rare row missing a match.
+      const shortArticle = obl?.article
+        ? (obl.article.length > 12 ? obl.article.split(/[,(]/)[0].trim() : obl.article)
+        : String(r.node_id).replace('IHR-OBL-', 'OBL-');
+      const fullLabel = obl?.article
+        ? `${obl.article}${obl.articleTitle ? ` · ${obl.articleTitle}` : ''} (${r.node_id})`
+        : r.node_id;
       simNodes.push({
         id: r.node_id, mode: 'obligation' as GraphMode,
-        label: String(r.node_id).replace('IHR-OBL-', 'OBL-'), full: r.node_id,
+        label: shortArticle, full: fullLabel,
         size: 6 + dn * 14,
         gapType: obligationGap[r.node_id] || 'none',
         degree: parseInt(r.degree, 10) || 0, degreeNorm: dn, betweenness: parseFloat(r.betweenness) || 0,
@@ -247,7 +258,7 @@ function ComputedNetworkGraph({
     }));
 
     return { nodes, edges, width, height };
-  }, [nodeRegistry, netEdges, netMetrics, obligationGap]);
+  }, [nodeRegistry, netEdges, netMetrics, obligationGap, oblLookup]);
 
   const posById = useMemo(() => {
     const m: Record<string, GraphNode> = {};
@@ -526,10 +537,10 @@ function ComputedNetworkGraph({
             // Exact numeric values on hover -- the visual encoding (size/shape)
             // is approximate by design; analysts need the real number too.
             const tooltip = n.mode === 'obligation'
-              ? `${n.full} — degree ${n.degree} of ${netMetrics?.network.n_instruments ?? '?'} instruments · betweenness ${n.betweenness?.toFixed(3)} · gap: ${n.gapType}`
+              ? `${n.full} · degree ${n.degree} of ${netMetrics?.network.n_instruments ?? '?'} instruments · betweenness ${n.betweenness?.toFixed(3)} · gap: ${n.gapType}`
               : n.mode === 'instrument'
-              ? `${n.full} — degree ${n.degree} of ${netMetrics?.network.n_obligations ?? '?'} obligations · degree_norm ${n.degreeNorm?.toFixed(3)} · betweenness ${n.betweenness?.toFixed(3)}`
-              : `${n.full} — obligation_reach ${n.reach} of ${netMetrics?.network.n_obligations ?? '?'} · via ${n.nInstruments} instrument${n.nInstruments === 1 ? '' : 's'}`;
+              ? `${n.full} · degree ${n.degree} of ${netMetrics?.network.n_obligations ?? '?'} obligations · degree_norm ${n.degreeNorm?.toFixed(3)} · betweenness ${n.betweenness?.toFixed(3)}`
+              : `${n.full} · obligation_reach ${n.reach} of ${netMetrics?.network.n_obligations ?? '?'} · via ${n.nInstruments} instrument${n.nInstruments === 1 ? '' : 's'}`;
             return (
               <g key={n.id}
                  transform={`translate(${n.x},${n.y})`}
@@ -608,7 +619,8 @@ function ComputedNetworkGraph({
               <span className="text-[10px] font-semibold text-blue-600 uppercase tracking-widest">Obligation chain</span>
               <button onClick={() => setSelected(null)} className="text-slate-400 hover:text-slate-700 text-xs">✕</button>
             </div>
-            <h4 className="text-lg font-semibold text-slate-900">{selectedNode.label}</h4>
+            <h4 className="text-lg font-semibold text-slate-900">{selectedNode.full}</h4>
+            <div className="text-[10px] font-mono text-slate-400 -mt-2">{selectedNode.id}</div>
             <div>
               <div className="text-[10px] font-bold text-slate-400 uppercase mb-1">Gap type</div>
               <span className={cn(
@@ -807,6 +819,18 @@ export default function ActorsExplorer() {
   // Computed node/edge registry for the force-directed graph (Phase 1-fig).
   const { data: nodeRegistry } = useCsvData<any>('derived/node_registry.csv');
   const { data: netEdges } = useCsvData<any>('derived/network_edges.csv');
+  // IHR article/title per obligation_id, so an obligation node reads the same
+  // way here as it does on Normative Pipeline and Norm Diagnostic -- never
+  // just the internal IHR-OBL-XXX id, which nobody outside the corpus can
+  // place without the treaty text open next to them.
+  const { data: obligations } = useCsvData<any>('ihr_2005_obligations_clean.csv');
+  const oblLookup = useMemo(() => {
+    const m: Record<string, { article: string; articleTitle: string }> = {};
+    obligations.forEach((o: any) => {
+      if (o.obligation_id) m[o.obligation_id.trim()] = { article: o.article, articleTitle: o.article_title };
+    });
+    return m;
+  }, [obligations]);
 
   const [tab, setTab] = useState<Tab>('map');
   const [mapMode, setMapMode] = useState<MapMode>('computed');
@@ -1043,6 +1067,7 @@ export default function ActorsExplorer() {
               netEdges={netEdges}
               netMetrics={netMetrics}
               obligationGap={obligationGap}
+              oblLookup={oblLookup}
             />
           )}
 

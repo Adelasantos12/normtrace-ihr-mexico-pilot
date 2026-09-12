@@ -175,6 +175,14 @@ function groupByNorm(rows: any[]): Record<string, any[]> {
 
 export default function NormDiagnostic() {
   const { data: mapping, loading } = useCsvData<any>('mexico_ihr2005_mapping_clean.csv');
+  // Article + title per obligation_id, so an obligation reads the same way
+  // here as on Normative Pipeline: never the bare IHR-OBL-XXX id alone.
+  const { data: obligations, loading: oblLoading } = useCsvData<any>('ihr_2005_obligations_clean.csv');
+  const oblMap = useMemo(() => {
+    const m: Record<string, any> = {};
+    obligations.forEach((o: any) => { if (o.obligation_id) m[o.obligation_id.trim()] = o; });
+    return m;
+  }, [obligations]);
   const [view, setView] = useState<'obligation' | 'norm' | 'matrix'>('obligation');
   const [filterCode, setFilterCode] = useState<string>('');
   const [filterDomain, setFilterDomain] = useState('');
@@ -186,6 +194,8 @@ export default function NormDiagnostic() {
   const obligationDiagnostics = useMemo(() => {
     return Object.entries(obligationGroups).map(([id, rows]) => ({
       id,
+      article: oblMap[id]?.article || '',
+      articleTitle: oblMap[id]?.article_title || '',
       domain: rows[0]?.implementation_domain || rows[0]?.ihr_domain || '',
       rows,
       diagnostic: computeDiagnostic(rows),
@@ -193,7 +203,7 @@ export default function NormDiagnostic() {
       primaryNorm: rows.sort((a, b) => (parseInt(b.anchoring_level) || 0) - (parseInt(a.anchoring_level) || 0))[0]?.domestic_norm,
       gaps: [...new Set(rows.map(r => r.gap_type).filter(g => g && g !== 'None' && g !== ''))]
     }));
-  }, [obligationGroups]);
+  }, [obligationGroups, oblMap]);
 
   const normDiagnostics = useMemo(() => {
     return Object.entries(normGroups)
@@ -231,7 +241,7 @@ export default function NormDiagnostic() {
     });
   }, [obligationDiagnostics, filterCode, filterDomain]);
 
-  if (loading) return (
+  if (loading || oblLoading) return (
     <div className="flex items-center justify-center min-h-[400px]">
       <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
     </div>
@@ -331,8 +341,15 @@ export default function NormDiagnostic() {
                     {def.label}
                   </span>
                   <div className="flex-1 min-w-0">
-                    <div className="font-semibold text-slate-900 text-sm">{o.id}</div>
-                    {o.domain && <div className="text-[10px] text-slate-400 uppercase tracking-wider mt-0.5">{o.domain}</div>}
+                    <div className="flex items-baseline gap-2 flex-wrap">
+                      {o.article && <span className="font-semibold text-blue-700 text-sm shrink-0">{o.article}</span>}
+                      {o.articleTitle && <span className="font-bold text-slate-900 text-sm">{o.articleTitle}</span>}
+                      {!o.article && <span className="font-semibold text-slate-900 text-sm">{o.id}</span>}
+                    </div>
+                    <div className="flex items-center gap-2 mt-0.5 flex-wrap">
+                      {o.article && <span className="text-[10px] font-mono text-slate-400">{o.id}</span>}
+                      {o.domain && <span className="text-[10px] text-slate-400 uppercase tracking-wider">{o.domain}</span>}
+                    </div>
                   </div>
                   <div className="hidden sm:flex items-center gap-3 shrink-0">
                     <div className="text-right">
@@ -500,7 +517,13 @@ export default function NormDiagnostic() {
                       <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-2">Obligations Anchored ({n.rows.length} mapping rows)</div>
                       <div className="flex flex-wrap gap-2">
                         {[...new Set(n.rows.map((r: any) => r.obligation_id))].map((id: any) => (
-                          <span key={id} className="px-2.5 py-1 bg-slate-100 text-slate-700 rounded text-[10px] font-bold border border-slate-200">{id}</span>
+                          <span
+                            key={id}
+                            title={oblMap[id]?.article_title ? `${oblMap[id]?.article}: ${oblMap[id]?.article_title} (${id})` : id}
+                            className="px-2.5 py-1 bg-slate-100 text-slate-700 rounded text-[10px] font-bold border border-slate-200"
+                          >
+                            {oblMap[id]?.article || id}
+                          </span>
                         ))}
                       </div>
                     </div>
@@ -524,13 +547,14 @@ export default function NormDiagnostic() {
                   <div
                     key={o.id}
                     className={cn('p-3 rounded-xl border space-y-1 transition-all cursor-default', def.bg, def.border)}
-                    title={`${o.id}: ${def.label}: ${def.description}`}
+                    title={`${o.article || o.id}${o.articleTitle ? ` · ${o.articleTitle}` : ''} (${o.id}): ${def.label}: ${def.description}`}
                   >
                     <div className="flex items-center gap-1.5">
                       <span className={def.color}>{getDiagnosticIcon(def.icon, 11)}</span>
                       <span className={cn('text-[9px] font-semibold uppercase tracking-wider truncate', def.color)}>{def.label}</span>
                     </div>
-                    <div className="text-[10px] font-semibold text-slate-900 leading-tight">{o.id}</div>
+                    <div className="text-[10px] font-semibold text-slate-900 leading-tight">{o.article || o.id}</div>
+                    {o.articleTitle && <div className="text-[9px] text-slate-500 truncate">{o.articleTitle}</div>}
                     <div className="text-[9px] text-slate-500 truncate">{o.primaryNorm}</div>
                     <div className={cn('text-[9px] font-bold', def.color)}>L{o.maxAnchoring}/5</div>
                   </div>

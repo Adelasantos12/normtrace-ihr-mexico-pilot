@@ -26,6 +26,11 @@ export default function ReportBuilder() {
   const { data: gapData } = useCsvData<any>('mexico_implementation_gap_map_clean.csv');
   const { data: provisionData } = useCsvData<any>('mexico_legal_provisions_clean.csv');
   const { data: actorData } = useCsvData<any>('mexico_health_governance_actors_clean.csv');
+  // Article + title per obligation_id, joined in below -- the same identifier
+  // convention used on Normative Pipeline and Norm Diagnostic.
+  const { data: obligations } = useCsvData<any>('ihr_2005_obligations_clean.csv');
+  const oblMap: Record<string, any> = {};
+  obligations.forEach((o: any) => { if (o.obligation_id) oblMap[o.obligation_id.trim()] = o; });
 
   const toggleSection = (id: string) => {
     const next = new Set(selected);
@@ -196,23 +201,27 @@ export default function ReportBuilder() {
                   <table className="w-full text-left border-collapse">
                      <thead className="bg-slate-50 border-b border-slate-200">
                         <tr>
-                           <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">ID</th>
-                           <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">IHR Obligation (Simplified)</th>
+                           <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">IHR Obligation</th>
                            <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">Domestic Norm</th>
                            <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">Level</th>
                            <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">Match</th>
                         </tr>
                      </thead>
                      <tbody className="divide-y divide-slate-100">
-                        {mappingData.slice(0, 40).map((row: any, i: number) => (
+                        {mappingData.slice(0, 40).map((row: any, i: number) => {
+                           const obl = oblMap[row.obligation_id];
+                           return (
                            <tr key={i} className="align-top">
-                              <td className="p-4 font-mono text-[10px] font-bold text-blue-900">{row.obligation_id}</td>
-                              <td className="p-4 font-medium text-slate-700 max-w-xs truncate">{row.ihr_obligation_simplified}</td>
+                              <td className="p-4 max-w-xs">
+                                 <div className="font-medium text-slate-900">{obl?.article || row.obligation_id}{obl?.article_title ? ` · ${obl.article_title}` : ''}</div>
+                                 <div className="font-mono text-[9px] text-slate-400">{row.obligation_id}</div>
+                              </td>
                               <td className="p-4 text-slate-600">{row.domestic_norm}</td>
                               <td className="p-4 font-bold text-slate-900">{row.anchoring_level}</td>
                               <td className="p-4 text-[10px] uppercase font-bold text-slate-500">{row.match_type}</td>
                            </tr>
-                        ))}
+                           );
+                        })}
                      </tbody>
                   </table>
                   <div className="p-4 bg-slate-50 border-t border-slate-200 text-[10px] italic text-slate-500">
