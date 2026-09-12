@@ -33,3 +33,7 @@ outputs_temp/
 .idea/
 *.swp
 *.swo
+~$*.docx
+
+# Claude Code agent tooling state (local worktrees for background subagents)
+.claude/

@@ -15,20 +15,25 @@ export default function GapMap() {
   return (
     <div className="space-y-10 pb-20">
       <header>
-         <h1 className="text-3xl font-bold text-slate-900">Implementation Gap Map</h1>
+         <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">Implementation Gap Typology</div>
+         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900 mt-2">Implementation Gap Map</h1>
          <p className="text-slate-500 mt-1">Policy-facing analysis of structural-legal gaps in Mexico's IHR internalisation.</p>
       </header>
 
-      <div className="bg-white border border-slate-200 rounded-[2rem] shadow-sm overflow-hidden">
-        <div className="overflow-x-auto">
+      <p className="text-xs text-slate-400 flex items-center gap-1">
+        Scroll horizontally to see all columns <ChevronRight size={12} />
+      </p>
+
+      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden">
+        <div className="overflow-x-auto [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-slate-100 [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar-thumb]:rounded-full">
           <table className="w-full text-left border-collapse min-w-[1200px]">
             <thead className="bg-slate-50 border-b border-slate-200">
               <tr>
-                <th className="p-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest w-1/6">Area</th>
-                <th className="p-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest w-1/6">Anchoring Pattern</th>
-                <th className="p-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest w-1/6">Main Actors</th>
-                <th className="p-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest w-1/6">Main Gap Type</th>
-                <th className="p-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest w-1/4">Entry Points & Implications</th>
+                <th className="p-6 text-[10px] font-semibold text-slate-500 uppercase tracking-widest w-1/6">Area</th>
+                <th className="p-6 text-[10px] font-semibold text-slate-500 uppercase tracking-widest w-1/6">Anchoring Pattern</th>
+                <th className="p-6 text-[10px] font-semibold text-slate-500 uppercase tracking-widest w-1/6">Main Actors</th>
+                <th className="p-6 text-[10px] font-semibold text-slate-500 uppercase tracking-widest w-1/6">Main Gap Type</th>
+                <th className="p-6 text-[10px] font-semibold text-slate-500 uppercase tracking-widest w-1/4">Entry Points & Implications</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -78,10 +83,10 @@ export default function GapMap() {
         </div>
       </div>
 
-      <div className="p-8 bg-blue-50 border border-blue-100 rounded-[2rem] flex gap-4">
+      <div className="p-8 bg-blue-50 border border-blue-100 rounded-2xl flex gap-4">
          <Info size={24} className="text-blue-500 shrink-0 mt-1" />
          <div className="space-y-2">
-            <h4 className="font-bold text-blue-900">Gap Classification Note</h4>
+            <h4 className="font-semibold text-blue-900">Gap Classification Note</h4>
             <p className="text-sm text-blue-800 leading-relaxed">
                Gap types represent structural-legal classifications based on the anchoring scale.
                <strong> 'Requires Statutory Strengthening'</strong> indicates an obligation currently anchored at administrative or operational levels (L0-L2) that may require higher-level legislative formalization for 2024 compliance.

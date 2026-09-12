@@ -26,6 +26,11 @@ export default function ReportBuilder() {
   const { data: gapData } = useCsvData<any>('mexico_implementation_gap_map_clean.csv');
   const { data: provisionData } = useCsvData<any>('mexico_legal_provisions_clean.csv');
   const { data: actorData } = useCsvData<any>('mexico_health_governance_actors_clean.csv');
+  // Article + title per obligation_id, joined in below -- the same identifier
+  // convention used on Normative Pipeline and Norm Diagnostic.
+  const { data: obligations } = useCsvData<any>('ihr_2005_obligations_clean.csv');
+  const oblMap: Record<string, any> = {};
+  obligations.forEach((o: any) => { if (o.obligation_id) oblMap[o.obligation_id.trim()] = o; });
 
   const toggleSection = (id: string) => {
     const next = new Set(selected);
@@ -45,17 +50,18 @@ export default function ReportBuilder() {
   return (
     <div className="space-y-10 pb-20 max-w-4xl mx-auto print:max-w-none print:m-0 print:p-0">
       <header className="print:hidden space-y-4">
-         <h1 className="text-3xl font-bold text-slate-900">Printable Report Builder</h1>
+         <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">Custom Report Builder</div>
+         <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight">Printable Report Builder</h1>
          <p className="text-slate-500">Assemble a customized legal intelligence report from the Mexico Pilot v0.1 data.</p>
 
          <div className="flex gap-4 pt-2">
             <button
               onClick={handlePrint}
-              className="flex items-center gap-2 px-6 py-3 bg-blue-900 text-white rounded-xl text-sm font-bold hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20"
+              className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-full text-sm font-medium hover:bg-blue-700 transition-all"
             >
                <Printer size={16} /> Print / Export PDF
             </button>
-            <a href="/report/print" className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 text-slate-600 rounded-xl text-sm font-bold hover:bg-slate-50 transition-all">
+            <a href="/report/print" className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 text-slate-600 rounded-full text-sm font-medium hover:bg-slate-50 transition-all">
                <Printer size={16} /> Open print route
             </a>
          </div>
@@ -63,7 +69,7 @@ export default function ReportBuilder() {
 
       <div className="print:hidden grid grid-cols-1 md:grid-cols-2 gap-12 pt-8">
          <div className="space-y-6">
-            <h3 className="font-bold text-slate-900 px-1">Report Contents</h3>
+            <h3 className="font-semibold text-slate-900 px-1">Report Contents</h3>
             <div className="space-y-2">
                {SECTIONS.map((section) => (
                   <button
@@ -77,14 +83,9 @@ export default function ReportBuilder() {
                     )}
                   >
                      <div className="flex items-center gap-4">
-                        <div className={cn(
-                          "p-2 rounded-lg transition-colors",
-                          selected.has(section.id) ? "bg-blue-50 text-blue-600" : "bg-slate-100 text-slate-400"
-                        )}>
-                           <section.icon size={18} />
-                        </div>
+                        <section.icon size={18} className={selected.has(section.id) ? "text-blue-600" : "text-slate-400"} />
                         <div>
-                           <p className="text-xs font-bold">{section.label}</p>
+                           <p className="text-xs font-semibold">{section.label}</p>
                            {section.always && <p className="text-[10px] text-slate-400 font-medium">Required Section</p>}
                         </div>
                      </div>
@@ -95,7 +96,7 @@ export default function ReportBuilder() {
          </div>
 
          <div className="space-y-6">
-            <h3 className="font-bold text-slate-900 px-1">Live Preview</h3>
+            <h3 className="font-semibold text-slate-900 px-1">Live Preview</h3>
             <div className="bg-slate-800 rounded-2xl p-8 aspect-[1/1.4] shadow-2xl relative overflow-hidden border border-slate-700">
                <div className="absolute top-0 left-0 w-full h-1 bg-blue-500" />
                <div className="space-y-8 animate-in fade-in duration-500">
@@ -158,7 +159,7 @@ export default function ReportBuilder() {
                   <div className="space-y-4">
                      <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-2">Data Package</h3>
                      <p className="text-lg font-bold text-slate-800">v0.1 (Audited)</p>
-                     <p className="text-sm text-slate-500">Verdict: PASS_WITH_DOCUMENTED_FINDINGS</p>
+                     <p className="text-sm text-slate-500">Verdict: Pass, with documented findings</p>
                   </div>
                </div>
 
@@ -200,23 +201,27 @@ export default function ReportBuilder() {
                   <table className="w-full text-left border-collapse">
                      <thead className="bg-slate-50 border-b border-slate-200">
                         <tr>
-                           <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">ID</th>
-                           <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">IHR Obligation (Simplified)</th>
+                           <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">IHR Obligation</th>
                            <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">Domestic Norm</th>
                            <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">Level</th>
                            <th className="p-4 font-bold text-[10px] uppercase tracking-wider text-slate-500">Match</th>
                         </tr>
                      </thead>
                      <tbody className="divide-y divide-slate-100">
-                        {mappingData.slice(0, 40).map((row: any, i: number) => (
+                        {mappingData.slice(0, 40).map((row: any, i: number) => {
+                           const obl = oblMap[row.obligation_id];
+                           return (
                            <tr key={i} className="align-top">
-                              <td className="p-4 font-mono text-[10px] font-bold text-blue-900">{row.obligation_id}</td>
-                              <td className="p-4 font-medium text-slate-700 max-w-xs truncate">{row.ihr_obligation_simplified}</td>
+                              <td className="p-4 max-w-xs">
+                                 <div className="font-medium text-slate-900">{obl?.article || row.obligation_id}{obl?.article_title ? ` · ${obl.article_title}` : ''}</div>
+                                 <div className="font-mono text-[9px] text-slate-400">{row.obligation_id}</div>
+                              </td>
                               <td className="p-4 text-slate-600">{row.domestic_norm}</td>
                               <td className="p-4 font-bold text-slate-900">{row.anchoring_level}</td>
                               <td className="p-4 text-[10px] uppercase font-bold text-slate-500">{row.match_type}</td>
                            </tr>
-                        ))}
+                           );
+                        })}
                      </tbody>
                   </table>
                   <div className="p-4 bg-slate-50 border-t border-slate-200 text-[10px] italic text-slate-500">
@@ -263,7 +268,7 @@ export default function ReportBuilder() {
                   <div className="grid grid-cols-2 gap-8">
                      <div className="p-6 bg-red-50 rounded-xl border border-red-100 space-y-4">
                         <h4 className="font-bold text-red-900 uppercase tracking-widest text-[10px]">Audit Verdict</h4>
-                        <p className="text-xl font-bold text-red-700">PASS_WITH_DOCUMENTED_FINDINGS</p>
+                        <p className="text-xl font-bold text-red-700">Pass, with documented findings</p>
                      </div>
                      <div className="p-6 bg-blue-50 rounded-xl border border-blue-100 space-y-4">
                         <h4 className="font-bold text-blue-900 uppercase tracking-widest text-[10px]">Mapping Version</h4>

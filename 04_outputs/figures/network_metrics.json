@@ -1,0 +1,206 @@
+{
+  "generated_by": "06_scripts/build_tables/build_network.py",
+  "network": {
+    "modes": [
+      "instrument",
+      "obligation"
+    ],
+    "n_instruments": 9,
+    "n_obligations": 43,
+    "n_edges": 68,
+    "density": 0.176
+  },
+  "instrument_degree_ranked": [
+    {
+      "instrument": "LGS",
+      "obligations_anchored": 21,
+      "degree_norm": 0.488,
+      "betweenness": 0.5711
+    },
+    {
+      "instrument": "RLGS-SI",
+      "obligations_anchored": 19,
+      "degree_norm": 0.442,
+      "betweenness": 0.482
+    },
+    {
+      "instrument": "RI-SS-2025",
+      "obligations_anchored": 11,
+      "degree_norm": 0.256,
+      "betweenness": 0.2292
+    },
+    {
+      "instrument": "NOM-017",
+      "obligations_anchored": 6,
+      "degree_norm": 0.14,
+      "betweenness": 0.0455
+    },
+    {
+      "instrument": "CPEUM",
+      "obligations_anchored": 5,
+      "degree_norm": 0.116,
+      "betweenness": 0.0879
+    },
+    {
+      "instrument": "Ley Aduanera",
+      "obligations_anchored": 3,
+      "degree_norm": 0.07,
+      "betweenness": 0.0383
+    },
+    {
+      "instrument": "LGPDPPSO",
+      "obligations_anchored": 1,
+      "degree_norm": 0.023,
+      "betweenness": 0.0
+    },
+    {
+      "instrument": "LOAPF",
+      "obligations_anchored": 1,
+      "degree_norm": 0.023,
+      "betweenness": 0.0
+    },
+    {
+      "instrument": "RLGS-Inv",
+      "obligations_anchored": 1,
+      "degree_norm": 0.023,
+      "betweenness": 0.0
+    }
+  ],
+  "actor_reach_ranked": [
+    {
+      "actor": "Secretaría de Salud",
+      "instruments": [
+        "CPEUM",
+        "LGS",
+        "LOAPF"
+      ],
+      "n_instruments": 3,
+      "obligation_reach": 24
+    },
+    {
+      "actor": "Consejo de Salubridad General",
+      "instruments": [
+        "CPEUM",
+        "LGS"
+      ],
+      "n_instruments": 2,
+      "obligation_reach": 23
+    },
+    {
+      "actor": "Entidades federativas (gobiernos estatales — 32 entidades)",
+      "instruments": [
+        "CPEUM",
+        "LGS"
+      ],
+      "n_instruments": 2,
+      "obligation_reach": 23
+    },
+    {
+      "actor": "Autoridades portuarias y aeroportuarias (puntos de entrada)",
+      "instruments": [
+        "LGS"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 21
+    },
+    {
+      "actor": "Comisión Federal para la Protección contra Riesgos Sanitarios (COFEPRIS)",
+      "instruments": [
+        "LGS"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 21
+    },
+    {
+      "actor": "Secretaría de Relaciones Exteriores",
+      "instruments": [
+        "CPEUM",
+        "LOAPF"
+      ],
+      "n_instruments": 2,
+      "obligation_reach": 6
+    },
+    {
+      "actor": "Auditoría Superior de la Federación",
+      "instruments": [
+        "CPEUM"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 5
+    },
+    {
+      "actor": "Comisión Nacional de los Derechos Humanos (CNDH)",
+      "instruments": [
+        "CPEUM"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 5
+    },
+    {
+      "actor": "Congreso de la Unión",
+      "instruments": [
+        "CPEUM"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 5
+    },
+    {
+      "actor": "Cámara de Diputados",
+      "instruments": [
+        "CPEUM"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 5
+    },
+    {
+      "actor": "Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI) / Transparencia para el Pueblo",
+      "instruments": [
+        "CPEUM",
+        "LGPDPPSO"
+      ],
+      "n_instruments": 2,
+      "obligation_reach": 5
+    },
+    {
+      "actor": "Senado de la República",
+      "instruments": [
+        "CPEUM"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 5
+    },
+    {
+      "actor": "Instituto Nacional de Migración",
+      "instruments": [
+        "LOAPF"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 1
+    },
+    {
+      "actor": "Secretaría de Gobernación",
+      "instruments": [
+        "LOAPF"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 1
+    }
+  ],
+  "communities": {
+    "n": 3,
+    "modularity": 0.286,
+    "sizes": [
+      22,
+      20,
+      1
+    ]
+  },
+  "cug_test": {
+    "measure": "instrument-degree centralisation",
+    "observed": 0.6402,
+    "random_mean": 0.328,
+    "p_value_ge_random": 0.0,
+    "interpretation": "centralisation significantly ABOVE random"
+  },
+  "provenance_note": "All figures computed from mexico_ihr2005_mapping.csv. Supersedes hard-coded degree values previously in ActorsExplorer.tsx."
+}
