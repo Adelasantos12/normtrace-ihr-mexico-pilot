@@ -124,12 +124,13 @@ export default function LandingPage() {
 
           <p className="text-sm sm:text-base text-slate-400 max-w-2xl leading-relaxed">
             NormTrace-IHR traces every IHR (2005) obligation to the specific domestic legal instrument that
-            anchors it — constitution, statute, regulation, or none at all. For CC1 (Legislation, policy &amp;
+            anchors it: constitution, statute, regulation, or none at all. For CC1 (Legislation, policy &amp;
             financing), Mexico's latest self-report to WHO SPAR ({cc1 ? `${cc1.spar_self_report_latest}%, ${spar?.cc1_spar_series.latest_year}` : '…'})
             runs well above what NormTrace finds actually anchored in domestic law for that same general capacity
             area ({cc1 ? `${cc1.normtrace_legal_anchoring_pct}%` : '…'}, averaged over the obligations NormTrace
-            tags CC1 — a thematic pairing, not a verified equivalent-denominator one) — a current-state comparison,
-            not against SPAR's historical mean ({cc1 ? `${cc1.spar_self_report_mean}%` : '…'}).
+            tags CC1). Treat that pairing as thematic: no verified equivalent-denominator crosswalk backs it.
+            This is a current-state comparison, set against SPAR's latest submission instead of its historical
+            mean ({cc1 ? `${cc1.spar_self_report_mean}%` : '…'}).
           </p>
 
           <div className="flex flex-wrap gap-2">
@@ -176,12 +177,12 @@ export default function LandingPage() {
 
         {/* Why 45: scope note to prevent conflation with the corpus's other, larger totals */}
         <p className="text-[11px] text-slate-400 leading-relaxed mb-10">
-          <strong className="text-slate-500 font-semibold">Why 45:</strong> this is the count of individual obligations
-          extracted from the IHR (2005) treaty text itself — the instrument the Mexico pilot maps obligation-by-obligation.
-          It is not the same count as, and should not be added to, the IHR 2024 amendment changes (57, a separate
-          change-tracking dataset), the Pandemic Agreement's obligations (83, a distinct treaty instrument), or the
-          PABS draft's provisional elements (38, an unadopted annex under negotiation) — each is tracked in its own
-          registry under <button onClick={() => navigate('/international')} className="underline hover:text-sky-500">International Instruments</button>.
+          <strong className="text-slate-500 font-semibold">Why 45:</strong> this figure counts the individual obligations
+          extracted from the IHR (2005) treaty text itself, the instrument the Mexico pilot maps obligation-by-obligation.
+          The IHR 2024 amendment tracks 57 changes in its own dataset. The Pandemic Agreement is a separate treaty
+          carrying 83 obligations. PABS is still an unadopted draft annex, currently listing 38 provisional elements.
+          None of these totals should be combined with the 45; each keeps its own registry under{' '}
+          <button onClick={() => navigate('/international')} className="underline hover:text-sky-500">International Instruments</button>.
         </p>
 
         {/* Pipeline concept */}
