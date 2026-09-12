@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import {
   ArrowRight, GitMerge, Activity, AlertTriangle,
-  Layers, ChevronRight, Scale, Network, TrendingDown, Shield, Clock
+  Layers, ChevronRight, Scale, Network, TrendingDown, Shield
 } from 'lucide-react';
 import { PreliminaryBanner } from '../components/PreliminaryBanner';
 import { useJsonData } from '../hooks/useData';
@@ -86,8 +86,7 @@ export default function LandingPage() {
       sub: cc1 ? `SPAR latest self-report vs legal anchoring · historical mean: +${cc1.divergence_mean} pts` : 'SPAR self-report above legal anchoring',
     },
     { label: 'Mean anchoring score', value: '1.76 / 5', icon: Activity, color: '#0ea5e9', sub: '45 IHR 2005 obligations, corpus-wide' },
-    { label: 'Primary IHR instrument', value: '1985', icon: Clock, color: '#f59e0b', sub: 'RLGS-SI predates IHR 2005 by 20 years' },
-    { label: 'IHR obligations mapped', value: '45', icon: Shield, color: '#10b981', sub: '110 domestic provisions, 18 instruments' },
+    { label: 'IHR (2005) obligations mapped', value: '45', icon: Shield, color: '#10b981', sub: '110 domestic provisions, 18 instruments — see note below' },
   ];
 
   return (
@@ -164,7 +163,7 @@ export default function LandingPage() {
         </div>
 
         {/* Key metrics — icon + colored number card grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-3">
           {KPI_STATS.map((s) => (
             <div key={s.label} className="bg-white p-5 rounded-2xl border border-slate-200 flex flex-col gap-1.5">
               <s.icon size={18} color={s.color} />
@@ -174,6 +173,16 @@ export default function LandingPage() {
             </div>
           ))}
         </div>
+
+        {/* Why 45: scope note to prevent conflation with the corpus's other, larger totals */}
+        <p className="text-[11px] text-slate-400 leading-relaxed mb-10">
+          <strong className="text-slate-500 font-semibold">Why 45:</strong> this is the count of individual obligations
+          extracted from the IHR (2005) treaty text itself — the instrument the Mexico pilot maps obligation-by-obligation.
+          It is not the same count as, and should not be added to, the IHR 2024 amendment changes (57, a separate
+          change-tracking dataset), the Pandemic Agreement's obligations (83, a distinct treaty instrument), or the
+          PABS draft's provisional elements (38, an unadopted annex under negotiation) — each is tracked in its own
+          registry under <button onClick={() => navigate('/international')} className="underline hover:text-sky-500">International Instruments</button>.
+        </p>
 
         {/* Pipeline concept */}
         <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 mb-6 space-y-6">
