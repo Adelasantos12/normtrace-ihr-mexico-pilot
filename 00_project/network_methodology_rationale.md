@@ -118,7 +118,7 @@ pre-2005 dummy, to test formally whether older/lower-rank instruments predict we
 ### 3.4 The SPAR↔legal bridge → thematic construct-validity probe, CC1 only, NOT an equivalent-denominator comparison
 `spar_normtrace_bridge.py` compares Mexico's SPAR self-report (0–100) with NormTrace legal
 anchoring (0–5→%), **scoped to CC1 (Legislation, policy & financing) only**: **CC1 Legislation:
-self-report 56.0% latest (2025) vs anchoring 34.0% (n=20 obligations) → +22.0 pts**. This is a
+self-report 60.0% latest (2025) vs anchoring 34.0% (n=20 obligations) → +26.0 pts**. This is a
 **thematic** pairing, not a verified equivalent-denominator one: SPAR's CC1 is a single
 country-level self-report answer for the capacity area as a whole, not decomposed into the
 individual IHR obligations that compose it; NormTrace's 34.0% is the mean anchoring score across
@@ -130,7 +130,7 @@ pairing as "two lenses on the same named capacity area," never as "the same obli
 same construct" (that phrasing implies a denominator equivalence that has not been verified).
 NormTrace's anchoring score is also a current-state snapshot, not a multi-year average, so the
 primary comparison is against SPAR's *latest* submission, not SPAR's 2010–2025 historical mean
-(80.4%, reported separately as trajectory context, → +46.4 pts if paired against it, which is
+(80.6%, reported separately as trajectory context, → +46.6 pts if paired against it, which is
 not the headline figure). This is the pilot's construct-validity contribution: a capacity can be
 reported as present while the obligations associated with it lack a sustainable legal base.
 **Implication:** the divergence is a *diagnostic of legal coverage on the same general theme*,
