@@ -1,0 +1,97 @@
+{
+  "generated_by": "06_scripts/build_tables/spar_normtrace_bridge.py",
+  "country": "Mexico",
+  "scope_note": "Comparison is limited to CC1 (Legislation, policy & financing), the one SPAR capacity that shares a name and general theme with what NormTrace's legal-anchoring score measures. This is a thematic pairing, not a verified equivalent-denominator one: SPAR's CC1 is a country-level self-report answer for the capacity area as a whole, not decomposed into individual IHR obligations; NormTrace's figure is the mean anchoring score across the N obligations NormTrace's own corpus tags as CC1 (an internal categorisation, not a checked crosswalk against SPAR's specific indicator content). SPAR's other capacities measure operational capacity, which NormTrace does not assess at all; an earlier version of this bridge compared five capacities and has been narrowed to CC1 as the closest available theme.",
+  "thesis": "SPAR CC1 self-report measures reported legislative/policy capacity for the capacity area as a whole; NormTrace measures domestic legal anchoring for the specific obligations it tags CC1 -- two lenses on the same general capacity dimension, not scores over the same denominator. A large positive divergence flags capacity reported without a sustainable legal-institutional base for those obligations.",
+  "primary_comparison": "latest",
+  "comparison_rationale": "NormTrace's legal-anchoring score is a snapshot of the CURRENT legal-institutional state, not a multi-year average -- it does not have a 'historical mean' the way a repeated yearly submission does. The construct-valid pairing is therefore NormTrace anchoring against SPAR's most recent (latest-year) CC1 submission, not against SPAR's historical mean, which mixes years the anchoring score was never computed for. spar_self_report_mean / divergence_mean are retained as historical context for the SPAR trajectory only -- they are not the headline figure.",
+  "headline_cc1": {
+    "capacity": "C1 Legislation, policy & financing",
+    "cc_tag": "CC1",
+    "spar_self_report_latest": 60.0,
+    "spar_self_report_mean": 80.6,
+    "normtrace_legal_anchoring_pct": 34.0,
+    "divergence_latest": 26.0,
+    "divergence_mean": 46.6,
+    "n_obligations": 20
+  },
+  "normtrace_corpus_anchoring_pct": 35.1,
+  "cc1_spar_series": {
+    "latest_year": 2025,
+    "latest": 60.0,
+    "mean": 80.6,
+    "max": 100.0,
+    "trajectory": [
+      {
+        "year": 2010,
+        "value": 50.0
+      },
+      {
+        "year": 2011,
+        "value": 100.0
+      },
+      {
+        "year": 2012,
+        "value": 100.0
+      },
+      {
+        "year": 2013,
+        "value": 100.0
+      },
+      {
+        "year": 2014,
+        "value": 100.0
+      },
+      {
+        "year": 2015,
+        "value": 100.0
+      },
+      {
+        "year": 2016,
+        "value": 100.0
+      },
+      {
+        "year": 2017,
+        "value": 100.0
+      },
+      {
+        "year": 2018,
+        "value": 100.0
+      },
+      {
+        "year": 2019,
+        "value": 80.0
+      },
+      {
+        "year": 2020,
+        "value": 80.0
+      },
+      {
+        "year": 2021,
+        "value": 60.0
+      },
+      {
+        "year": 2022,
+        "value": 40.0
+      },
+      {
+        "year": 2023,
+        "value": 60.0
+      },
+      {
+        "year": 2024,
+        "value": 60.0
+      },
+      {
+        "year": 2025,
+        "value": 60.0
+      }
+    ]
+  },
+  "caveats": [
+    "This comparison covers CC1 only; NormTrace does not measure the operational capacities SPAR's other core capacities assess (surveillance systems, points-of-entry infrastructure, emergency management, etc.), so no divergence claim is made for them.",
+    "SPAR's CC1 score and NormTrace's anchoring score are not a verified equivalent-denominator comparison: SPAR reports one self-assessed value for the capacity area as a whole, while NormTrace averages its own obligation-level anchoring across the obligations it tags CC1. No crosswalk confirms these are literally the same items -- read the divergence as two lenses on the same named capacity area, not as two scores over identical obligations.",
+    "NormTrace anchoring is preliminary_ai_assisted and unvalidated by a domestic public-health-law expert.",
+    "SPAR cap1 methodology changed across editions, so within-SPAR year-over-year swings should be read as trajectory context, not compared point-by-point across years. That is separate from the headline pairing above: NormTrace anchoring is itself a current snapshot, so it is deliberately compared against SPAR's latest submission (not the SPAR historical mean)."
+  ]
+}

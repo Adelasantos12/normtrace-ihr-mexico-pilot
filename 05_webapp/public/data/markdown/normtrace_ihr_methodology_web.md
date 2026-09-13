@@ -77,7 +77,7 @@ Institutional decoupling — the gap between formal structure and operational pr
 | Domestic legal provisions extracted | 110 |
 | Domestic instruments in corpus | 18 |
 | Mapping rows | 80 |
-| Institutional actors profiled | 14 |
+| Institutional actors profiled | 18 (15 federal, 2 autonomous, 1 state grouping) |
 | Mean anchoring score | **1.76 / 5** |
 | Primary IHR regulatory instrument | RLGS-SI (1985) — 20 years before IHR 2005 |
 | Corpus level | Federal only (state legislation excluded) |
@@ -130,12 +130,16 @@ NormTrace applies the country-specific legal hierarchy as a structural filter. F
 
 The critical structural finding: Mexico's primary IHR implementation instrument (RLGS-SI) sits at **tier 3 (regulatory)** but must implement obligations that require **tier 2 (statutory)** anchoring. This tier mismatch — not legal silence — explains the 1.76/5 mean anchoring score.
 
+### SPAR self-report vs legal anchoring
+
+Scoped to CC1 (Legislation, policy & financing) only: the one SPAR capacity that shares a name and general theme with NormTrace's legal-anchoring score. SPAR's other capacities assess operational readiness, which NormTrace does not measure. Treat this pairing as thematic: no verified equivalent-denominator crosswalk backs it. SPAR's CC1 is a single self-reported value for the capacity area as a whole. NormTrace's figure averages its own obligation-level anchoring across the 20 obligations it tags CC1, an internal categorisation that has not been crosswalked item-by-item against SPAR's specific indicator content. On that basis, Mexico's latest (2025) self-reported CC1 capacity runs well above NormTrace's legal anchoring for those obligations: 60.0% (SPAR, 2025) against 34.0% (NormTrace anchoring), a +26.0-point divergence. NormTrace's anchoring score is a current-state snapshot, so it is compared against SPAR's latest submission. SPAR's 2010–2025 historical mean (80.6%) is shown for reference only. This is a **construct-validity diagnostic**: two lenses on the same named capacity area, where reported capacity can exceed the domestic legal base for the obligations NormTrace associates with it. This does not show that SPAR self-reports are inflated or false (independent SPAR–JEE comparisons show the gap has narrowed in recent editions), nor that the two figures share a verified equivalent denominator. See `/spar-bridge` in the webapp and `00_project/network_methodology_rationale.md` §4 for the full guardrails.
+
 ---
 
 ## Role of Artificial Intelligence, Python, and Human Review
 
 - **AI-assisted structuring**: corpus conversion, metadata coding, provision extraction, preliminary anchoring classification. AI systematises legal text according to researcher-defined schemas and decision rules; it does not function as a legal authority.
-- **Python pipeline**: cleaning, validation, cross-reference checks, network analysis, reproducibility.
+- **Python pipeline**: cleaning, validation, cross-reference checks, network analysis, reproducibility. Network and SPAR-divergence figures are computed by `06_scripts/build_tables/build_network.py` and `spar_normtrace_bridge.py`; see `00_project/network_methodology_rationale.md` for the theoretical basis and interpretive limits.
 - **Human expert review**: required for legal validity, interpretation, and any policy application. All outputs are designated *preliminary_ai_assisted*.
 - **Technical audit**: PASS\_WITH\_DOCUMENTED\_FINDINGS (Audit L-01 through L-08).
 

@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useCsvData } from '../hooks/useData';
-import { Activity, Filter, Info, AlertTriangle, CheckCircle, XCircle, Clock, ChevronDown, ChevronRight } from 'lucide-react';
+import { Filter, Info, AlertTriangle, CheckCircle, XCircle, Clock, ChevronDown, ChevronRight } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 // --- Diagnostic categories ---
@@ -175,6 +175,14 @@ function groupByNorm(rows: any[]): Record<string, any[]> {
 
 export default function NormDiagnostic() {
   const { data: mapping, loading } = useCsvData<any>('mexico_ihr2005_mapping_clean.csv');
+  // Article + title per obligation_id, so an obligation reads the same way
+  // here as on Normative Pipeline: never the bare IHR-OBL-XXX id alone.
+  const { data: obligations, loading: oblLoading } = useCsvData<any>('ihr_2005_obligations_clean.csv');
+  const oblMap = useMemo(() => {
+    const m: Record<string, any> = {};
+    obligations.forEach((o: any) => { if (o.obligation_id) m[o.obligation_id.trim()] = o; });
+    return m;
+  }, [obligations]);
   const [view, setView] = useState<'obligation' | 'norm' | 'matrix'>('obligation');
   const [filterCode, setFilterCode] = useState<string>('');
   const [filterDomain, setFilterDomain] = useState('');
@@ -186,6 +194,8 @@ export default function NormDiagnostic() {
   const obligationDiagnostics = useMemo(() => {
     return Object.entries(obligationGroups).map(([id, rows]) => ({
       id,
+      article: oblMap[id]?.article || '',
+      articleTitle: oblMap[id]?.article_title || '',
       domain: rows[0]?.implementation_domain || rows[0]?.ihr_domain || '',
       rows,
       diagnostic: computeDiagnostic(rows),
@@ -193,7 +203,7 @@ export default function NormDiagnostic() {
       primaryNorm: rows.sort((a, b) => (parseInt(b.anchoring_level) || 0) - (parseInt(a.anchoring_level) || 0))[0]?.domestic_norm,
       gaps: [...new Set(rows.map(r => r.gap_type).filter(g => g && g !== 'None' && g !== ''))]
     }));
-  }, [obligationGroups]);
+  }, [obligationGroups, oblMap]);
 
   const normDiagnostics = useMemo(() => {
     return Object.entries(normGroups)
@@ -231,7 +241,7 @@ export default function NormDiagnostic() {
     });
   }, [obligationDiagnostics, filterCode, filterDomain]);
 
-  if (loading) return (
+  if (loading || oblLoading) return (
     <div className="flex items-center justify-center min-h-[400px]">
       <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
     </div>
@@ -240,17 +250,17 @@ export default function NormDiagnostic() {
   return (
     <div className="space-y-8 pb-24">
       <header className="space-y-3">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-blue-900 text-white rounded-xl"><Activity size={20} /></div>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tight">Norm Diagnostic</h1>
+        <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">
+          Obligation × Norm Diagnostic
         </div>
-        <p className="text-lg text-slate-600 max-w-4xl">
+        <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight">Norm Diagnostic</h1>
+        <p className="text-lg text-slate-500 max-w-4xl">
           Cross-diagnostic matrix: IHR obligation × domestic norm. Each pairing is classified by diagnostic status: from well-anchored to orphaned, with identification of tier mismatches, outdated instruments, procedural gaps, and fragmented anchoring.
         </p>
       </header>
 
       {/* Diagnostic summary */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 border-t-2 border-slate-900 pt-10">
         {(Object.values(DIAGNOSTICS) as DiagnosticDef[]).map(d => {
           const count = diagnosticCounts[d.code] || 0;
           if (count === 0) return null;
@@ -266,9 +276,9 @@ export default function NormDiagnostic() {
             >
               <div className="flex items-center gap-1.5 mb-2">
                 <span className={d.color}>{getDiagnosticIcon(d.icon, 14)}</span>
-                <span className={cn('text-[10px] font-black uppercase tracking-wider', d.color)}>{d.label}</span>
+                <span className={cn('text-[10px] font-semibold uppercase tracking-wider', d.color)}>{d.label}</span>
               </div>
-              <div className={cn('text-2xl font-black', d.color)}>{count}</div>
+              <div className={cn('text-2xl font-semibold', d.color)}>{count}</div>
               <div className="text-[9px] text-slate-500 mt-0.5 leading-tight">{d.description.split(' ').slice(0, 6).join(' ')}…</div>
             </button>
           );
@@ -276,7 +286,7 @@ export default function NormDiagnostic() {
       </div>
 
       {/* View switcher */}
-      <div className="flex flex-wrap items-center gap-4">
+      <div className="flex flex-wrap items-center gap-4 border-t border-slate-200 pt-8">
         <div className="flex bg-slate-100 p-1 rounded-xl w-fit">
           {[
             { id: 'obligation', label: 'By Obligation' },
@@ -326,17 +336,24 @@ export default function NormDiagnostic() {
                   onClick={() => setExpanded(isExp ? null : `obl-${o.id}`)}
                   className="w-full p-5 flex items-center gap-4 text-left hover:bg-slate-50/50 transition-colors"
                 >
-                  <span className={cn('px-2.5 py-1 rounded-lg text-[10px] font-black border flex items-center gap-1.5 shrink-0', def.bg, def.border, def.color)}>
+                  <span className={cn('px-2.5 py-1 rounded-lg text-[10px] font-semibold border flex items-center gap-1.5 shrink-0', def.bg, def.border, def.color)}>
                     {getDiagnosticIcon(def.icon, 11)}
                     {def.label}
                   </span>
                   <div className="flex-1 min-w-0">
-                    <div className="font-black text-slate-900 text-sm">{o.id}</div>
-                    {o.domain && <div className="text-[10px] text-slate-400 uppercase tracking-wider mt-0.5">{o.domain}</div>}
+                    <div className="flex items-baseline gap-2 flex-wrap">
+                      {o.article && <span className="font-semibold text-blue-700 text-sm shrink-0">{o.article}</span>}
+                      {o.articleTitle && <span className="font-bold text-slate-900 text-sm">{o.articleTitle}</span>}
+                      {!o.article && <span className="font-semibold text-slate-900 text-sm">{o.id}</span>}
+                    </div>
+                    <div className="flex items-center gap-2 mt-0.5 flex-wrap">
+                      {o.article && <span className="text-[10px] font-mono text-slate-400">{o.id}</span>}
+                      {o.domain && <span className="text-[10px] text-slate-400 uppercase tracking-wider">{o.domain}</span>}
+                    </div>
                   </div>
                   <div className="hidden sm:flex items-center gap-3 shrink-0">
                     <div className="text-right">
-                      <div className="text-xs font-black text-slate-900">L{o.maxAnchoring}/5</div>
+                      <div className="text-xs font-semibold text-slate-900">L{o.maxAnchoring}/5</div>
                       <div className="text-[9px] text-slate-400">max anchor</div>
                     </div>
                     {o.gaps.length > 0 && (
@@ -354,20 +371,20 @@ export default function NormDiagnostic() {
                   <div className="border-t border-slate-100 p-6 space-y-5 bg-slate-50/30">
                     <div className="grid md:grid-cols-3 gap-5">
                       <div className={cn('p-5 rounded-2xl border space-y-2', def.bg, def.border)}>
-                        <div className={cn('text-[10px] font-black uppercase tracking-widest', def.color)}>Diagnostic</div>
-                        <div className={cn('text-lg font-black flex items-center gap-2', def.color)}>
+                        <div className={cn('text-[10px] font-semibold uppercase tracking-widest', def.color)}>Diagnostic</div>
+                        <div className={cn('text-lg font-semibold flex items-center gap-2', def.color)}>
                           {getDiagnosticIcon(def.icon, 18)}
                           {def.label}
                         </div>
                         <p className="text-xs text-slate-600 leading-relaxed">{def.description}</p>
                       </div>
                       <div className="p-5 bg-white rounded-2xl border border-slate-100 space-y-2">
-                        <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Primary Anchor</div>
+                        <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Primary Anchor</div>
                         <div className="font-bold text-slate-900 text-sm">{o.primaryNorm || 'None identified'}</div>
                         <div className="text-xs text-slate-500">Max anchoring: L{o.maxAnchoring}/5</div>
                       </div>
                       <div className="p-5 bg-white rounded-2xl border border-slate-100 space-y-2">
-                        <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Gap Types</div>
+                        <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Gap Types</div>
                         {o.gaps.length > 0 ? (
                           <div className="flex flex-wrap gap-1.5">
                             {o.gaps.map((g, i) => (
@@ -381,7 +398,7 @@ export default function NormDiagnostic() {
                     </div>
 
                     <div className="space-y-2">
-                      <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">All Mapping Rows ({o.rows.length})</div>
+                      <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">All Mapping Rows ({o.rows.length})</div>
                       <div className="overflow-x-auto">
                         <table className="w-full text-xs">
                           <thead>
@@ -401,7 +418,7 @@ export default function NormDiagnostic() {
                                 <td className="py-2 pr-4 font-medium text-slate-900 max-w-[180px] truncate">{r.domestic_norm}</td>
                                 <td className="py-2 pr-4 text-slate-500">{r.domestic_article}</td>
                                 <td className="py-2 pr-4">
-                                  <span className={cn('px-1.5 py-0.5 rounded text-[10px] font-black',
+                                  <span className={cn('px-1.5 py-0.5 rounded text-[10px] font-semibold',
                                     parseInt(r.anchoring_level) >= 4 ? 'bg-emerald-100 text-emerald-700' :
                                     parseInt(r.anchoring_level) >= 2 ? 'bg-amber-100 text-amber-700' :
                                     'bg-red-100 text-red-700'
@@ -440,9 +457,9 @@ export default function NormDiagnostic() {
                   className="w-full p-5 flex items-center gap-4 text-left hover:bg-slate-50/50 transition-colors"
                 >
                   <div className="flex-1 min-w-0">
-                    <div className="font-black text-slate-900 text-sm truncate">{n.id}</div>
+                    <div className="font-semibold text-slate-900 text-sm truncate">{n.id}</div>
                     <div className="flex items-center gap-2 mt-1 flex-wrap">
-                      <span className={cn('px-2 py-0.5 rounded text-[9px] font-black border', def.bg, def.border, def.color)}>
+                      <span className={cn('px-2 py-0.5 rounded text-[9px] font-semibold border', def.bg, def.border, def.color)}>
                         {def.label}
                       </span>
                       {n.isOutdated && (
@@ -454,15 +471,15 @@ export default function NormDiagnostic() {
                   </div>
                   <div className="hidden sm:flex items-center gap-6 text-right shrink-0">
                     <div>
-                      <div className="text-lg font-black text-slate-900">{n.obligationsAnchored}</div>
+                      <div className="text-lg font-semibold text-slate-900">{n.obligationsAnchored}</div>
                       <div className="text-[9px] text-slate-400">obligations</div>
                     </div>
                     <div>
-                      <div className="text-lg font-black text-slate-900">L{n.maxAnchoring}</div>
+                      <div className="text-lg font-semibold text-slate-900">L{n.maxAnchoring}</div>
                       <div className="text-[9px] text-slate-400">max level</div>
                     </div>
                     <div>
-                      <div className="text-lg font-black text-slate-900">{n.meanAnchoring.toFixed(1)}</div>
+                      <div className="text-lg font-semibold text-slate-900">{n.meanAnchoring.toFixed(1)}</div>
                       <div className="text-[9px] text-slate-400">mean level</div>
                     </div>
                   </div>
@@ -473,7 +490,7 @@ export default function NormDiagnostic() {
                   <div className="border-t border-slate-100 p-6 space-y-4 bg-slate-50/30">
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className={cn('p-5 rounded-2xl border', def.bg, def.border)}>
-                        <div className={cn('text-[10px] font-black uppercase tracking-widest mb-2', def.color)}>Instrument Diagnostic</div>
+                        <div className={cn('text-[10px] font-semibold uppercase tracking-widest mb-2', def.color)}>Instrument Diagnostic</div>
                         <p className="text-xs text-slate-700 leading-relaxed">{def.description}</p>
                         {n.isOutdated && (
                           <div className="mt-3 flex items-start gap-2 p-3 bg-white/70 rounded-xl border border-amber-100">
@@ -485,7 +502,7 @@ export default function NormDiagnostic() {
                         )}
                       </div>
                       <div className="p-5 bg-white rounded-2xl border border-slate-100 space-y-3">
-                        <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Gap Profile</div>
+                        <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Gap Profile</div>
                         {n.gaps.length > 0 ? (
                           <div className="flex flex-wrap gap-1.5">
                             {n.gaps.map((g, i) => <span key={i} className="px-2 py-0.5 bg-red-50 text-red-700 border border-red-100 rounded text-[10px] font-bold">{g}</span>)}
@@ -497,10 +514,16 @@ export default function NormDiagnostic() {
                     </div>
 
                     <div>
-                      <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Obligations Anchored ({n.rows.length} mapping rows)</div>
+                      <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-2">Obligations Anchored ({n.rows.length} mapping rows)</div>
                       <div className="flex flex-wrap gap-2">
                         {[...new Set(n.rows.map((r: any) => r.obligation_id))].map((id: any) => (
-                          <span key={id} className="px-2.5 py-1 bg-slate-100 text-slate-700 rounded text-[10px] font-bold border border-slate-200">{id}</span>
+                          <span
+                            key={id}
+                            title={oblMap[id]?.article_title ? `${oblMap[id]?.article}: ${oblMap[id]?.article_title} (${id})` : id}
+                            className="px-2.5 py-1 bg-slate-100 text-slate-700 rounded text-[10px] font-bold border border-slate-200"
+                          >
+                            {oblMap[id]?.article || id}
+                          </span>
                         ))}
                       </div>
                     </div>
@@ -516,7 +539,7 @@ export default function NormDiagnostic() {
       {view === 'matrix' && (
         <div className="space-y-4">
           <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-            <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Diagnostic Matrix: IHR Obligations by Status</div>
+            <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-4">Diagnostic Matrix: IHR Obligations by Status</div>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
               {obligationDiagnostics.map(o => {
                 const def = DIAGNOSTICS[o.diagnostic];
@@ -524,13 +547,14 @@ export default function NormDiagnostic() {
                   <div
                     key={o.id}
                     className={cn('p-3 rounded-xl border space-y-1 transition-all cursor-default', def.bg, def.border)}
-                    title={`${o.id}: ${def.label}: ${def.description}`}
+                    title={`${o.article || o.id}${o.articleTitle ? ` · ${o.articleTitle}` : ''} (${o.id}): ${def.label}: ${def.description}`}
                   >
                     <div className="flex items-center gap-1.5">
                       <span className={def.color}>{getDiagnosticIcon(def.icon, 11)}</span>
-                      <span className={cn('text-[9px] font-black uppercase tracking-wider truncate', def.color)}>{def.label}</span>
+                      <span className={cn('text-[9px] font-semibold uppercase tracking-wider truncate', def.color)}>{def.label}</span>
                     </div>
-                    <div className="text-[10px] font-black text-slate-900 leading-tight">{o.id}</div>
+                    <div className="text-[10px] font-semibold text-slate-900 leading-tight">{o.article || o.id}</div>
+                    {o.articleTitle && <div className="text-[9px] text-slate-500 truncate">{o.articleTitle}</div>}
                     <div className="text-[9px] text-slate-500 truncate">{o.primaryNorm}</div>
                     <div className={cn('text-[9px] font-bold', def.color)}>L{o.maxAnchoring}/5</div>
                   </div>
@@ -540,7 +564,7 @@ export default function NormDiagnostic() {
           </div>
 
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6">
-            <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Legend</div>
+            <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-3">Legend</div>
             <div className="flex flex-wrap gap-3">
               {(Object.values(DIAGNOSTICS) as DiagnosticDef[]).map(d => (
                 <div key={d.code} className={cn('flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-bold', d.bg, d.border, d.color)}>
@@ -557,7 +581,7 @@ export default function NormDiagnostic() {
       <div className="bg-amber-50 border border-amber-100 rounded-2xl p-6 flex gap-4">
         <Info size={20} className="text-amber-600 shrink-0 mt-0.5" />
         <div className="space-y-1">
-          <p className="text-xs font-black text-amber-900 uppercase tracking-wider">Diagnostic Classification: Methodological Note</p>
+          <p className="text-xs font-semibold text-amber-900 uppercase tracking-wider">Diagnostic Classification: Methodological Note</p>
           <p className="text-xs text-amber-800 leading-relaxed">
             Diagnostic codes are algorithmically derived from anchoring level, fit dimension scores, and gap type classifications in the NormTrace dataset. They classify the <em>legal-institutional anchoring quality</em>: not operational performance. A "Procedural Gap" means legally-assigned duties without defined procedures in the corpus; it does not confirm that procedures do not exist in practice. All classifications require expert legal validation before any policy application.
           </p>

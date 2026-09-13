@@ -16,6 +16,7 @@ import NormPipeline from './pages/NormPipeline';
 import NormativeHierarchy from './pages/NormativeHierarchy';
 import NormDiagnostic from './pages/NormDiagnostic';
 import PoliticalBrain from './pages/PoliticalBrain';
+import SparBridge from './pages/SparBridge';
 import './App.css';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/mapping" element={<MappingExplorer />} />
           <Route path="/provisions" element={<ProvisionsExplorer />} />
           <Route path="/actors" element={<ActorsExplorer />} />
+          <Route path="/spar-bridge" element={<SparBridge />} />
           <Route path="/gap-map" element={<GapMap />} />
           <Route path="/snapshot" element={<CountrySnapshot />} />
           <Route path="/capacity" element={<CapacityBrief />} />
