@@ -69,6 +69,12 @@ def alias(norm: str) -> str:
 def main():
     mapping = read_csv(MAP)
     actors = read_csv(ACTORS)
+    # OBLIG is ';'-delimited (unlike MAP/ACTORS), so read it directly rather
+    # than through read_csv()'s comma-only csv.DictReader.
+    with open(OBLIG, newline="", encoding="utf-8") as f:
+        obligations = [{k.strip(): (v.strip() if isinstance(v, str) else v) for k, v in row.items()}
+                       for row in csv.DictReader(f, delimiter=";")]
+    all_obligation_ids = {o["obligation_id"].strip() for o in obligations if o.get("obligation_id")}
 
     # ---- Build the instrument x obligation two-mode network -----------------
     B = nx.Graph()
@@ -91,6 +97,19 @@ def main():
             B[inst][obl]["rows"] += 1
         else:
             B.add_edge(inst, obl, weight=w, rows=1)
+
+    # Obligations with NO anchoring row at all (domestic_norm empty -> every
+    # mapping row for them was skipped above, "UNSPECIFIED") never entered
+    # obl_nodes, so they silently vanished from the network instead of
+    # appearing as the isolated, zero-degree nodes their "full gap" /
+    # "legal silence" finding actually is. That undercounts n_obligations
+    # against the corpus total (45) and -- worse -- hides precisely the
+    # most severe obligations from the one visualisation meant to surface
+    # them. Add them explicitly as isolated nodes so the network's
+    # obligation count always equals the corpus's.
+    orphaned_obligations = sorted(all_obligation_ids - obl_nodes)
+    obl_nodes |= set(orphaned_obligations)
+
     for n in sorted(inst_nodes):
         B.add_node(n, mode="instrument", bipartite=0)
     for n in sorted(obl_nodes):
@@ -191,8 +210,18 @@ def main():
                      "interpretation": ("centralisation significantly ABOVE random"
                                         if p_ge < 0.05 else
                                         "not distinguishable from random")},
+        "isolated_obligations": orphaned_obligations,
         "provenance_note": ("All figures computed from mexico_ihr2005_mapping.csv. "
-                            "Supersedes hard-coded degree values previously in ActorsExplorer.tsx."),
+                            "Supersedes hard-coded degree values previously in ActorsExplorer.tsx. "
+                            "n_obligations always equals the full IHR-2005_obligations_domestic-anchoring.csv "
+                            "corpus (45): obligations with no anchoring row in the mapping (full gap / legal "
+                            "silence) are included as isolated, zero-degree nodes -- see isolated_obligations "
+                            "-- rather than dropped, so the network's coverage figure never falls below the "
+                            "corpus total and its worst findings stay visible instead of vanishing. "
+                            "n_instruments (9) legitimately covers only instruments that anchor at least one "
+                            "of these 45 obligations; the broader 18-instrument legal corpus includes "
+                            "instruments scoped to the Pandemic Agreement, PABS, or general administrative "
+                            "matters outside IHR 2005, which this IHR-anchoring network does not include."),
     }
 
     with open(os.path.join(OUT_FIG, "network_metrics.json"), "w", encoding="utf-8") as f:
@@ -222,6 +251,8 @@ def main():
           f"random_mean={metrics['cug_test']['random_mean']}  "
           f"p(>=random)={metrics['cug_test']['p_value_ge_random']}  "
           f"-> {metrics['cug_test']['interpretation']}")
+    print(f"\nIsolated obligations (no anchoring row, kept as zero-degree nodes): "
+          f"{orphaned_obligations or 'none'}")
     print(f"\nWrote network_metrics.json / node_registry.csv / network_edges.csv "
           f"to 04_outputs/figures/ and 05_webapp/public/data/derived/")
 

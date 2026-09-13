@@ -49,7 +49,7 @@ three-mode network**:
 |------|-------------|-----------------|
 | Actors (agentic) | institutions | 18 (15 federal, 2 autonomous, 1 state-grouping) |
 | Instruments (objects) | legal instruments / provisions | 9 instruments carrying edges (post aliasing-fix, §5); 110 provisions |
-| Obligations (objects) | IHR 2005 obligations | 45 (43 with ≥1 identified anchoring instrument) |
+| Obligations (objects) | IHR 2005 obligations | 45 (43 with ≥1 identified anchoring instrument; the other 2 are kept as isolated, zero-degree nodes -- see §5) |
 | Gap type (attribute) | gap classification | 10 categories |
 
 "Restricted" means ties run **between** adjacent modes (provision→obligation,
@@ -179,8 +179,17 @@ computed network/divergence numbers as validated measurement.
 
 ## 5. Known limitations specific to this layer
 
-- **43 of 45 obligations** enter the two-mode network; 2 have no identified anchoring
-  instrument (they are the full-gap rows) and are absent by construction, not error.
+- **All 45 obligations** appear as nodes in the two-mode network; 43 carry at least one
+  anchoring edge, and the other 2 (IHR-OBL-011, IHR-OBL-037 -- the two full-gap rows with
+  no domestic anchor at all) are included as isolated, zero-degree nodes rather than
+  dropped (fixed 2026-09-13: an earlier version of `build_network.py` silently skipped
+  any obligation whose mapping row had no `domestic_norm`, which excluded these exact
+  two from the node set and left `network.n_obligations` at 43 against a 45-obligation
+  corpus -- coverage drift that a reviewer would reasonably read as the flagship
+  visualisation hiding its own worst findings). `isolated_obligations` in
+  `network_metrics.json` names them explicitly; `validate_content.py` now asserts
+  `network.n_obligations` equals the corpus total on every run so this cannot regress
+  silently.
 - **9 instruments carry edges** (after the aliasing fix below), though the corpus has 18:
   most instruments in the corpus are not cited as the anchoring instrument for any
   obligation in the 80 mapping rows.
@@ -194,6 +203,18 @@ computed network/divergence numbers as validated measurement.
   rose from 8 to 9; communities went from 2 (Q=0.293) to 3 (Q=0.286); CUG test observed
   centralisation moved from 0.5952 to 0.6402 (still p<0.001 vs random). The correction
   is a ≤1-obligation rounding, not a change to the substantive finding.
+- **Isolated-obligations fix (2026-09-13):** as described above, IHR-OBL-011 and
+  IHR-OBL-037 are now added as isolated nodes instead of being dropped. Each forms its
+  own singleton community (no shared instrument ties to project against), so community
+  count rose from 3 to 5 while modularity stayed at Q=0.286 -- the two additions are
+  structurally trivial and do not touch the substantive community partition above them.
+  `instrument_degree_ranked`, `actor_reach_ranked`, and the CUG test are all unaffected
+  (they never depended on the missing nodes); `degree_norm` values on the *obligation*
+  side shift slightly because their denominator (`n_instruments`, unaffected) is
+  unchanged, and on the *instrument* side because their denominator (`n_obligations`)
+  moved from 43 to 45 -- e.g. LGS's normalised degree is now 21/45=0.467, not 21/43=0.488.
+  Raw (non-normalised) degree counts, which is what every "LGS anchors 21 obligations"
+  style claim in the UI and papers actually cites, are unchanged.
 - **SPAR→CC crosswalk is CC1 only** (§3.4) — the one capacity pairing that is construct-valid;
   it is a defensible approximation, not an official WHO mapping. SPAR methodology also
   changed across editions (interpret trajectories, not single years).

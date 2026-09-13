@@ -10,20 +10,26 @@ regenerated 04_outputs/ and 05_webapp/public/data/derived/.
 
 Checks:
   1. Every source/target in network_edges.csv exists in node_registry.csv.
-  2. Corpus row counts match the figures asserted in CODE_BRIEFING.md's
-     "ground truth": 45 obligations, 110 provisions, 18 instruments,
-     80 mapping rows.
+  2. Corpus row counts match the pilot's fixed scope: 45 obligations,
+     110 provisions, 18 instruments, 80 mapping rows.
   3. The "N federal[-level institutional actors]" figure quoted in each of
      the three paper mirrors matches count(government_level=='federal')
      in the actors CSV.
   4. No hard-coded `deg=NN` / `degree: NN` integer literal remains in
      05_webapp/src/pages/*.tsx.
+  5. network_metrics.json's network.n_obligations equals the full 45-row
+     obligations corpus. build_network.py used to silently drop any
+     obligation with no anchoring row (full gap / legal silence) instead
+     of keeping it as an isolated node, so the network's coverage figure
+     could fall below the corpus total without any check catching it --
+     this guards against that regressing.
 
 Usage:  python3 06_scripts/validation/validate_content.py
 """
 from __future__ import annotations
 import csv
 import glob
+import json
 import os
 import re
 import sys
@@ -32,6 +38,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 NETWORK_EDGES = os.path.join(ROOT, "04_outputs/figures/network_edges.csv")
 NODE_REGISTRY = os.path.join(ROOT, "04_outputs/figures/node_registry.csv")
+NETWORK_METRICS = os.path.join(ROOT, "04_outputs/figures/network_metrics.json")
 OBLIGATIONS = os.path.join(ROOT, "03_tables/international_obligations/IHR-2005_obligations_domestic-anchoring.csv")
 PROVISIONS = os.path.join(ROOT, "03_tables/country_legal_mapping/mexico_legal_provisions.csv")
 CORPUS_INDEX = os.path.join(ROOT, "03_tables/country_legal_mapping/mexico_normative_corpus_index.csv")
@@ -141,6 +148,20 @@ def main() -> int:
                         f"hard-coded degree literal: {os.path.relpath(path, ROOT)}:{lineno}: {line.strip()}"
                     )
 
+    # 5. Network obligation coverage vs corpus total.
+    if os.path.isfile(NETWORK_METRICS) and os.path.isfile(OBLIGATIONS):
+        with open(NETWORK_METRICS, encoding="utf-8") as f:
+            net_n_obl = json.load(f).get("network", {}).get("n_obligations")
+        expected_n_obl = len(read_rows(OBLIGATIONS, ";"))
+        if net_n_obl != expected_n_obl:
+            failures.append(
+                f"network coverage drift: network_metrics.json network.n_obligations={net_n_obl}, "
+                f"but the obligations corpus has {expected_n_obl} rows. An obligation with no "
+                f"anchoring row must still appear as an isolated node, not be dropped."
+            )
+    else:
+        failures.append(f"network_metrics.json not found: {NETWORK_METRICS}")
+
     if failures:
         print(f"FAIL — {len(failures)} content validation issue(s):\n")
         for msg in failures:
@@ -148,7 +169,7 @@ def main() -> int:
         return 1
 
     print("PASS — network edges resolve, corpus counts match, paper actor count reconciled, "
-          "no hard-coded degree literals.")
+          "no hard-coded degree literals, network obligation coverage matches the corpus.")
     return 0
 
 

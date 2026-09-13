@@ -1,3 +1,12 @@
+> **Historical briefing, not current ground truth.** This doc kicked off a prior work session and its
+> "ground truth" figures below (8 instruments, 43 obligations, 2 communities, SPAR headline without a
+> latest/mean split, etc.) reflect that session's snapshot, not the platform's present state. The pipeline
+> has since been fixed and extended (isolated obligations with no anchoring row are now kept as zero-degree
+> nodes instead of dropped, so `n_obligations` is always 45; SPAR's headline is `divergence_latest`, not
+> `divergence_mean`). For current numbers, read `04_outputs/figures/network_metrics.json` and
+> `spar_normtrace_divergence.json` directly, or `00_project/network_methodology_rationale.md` — never this
+> file's hard-coded figures below.
+
 # CODE_BRIEFING — NormTrace-IHR: integrate, clean, and finish the webapp
 
 **Audience:** Claude Code, working inside the `normtrace-ihr-mexico-pilot` repo connected to GitHub + Vercel.

@@ -10,6 +10,7 @@ interface NetworkMetrics {
   actor_reach_ranked: { actor: string; instruments: string[]; n_instruments: number; obligation_reach: number }[];
   communities: { n: number; modularity: number | null; sizes: number[] };
   cug_test: { observed: number; random_mean: number; p_value_ge_random: number; interpretation: string };
+  isolated_obligations?: string[];
 }
 
 // Curated qualitative notes keyed by node; NUMBERS come from the JSON, not here.
@@ -418,6 +419,13 @@ function ComputedNetworkGraph({
             (1997); see also Knoke, Diani, Hollway &amp; Christopoulos, <em>Multimodal Political Networks</em> (Cambridge
             University Press, 2021).
           </p>
+          {netMetrics?.isolated_obligations && netMetrics.isolated_obligations.length > 0 && (
+            <p className="text-[10px] text-amber-700 max-w-2xl leading-relaxed">
+              {netMetrics.isolated_obligations.length} obligation{netMetrics.isolated_obligations.length === 1 ? '' : 's'} ({netMetrics.isolated_obligations.map((id) => oblLookup[id]?.article || id).join(', ')}) have no domestic legal anchor at all and so carry
+              no edges: they render as disconnected circles, not as an error. Dropping them instead would hide the
+              corpus's most severe finding, not just a rendering quirk.
+            </p>
+          )}
         </div>
         <div className="flex gap-2">
           <span className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded text-[10px] font-bold border border-slate-200">{nodes.length} NODES</span>

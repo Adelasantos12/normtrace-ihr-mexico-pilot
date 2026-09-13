@@ -6,63 +6,63 @@
       "obligation"
     ],
     "n_instruments": 9,
-    "n_obligations": 43,
+    "n_obligations": 45,
     "n_edges": 68,
-    "density": 0.176
+    "density": 0.168
   },
   "instrument_degree_ranked": [
     {
       "instrument": "LGS",
       "obligations_anchored": 21,
-      "degree_norm": 0.488,
-      "betweenness": 0.5711
+      "degree_norm": 0.467,
+      "betweenness": 0.5281
     },
     {
       "instrument": "RLGS-SI",
       "obligations_anchored": 19,
-      "degree_norm": 0.442,
-      "betweenness": 0.482
+      "degree_norm": 0.422,
+      "betweenness": 0.4457
     },
     {
       "instrument": "RI-SS-2025",
       "obligations_anchored": 11,
-      "degree_norm": 0.256,
-      "betweenness": 0.2292
+      "degree_norm": 0.244,
+      "betweenness": 0.2119
     },
     {
       "instrument": "NOM-017",
       "obligations_anchored": 6,
-      "degree_norm": 0.14,
-      "betweenness": 0.0455
+      "degree_norm": 0.133,
+      "betweenness": 0.042
     },
     {
       "instrument": "CPEUM",
       "obligations_anchored": 5,
-      "degree_norm": 0.116,
-      "betweenness": 0.0879
+      "degree_norm": 0.111,
+      "betweenness": 0.0813
     },
     {
       "instrument": "Ley Aduanera",
       "obligations_anchored": 3,
-      "degree_norm": 0.07,
-      "betweenness": 0.0383
+      "degree_norm": 0.067,
+      "betweenness": 0.0354
     },
     {
       "instrument": "LGPDPPSO",
       "obligations_anchored": 1,
-      "degree_norm": 0.023,
+      "degree_norm": 0.022,
       "betweenness": 0.0
     },
     {
       "instrument": "LOAPF",
       "obligations_anchored": 1,
-      "degree_norm": 0.023,
+      "degree_norm": 0.022,
       "betweenness": 0.0
     },
     {
       "instrument": "RLGS-Inv",
       "obligations_anchored": 1,
-      "degree_norm": 0.023,
+      "degree_norm": 0.022,
       "betweenness": 0.0
     }
   ],
@@ -187,20 +187,26 @@
     }
   ],
   "communities": {
-    "n": 3,
+    "n": 5,
     "modularity": 0.286,
     "sizes": [
       22,
       20,
+      1,
+      1,
       1
     ]
   },
   "cug_test": {
     "measure": "instrument-degree centralisation",
     "observed": 0.6402,
-    "random_mean": 0.328,
+    "random_mean": 0.3282,
     "p_value_ge_random": 0.0,
     "interpretation": "centralisation significantly ABOVE random"
   },
-  "provenance_note": "All figures computed from mexico_ihr2005_mapping.csv. Supersedes hard-coded degree values previously in ActorsExplorer.tsx."
+  "isolated_obligations": [
+    "IHR-OBL-011",
+    "IHR-OBL-037"
+  ],
+  "provenance_note": "All figures computed from mexico_ihr2005_mapping.csv. Supersedes hard-coded degree values previously in ActorsExplorer.tsx. n_obligations always equals the full IHR-2005_obligations_domestic-anchoring.csv corpus (45): obligations with no anchoring row in the mapping (full gap / legal silence) are included as isolated, zero-degree nodes -- see isolated_obligations -- rather than dropped, so the network's coverage figure never falls below the corpus total and its worst findings stay visible instead of vanishing. n_instruments (9) legitimately covers only instruments that anchor at least one of these 45 obligations; the broader 18-instrument legal corpus includes instruments scoped to the Pandemic Agreement, PABS, or general administrative matters outside IHR 2005, which this IHR-anchoring network does not include."
 }
