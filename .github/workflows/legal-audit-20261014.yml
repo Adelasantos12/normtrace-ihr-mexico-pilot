@@ -1,0 +1,22 @@
+name: Legal audit 2026-10-14
+on:
+  push:
+    branches: [audit/legal-corrections-2026-10-14]
+    paths:
+      - '.github/workflows/legal-audit-20261014.yml'
+      - '06_scripts/audit_20261014/**'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare source snapshot
+        run: git archive --format=tar.gz -o /tmp/normtrace-source.tar.gz HEAD
+      - uses: actions/upload-artifact@v4
+        with:
+          name: normtrace-source-audit
+          path: /tmp/normtrace-source.tar.gz
+          retention-days: 7
