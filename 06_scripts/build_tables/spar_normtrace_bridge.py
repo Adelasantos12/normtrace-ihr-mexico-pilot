@@ -1,61 +1,5 @@
 #!/usr/bin/env python3
-"""
-NormTrace-IHR — SPAR x NormTrace divergence bridge.
-
-Operationalises the core thesis: self-reported IHR capacity (SPAR) can run far
-ABOVE the actual domestic *legal anchoring* NormTrace finds for the same
-general capacity area. We compare, for Mexico:
-
-  SPAR self-report (0-100, cap1 = CC1 Legislation/Policy/Financing)
-      vs
-  NormTrace legal anchoring (0-5 -> 0-100), mean over the obligations whose
-  implementation_domain includes CC1.
-
-This turns the qualitative claim ("Mexico reports perfect legislation capacity
-while its main instrument dates to 1985") into a measured divergence.
-
-Scope: CC1 only, and NOT an equivalent-denominator comparison. SPAR's CC1 is
-a country-level self-report answer for "Legislation, policy & financing" as a
-whole -- WHO's own indicator, not decomposed into the individual IHR (2005)
-obligations that make up the capacity area. NormTrace's anchoring figure is
-the MEAN legal-anchoring score across the N obligations that NormTrace's own
-corpus tags implementation_domain=CC1 -- an internal categorisation, not a
-verified crosswalk against SPAR's specific indicator content. There is no
-item-level check in this repo (or, to our knowledge, published anywhere)
-confirming that SPAR's C1 score is itself computed from exactly these N
-treaty obligations. Both measure the same NAMED capacity area (national
-legislation/policy/financing for IHR implementation) at a thematic level, per
-the IHR Monitoring and Evaluation Framework's shared terminology -- that is
-the basis for comparing them at all -- but they are two lenses on that same
-general dimension, not two scores over the same denominator. Frame any
-divergence accordingly: "SPAR's self-reported C1 capacity runs above
-NormTrace's obligation-level anchoring for the same general capacity area,"
-never "for the same obligations" or "the same construct" (see
-network_methodology_rationale.md SS4 for the corresponding guardrail). SPAR's
-other capacities (surveillance, points of entry, emergency management, IHR
-coordination, etc.) measure operational capacity -- staffed systems,
-infrastructure, running programmes -- which is a different construct
-NormTrace does not measure at all; a prior version of this script paired
-NormTrace's score against those too and was narrowed to CC1-only because it
-is at least the same named capacity area, even without a verified crosswalk
-(see network_methodology_rationale.md SS3.4).
-
-Primary comparison year: latest, not mean. NormTrace's anchoring score is a
-snapshot of the current legal state, not a multi-year average, so the
-headline divergence pairs it against SPAR's latest CC1 submission
-(spar_self_report_latest / divergence_latest). spar_self_report_mean /
-divergence_mean are computed and retained only as historical context for
-the SPAR trajectory -- see comparison_rationale in the output JSON.
-
-Inputs:
-  02_data/raw/spar_americas_clean.csv           (SPAR panel, Americas)
-  03_tables/country_legal_mapping/mexico_ihr2005_mapping.csv
-  03_tables/international_obligations/IHR-2005_obligations_domestic-anchoring.csv  (';'-delimited)
-
-Output:
-  04_outputs/exports/spar_normtrace_divergence.json
-  05_webapp/public/data/derived/spar_normtrace_divergence.json
-"""
+"""Build SPAR historical context. Numerical subtraction from NormTrace is withdrawn by the 2026-10-14 audit."""
 from __future__ import annotations
 import csv, json, os, statistics
 from collections import defaultdict
@@ -148,8 +92,8 @@ def main():
         "spar_self_report_latest": cc1_series["latest"],
         "spar_self_report_mean": cc1_series["mean"],
         "normtrace_legal_anchoring_pct": cc1_anchoring_pct,
-        "divergence_latest": round(cc1_series["latest"] - cc1_anchoring_pct, 1),
-        "divergence_mean": round(cc1_series["mean"] - cc1_anchoring_pct, 1),
+        "divergence_latest": None,
+        "divergence_mean": None,
         "n_obligations": len(cc1_scores),
     }
 
@@ -216,20 +160,18 @@ def main():
                     "submission (not the SPAR historical mean)."],
     }
 
+    result['primary_comparison'] = 'not_comparable'
+    result['comparison_rationale'] = 'No validated common construct, denominator or item-level crosswalk. Subtraction withdrawn.'
+    result['scope_note'] = 'SPAR C1.1 already asks for national and subnational legal mapping; C2.1 addresses focal-point mandate and functioning. NormTrace organizes obligation-level documentary evidence.'
+    result['thesis'] = 'A published score does not substitute for inspectable legal sources.'
+    result['caveats'] = ['SPAR and NormTrace are not equivalent measurements. No divergence or overstatement is inferred.', 'The SPAR instrument changed across reporting editions; the historical series is not measurement-invariant.', 'NormTrace source corrections remain subject to legal scope review.']
+    result['headline_cc1']['normtrace_legal_anchoring_pct'] = None
+    result['normtrace_corpus_anchoring_pct'] = None
     for folder in (OUT_EXP, OUT_WEB):
         with open(os.path.join(folder, "spar_normtrace_divergence.json"), "w", encoding="utf-8") as f:
             json.dump(result, f, indent=2, ensure_ascii=False)
 
-    print("=== SPAR CC1 (self-report) vs NormTrace (legal anchoring) — Mexico ===\n")
-    print(f"HEADLINE (CC1 Legislation): Mexico self-reported "
-          f"{headline['spar_self_report_latest']}% (latest, {cc1_series['latest_year']}) legislation "
-          f"capacity, while NormTrace legal anchoring = {headline['normtrace_legal_anchoring_pct']}% "
-          f"(n={headline['n_obligations']} obligations) "
-          f"-> divergence {headline['divergence_latest']} pts (primary, vs. latest). "
-          f"[Historical context: SPAR mean {headline['spar_self_report_mean']}% -> "
-          f"{headline['divergence_mean']} pts vs. mean.]")
-    print(f"\nCorpus-wide NormTrace anchoring (all 45 obligations, standalone stat, "
-          f"not compared to SPAR): {normtrace_corpus_anchoring_pct}%.")
+    print("SPAR context rebuilt; non-equivalent score subtraction disabled.")
 
 
 if __name__ == "__main__":

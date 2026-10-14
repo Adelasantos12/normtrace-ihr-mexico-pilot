@@ -14,8 +14,8 @@ Modes (Knoke, Diani, Hollway & Christopoulos 2021):
   - gap         (gap-type — attribute-node)
 
 Primary two-mode network: instrument x obligation, from the 80 mapping rows,
-weight = anchoring_level. Actor overlay: actor x instrument, from the actors
-table (source_norm). Outputs are written to 04_outputs/figures/ and mirrored
+weight = anchoring_level. Actor overlay: actor x instrument, from explicit source_instrument_ids in the actors
+table. These are competence-source associations, not issuance powers or observed dependencies. Outputs are written to 04_outputs/figures/ and mirrored
 to the webapp public/data/derived/ folder so the UI reads computed numbers.
 
 Usage:  python3 06_scripts/build_tables/build_network.py
@@ -128,8 +128,8 @@ def main():
     for a in actors:
         name = a.get("actor_name", "")
         src = (a.get("source_norm", "") or "")
-        for full, short in INSTRUMENT_ALIASES.items():
-            if full[:30] in src and short in inst_nodes:
+        for short in a.get("source_instrument_ids", "").split(";"):
+            if short in inst_nodes:
                 actor_inst[name].add(short)
     actor_reach = {}  # obligations reachable via the actor's instruments
     for actor, insts in actor_inst.items():
@@ -141,7 +141,7 @@ def main():
                               "obligation_reach": len(reach)}
 
     # ---- Projection to obligation-obligation (shared instruments) -----------
-    G_obl = bipartite.weighted_projected_graph(B, obl_nodes)
+    G_obl = bipartite.weighted_projected_graph(B, sorted(obl_nodes))
     raw_communities = greedy_modularity_communities(G_obl) if G_obl.number_of_edges() else []
     # greedy_modularity_communities' output order (and therefore the community index
     # each obligation gets) is not guaranteed stable across runs; sort communities by
@@ -186,7 +186,7 @@ def main():
 
     edges_out = [{"source": i, "target": o, "type": "anchors",
                   "weight": B[i][o]["weight"], "rows": B[i][o]["rows"]}
-                 for i, o in B.edges()]
+                 for i in sorted(inst_nodes) for o in sorted(B.neighbors(i))]
 
     metrics = {
         "generated_by": "06_scripts/build_tables/build_network.py",
@@ -207,7 +207,7 @@ def main():
                      "observed": round(obs_c, 4),
                      "random_mean": round(statistics.mean(sims), 4),
                      "p_value_ge_random": round(p_ge, 4),
-                     "interpretation": ("centralisation significantly ABOVE random"
+                     "interpretation": ("corpus incidence differs from a uniform fixed-density random graph; not a test of operational risk"
                                         if p_ge < 0.05 else
                                         "not distinguishable from random")},
         "isolated_obligations": orphaned_obligations,

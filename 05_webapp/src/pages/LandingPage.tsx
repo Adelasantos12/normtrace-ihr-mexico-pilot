@@ -3,6 +3,7 @@ import {
   ArrowRight, GitMerge, Activity, AlertTriangle,
   Layers, ChevronRight, Scale, Network, TrendingDown, Shield
 } from 'lucide-react';
+import AuditNotice from '../components/AuditNotice';
 import { PreliminaryBanner } from '../components/PreliminaryBanner';
 import { useJsonData } from '../hooks/useData';
 
@@ -41,25 +42,25 @@ const ADVANCED_LAYERS = [
   {
     icon: Network,
     title: 'Actors & CAS Topology',
-    desc: 'Institutional network as a complex adaptive system: hubs, bridges, decoupled actors, and structural bottlenecks in health governance',
+    desc: 'Corpus-derived source associations; exploratory CAS interpretations remain unvalidated',
     path: '/actors',
   },
   {
     icon: Scale,
     title: 'Political Brain',
-    desc: 'Institutional authority topology: formal mandates versus operational realities, reform feasibility, veto players, and political decoupling',
+    desc: 'Archived institutional hypotheses, separated from documentary findings and observed practice',
     path: '/political-brain',
   },
   {
     icon: GitMerge,
     title: 'IHR Mapping Explorer',
-    desc: '45 obligations × 110 domestic provisions: anchoring scale, six fit dimensions, gap typology, IHR 2024 update pressure',
+    desc: 'Obligation-level records, cited provisions, provisional coding and documented review status',
     path: '/mapping',
   },
   {
     icon: AlertTriangle,
     title: 'Implementation Gap Map',
-    desc: '19 gap areas classified by type, responsible actor, update pressure, and capacity-building entry points for reform',
+    desc: 'Legacy synthesis retained for review; current source corrections are documented in the audit',
     path: '/gap-map',
   },
 ];
@@ -77,16 +78,12 @@ export default function LandingPage() {
   const navigate = useNavigate();
   const { data: spar } = useJsonData<Divergence>('derived/spar_normtrace_divergence.json');
   const cc1 = spar?.headline_cc1;
+  const { data: audit } = useJsonData<any>('derived/audit_20261014.json');
 
   const KPI_STATS = [
-    {
-      label: `CC1 divergence (${spar?.cc1_spar_series.latest_year ?? 'latest'})`,
-      value: cc1 ? `+${cc1.divergence_latest} pts` : '…',
-      icon: TrendingDown, color: '#dc2626',
-      sub: cc1 ? `SPAR latest self-report vs legal anchoring · historical mean: +${cc1.divergence_mean} pts` : 'SPAR self-report above legal anchoring',
-    },
-    { label: 'Mean anchoring score', value: '1.76 / 5', icon: Activity, color: '#0ea5e9', sub: '45 IHR 2005 obligations, corpus-wide' },
-    { label: 'IHR (2005) obligations mapped', value: '45', icon: Shield, color: '#10b981', sub: '110 domestic provisions, 18 instruments — see note below' },
+    { label: 'Selected IHR obligations', value: String(audit?.counts.obligations ?? '…'), icon: Shield, color: '#10b981', sub: 'IHR 2005 pilot registry; not all obligations of every instrument' },
+    { label: 'Federal instruments in corpus', value: String(audit?.counts.instruments ?? '…'), icon: Layers, color: '#0ea5e9', sub: 'Source corpus, not the smaller connected network' },
+    { label: 'Obligation–provision records', value: String(audit?.counts.mapping_rows ?? '…'), icon: Activity, color: '#0ea5e9', sub: 'Source corrections applied; legal review remains pending' },
   ];
 
   return (
@@ -109,7 +106,7 @@ export default function LandingPage() {
 
         {/* Hero */}
         <div className="rounded-[20px] p-8 sm:p-12 text-white space-y-5 bg-gradient-to-br from-slate-900 via-[#0c2a4a] to-[#1e3a5f] mb-8">
-          <PreliminaryBanner />
+          <PreliminaryBanner /><AuditNotice />
 
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-[11px] font-bold text-sky-400 uppercase tracking-widest">NormTrace · Diagnostic Pilot</span>
@@ -118,20 +115,12 @@ export default function LandingPage() {
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-extrabold leading-[1.15] tracking-tight">
-            Legal capacity, reported<br />
-            <span className="text-sky-400">vs. legal capacity, anchored</span>
+            Following IHR obligations<br />
+            <span className="text-sky-400">through domestic law</span>
           </h1>
 
           <p className="text-sm sm:text-base text-slate-400 max-w-2xl leading-relaxed">
-            NormTrace-IHR traces every IHR (2005) obligation to the specific domestic legal instrument that
-            anchors it: constitution, statute, regulation, or none at all. For CC1 (Legislation, policy &amp;
-            financing), Mexico's latest self-report to WHO SPAR ({cc1 ? `${cc1.spar_self_report_latest}%, ${spar?.cc1_spar_series.latest_year}` : '…'})
-            runs well above what NormTrace finds actually anchored in domestic law for that same general capacity
-            area ({cc1 ? `${cc1.normtrace_legal_anchoring_pct}%` : '…'}, averaged over the obligations NormTrace
-            tags CC1). Treat that pairing as thematic: no verified equivalent-denominator crosswalk backs it.
-            This is a current-state comparison, set against SPAR's latest submission instead of its historical
-            mean ({cc1 ? `${cc1.spar_self_report_mean}%` : '…'}).
-          </p>
+            NormTrace links selected IHR obligations to domestic provisions and institutional responsibilities. SPAR already asks countries to review their legal frameworks. This pilot makes the documentary correspondences available for inspection. It is not a second capacity score, and it does not measure actual coordination.</p>
 
           <div className="flex flex-wrap gap-2">
             {HERO_TAGS.map((tag) => (
@@ -189,16 +178,11 @@ export default function LandingPage() {
         <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 mb-6 space-y-6">
           <div>
             <h2 className="text-base font-bold text-slate-900">The normative pipeline</h2>
-            <p className="text-slate-400 text-xs mt-1">Six-stage internalisation flow from international obligation to domestic implementation</p>
+            <p className="text-slate-400 text-xs mt-1">Six analytical layers for examining domestic legal sources</p>
           </div>
 
           <p className="text-slate-600 text-sm max-w-3xl leading-relaxed">
-            IHR obligations do not self-execute. Each must traverse a domestic normative pipeline: constitutional
-            incorporation, statutory mandate, regulatory specification, institutional actor competence, procedural
-            design, and implementation mechanism. NormTrace reconstructs this pipeline for each obligation,
-            revealing where flow is blocked, where instruments are misaligned with their hierarchical level, and
-            where actors have formal mandates without operational procedures.
-          </p>
+            Each obligation must be examined in the context of the domestic legal system. Relevant evidence can include constitutional provisions, statutes, regulations, technical standards and documents incorporated by reference. These are analytical layers, not a mandatory sequence of six new legal instruments.</p>
 
           <ol className="flex flex-wrap items-center gap-x-2 gap-y-3 text-sm">
             {PIPELINE_STAGES.map((stage, i) => (
@@ -252,18 +236,16 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-2 gap-10 text-sm text-slate-400 leading-relaxed">
             <div className="space-y-3">
               <p>
-                The IHR Monitoring and Evaluation Framework (SPAR, JEE) assesses reported capacity levels. Bishowkarma et al. (2026) documented improved alignment between SPAR and JEE across most indicators in recent editions, while identifying that three capacity areas retain significant score disagreement: infection prevention and control, healthcare-associated infection surveillance, and <strong className="text-white">national IHR focal point functions</strong> — precisely the capacities that depend most directly on legal-institutional anchoring.
-              </p>
+                SPAR C1.1 includes national and subnational legal mapping. C2.1 examines the focal point and its mandate. NormTrace complements this work by organizing sources around individual obligations.</p>
               <p>
-                Even when SPAR and JEE agree, neither instrument traces the domestic legal foundation of the capacity being measured. A country may score well on NFP functions because its DGE performs the role operationally, while lacking the statutory designation IHR Art. 4 requires — a real gap, invisible to aggregate scoring, visible through legal traceability.
-              </p>
+                The published score alone does not allow a reader to inspect every supporting provision. Legal and administrative arrangements must be assessed on their content and authority; IHR Article 4 does not universally require designation through a statute.</p>
             </div>
             <div className="space-y-3">
               <p>
                 NormTrace does not compete with SPAR or JEE. It adds a different analytical dimension: for each IHR obligation, it reconstructs which specific domestic legal instrument, actor, and procedure currently anchor it, at which hierarchical level, and with what structural gaps.
               </p>
               <p>
-                The Mexico pilot is a proof of concept for a replicable framework adaptable to any legal system with a publicly accessible normative corpus. The methodology does not produce compliance scores: it produces legal-institutional maps that identify where reform is needed, at what normative level, and for which actor.
+                The Mexico pilot is a proof of concept for a replicable framework adaptable to any legal system with a publicly accessible normative corpus. The methodology does not produce compliance scores: it produces legal-institutional records that identify sources and questions for further review before proposing reform.
               </p>
             </div>
           </div>
@@ -276,13 +258,13 @@ export default function LandingPage() {
           <div className="sm:col-span-2 space-y-3">
             <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wide">Analytical framework</h4>
             <p className="text-xs text-slate-500 leading-relaxed">
-              NormTrace-IHR applies legal-institutional traceability as its core methodology, drawing on multi-level governance theory, institutional decoupling analysis, and network science for the actor topology layer. The normative pipeline concept captures the cascading structure of domestic legal architectures without reducing them to a single compliance score. IHR compliance and reform scholarship informs the diagnostic framework for identifying where obligations are formally present but operationally blocked. Full references below.
+              NormTrace-IHR applies legal-institutional traceability as its core methodology, drawing on multi-level governance theory, institutional decoupling analysis, and network science for the actor topology layer. The normative pipeline concept captures the cascading structure of domestic legal architectures without reducing them to a single compliance score. IHR compliance and reform scholarship informs the diagnostic framework for identifying where documentary relationships require further examination. Full references below.
             </p>
           </div>
           <div className="space-y-2">
             <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wide">Mexico Pilot v0.1</h4>
             <div className="flex items-center gap-1.5 text-amber-700 font-medium text-xs">
-              <AlertTriangle size={12} /> Pass, with findings
+              <AlertTriangle size={12} /> Source corrections applied; expert validation pending
             </div>
             <p className="text-xs text-slate-500">Proof-of-concept pilot. Framework designed for replication across legal systems.</p>
             <p className="text-xs text-slate-400 italic">Preliminary AI-assisted outputs. Expert legal review required before any policy application.</p>

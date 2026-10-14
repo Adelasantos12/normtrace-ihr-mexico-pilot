@@ -15,9 +15,9 @@ interface NetworkMetrics {
 
 // Curated qualitative notes keyed by node; NUMBERS come from the JSON, not here.
 const HUB_NOTES: Record<string, { role: string; color: string; interpretation: string }> = {
-  'Secretaría de Salud': { role: 'Primary hub', color: 'bg-blue-900 text-white', interpretation: 'Highest actor obligation-reach in the corpus. Central to virtually all IHR implementation pathways; reform of the IHR legal architecture must run through it. Resilience depends on its institutional continuity.' },
+  'Secretaría de Salud': { role: 'Primary hub', color: 'bg-blue-900 text-white', interpretation: 'Highest actor corpus-association reach in the corpus. This association metric does not assign all linked obligations to this institution or establish reform power.' },
   'LGS': { role: 'Statutory hub', color: 'bg-blue-700 text-white', interpretation: 'Primary statutory anchor. Many IHR obligations pass through the LGS, but anchoring is general: it is a hub through breadth, not obligation-specific precision.' },
-  'RLGS-SI': { role: 'Regulatory hub', color: 'bg-amber-600 text-white', interpretation: 'Primary IHR regulatory instrument despite predating IHR 2005 by 20 years. Its age and regulatory (sub-statutory) rank make it a fragile, reform-critical hub.' },
+  'RLGS-SI': { role: 'Regulatory hub', color: 'bg-amber-600 text-white', interpretation: 'This regulation supports multiple documentary correspondences. Age and regulatory rank alone do not demonstrate insufficiency; content, statutory authority and subsequent references require examination.' },
   'RI-SS-2025': { role: 'Administrative hub', color: 'bg-indigo-700 text-white', interpretation: 'Carries the operational NFP designation (DGE) at the internal-regulation level — administrative practice standing in for the statutory designation IHR Art. 4 requires.' },
   'CPEUM': { role: 'Constitutional hub', color: 'bg-slate-700 text-white', interpretation: 'Constitutional foundation connecting treaty obligations to the domestic order. Its degree reflects breadth of constitutional reference, not specific IHR operative anchoring.' },
   'NOM-017': { role: 'Technical hub', color: 'bg-slate-700 text-white', interpretation: 'Operationalises surveillance/NFP duties at the technical-normative level.' },
@@ -27,7 +27,7 @@ function buildHubs(m: NetworkMetrics) {
   const hubs: { node: string; degree: number; metricLabel: string; role: string; color: string; interpretation: string }[] = [];
   const topActor = m.actor_reach_ranked?.[0];
   if (topActor) {
-    const note = HUB_NOTES[topActor.actor] || { role: 'Primary hub', color: 'bg-blue-900 text-white', interpretation: 'Highest actor obligation-reach in the corpus.' };
+    const note = HUB_NOTES[topActor.actor] || { role: 'Primary hub', color: 'bg-blue-900 text-white', interpretation: 'Highest actor corpus-association reach in the corpus.' };
     hubs.push({ node: topActor.actor, degree: topActor.obligation_reach, metricLabel: 'reach', ...note });
   }
   (m.instrument_degree_ranked || []).slice(0, 3).forEach((inst) => {
@@ -305,7 +305,7 @@ function ComputedNetworkGraph({
   }, [nodes]);
 
   // Click an obligation -> highlight its chain: anchoring instruments, and the
-  // actors that can issue those instruments.
+  // actors with documented source references to those instruments.
   const highlightSet = useMemo(() => {
     if (!selected) return null;
     const instruments = new Set<string>();
@@ -408,7 +408,7 @@ function ComputedNetworkGraph({
           <p className="text-[10px] text-slate-500 font-medium max-w-2xl leading-relaxed">
             How to read this: top band = {nodes.filter((n) => n.mode === 'obligation').length} IHR obligations; middle
             band = {nodes.filter((n) => n.mode === 'instrument').length} legal instruments that anchor them; bottom
-            band = institutional actors that can issue those instruments. Node size = degree/obligation-reach; edge
+            band = actors whose profiles cite those instruments. Node size = degree/obligation-reach; edge
             width = anchoring strength. Click an obligation to trace its chain to the responsible actor and see its
             gap type.
           </p>
@@ -451,7 +451,7 @@ function ComputedNetworkGraph({
             ))}
             <div className="flex items-center gap-2 pt-2 mt-1 border-t border-slate-100">
               <div className="w-5 h-0.5 shrink-0 rounded border-t-2 border-dashed" style={{ borderColor: '#dc2626' }} />
-              <span className="font-bold text-slate-600">Gap-exposed obligation</span>
+              <span className="font-bold text-slate-600">Provisional review flag</span>
             </div>
           </div>
 
@@ -630,7 +630,7 @@ function ComputedNetworkGraph({
             <h4 className="text-lg font-semibold text-slate-900">{selectedNode.full}</h4>
             <div className="text-[10px] font-mono text-slate-400 -mt-2">{selectedNode.id}</div>
             <div>
-              <div className="text-[10px] font-bold text-slate-400 uppercase mb-1">Gap type</div>
+              <div className="text-[10px] font-bold text-slate-400 uppercase mb-1">Provisional record code</div>
               <span className={cn(
                 "inline-block px-2 py-0.5 rounded text-[10px] font-semibold uppercase",
                 selectedNode.gapType !== 'none' ? 'bg-red-50 text-red-700' : 'bg-emerald-50 text-emerald-700'
@@ -645,7 +645,7 @@ function ComputedNetworkGraph({
               </div>
             </div>
             <div>
-              <div className="text-[10px] font-bold text-slate-400 uppercase mb-1">Reachable actors</div>
+              <div className="text-[10px] font-bold text-slate-400 uppercase mb-1">Actors associated through cited instruments</div>
               <div className="flex flex-col gap-1">
                 {[...(highlightSet?.actors ?? [])].map((id) => (
                   <span key={id} className="text-[11px] text-slate-700 font-medium">{id}</span>
@@ -719,7 +719,7 @@ function ComputedNetworkGraph({
           every node); scroll/pinch to zoom into a cluster and drag to pan — actor names lengthen as you zoom in
           rather than staying clipped. This is a corpus-derived, multimodal legal-institutional traceability network
           (obligation × instrument × actor; see Knoke, Diani, Hollway &amp; Christopoulos, <em>Multimodal Political
-          Networks</em>, Cambridge University Press, 2021), not observed coordination or political authority.
+          Networks</em>, Cambridge University Press, 2021), not observed coordination or political authority. An actor–instrument association is not an issuance power, and a shared instrument does not establish a directed dependency. See the audit for the separately sourced notification-path record.
         </p>
       </div>
     </div>
@@ -1014,8 +1014,9 @@ export default function ActorsExplorer() {
 
   return (
     <div className="space-y-8 pb-24">
+      <p className="text-sm text-amber-800 bg-amber-50 border border-amber-200 rounded-xl p-4">The computed view represents legal-source associations. It does not measure information exchange, institutional performance or reform power. Curated and CAS tabs are archived exploratory interpretations, not validated findings.</p>
       <header className="space-y-2">
-        <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">Actors &amp; CAS Topology</div>
+        <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">Legal-source associations</div>
         <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight">Actors Explorer</h1>
         <p className="text-lg text-slate-600">
           Analyze the legal-institutional network of health governance and pandemic response in Mexico.
@@ -1027,7 +1028,7 @@ export default function ActorsExplorer() {
           { id: 'map', label: 'Relationship Map', icon: Share2 },
           { id: 'inventory', label: 'Actor Inventory', icon: Users },
           { id: 'metrics', label: 'Network Metrics', icon: BarChart3 },
-          { id: 'topology', label: 'CAS Topology', icon: Target }
+          { id: 'topology', label: 'CAS Topology (legacy, unvalidated)', icon: Target }
         ].map(t => (
           <button
             key={t.id}
@@ -1370,7 +1371,7 @@ export default function ActorsExplorer() {
                   node: 'SSA / DGE',
                   badge: 'Hub fragility',
                   badgeColor: 'bg-red-600',
-                  finding: 'The Secretaría de Salud has the highest actor obligation-reach in the corpus, and DGE operationally performs NFP functions. But DGE\'s legal basis is administrative practice, not statute. IHR Art. 4 requires statutory designation. The hub is real; its anchoring is not.',
+                  finding: 'The Secretaría de Salud has the highest actor corpus-association reach in the corpus, and DGE operationally performs NFP functions. But DGE\'s legal basis is administrative practice, not statute. IHR Art. 4 requires statutory designation. The hub is real; its anchoring is not.',
                   link: 'Mandate decoupling'
                 },
                 {

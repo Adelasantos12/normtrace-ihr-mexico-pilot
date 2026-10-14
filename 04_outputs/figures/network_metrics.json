@@ -7,45 +7,45 @@
     ],
     "n_instruments": 9,
     "n_obligations": 45,
-    "n_edges": 68,
-    "density": 0.168
+    "n_edges": 69,
+    "density": 0.17
   },
   "instrument_degree_ranked": [
     {
       "instrument": "LGS",
       "obligations_anchored": 21,
       "degree_norm": 0.467,
-      "betweenness": 0.5281
+      "betweenness": 0.5431
     },
     {
       "instrument": "RLGS-SI",
-      "obligations_anchored": 19,
-      "degree_norm": 0.422,
-      "betweenness": 0.4457
+      "obligations_anchored": 20,
+      "degree_norm": 0.444,
+      "betweenness": 0.4815
     },
     {
       "instrument": "RI-SS-2025",
       "obligations_anchored": 11,
       "degree_norm": 0.244,
-      "betweenness": 0.2119
+      "betweenness": 0.2163
     },
     {
       "instrument": "NOM-017",
       "obligations_anchored": 6,
       "degree_norm": 0.133,
-      "betweenness": 0.042
+      "betweenness": 0.0435
     },
     {
       "instrument": "CPEUM",
       "obligations_anchored": 5,
       "degree_norm": 0.111,
-      "betweenness": 0.0813
+      "betweenness": 0.0831
     },
     {
       "instrument": "Ley Aduanera",
       "obligations_anchored": 3,
       "degree_norm": 0.067,
-      "betweenness": 0.0354
+      "betweenness": 0.0361
     },
     {
       "instrument": "LGPDPPSO",
@@ -68,14 +68,24 @@
   ],
   "actor_reach_ranked": [
     {
+      "actor": "Autoridades portuarias y aeroportuarias (puntos de entrada)",
+      "instruments": [
+        "LGS",
+        "RLGS-SI"
+      ],
+      "n_instruments": 2,
+      "obligation_reach": 35
+    },
+    {
       "actor": "Secretaría de Salud",
       "instruments": [
         "CPEUM",
         "LGS",
-        "LOAPF"
+        "LOAPF",
+        "RI-SS-2025"
       ],
-      "n_instruments": 3,
-      "obligation_reach": 24
+      "n_instruments": 4,
+      "obligation_reach": 29
     },
     {
       "actor": "Consejo de Salubridad General",
@@ -96,7 +106,7 @@
       "obligation_reach": 23
     },
     {
-      "actor": "Autoridades portuarias y aeroportuarias (puntos de entrada)",
+      "actor": "Comisión Federal para la Protección contra Riesgos Sanitarios (COFEPRIS)",
       "instruments": [
         "LGS"
       ],
@@ -104,12 +114,38 @@
       "obligation_reach": 21
     },
     {
-      "actor": "Comisión Federal para la Protección contra Riesgos Sanitarios (COFEPRIS)",
+      "actor": "Instituto Nacional de Migración",
       "instruments": [
-        "LGS"
+        "LOAPF",
+        "RLGS-SI"
+      ],
+      "n_instruments": 2,
+      "obligation_reach": 21
+    },
+    {
+      "actor": "Dirección General de Epidemiología",
+      "instruments": [
+        "NOM-017",
+        "RI-SS-2025"
+      ],
+      "n_instruments": 2,
+      "obligation_reach": 15
+    },
+    {
+      "actor": "Dirección General de Relaciones Internacionales (DGRI)",
+      "instruments": [
+        "RI-SS-2025"
       ],
       "n_instruments": 1,
-      "obligation_reach": 21
+      "obligation_reach": 11
+    },
+    {
+      "actor": "Dirección General del Servicio Nacional de Salud Pública (SNSP)",
+      "instruments": [
+        "RI-SS-2025"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 11
     },
     {
       "actor": "Secretaría de Relaciones Exteriores",
@@ -170,14 +206,6 @@
       "obligation_reach": 5
     },
     {
-      "actor": "Instituto Nacional de Migración",
-      "instruments": [
-        "LOAPF"
-      ],
-      "n_instruments": 1,
-      "obligation_reach": 1
-    },
-    {
       "actor": "Secretaría de Gobernación",
       "instruments": [
         "LOAPF"
@@ -187,26 +215,24 @@
     }
   ],
   "communities": {
-    "n": 5,
-    "modularity": 0.286,
+    "n": 4,
+    "modularity": 0.293,
     "sizes": [
       22,
-      20,
-      1,
+      21,
       1,
       1
     ]
   },
   "cug_test": {
     "measure": "instrument-degree centralisation",
-    "observed": 0.6402,
-    "random_mean": 0.3282,
+    "observed": 0.6349,
+    "random_mean": 0.3284,
     "p_value_ge_random": 0.0,
-    "interpretation": "centralisation significantly ABOVE random"
+    "interpretation": "corpus incidence differs from a uniform fixed-density random graph; not a test of operational risk"
   },
   "isolated_obligations": [
-    "IHR-OBL-011",
-    "IHR-OBL-037"
+    "IHR-OBL-011"
   ],
   "provenance_note": "All figures computed from mexico_ihr2005_mapping.csv. Supersedes hard-coded degree values previously in ActorsExplorer.tsx. n_obligations always equals the full IHR-2005_obligations_domestic-anchoring.csv corpus (45): obligations with no anchoring row in the mapping (full gap / legal silence) are included as isolated, zero-degree nodes -- see isolated_obligations -- rather than dropped, so the network's coverage figure never falls below the corpus total and its worst findings stay visible instead of vanishing. n_instruments (9) legitimately covers only instruments that anchor at least one of these 45 obligations; the broader 18-instrument legal corpus includes instruments scoped to the Pandemic Agreement, PABS, or general administrative matters outside IHR 2005, which this IHR-anchoring network does not include."
 }

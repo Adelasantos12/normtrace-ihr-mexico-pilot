@@ -1,3 +1,4 @@
+import AuditNotice from './components/AuditNotice';
 import { useState, useEffect } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import {
@@ -122,7 +123,7 @@ export default function Layout() {
       {/* Main Content */}
       <main className="flex-1 min-w-0 lg:ml-64 p-6 md:p-12 mt-16 lg:mt-0 min-h-screen print:m-0 print:p-0 print:bg-white print:ml-0">
         <div className="max-w-6xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <Outlet />
+          <AuditNotice /><Outlet />
         </div>
       </main>
 
