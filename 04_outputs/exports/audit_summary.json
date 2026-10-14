@@ -1,0 +1,1125 @@
+{
+  "aggregation_rules": {
+    "evidence_status": "Source verification and legal sufficiency are different fields.",
+    "full_paths": "Not calculated; two legacy no-gap rows did not establish two complete obligation pathways.",
+    "labels": "An obligation may have several row labels; do not sum overlapping counts.",
+    "scores": "Blank means withheld/unassessed, never zero. No revised aggregate score is published.",
+    "unit": "obligation_id",
+    "unmatched": "No candidate in the current dataset does not establish a legal vacuum."
+  },
+  "counts": {
+    "actor_entries": 18,
+    "changed_or_added_mapping_records": 35,
+    "explicit_relation_records": 4,
+    "instruments": 18,
+    "mapping_rows": 88,
+    "obligations": 45,
+    "provisions": 116,
+    "reference_records": 4,
+    "unmatched_obligations_in_current_dataset": 1,
+    "unscored_mapping_rows": 29
+  },
+  "date": "2026-10-14",
+  "labels_to_obligation_ids": {
+    "coordination gap": [
+      "IHR-OBL-022",
+      "IHR-OBL-043"
+    ],
+    "full gap": [
+      "IHR-OBL-011",
+      "IHR-OBL-038",
+      "IHR-OBL-045"
+    ],
+    "none": [
+      "IHR-OBL-019",
+      "IHR-OBL-044"
+    ],
+    "partial regulatory gap": [
+      "IHR-OBL-006",
+      "IHR-OBL-016",
+      "IHR-OBL-017",
+      "IHR-OBL-018",
+      "IHR-OBL-022",
+      "IHR-OBL-023",
+      "IHR-OBL-026",
+      "IHR-OBL-030",
+      "IHR-OBL-044"
+    ],
+    "procedural gap": [
+      "IHR-OBL-006",
+      "IHR-OBL-019",
+      "IHR-OBL-021",
+      "IHR-OBL-023",
+      "IHR-OBL-027",
+      "IHR-OBL-028",
+      "IHR-OBL-030",
+      "IHR-OBL-039",
+      "IHR-OBL-041",
+      "IHR-OBL-042"
+    ],
+    "reference follow-up pending": [
+      "IHR-OBL-001",
+      "IHR-OBL-003",
+      "IHR-OBL-004",
+      "IHR-OBL-005",
+      "IHR-OBL-007",
+      "IHR-OBL-008",
+      "IHR-OBL-009",
+      "IHR-OBL-012",
+      "IHR-OBL-013",
+      "IHR-OBL-014"
+    ],
+    "regulatory gap": [
+      "IHR-OBL-002",
+      "IHR-OBL-010",
+      "IHR-OBL-012",
+      "IHR-OBL-013",
+      "IHR-OBL-015",
+      "IHR-OBL-016",
+      "IHR-OBL-017",
+      "IHR-OBL-018",
+      "IHR-OBL-020",
+      "IHR-OBL-026",
+      "IHR-OBL-032",
+      "IHR-OBL-033",
+      "IHR-OBL-036",
+      "IHR-OBL-040",
+      "IHR-OBL-043"
+    ],
+    "rights safeguard gap": [
+      "IHR-OBL-024",
+      "IHR-OBL-025",
+      "IHR-OBL-028",
+      "IHR-OBL-029",
+      "IHR-OBL-031",
+      "IHR-OBL-039"
+    ],
+    "scope review pending": [
+      "IHR-OBL-002",
+      "IHR-OBL-037"
+    ],
+    "update review pending": [
+      "IHR-OBL-034",
+      "IHR-OBL-035"
+    ]
+  },
+  "nia_status": {
+    "authority_name": null,
+    "domestic_instrument": null,
+    "interpretation": "PAHO report confirms designation/establishment; identity, mandate and domestic act remain to be located.",
+    "locator": "CD63/INF/1 paragraph 17",
+    "report_date": "2026-08-21",
+    "reported_as_of": "2026-07-15",
+    "source": "https://iris.paho.org/bitstreams/7c461167-1eae-4e58-ad9c-d8ba8338c9dc/download",
+    "status": "designation_or_establishment_reported"
+  },
+  "obligations": [
+    {
+      "audit_statuses": [
+        "source_added",
+        "source_correction_applied"
+      ],
+      "candidate_provision_ids": [
+        "MEX-017-art02-estructuraadm",
+        "MEX-017-art35-fraccXIX",
+        "MEX_PROV_NOM017_SEC661_001",
+        "MEX_PROV_NOM017_SEC663_664_AUDIT20261014",
+        "MEX_PROV_NOM017_SEC814_AUDIT20261014"
+      ],
+      "current_review_labels": [
+        "reference follow-up pending"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_001_001",
+        "MEX_MAP_IHR2005_001_002",
+        "MEX_MAP_IHR2005_001_003",
+        "MEX_MAP_IHR2005_001_AUDIT_663",
+        "MEX_MAP_IHR2005_001_AUDIT_814"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-001",
+      "title": "Art. 4",
+      "unscored_records": 5
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary",
+        "source_correction_applied"
+      ],
+      "candidate_provision_ids": [
+        "MEX-017-art35-fraccX",
+        "MEX_PROV_LGS_ART133_II_AUDIT20261014",
+        "MEX_PROV_NOM017_SEC42_001"
+      ],
+      "current_review_labels": [
+        "regulatory gap",
+        "scope review pending"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_002_001",
+        "MEX_MAP_IHR2005_002_002",
+        "MEX_MAP_IHR2005_002_003"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-002",
+      "title": "Art. 5(1)",
+      "unscored_records": 1
+    },
+    {
+      "audit_statuses": [
+        "source_correction_applied"
+      ],
+      "candidate_provision_ids": [
+        "MEX-017-art35-fraccXIX",
+        "MEX_PROV_LGS_ART136_001"
+      ],
+      "current_review_labels": [
+        "reference follow-up pending"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_003_001",
+        "MEX_MAP_IHR2005_003_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-003",
+      "title": "Art. 5(2)",
+      "unscored_records": 2
+    },
+    {
+      "audit_statuses": [
+        "source_added",
+        "source_correction_applied"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_LGS_ART136_001",
+        "MEX_PROV_NOM017_SEC661_001",
+        "MEX_PROV_NOM017_SEC663_664_AUDIT20261014",
+        "MEX_PROV_NOM017_SEC814_AUDIT20261014",
+        "MEX_PROV_RISI_ART014_001"
+      ],
+      "current_review_labels": [
+        "reference follow-up pending"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_004_001",
+        "MEX_MAP_IHR2005_004_002",
+        "MEX_MAP_IHR2005_004_003",
+        "MEX_MAP_IHR2005_004_AUDIT_663",
+        "MEX_MAP_IHR2005_004_AUDIT_814"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-004",
+      "title": "Art. 6(1)",
+      "unscored_records": 5
+    },
+    {
+      "audit_statuses": [
+        "source_correction_applied"
+      ],
+      "candidate_provision_ids": [
+        "MEX-017-art35-fraccXIX",
+        "MEX_PROV_LGS_ART136_001"
+      ],
+      "current_review_labels": [
+        "reference follow-up pending"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_005_001",
+        "MEX_MAP_IHR2005_005_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-005",
+      "title": "Art. 6(2)",
+      "unscored_records": 2
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_LGS_ART136_001",
+        "MEX_PROV_LGS_ART181_001"
+      ],
+      "current_review_labels": [
+        "partial regulatory gap",
+        "procedural gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_006_001",
+        "MEX_MAP_IHR2005_006_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-006",
+      "title": "Art. 7",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "source_correction_applied"
+      ],
+      "candidate_provision_ids": [
+        "MEX-017-art33-fraccI-IV",
+        "MEX-017-art35-fraccXIX"
+      ],
+      "current_review_labels": [
+        "reference follow-up pending"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_007_001",
+        "MEX_MAP_IHR2005_007_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-007",
+      "title": "Art. 8",
+      "unscored_records": 2
+    },
+    {
+      "audit_statuses": [
+        "source_correction_applied"
+      ],
+      "candidate_provision_ids": [
+        "MEX-017-art35-fraccXIX"
+      ],
+      "current_review_labels": [
+        "reference follow-up pending"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_008_001"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-008",
+      "title": "Art. 9(2)",
+      "unscored_records": 1
+    },
+    {
+      "audit_statuses": [
+        "source_correction_applied"
+      ],
+      "candidate_provision_ids": [
+        "MEX-017-art35-fraccXIX"
+      ],
+      "current_review_labels": [
+        "reference follow-up pending"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_009_001"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-009",
+      "title": "Art. 10(2)",
+      "unscored_records": 1
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX-017-art43-fraccIX",
+        "MEX_PROV_LGS_ART181_001",
+        "MEX_PROV_LGS_ART184_001"
+      ],
+      "current_review_labels": [
+        "regulatory gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_010_001",
+        "MEX_MAP_IHR2005_010_002",
+        "MEX_MAP_IHR2005_010_003"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-010",
+      "title": "Art. 13(1)",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [],
+      "current_review_labels": [
+        "full gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_011_001"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-011",
+      "title": "Annex 1A, par.2",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary",
+        "source_added",
+        "source_correction_applied"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_LGS_ART134_001",
+        "MEX_PROV_NOM017_SEC42_001",
+        "MEX_PROV_NOM017_SEC814_AUDIT20261014"
+      ],
+      "current_review_labels": [
+        "reference follow-up pending",
+        "regulatory gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_012_001",
+        "MEX_MAP_IHR2005_012_002",
+        "MEX_MAP_IHR2005_012_AUDIT_814"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-012",
+      "title": "Annex 1A, par.4",
+      "unscored_records": 2
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary",
+        "source_added"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_LGS_ART146_001",
+        "MEX_PROV_NOM017_SEC311_001",
+        "MEX_PROV_NOM017_SEC663_664_AUDIT20261014"
+      ],
+      "current_review_labels": [
+        "reference follow-up pending",
+        "regulatory gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_013_001",
+        "MEX_MAP_IHR2005_013_002",
+        "MEX_MAP_IHR2005_013_AUDIT_663"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-013",
+      "title": "Annex 1A, par.5",
+      "unscored_records": 1
+    },
+    {
+      "audit_statuses": [
+        "source_added",
+        "source_correction_applied"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_LGS_ART134_001",
+        "MEX_PROV_NOM017_SEC661_001",
+        "MEX_PROV_NOM017_SEC663_664_AUDIT20261014",
+        "MEX_PROV_NOM017_SEC814_AUDIT20261014"
+      ],
+      "current_review_labels": [
+        "reference follow-up pending"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_014_001",
+        "MEX_MAP_IHR2005_014_002",
+        "MEX_MAP_IHR2005_014_AUDIT_663",
+        "MEX_MAP_IHR2005_014_AUDIT_814"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-014",
+      "title": "Annex 1A, par.6 (assessment)",
+      "unscored_records": 4
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX-017-art43-fraccIX",
+        "MEX_PROV_LGS_ART181_001"
+      ],
+      "current_review_labels": [
+        "regulatory gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_015_001",
+        "MEX_MAP_IHR2005_015_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-015",
+      "title": "Annex 1A, par.6 (response)",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_LGS_ART352_001",
+        "MEX_PROV_RISS2025_ART026_001",
+        "MEX_PROV_RISS2025_ART027_001"
+      ],
+      "current_review_labels": [
+        "partial regulatory gap",
+        "regulatory gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_016_001",
+        "MEX_MAP_IHR2005_016_002",
+        "MEX_MAP_IHR2005_016_003"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-016",
+      "title": "Annex 1B, par.1",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_RISI_ART006_001",
+        "MEX_PROV_RISS2025_ART026_001"
+      ],
+      "current_review_labels": [
+        "partial regulatory gap",
+        "regulatory gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_017_001",
+        "MEX_MAP_IHR2005_017_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-017",
+      "title": "Annex 1B, par.2",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_LGS_ART352_001",
+        "MEX_PROV_RISS2025_ART010_001"
+      ],
+      "current_review_labels": [
+        "partial regulatory gap",
+        "regulatory gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_018_001",
+        "MEX_MAP_IHR2005_018_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-018",
+      "title": "Art. 19",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_LGS_ART352_001",
+        "MEX_PROV_RISS2025_ART010_001"
+      ],
+      "current_review_labels": [
+        "none",
+        "procedural gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_019_001",
+        "MEX_MAP_IHR2005_019_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-019",
+      "title": "Art. 20(1)",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_RISS2025_ART044_001"
+      ],
+      "current_review_labels": [
+        "regulatory gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_020_001"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-020",
+      "title": "Art. 20(2)",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_LGS_ART359_001"
+      ],
+      "current_review_labels": [
+        "procedural gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_021_001"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-021",
+      "title": "Art. 20(3)",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_LADUANERA_ART003_001",
+        "MEX_PROV_RISS2025_ART026_001"
+      ],
+      "current_review_labels": [
+        "coordination gap",
+        "partial regulatory gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_022_001",
+        "MEX_MAP_IHR2005_022_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-022",
+      "title": "Art. 21",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_LGS_ART017BIS_001",
+        "MEX_PROV_RISS2025_ART044_001"
+      ],
+      "current_review_labels": [
+        "partial regulatory gap",
+        "procedural gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_023_001",
+        "MEX_MAP_IHR2005_023_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-023",
+      "title": "Art. 22(1)",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_CPEUM_ART014_001",
+        "MEX_PROV_LGS_ART139_001"
+      ],
+      "current_review_labels": [
+        "rights safeguard gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_024_001",
+        "MEX_MAP_IHR2005_024_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-024",
+      "title": "Art. 23(3)",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_RISS2025_ART069_001",
+        "MEX_PROV_RISS2025_ART070_001"
+      ],
+      "current_review_labels": [
+        "rights safeguard gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_025_001",
+        "MEX_MAP_IHR2005_025_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-025",
+      "title": "Art. 23(4)",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_LADUANERA_ART007_001",
+        "MEX_PROV_RISS2025_ART044_001"
+      ],
+      "current_review_labels": [
+        "partial regulatory gap",
+        "regulatory gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_026_001",
+        "MEX_MAP_IHR2005_026_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-026",
+      "title": "Art. 24(1)",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_RISS2025_ART068_001",
+        "MEX_PROV_RISS2025_ART069_001"
+      ],
+      "current_review_labels": [
+        "procedural gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_027_001",
+        "MEX_MAP_IHR2005_027_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-027",
+      "title": "Art. 27(1)",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_RISS2025_ART069_001",
+        "MEX_PROV_RISS2025_ART070_001"
+      ],
+      "current_review_labels": [
+        "procedural gap",
+        "rights safeguard gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_028_001",
+        "MEX_MAP_IHR2005_028_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-028",
+      "title": "Art. 30",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_CPEUM_ART014_001",
+        "MEX_PROV_LGS_ART139_001"
+      ],
+      "current_review_labels": [
+        "rights safeguard gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_029_001",
+        "MEX_MAP_IHR2005_029_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-029",
+      "title": "Art. 31(1)",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_LGS_ART139_001",
+        "MEX_PROV_RISS2025_ART068_001"
+      ],
+      "current_review_labels": [
+        "partial regulatory gap",
+        "procedural gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_030_001",
+        "MEX_MAP_IHR2005_030_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-030",
+      "title": "Art. 31(2)",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_CPEUM_ART001_001",
+        "MEX_PROV_RISS2025_ART069_001"
+      ],
+      "current_review_labels": [
+        "rights safeguard gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_031_001",
+        "MEX_MAP_IHR2005_031_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-031",
+      "title": "Art. 32",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_RISS2025_ART009_001"
+      ],
+      "current_review_labels": [
+        "regulatory gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_032_001"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-032",
+      "title": "Art. 35",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_RISI_ART003_001"
+      ],
+      "current_review_labels": [
+        "regulatory gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_033_001"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-033",
+      "title": "Art. 36",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "source_correction_applied"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_RISI_ART031_AUDIT20261014"
+      ],
+      "current_review_labels": [
+        "update review pending"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_034_001"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-034",
+      "title": "Art. 37",
+      "unscored_records": 1
+    },
+    {
+      "audit_statuses": [
+        "source_correction_applied"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_RISI_ART030_AUDIT20261014"
+      ],
+      "current_review_labels": [
+        "update review pending"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_035_001"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-035",
+      "title": "Art. 38",
+      "unscored_records": 1
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_RISS2025_ART044_001"
+      ],
+      "current_review_labels": [
+        "regulatory gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_036_001"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-036",
+      "title": "Art. 39",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "source_correction_applied"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_RISI_ART007_AUDIT20261014"
+      ],
+      "current_review_labels": [
+        "scope review pending"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_037_001"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-037",
+      "title": "Art. 40",
+      "unscored_records": 1
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_LADUANERA_ART056_001"
+      ],
+      "current_review_labels": [
+        "full gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_038_001"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-038",
+      "title": "Art. 41",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_CPEUM_ART001_001",
+        "MEX_PROV_LGS_ART139_001"
+      ],
+      "current_review_labels": [
+        "procedural gap",
+        "rights safeguard gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_039_001",
+        "MEX_MAP_IHR2005_039_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-039",
+      "title": "Art. 42",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_LGS_ART181_001",
+        "MEX_PROV_LGS_ART184_001"
+      ],
+      "current_review_labels": [
+        "regulatory gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_040_001",
+        "MEX_MAP_IHR2005_040_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-040",
+      "title": "Art. 43(1)-(2)",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX-017-art35-fraccXIX"
+      ],
+      "current_review_labels": [
+        "procedural gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_041_001"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-041",
+      "title": "Art. 43(3) and (5)",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_LGS_ART184_001"
+      ],
+      "current_review_labels": [
+        "procedural gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_042_001"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-042",
+      "title": "Art. 43(6)",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX-017-art33-fraccI-IV",
+        "MEX_PROV_LOAPF_ART028_001"
+      ],
+      "current_review_labels": [
+        "coordination gap",
+        "regulatory gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_043_001",
+        "MEX_MAP_IHR2005_043_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-043",
+      "title": "Art. 44(1)",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_CPEUM_ART016_001",
+        "MEX_PROV_LGPDPPSO_ART016_001"
+      ],
+      "current_review_labels": [
+        "none",
+        "partial regulatory gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_044_001",
+        "MEX_MAP_IHR2005_044_002"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-044",
+      "title": "Art. 45",
+      "unscored_records": 0
+    },
+    {
+      "audit_statuses": [
+        "inherited_preliminary"
+      ],
+      "candidate_provision_ids": [
+        "MEX_PROV_RLGS_INV_ART011_001"
+      ],
+      "current_review_labels": [
+        "full gap"
+      ],
+      "full_obligation_legal_validation": "not_completed",
+      "mapping_ids": [
+        "MEX_MAP_IHR2005_045_001"
+      ],
+      "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
+      "obligation_id": "IHR-OBL-045",
+      "title": "Art. 46",
+      "unscored_records": 0
+    }
+  ],
+  "retired_claims": [
+    "18 obligations with confirmed procedural/coordination gaps",
+    "7 confirmed federal-state gaps",
+    "2 complete legal pathways",
+    "6 instruments lacking safeguards",
+    "SPAR minus NormTrace as a preparedness divergence"
+  ],
+  "sources": [
+    {
+      "document_status": "final standard; draft not used as operative text",
+      "id": "NOM-017",
+      "locators": "6.6.3, 6.6.4, 8.1.4",
+      "url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+    },
+    {
+      "id": "LGS",
+      "locators": "133(II), 134",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf"
+    },
+    {
+      "id": "RLGS-SI",
+      "locators": "7, 10, 30, 31",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf"
+    },
+    {
+      "id": "PAHO-NIA",
+      "locators": "paragraph 17",
+      "url": "https://iris.paho.org/bitstreams/7c461167-1eae-4e58-ad9c-d8ba8338c9dc/download"
+    },
+    {
+      "id": "SPAR-2021",
+      "locators": "C1.1, C2.1",
+      "url": "https://cdn.who.int/media/docs/default-source/health-security-preparedness/cap/spar/9789240040120-eng-new.pdf"
+    },
+    {
+      "id": "IHR",
+      "locators": "4, 6, 37, 38, 40",
+      "url": "https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+    }
+  ],
+  "status": "source-corrected preliminary pilot",
+  "unmatched_obligation_ids": [
+    "IHR-OBL-011"
+  ],
+  "version": "0.2.0-audit.20261014"
+}

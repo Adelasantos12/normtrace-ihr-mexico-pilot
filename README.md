@@ -1,3 +1,26 @@
+# Source correction update — 14 October 2026
+
+The active `webapp-integrated` branch now carries dataset version **0.2.0-audit.20261014**. This is a targeted correction of sources, references, network semantics and unsupported claims, **not an expert-validated compliance assessment**.
+
+Use `/audit` in the application for before/after records, source links, current counts and pending questions. Original values remain in `legacy_*` columns and `99_archive/pre-audit-2026-10-14`. The original deposited release and its DOI have not been overwritten.
+
+To rebuild current outputs:
+
+```sh
+python3 06_scripts/build_tables/build_audit_summary.py
+python3 06_scripts/build_tables/build_network.py
+python3 06_scripts/build_tables/spar_normtrace_bridge.py
+python3 06_scripts/validation/validate_content.py
+python3 -m unittest discover -s 06_scripts/validation -p 'test_*.py'
+cd 05_webapp && npm ci && npm run build
+```
+
+The one-time `apply_legal_audit_20261014.py` migration archives its baseline and is idempotent. It must not be rerun over another baseline without reconciliation.
+
+---
+
+## Original project overview
+
 # NormTrace-IHR
 
 **Legal Internalisation Mapping Infrastructure for International Health Regulations**

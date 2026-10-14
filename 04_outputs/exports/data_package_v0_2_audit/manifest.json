@@ -1,0 +1,26 @@
+{
+  "counts": {
+    "actor_entries": 18,
+    "changed_or_added_mapping_records": 35,
+    "explicit_relation_records": 4,
+    "instruments": 18,
+    "mapping_rows": 88,
+    "obligations": 45,
+    "provisions": 116,
+    "reference_records": 4,
+    "unmatched_obligations_in_current_dataset": 1,
+    "unscored_mapping_rows": 29
+  },
+  "scope_date": "2026-10-14 targeted source audit; not a full currency audit",
+  "source_files": {
+    "03_tables/actors/mexico_health_governance_actors.csv": "8ab33620b850cefff4d3d6d6090b27d341362b5c63cf104610bd4f8d3ad8f178",
+    "03_tables/actors/mexico_institutional_relations.csv": "ca08d8ca12d5a7f7fde3d67b476131885c3ceb4c3d59a21899728c3ab1b46ff2",
+    "03_tables/country_legal_mapping/mexico_ihr2005_mapping.csv": "2fdf571ac6e874987229b3decd6d8bf38ecd3c45d5c18de175645b37501de5dc",
+    "03_tables/country_legal_mapping/mexico_legal_provisions.csv": "a6c52259dfdd4829ad92b5a88f249a86d1715c29a98d5253869e60c52016bc90",
+    "03_tables/country_legal_mapping/mexico_legal_references.csv": "fe7e06e3195a1b22708c9a3ae586599488b8b8a644105fac3fb9704279cf8d91",
+    "03_tables/country_legal_mapping/mexico_normative_corpus_index.csv": "83a182a0ed756fd94d9adffc3622571104199c192d86b157ccf45935273428fa",
+    "04_outputs/country_profiles/mexico_implementation_gap_map.csv": "593c8789e3a027bb569167742f747d507afe57405787e6e03ab25f9878098795"
+  },
+  "status": "Preliminary. Numerical gap claims and compliance scores require independent legal validation.",
+  "version": "0.2.0-audit.20261014"
+}

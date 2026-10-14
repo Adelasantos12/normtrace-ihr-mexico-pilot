@@ -14,7 +14,7 @@ const SECTIONS = [
   { id: 'mapping', label: 'IHR 2005 Mapping Summary', icon: GitMerge },
   { id: 'provisions', label: 'Legal Provisions Corpus Overview', icon: BookOpen },
   { id: 'actors', label: 'Actor Network and Actor Table', icon: Users },
-  { id: 'gaps', label: 'Implementation Gap Map', icon: AlertTriangle },
+  { id: 'gaps', label: 'Thematic Review Map', icon: AlertTriangle },
   { id: 'snapshot', label: 'Country Snapshot', icon: Globe },
   { id: 'methodology', label: 'Methodology and Caveats', icon: AlertCircle, always: true },
   { id: 'citation', label: 'Citation and Version Information', icon: Calendar, always: true },
@@ -52,7 +52,7 @@ export default function ReportBuilder() {
       <header className="print:hidden space-y-4">
          <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">Custom Report Builder</div>
          <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight">Printable Report Builder</h1>
-         <p className="text-slate-500">Assemble a customized legal intelligence report from the Mexico Pilot v0.1 data.</p>
+         <p className="text-slate-500">Assemble a customized legal intelligence report from the Mexico · 0.2.0-audit.20261014 data.</p>
 
          <div className="flex gap-4 pt-2">
             <button
@@ -105,7 +105,7 @@ export default function ReportBuilder() {
                         <Shield className="text-blue-500" size={24} />
                      </div>
                      <h4 className="text-xl font-bold text-white">NormTrace-IHR Report</h4>
-                     <p className="text-[10px] text-slate-400 uppercase tracking-[0.2em] font-bold">Mexico Pilot v0.1</p>
+                     <p className="text-[10px] text-slate-400 uppercase tracking-[0.2em] font-bold">Mexico · 0.2.0-audit.20261014</p>
                   </div>
 
                   <div className="space-y-3 pt-8">
@@ -142,7 +142,7 @@ export default function ReportBuilder() {
                <div className="space-y-12">
                   <div className="flex justify-between items-start">
                      <div className="p-4 bg-blue-900 text-white font-black text-2xl tracking-tighter">NT-IHR</div>
-                     <div className="text-right font-mono text-xs text-slate-400 uppercase tracking-widest">Mexico Pilot / Webapp v0.3</div>
+                     <div className="text-right font-mono text-xs text-slate-400 uppercase tracking-widest">Mexico Pilot / Source audit 2026-10-14</div>
                   </div>
                   <div className="space-y-6">
                      <h1 className="text-6xl font-black text-slate-900 leading-tight">NormTrace-IHR <br/> Legal Intelligence Report</h1>
@@ -158,8 +158,8 @@ export default function ReportBuilder() {
                   </div>
                   <div className="space-y-4">
                      <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b pb-2">Data Package</h3>
-                     <p className="text-lg font-bold text-slate-800">v0.1 (Audited)</p>
-                     <p className="text-sm text-slate-500">Verdict: Pass, with documented findings</p>
+                     <p className="text-lg font-bold text-slate-800">0.2.0-audit.20261014</p>
+                     <p className="text-sm text-slate-500">Targeted source corrections; legal review pending</p>
                   </div>
                </div>
 
@@ -178,15 +178,15 @@ export default function ReportBuilder() {
                <h2 className="text-3xl font-bold border-l-4 border-blue-600 pl-6">Executive Summary</h2>
                <div className="grid grid-cols-1 gap-12 text-slate-700 leading-relaxed">
                   <p>
-                     The NormTrace-IHR Mexico Pilot v0.1 provides a structured mapping of the Mexican domestic legal framework against the International Health Regulations (2005) and emerging international instruments.
+                     The NormTrace-IHR Mexico · 0.2.0-audit.20261014 provides a structured mapping of the Mexican domestic legal framework against the International Health Regulations (2005) and emerging international instruments.
                      The mapping identifies the statutory and administrative "anchoring" of international obligations within Mexico's health governance architecture.
                   </p>
                   <div className="p-8 bg-slate-50 rounded-2xl border border-slate-100">
                      <h4 className="font-bold text-slate-900 mb-4">Key Findings</h4>
                      <ul className="list-disc pl-6 space-y-4">
-                        <li>The <strong>Ley General de Salud (LGS)</strong> and the <strong>Reglamento Interior de la Secretaría de Salud (2025)</strong> constitute the core statutory anchors for IHR implementation.</li>
-                        <li>Structural analysis reveals a transition from L0-L2 (Administrative) to L3-L5 (Statutory) anchoring for primary surveillance functions.</li>
-                        <li>Gaps in intersectoral coordination for Points of Entry and PABS-readiness require further regulatory clarification.</li>
+                        <li>The SINAVE statutory reference is Article 133(II). NOM-017 supplies additional inter-level duties, notification rules and references requiring follow-up.</li>
+                        <li>Article 7 of the international health regulation supplies a relevant gratuity rule with exceptions; Articles 30 and 31 address aircraft and maritime declarations.</li>
+                        <li>Affected scores are withheld. The remaining historical coding is preliminary; no aggregate legal-capacity score or confirmed gap count is published.</li>
                      </ul>
                   </div>
                </div>
@@ -208,7 +208,7 @@ export default function ReportBuilder() {
                         </tr>
                      </thead>
                      <tbody className="divide-y divide-slate-100">
-                        {mappingData.slice(0, 40).map((row: any, i: number) => {
+                        {mappingData.map((row: any, i: number) => {
                            const obl = oblMap[row.obligation_id];
                            return (
                            <tr key={i} className="align-top">
@@ -217,7 +217,7 @@ export default function ReportBuilder() {
                                  <div className="font-mono text-[9px] text-slate-400">{row.obligation_id}</div>
                               </td>
                               <td className="p-4 text-slate-600">{row.domestic_norm}</td>
-                              <td className="p-4 font-bold text-slate-900">{row.anchoring_level}</td>
+                              <td className="p-4 font-bold text-slate-900">{row.anchoring_level === '' ? 'Unscored' : `Legacy L${row.anchoring_level}`}</td>
                               <td className="p-4 text-[10px] uppercase font-bold text-slate-500">{row.match_type}</td>
                            </tr>
                            );
@@ -225,16 +225,16 @@ export default function ReportBuilder() {
                      </tbody>
                   </table>
                   <div className="p-4 bg-slate-50 border-t border-slate-200 text-[10px] italic text-slate-500">
-                     Showing first 40 rows. Total mappings: {mappingData.length}.
+                     Showing all records. Total mappings: {mappingData.length}.
                   </div>
                </div>
             </div>
          )}
 
-         {/* Implementation Gap Map */}
+         {/* Thematic Review Map */}
          {selected.has('gaps') && gapData.length > 0 && (
             <div className="page-break-before space-y-8">
-               <h2 className="text-3xl font-bold border-l-4 border-blue-600 pl-6">Implementation Gap Map</h2>
+               <h2 className="text-3xl font-bold border-l-4 border-blue-600 pl-6">Thematic Review Map</h2>
                <div className="text-sm overflow-hidden border border-slate-200 rounded-xl">
                   <table className="w-full text-left border-collapse">
                      <thead className="bg-slate-50 border-b border-slate-200">
@@ -268,11 +268,11 @@ export default function ReportBuilder() {
                   <div className="grid grid-cols-2 gap-8">
                      <div className="p-6 bg-red-50 rounded-xl border border-red-100 space-y-4">
                         <h4 className="font-bold text-red-900 uppercase tracking-widest text-[10px]">Audit Verdict</h4>
-                        <p className="text-xl font-bold text-red-700">Pass, with documented findings</p>
+                        <p className="text-xl font-bold text-red-700">Source-corrected; validation pending</p>
                      </div>
                      <div className="p-6 bg-blue-50 rounded-xl border border-blue-100 space-y-4">
                         <h4 className="font-bold text-blue-900 uppercase tracking-widest text-[10px]">Mapping Version</h4>
-                        <p className="text-xl font-bold text-blue-700">v0.1 / Mexico Pilot</p>
+                        <p className="text-xl font-bold text-blue-700">0.2.0-audit.20261014</p>
                      </div>
                   </div>
 
@@ -282,9 +282,9 @@ export default function ReportBuilder() {
                         {[
                            "L-01: Preliminary AI-assisted mapping requires expert review.",
                            "L-02: PABS-related info is provisional.",
-                           "L-03: RISS 2025 currency verification remains substantive.",
-                           "L-04: Anchoring levels represent legal formalization, not performance.",
-                           "L-05: Gap types are structural-legal classifications.",
+                           "L-03: Targeted source checks do not establish currency of the whole corpus.",
+                           "L-04: Retained scores are legacy coding; affected scores are withheld.",
+                           "L-05: Review labels overlap and are not confirmed gap counts.",
                            "L-06: Actor mentions in provisions may include inactive entities.",
                            "L-07: Mapping assumes current binding status of IHR 2005.",
                            "L-08: Methodology focused on federal instruments; subnational law excluded."
@@ -302,15 +302,15 @@ export default function ReportBuilder() {
             <div className="page-break-before pt-20 border-t-2 border-slate-100 space-y-8">
                <h3 className="text-xl font-bold">Citation & Versioning</h3>
                <div className="p-8 bg-slate-900 text-white rounded-2xl font-mono text-xs leading-relaxed">
-                  NormTrace-IHR (2025). Mexico Legal Internalisation Mapping: Pilot v0.1 Data Package.
-                  Digital Object Identifier: 10.5281/zenodo.20085170.
-                  Repository: Local Build / Non-Public Audit.
-                  Status: Preliminary / Not for public circulation.
+                  NormTrace-IHR. Mexico source-corrected preliminary dataset, 0.2.0-audit.20261014.
+                  Original deposited release DOI: 10.5281/zenodo.20085170 (not a new deposit for this correction).
+                  Repository: Adelasantos12/normtrace-ihr-mexico-pilot; current audit at /audit.
+                  Status: preliminary; legal validation pending.
                </div>
 
                <div className="flex justify-between items-center text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em]">
-                  <div>NormTrace-IHR Mexico Pilot v0.1</div>
-                  <div>Page Appendix: v0.3 Build</div>
+                  <div>NormTrace-IHR Mexico · 0.2.0-audit.20261014</div>
+                  <div>Source audit: 14 October 2026</div>
                </div>
             </div>
          )}

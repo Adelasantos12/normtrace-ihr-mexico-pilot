@@ -15,9 +15,9 @@ export default function GapMap() {
   return (
     <div className="space-y-10 pb-20">
       <header>
-         <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">Implementation Gap Typology</div>
-         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900 mt-2">Implementation Gap Map</h1>
-         <p className="text-slate-500 mt-1">Policy-facing analysis of structural-legal gaps in Mexico's IHR internalisation.</p>
+         <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">Thematic review questions</div>
+         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900 mt-2">Implementation Review Map</h1>
+         <p className="text-slate-500 mt-1">Topics requiring documentary and legal follow-up. These are not nineteen confirmed gaps.</p>
       </header>
 
       <p className="text-xs text-slate-400 flex items-center gap-1">
@@ -88,8 +88,7 @@ export default function GapMap() {
          <div className="space-y-2">
             <h4 className="font-semibold text-blue-900">Gap Classification Note</h4>
             <p className="text-sm text-blue-800 leading-relaxed">
-               Gap types represent structural-legal classifications based on the anchoring scale.
-               <strong> 'Requires Statutory Strengthening'</strong> indicates an obligation currently anchored at administrative or operational levels (L0-L2) that may require higher-level legislative formalization for 2024 compliance.
+               Thematic questions are not mutually exclusive diagnoses. Their previous gap labels have been retained in legacy fields. Neither a low pilot score nor an administrative instrument establishes that legislation is required; examine the enabling powers and the obligation’s content.
             </p>
          </div>
       </div>

@@ -1,0 +1,25 @@
+name: Legal evidence audit review
+
+on:
+  push:
+    branches: [audit/legal-evidence-2026-10-14]
+    paths: [.github/workflows/audit-review.yml]
+
+permissions:
+  contents: read
+
+jobs:
+  source-snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Package tracked source without Git metadata or credentials
+        run: git archive --format=zip HEAD -o audit-source.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: normtrace-audit-source
+          path: audit-source.zip
+          retention-days: 3

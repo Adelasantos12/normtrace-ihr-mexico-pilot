@@ -195,7 +195,7 @@ export default function Methodology() {
 
             <div className="mt-6 pt-5 border-t border-slate-200 flex items-center gap-2 text-xs text-slate-500">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
-              Source-audited revision · expert validation pending
+              Audit version 0.1 (stable)
             </div>
           </div>
         </aside>

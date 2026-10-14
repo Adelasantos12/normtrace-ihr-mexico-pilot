@@ -37,27 +37,29 @@ export default function MappingExplorer() {
   const { data: pabs, loading: l5 } = useCsvData<any>('pabs_draft_obligations_clean.csv');
 
   const [tab, setTab] = useState<Tab>('ihr2005');
+  const [query, setQuery] = useState('');
   const [expanded, setExpanded] = useState<string | null>(null);
   const [filters, setFilters] = useState<any>({ article: '', domain: '', norm: '', level: '', gap: '', conf: '' });
 
   const joined = useMemo(() => {
     const byId = new Map(obl.map((o) => [o.obligation_id, o]));
-    return mapping.map((m) => ({ ...m, ...(byId.get(m.obligation_id) || {}) }));
+    return mapping.map((m) => ({ ...(byId.get(m.obligation_id) || {}), ...m }));
   }, [mapping, obl]);
 
   const filtered = useMemo(() => joined.filter((r) =>
+    (!query.trim() || [r.obligation_id, r.mapping_id, r.title, r.obligation_text, r.domestic_norm, r.domestic_article, r.assessment_summary].join(' ').toLowerCase().includes(query.trim().toLowerCase())) &&
     (!filters.article || r.article === filters.article) &&
     (!filters.domain || r.implementation_domain === filters.domain) &&
     (!filters.norm || r.domestic_norm === filters.norm) &&
     (!filters.level || String(r.anchoring_level) === filters.level) &&
     (!filters.gap || r.gap_type === filters.gap) &&
     (!filters.conf || r.confidence_level === filters.conf)
-  ), [joined, filters]);
+  ), [joined, filters, query]);
 
   const stats = useMemo(() => ({
     obligations: new Set(mapping.map(m => m.obligation_id)).size,
-    anchors: mapping.filter(m => parseInt(m.anchoring_level) > 0).length,
-    sensitive: mapping.filter(m => m.review_status === 'REVIEW_REQUIRED').length,
+    anchors: mapping.filter(m => m.domestic_norm && m.domestic_provision_id !== 'NO_MATCH_IDENTIFIED').length,
+    sensitive: mapping.filter(m => m.review_status === 'requires_human_review').length,
     gaps: new Set(mapping.map(m => m.gap_type).filter(g => g && g !== 'none')).size
   }), [mapping]);
 
@@ -97,9 +99,9 @@ export default function MappingExplorer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-slate-100 rounded-2xl overflow-hidden border border-slate-100">
           {[
             { label: 'IHR 2005 Obligations', value: stats.obligations, icon: Globe },
-            { label: 'Domestic Anchors', value: stats.anchors, icon: Shield },
+            { label: 'Candidate correspondences', value: stats.anchors, icon: Shield },
             { label: 'Review-Sensitive', value: stats.sensitive, icon: AlertTriangle },
-            { label: 'Primary Gap Types', value: stats.gaps, icon: Activity }
+            { label: 'Provisional review labels', value: stats.gaps, icon: Activity }
           ].map((s, i) => (
             <div key={i} className="bg-white p-5 flex items-center gap-4">
               <s.icon size={18} className="text-slate-400" />
@@ -140,6 +142,7 @@ export default function MappingExplorer() {
               <Filter size={18} />
               <span>Filters</span>
             </div>
+            <label className="block text-sm">Search records<input aria-label="Search records" placeholder="Search obligation ID, law or source text" value={query} onChange={e => setQuery(e.target.value)} className="mt-1 w-full rounded-lg border p-3" /></label>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
               {[
                 { key: 'article', label: 'Article', field: 'article' },
@@ -194,17 +197,17 @@ export default function MappingExplorer() {
 
                           <div className="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-100 flex flex-wrap gap-y-3">
                             <div className="w-full md:w-1/2">
-                              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Domestic anchor</div>
+                              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Candidate domestic provision</div>
                               <div className="text-sm font-bold text-slate-800">
                                 {r.domestic_norm}
                                 <span className="mx-2 text-slate-300">/</span>
-                                Art. {r.domestic_article}
+                                {r.domestic_article}
                                 <span className="ml-2 text-slate-400 font-normal text-xs">({r.domestic_provision_id})</span>
                               </div>
                             </div>
                             <div className="w-full md:w-1/2 flex flex-wrap gap-2 items-center">
                               <span className={cn("px-2.5 py-1 rounded-full text-[10px] font-bold border shadow-sm", getLevelColor(r.anchoring_level))}>
-                                L{r.anchoring_level}
+                                {r.anchoring_level === '' ? 'Unscored · review pending' : `Legacy L${r.anchoring_level} · unvalidated`}
                               </span>
                               <span className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold border border-slate-200">
                                 {r.match_type}
@@ -212,7 +215,7 @@ export default function MappingExplorer() {
                               <span className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold border border-slate-200">
                                 {r.gap_type}
                               </span>
-                              {r.review_status === 'REVIEW_REQUIRED' && (
+                              {r.review_status === 'requires_human_review' && (
                                 <span className="px-2.5 py-1 rounded-full bg-amber-100 text-amber-700 text-[10px] font-bold border border-amber-200 flex items-center gap-1">
                                   <AlertTriangle size={10} /> REVIEW
                                 </span>
@@ -241,8 +244,8 @@ export default function MappingExplorer() {
                               </h4>
                               <div className="space-y-4">
                                 <div>
-                                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Anchoring reason</div>
-                                  <p className="text-sm text-slate-700">{r.anchoring_reason || 'Not identified in current corpus'}</p>
+                                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Evidence status</div>
+                                  <p className="text-sm text-slate-700">{r.evidence_status || 'Evidence status not recorded'}</p>
                                 </div>
                                 <div>
                                   <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Minimum domestic requirement</div>
@@ -251,6 +254,13 @@ export default function MappingExplorer() {
                                 <div>
                                   <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Assessment summary</div>
                                   <p className="text-sm text-slate-700 italic">{r.assessment_summary}</p>
+                                </div>
+                                <div className="p-3 bg-amber-50 border border-amber-100 rounded-lg text-sm space-y-2">
+                                  <p><strong>Source audit:</strong> {r.audit_status || 'Inherited preliminary entry'}</p>
+                                  <p>{r.audit_note}</p>
+                                  {r.audit_source_url && <a className="underline" href={r.audit_source_url} target="_blank" rel="noreferrer">Check the official source</a>}
+                                  <p>Source corrections are not expert validation. No aggregate compliance score is published.</p>
+                                  <details><summary className="cursor-pointer">Original coding (superseded where corrected)</summary><p>Level: {r.legacy_anchoring_level || 'Not assigned'}; label: {r.legacy_gap_type || 'Not assigned'}.</p></details>
                                 </div>
                                 {r.reviewer_notes && (
                                   <div className="p-3 bg-blue-50 border border-blue-100 rounded-lg">
@@ -285,24 +295,13 @@ export default function MappingExplorer() {
                           </div>
 
                           <section className="space-y-4">
-                            <h4 className="text-xs font-semibold text-slate-900 uppercase tracking-widest">Structural Fit Analysis</h4>
+                            <h4 className="text-xs font-semibold text-slate-900 uppercase tracking-widest">Preliminary fit coding (not expert validated)</h4>
                             <div className="space-y-3">
                               {Object.entries(FIT_LABELS).map(([key, label]: [string, any]) => (
                                 <div key={key} className="flex items-center justify-between group">
                                   <span className="text-xs text-slate-500">{label}</span>
                                   <div className="flex items-center gap-2">
-                                    <div className="w-24 h-1.5 bg-slate-200 rounded-full overflow-hidden">
-                                      <div
-                                        className={cn(
-                                          "h-full transition-all",
-                                          parseInt(r[key]) >= 4 ? "bg-emerald-500" :
-                                          parseInt(r[key]) >= 2 ? "bg-blue-500" :
-                                          "bg-slate-300"
-                                        )}
-                                        style={{ width: `${(parseInt(r[key]) / 5) * 100}%` }}
-                                      />
-                                    </div>
-                                    <span className="text-[10px] font-bold text-slate-700 w-4 text-right">{r[key]}</span>
+                                    <span className="text-xs text-slate-700 text-right max-w-[14rem]">{r[key] || 'Not assessed'}</span>
                                   </div>
                                 </div>
                               ))}

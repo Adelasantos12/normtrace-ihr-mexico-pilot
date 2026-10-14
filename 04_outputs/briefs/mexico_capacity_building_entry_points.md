@@ -1,3 +1,5 @@
+> **Superseded preliminary narrative.** Source descriptions and quantitative claims in this historical report have not been revalidated after the 14 October 2026 correction. Use `00_project/normtrace_ihr_methodology_full.md` and `04_outputs/exports/audit_summary.json` for the current scope, withdrawals and pending review.
+
 # Mexico Capacity-Building Entry Points for Pandemic Governance
 
 **Document type:** NormTrace-IHR Level 3 Output — Capacity-Building Brief  

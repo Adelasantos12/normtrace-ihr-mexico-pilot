@@ -23,7 +23,7 @@ export default function MarkdownPage({ fileName, title, subtitle }: MarkdownPage
       </header>
 
       <div className="bg-white border border-slate-200 rounded-[2rem] shadow-sm overflow-hidden">
-        <div className="p-12 prose prose-slate max-w-none prose-headings:text-slate-900 prose-headings:font-black prose-p:text-slate-600 prose-p:leading-relaxed prose-li:text-slate-600 prose-blockquote:border-l-blue-600 prose-blockquote:bg-slate-50 prose-blockquote:p-6 prose-blockquote:rounded-r-xl">
+        <div className="p-5 sm:p-10 prose prose-slate max-w-none prose-headings:text-slate-900 prose-headings:font-black prose-p:text-slate-600 prose-p:leading-relaxed prose-li:text-slate-600 prose-blockquote:border-l-blue-600 prose-blockquote:bg-slate-50 prose-blockquote:p-6 prose-blockquote:rounded-r-xl">
            <ReactMarkdown>{content}</ReactMarkdown>
         </div>
       </div>
@@ -31,7 +31,7 @@ export default function MarkdownPage({ fileName, title, subtitle }: MarkdownPage
       <div className="p-6 bg-blue-50 border border-blue-100 rounded-2xl flex gap-4">
          <Info size={20} className="text-blue-500 shrink-0 mt-0.5" />
          <p className="text-xs text-blue-800 leading-relaxed italic">
-            This document is rendered from the audited data package. Methodology summary available in the Methodology section.
+            This document accompanies a targeted source-correction audit, not an expert-validated compliance assessment. Methodology summary available in the Methodology section.
          </p>
       </div>
     </div>

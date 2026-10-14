@@ -62,7 +62,7 @@ export default function ProvisionsExplorer() {
            Domestic Provisions Corpus
          </div>
          <h1 className="text-4xl sm:text-5xl font-bold text-slate-900">Legal Provisions Explorer</h1>
-         <p className="text-slate-500 mt-1">Granular extraction of IHR-relevant provisions from the Mexican legal corpus.</p>
+         <p className="text-slate-500 mt-1">Provision excerpts and preliminary annotations. Consult the cited source for complete, authoritative text; targeted corrections do not validate the entire corpus.</p>
       </header>
 
       <InstrumentsPanel instruments={corpusData} />

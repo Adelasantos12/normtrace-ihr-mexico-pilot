@@ -4,39 +4,60 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   content-and-build:
     runs-on: ubuntu-latest
-    env:
-      PYTHONHASHSEED: '0'
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Install reproducible pipeline dependencies
-        run: pip install networkx==3.2.1 pandas==2.2.3
-      - name: Regenerate network and SPAR context
+      - name: Install Python pipeline dependencies
+        run: pip install networkx==3.6.1 pandas==3.0.6
+      - name: Regenerate evidence, network and SPAR context
         run: |
+          python3 06_scripts/build_tables/build_audit_summary.py
           python3 06_scripts/build_tables/build_network.py
           python3 06_scripts/build_tables/spar_normtrace_bridge.py
-      - name: Validate sources, references, units and withdrawn claims
-        run: python3 06_scripts/validation/validate_content.py
+      - name: Validate source integrity, units and interpretive boundaries
+        run: |
+          python3 06_scripts/validation/validate_content.py
+          python3 -m unittest discover -s 06_scripts/validation -p 'test_*.py' -v
+      - name: Reject uncommitted generated data changes
+        run: |
+          git diff --exit-code -- 04_outputs 05_webapp/public/data
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
           cache: npm
           cache-dependency-path: 05_webapp/package-lock.json
-      - name: Install application dependencies
+      - name: Install and build web application
         working-directory: 05_webapp
-        run: npm ci
-      - name: Build application
+        run: npm ci && npm run build
+      - name: Install test browser
         working-directory: 05_webapp
-        run: npm run build
-      - name: Check committed derivations are reproducible
-        run: |
-          git diff --stat
-          git diff --quiet -- 04_outputs 05_webapp/public/data/derived || {
-            echo '::error::Generated data differs from the committed version. Rebuild, review and commit it.';
-            exit 1;
-          }
+        run: npx playwright install --with-deps chromium
+      - name: Test corrected data, routes, network interaction and mobile views
+        working-directory: 05_webapp
+        run: npx playwright test tests/audit_20261014.spec.ts --reporter=line
+      - name: Record dependency audit without unreviewed upgrades
+        if: always()
+        working-directory: 05_webapp
+        run: npm audit --json > dependency-audit.json || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: normtrace-validation-evidence
+          path: |
+            05_webapp/test-results
+            05_webapp/playwright-report
+            05_webapp/dependency-audit.json
+          retention-days: 14
