@@ -1,0 +1,136 @@
+name: Apply and validate legal evidence audit
+
+on:
+  push:
+    branches: [audit/legal-evidence-2026-10-14]
+    paths: ['.audit-bootstrap/**', '.github/workflows/apply-audit-20261014.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: legal-evidence-audit-20261014
+  cancel-in-progress: false
+
+jobs:
+  apply-validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify and apply source patch
+        run: |
+          python3 - <<'PY'
+          import base64, hashlib, json, lzma
+          from pathlib import Path
+          parts = sorted(Path('.audit-bootstrap').glob('part*.b64'))
+          assert len(parts) == 4, 'Expected four transport parts'
+          compressed = base64.b64decode(''.join(p.read_text().strip() for p in parts), validate=True)
+          assert hashlib.sha256(compressed).hexdigest() == '9a2a3dc5b743e82efe72aa3b250485c430fa523c04418962d6920c5f2be9ca35'
+          delta = json.loads(lzma.decompress(compressed))
+          prepared = []
+          for item in delta['files']:
+              p = Path(item['path'])
+              assert not p.is_absolute() and '..' not in p.parts
+              old = p.read_bytes() if p.exists() else None
+              actual = hashlib.sha256(old).hexdigest() if old is not None else None
+              assert actual == item['before_sha256'], f'Baseline changed: {p}'
+              lines = (old.decode('utf-8') if old is not None else '').splitlines(keepends=True)
+              for h in reversed(item['hunks']):
+                  lines[h['start']:h['end']] = h['text'].splitlines(keepends=True)
+              new = ''.join(lines).encode('utf-8')
+              assert hashlib.sha256(new).hexdigest() == item['after_sha256'], f'Patch integrity failed: {p}'
+              prepared.append((p, old, new))
+          for p, old, new in prepared:
+              if old is not None and p.suffix == '.md':
+                  archived = Path('99_archive/pre-audit-2026-10-14/documents') / p
+                  archived.parent.mkdir(parents=True, exist_ok=True)
+                  archived.write_bytes(old)
+              p.parent.mkdir(parents=True, exist_ok=True)
+              p.write_bytes(new)
+          print(f'Applied {len(prepared)} hash-verified source changes')
+          p = Path('05_webapp/src/pages/MappingExplorer.tsx')
+          text = p.read_text()
+          old = "  const [tab, setTab] = useState<Tab>('ihr2005');"
+          assert text.count(old) == 1
+          text = text.replace(old, old + "\n  const [query, setQuery] = useState('');")
+          old = '  const filtered = useMemo(() => joined.filter((r) =>\n'
+          assert text.count(old) == 1
+          text = text.replace(old, old + "    (!query.trim() || [r.obligation_id, r.mapping_id, r.title, r.obligation_text, r.domestic_norm, r.domestic_article, r.assessment_summary].join(' ').toLowerCase().includes(query.trim().toLowerCase())) &&\n")
+          text = text.replace('), [joined, filters]);', '), [joined, filters, query]);')
+          old = '            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">'
+          assert text.count(old) == 1
+          text = text.replace(old, '            <label className="block text-sm">Search records<input aria-label="Search records" placeholder="Search obligation ID, law or source text" value={query} onChange={e => setQuery(e.target.value)} className="mt-1 w-full rounded-lg border p-3" /></label>\n' + old)
+          p.write_text(text)
+          PY
+      - name: Install pipeline dependencies
+        run: pip install networkx pandas
+      - name: Apply source corrections and regenerate all data consumers
+        run: |
+          python3 06_scripts/maintenance/apply_legal_audit_20261014.py
+          python3 06_scripts/build_tables/build_audit_summary.py
+          python3 06_scripts/build_tables/build_network.py
+          python3 06_scripts/build_tables/spar_normtrace_bridge.py
+          python3 06_scripts/validation/validate_content.py
+          python3 -m unittest discover -s 06_scripts/validation -p 'test_*.py' -v
+      - name: Confirm reproducible generated files
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, subprocess
+          folders = ['04_outputs/figures','04_outputs/exports/data_package_v0_2_audit','05_webapp/public/data/derived']
+          def hashes():
+              return {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for f in folders for p in Path(f).rglob('*') if p.is_file()}
+          before = hashes()
+          for script in ['build_audit_summary.py','build_network.py','spar_normtrace_bridge.py']:
+              subprocess.run(['python3','06_scripts/build_tables/'+script], check=True)
+          assert before == hashes(), 'Generated artifacts are not deterministic'
+          print('PASS: repeat generation is byte-identical')
+          PY
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: 05_webapp/package-lock.json
+      - name: Install web dependencies and build
+        working-directory: 05_webapp
+        run: npm ci && npm run build
+      - name: Install Chromium
+        working-directory: 05_webapp
+        run: npx playwright install --with-deps chromium
+      - name: Test routes, source corrections, interaction and mobile layout
+        working-directory: 05_webapp
+        run: npx playwright test tests/audit_20261014.spec.ts --reporter=line
+      - name: Commit validated correction and regenerated data
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -rf .audit-bootstrap
+          git add 00_project 03_tables 04_outputs 05_webapp 06_scripts 99_archive README.md .github/workflows/validate.yml .audit-bootstrap
+          git reset -- 05_webapp/test-results 05_webapp/playwright-report
+          git commit -m "fix(audit): correct legal evidence, preserve provenance and align public diagnostics"
+          git push origin HEAD:${{ github.ref_name }}
+          git rev-parse HEAD > /tmp/audit-validated-commit.txt
+      - name: Package audit evidence
+        if: always()
+        run: |
+          mkdir -p /tmp/audit-evidence
+          git diff --stat > /tmp/audit-evidence/diff-stat.txt
+          git rev-parse HEAD > /tmp/audit-evidence/working-commit.txt
+          cp /tmp/audit-validated-commit.txt /tmp/audit-evidence/ 2>/dev/null || true
+          tar --exclude='.git' --exclude='node_modules' --exclude='dist' --exclude='test-results' --exclude='playwright-report' --exclude='.audit-bootstrap' -czf /tmp/audit-evidence/source.tar.gz .
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: normtrace-corrected-audit-evidence
+          path: |
+            /tmp/audit-evidence
+            05_webapp/test-results
+            05_webapp/playwright-report
+          retention-days: 14
