@@ -18,6 +18,7 @@ import NormDiagnostic from './pages/NormDiagnostic';
 import PoliticalBrain from './pages/PoliticalBrain';
 import SparBridge from './pages/SparBridge';
 import './App.css';
+import AuditTrail from './pages/AuditTrail';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route element={<Layout />}>
+          <Route path="/audit" element={<AuditTrail />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/pipeline" element={<NormPipeline />} />
           <Route path="/normative-hierarchy" element={<NormativeHierarchy />} />

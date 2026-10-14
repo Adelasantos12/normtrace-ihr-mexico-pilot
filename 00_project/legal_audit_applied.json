@@ -1,0 +1,2094 @@
+{
+  "audit_id": "0.2.0-audit.20261014",
+  "applied_date": "2026-10-14",
+  "baseline_mapping_sha256": "6b1a0fbc6e241d752fa81bb1a8722f13478a895d8ba892f6dabd661c045936f5",
+  "corrected_mapping_records": 31,
+  "added_provisions": 6,
+  "legal_validation": "not_completed",
+  "scope": "Targeted correction of source descriptions, references and unsupported public claims; not full legal validation.",
+  "changes": [
+    {
+      "record_id": "MEX_MAP_IHR2005_001_001",
+      "obligation_id": "IHR-OBL-001",
+      "changes": {
+        "match_type": {
+          "before": "direct statutory",
+          "after": "regulatory"
+        },
+        "anchoring_level": {
+          "before": "3",
+          "after": ""
+        },
+        "procedure_fit": {
+          "before": "partial",
+          "after": "review pending"
+        },
+        "coordination_fit": {
+          "before": "partial",
+          "after": "review pending"
+        },
+        "federalism_fit": {
+          "before": "partial",
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": "Art. 35 frac. XIX of the SS Interior Regulation explicitly designates the DGE as the RSI National Focal Point and assigns IHR Article 4 duties. Actor fit is strong. Procedure fit is partial: 24-hour availability, internal contact lists, and WHO communication protocols are not codified. Coordination with SRE (DGRI) and COFEPRIS is implied but not operationally specified.",
+          "after": "This provision forms part of the preliminary mapping for IHR-OBL-001. A conclusion that procedures are absent is not supported by this provision alone: NOM-017 §§6.6.3–6.6.4 assigns inter-level duties and refers to the IHR and an international surveillance manual; §8.1.4 defines a domestic immediate-notification chain. The scope of these provisions for this specific obligation and the referred manual remain to be reviewed."
+        },
+        "gap_type": {
+          "before": "procedural gap",
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": "high",
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": "preliminary",
+          "after": "requires_human_review"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: absence claim withheld; referral and domestic procedure located. This does not establish complete implementation. Instrument is a regulation, not a statute."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_001_002",
+      "obligation_id": "IHR-OBL-001",
+      "changes": {
+        "anchoring_level": {
+          "before": "3",
+          "after": ""
+        },
+        "procedure_fit": {
+          "before": "partial",
+          "after": "review pending"
+        },
+        "coordination_fit": {
+          "before": "partial",
+          "after": "review pending"
+        },
+        "federalism_fit": {
+          "before": "partial",
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": "NOM-017 numeral 6.6.1-6.6.2 reiterates and operationalises the DGE NFP designation at the technical-normative level, confirming DGE as the domestic focal point for PHEIC notifications. Provides operational specificity not found in the Reglamento Interior, but does not fully specify 24-hour communication protocols or backup NFP contacts.",
+          "after": "This provision forms part of the preliminary mapping for IHR-OBL-001. A conclusion that procedures are absent is not supported by this provision alone: NOM-017 §§6.6.3–6.6.4 assigns inter-level duties and refers to the IHR and an international surveillance manual; §8.1.4 defines a domestic immediate-notification chain. The scope of these provisions for this specific obligation and the referred manual remain to be reviewed."
+        },
+        "gap_type": {
+          "before": "procedural gap",
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": "high",
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": "preliminary",
+          "after": "requires_human_review"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: absence claim withheld; referral and domestic procedure located. This does not establish complete implementation."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_001_003",
+      "obligation_id": "IHR-OBL-001",
+      "changes": {
+        "anchoring_level": {
+          "before": "2",
+          "after": ""
+        },
+        "procedure_fit": {
+          "before": "weak",
+          "after": "review pending"
+        },
+        "coordination_fit": {
+          "before": "weak",
+          "after": "review pending"
+        },
+        "federalism_fit": {
+          "before": "not directly implicated",
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": "Art. 2 establishes DGE as a deconcentrated administrative unit of SS, providing the institutional-structural basis for the NFP designation in Art. 35. Anchoring is actor-level only; no IHR obligations or procedures are specified here.",
+          "after": "This provision forms part of the preliminary mapping for IHR-OBL-001. A conclusion that procedures are absent is not supported by this provision alone: NOM-017 §§6.6.3–6.6.4 assigns inter-level duties and refers to the IHR and an international surveillance manual; §8.1.4 defines a domestic immediate-notification chain. The scope of these provisions for this specific obligation and the referred manual remain to be reviewed."
+        },
+        "gap_type": {
+          "before": "procedural gap",
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": "medium",
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": "preliminary",
+          "after": "requires_human_review"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: absence claim withheld; referral and domestic procedure located. This does not establish complete implementation."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_002_001",
+      "obligation_id": "IHR-OBL-002",
+      "changes": {
+        "domestic_provision_id": {
+          "before": "MEX_PROV_LGS_ART134_001",
+          "after": "MEX_PROV_LGS_ART133_II_AUDIT20261014"
+        },
+        "domestic_article": {
+          "before": "Art. 134, fracciones I-XIV",
+          "after": "Art. 133, fracción II"
+        },
+        "anchoring_level": {
+          "before": "2",
+          "after": ""
+        },
+        "assessment_summary": {
+          "before": "Art. 134 establishes the SINAVE and assigns SS the mandate to develop epidemiological surveillance capacity at all levels. Fourteen fracciones cover detection, notification, laboratory confirmation, and information management. Does not explicitly reference IHR Annex 1 benchmarks or time-bound development milestones.",
+          "after": "Article 133(II), not Article 134, assigns the Health Ministry responsibility to establish and operate SINAVE. Article 134 separately covers surveillance, prevention and control of listed diseases. These provisions must be read with NOM-017 and relevant implementing documents before assessing the whole IHR obligation."
+        },
+        "gap_type": {
+          "before": "regulatory gap",
+          "after": "scope review pending"
+        },
+        "confidence_level": {
+          "before": "high",
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": "preliminary",
+          "after": "requires_human_review"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "relevant_statutory_provision_identified"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-LGS-133: incorrect article attribution corrected; no new compliance score assigned."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_002_003",
+      "obligation_id": "IHR-OBL-002",
+      "changes": {
+        "match_type": {
+          "before": "indirect statutory",
+          "after": "regulatory"
+        },
+        "review_status": {
+          "before": "preliminary",
+          "after": "preliminary_ai_assisted"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "inherited_preliminary"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "not_rechecked_in_this_audit"
+        },
+        "score_status": {
+          "before": null,
+          "after": "legacy_unaudited"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": ""
+        },
+        "audit_note": {
+          "before": null,
+          "after": " Instrument is a regulation, not a statute."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_003_001",
+      "obligation_id": "IHR-OBL-003",
+      "changes": {
+        "anchoring_level": {
+          "before": "1",
+          "after": ""
+        },
+        "procedure_fit": {
+          "before": "weak",
+          "after": "review pending"
+        },
+        "coordination_fit": {
+          "before": "weak",
+          "after": "review pending"
+        },
+        "federalism_fit": {
+          "before": "not directly implicated",
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": "The DGE is designated as NFP with IHR coordination duties, which would include extension-request reporting under Art. 5(2). However, no domestic provision explicitly establishes the procedure for requesting or reporting capacity-building extensions to WHO, nor assigns this duty formally.",
+          "after": "This provision forms part of the preliminary mapping for IHR-OBL-003. A conclusion that procedures are absent is not supported by this provision alone: NOM-017 §§6.6.3–6.6.4 assigns inter-level duties and refers to the IHR and an international surveillance manual; §8.1.4 defines a domestic immediate-notification chain. The scope of these provisions for this specific obligation and the referred manual remain to be reviewed."
+        },
+        "gap_type": {
+          "before": "procedural gap",
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": "medium",
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": "preliminary",
+          "after": "requires_human_review"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: absence claim withheld; referral and domestic procedure located. This does not establish complete implementation."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_003_002",
+      "obligation_id": "IHR-OBL-003",
+      "changes": {
+        "anchoring_level": {
+          "before": "1",
+          "after": ""
+        },
+        "procedure_fit": {
+          "before": "weak",
+          "after": "review pending"
+        },
+        "coordination_fit": {
+          "before": "weak",
+          "after": "review pending"
+        },
+        "federalism_fit": {
+          "before": "not directly implicated",
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": "Art. 136 establishes the general notification framework that underpins WHO reporting obligations. No specific provision requires Mexico to report capacity-building extensions or development plans to WHO under IHR Art. 5(2). Anchoring is contextual only.",
+          "after": "This provision forms part of the preliminary mapping for IHR-OBL-003. A conclusion that procedures are absent is not supported by this provision alone: NOM-017 §§6.6.3–6.6.4 assigns inter-level duties and refers to the IHR and an international surveillance manual; §8.1.4 defines a domestic immediate-notification chain. The scope of these provisions for this specific obligation and the referred manual remain to be reviewed."
+        },
+        "gap_type": {
+          "before": "full gap",
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": "low",
+          "after": "not assessed"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: absence claim withheld; referral and domestic procedure located. This does not establish complete implementation."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_004_001",
+      "obligation_id": "IHR-OBL-004",
+      "changes": {
+        "anchoring_level": {
+          "before": "3",
+          "after": ""
+        },
+        "procedure_fit": {
+          "before": "partial",
+          "after": "review pending"
+        },
+        "coordination_fit": {
+          "before": "partial",
+          "after": "review pending"
+        },
+        "federalism_fit": {
+          "before": "partial",
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": "Art. 136 frac. I explicitly mandates notification of epidemiological events to the SS (and by implication to WHO via the NFP). Fracciones II-IV cover cross-level and cross-sector notification. However, the Annex 2 decision instrument is not domestically codified, and the 24-hour notification clock is not reflected in this article.",
+          "after": "This provision forms part of the preliminary mapping for IHR-OBL-004. A conclusion that procedures are absent is not supported by this provision alone: NOM-017 §§6.6.3–6.6.4 assigns inter-level duties and refers to the IHR and an international surveillance manual; §8.1.4 defines a domestic immediate-notification chain. The scope of these provisions for this specific obligation and the referred manual remain to be reviewed."
+        },
+        "gap_type": {
+          "before": "procedural gap",
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": "high",
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": "preliminary",
+          "after": "requires_human_review"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: absence claim withheld; referral and domestic procedure located. This does not establish complete implementation."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_004_002",
+      "obligation_id": "IHR-OBL-004",
+      "changes": {
+        "match_type": {
+          "before": "direct statutory",
+          "after": "regulatory"
+        },
+        "anchoring_level": {
+          "before": "3",
+          "after": ""
+        },
+        "procedure_fit": {
+          "before": "partial",
+          "after": "review pending"
+        },
+        "coordination_fit": {
+          "before": "partial",
+          "after": "review pending"
+        },
+        "federalism_fit": {
+          "before": "not directly implicated",
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": "Art. 14 of the RLGS Sanidad Internacional explicitly assigns the duty to notify WHO of events meeting IHR notification criteria, referencing international obligations. This is the most direct regulatory anchor for the Art. 6(1) notification obligation. Procedure for Annex 2 risk assessment is not domestically specified.",
+          "after": "This provision forms part of the preliminary mapping for IHR-OBL-004. A conclusion that procedures are absent is not supported by this provision alone: NOM-017 §§6.6.3–6.6.4 assigns inter-level duties and refers to the IHR and an international surveillance manual; §8.1.4 defines a domestic immediate-notification chain. The scope of these provisions for this specific obligation and the referred manual remain to be reviewed."
+        },
+        "gap_type": {
+          "before": "procedural gap",
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": "high",
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": "preliminary",
+          "after": "requires_human_review"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: absence claim withheld; referral and domestic procedure located. This does not establish complete implementation. Instrument is a regulation, not a statute."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_004_003",
+      "obligation_id": "IHR-OBL-004",
+      "changes": {
+        "anchoring_level": {
+          "before": "2",
+          "after": ""
+        },
+        "procedure_fit": {
+          "before": "partial",
+          "after": "review pending"
+        },
+        "coordination_fit": {
+          "before": "partial",
+          "after": "review pending"
+        },
+        "federalism_fit": {
+          "before": "partial",
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": "NOM-017 numeral 6.6.1-6.6.2 confirms DGE as operational NFP for PHEIC notifications and formalises the WHO notification channel at technical-normative level. Does not specify the Annex 2 decision algorithm or 24-hour reporting clock.",
+          "after": "This provision forms part of the preliminary mapping for IHR-OBL-004. A conclusion that procedures are absent is not supported by this provision alone: NOM-017 §§6.6.3–6.6.4 assigns inter-level duties and refers to the IHR and an international surveillance manual; §8.1.4 defines a domestic immediate-notification chain. The scope of these provisions for this specific obligation and the referred manual remain to be reviewed."
+        },
+        "gap_type": {
+          "before": "procedural gap",
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": "high",
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": "preliminary",
+          "after": "requires_human_review"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: absence claim withheld; referral and domestic procedure located. This does not establish complete implementation."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_005_001",
+      "obligation_id": "IHR-OBL-005",
+      "changes": {
+        "anchoring_level": {
+          "before": "2",
+          "after": ""
+        },
+        "procedure_fit": {
+          "before": "partial",
+          "after": "review pending"
+        },
+        "coordination_fit": {
+          "before": "weak",
+          "after": "review pending"
+        },
+        "federalism_fit": {
+          "before": "not directly implicated",
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": "NFP designation implies ongoing WHO communication responsibilities. Art. 35 frac. XIX attributes IHR coordination duties to DGE as NFP, which encompasses the Art. 6(2) duty of continued reporting. However, no domestic rule specifies the frequency, format, or continuity of post-notification updates to WHO.",
+          "after": "This provision forms part of the preliminary mapping for IHR-OBL-005. A conclusion that procedures are absent is not supported by this provision alone: NOM-017 §§6.6.3–6.6.4 assigns inter-level duties and refers to the IHR and an international surveillance manual; §8.1.4 defines a domestic immediate-notification chain. The scope of these provisions for this specific obligation and the referred manual remain to be reviewed."
+        },
+        "gap_type": {
+          "before": "procedural gap",
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": "medium",
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": "preliminary",
+          "after": "requires_human_review"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: absence claim withheld; referral and domestic procedure located. This does not establish complete implementation."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_005_002",
+      "obligation_id": "IHR-OBL-005",
+      "changes": {
+        "anchoring_level": {
+          "before": "1",
+          "after": ""
+        },
+        "procedure_fit": {
+          "before": "weak",
+          "after": "review pending"
+        },
+        "coordination_fit": {
+          "before": "weak",
+          "after": "review pending"
+        },
+        "federalism_fit": {
+          "before": "not directly implicated",
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": "Art. 136 establishes the notification obligation but does not address the continuity duty (ongoing updates to WHO after initial notification). Contextual anchoring only.",
+          "after": "This provision forms part of the preliminary mapping for IHR-OBL-005. A conclusion that procedures are absent is not supported by this provision alone: NOM-017 §§6.6.3–6.6.4 assigns inter-level duties and refers to the IHR and an international surveillance manual; §8.1.4 defines a domestic immediate-notification chain. The scope of these provisions for this specific obligation and the referred manual remain to be reviewed."
+        },
+        "gap_type": {
+          "before": "procedural gap",
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": "medium",
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": "preliminary",
+          "after": "requires_human_review"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: absence claim withheld; referral and domestic procedure located. This does not establish complete implementation."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_007_001",
+      "obligation_id": "IHR-OBL-007",
+      "changes": {
+        "anchoring_level": {
+          "before": "1",
+          "after": ""
+        },
+        "procedure_fit": {
+          "before": "weak",
+          "after": "review pending"
+        },
+        "coordination_fit": {
+          "before": "partial",
+          "after": "review pending"
+        },
+        "federalism_fit": {
+          "before": "not directly implicated",
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": "Art. 33 fracs. I-IV assign DGRI the mandate to coordinate international health relations, including WHO engagement. This provides the institutional channel through which Art. 8 consultations would be conducted. No domestic provision specifically operationalises the Art. 8 duty to consult WHO about events not meeting notification thresholds.",
+          "after": "This provision forms part of the preliminary mapping for IHR-OBL-007. A conclusion that procedures are absent is not supported by this provision alone: NOM-017 §§6.6.3–6.6.4 assigns inter-level duties and refers to the IHR and an international surveillance manual; §8.1.4 defines a domestic immediate-notification chain. The scope of these provisions for this specific obligation and the referred manual remain to be reviewed."
+        },
+        "gap_type": {
+          "before": "procedural gap",
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": "medium",
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": "preliminary",
+          "after": "requires_human_review"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: absence claim withheld; referral and domestic procedure located. This does not establish complete implementation."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_007_002",
+      "obligation_id": "IHR-OBL-007",
+      "changes": {
+        "anchoring_level": {
+          "before": "1",
+          "after": ""
+        },
+        "procedure_fit": {
+          "before": "weak",
+          "after": "review pending"
+        },
+        "coordination_fit": {
+          "before": "weak",
+          "after": "review pending"
+        },
+        "federalism_fit": {
+          "before": "not directly implicated",
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": "The NFP designation in Art. 35 frac. XIX is the primary actor anchor for Art. 8 consultations. No procedure for non-notifiable event sharing with WHO is domestically codified.",
+          "after": "This provision forms part of the preliminary mapping for IHR-OBL-007. A conclusion that procedures are absent is not supported by this provision alone: NOM-017 §§6.6.3–6.6.4 assigns inter-level duties and refers to the IHR and an international surveillance manual; §8.1.4 defines a domestic immediate-notification chain. The scope of these provisions for this specific obligation and the referred manual remain to be reviewed."
+        },
+        "gap_type": {
+          "before": "procedural gap",
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": "medium",
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": "preliminary",
+          "after": "requires_human_review"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: absence claim withheld; referral and domestic procedure located. This does not establish complete implementation."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_008_001",
+      "obligation_id": "IHR-OBL-008",
+      "changes": {
+        "anchoring_level": {
+          "before": "1",
+          "after": ""
+        },
+        "procedure_fit": {
+          "before": "weak",
+          "after": "review pending"
+        },
+        "coordination_fit": {
+          "before": "weak",
+          "after": "review pending"
+        },
+        "federalism_fit": {
+          "before": "not directly implicated",
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": "The NFP (DGE) is the institutional actor designated to handle WHO verification requests including those arising from non-state source reports under Art. 9(2). However, no domestic norm codifies a 24-hour response procedure, internal escalation protocol, or cross-ministry coordination mechanism for this obligation.",
+          "after": "This provision forms part of the preliminary mapping for IHR-OBL-008. A conclusion that procedures are absent is not supported by this provision alone: NOM-017 §§6.6.3–6.6.4 assigns inter-level duties and refers to the IHR and an international surveillance manual; §8.1.4 defines a domestic immediate-notification chain. The scope of these provisions for this specific obligation and the referred manual remain to be reviewed."
+        },
+        "gap_type": {
+          "before": "procedural gap",
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": "low",
+          "after": "not assessed"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: absence claim withheld; referral and domestic procedure located. This does not establish complete implementation."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_009_001",
+      "obligation_id": "IHR-OBL-009",
+      "changes": {
+        "anchoring_level": {
+          "before": "1",
+          "after": ""
+        },
+        "procedure_fit": {
+          "before": "weak",
+          "after": "review pending"
+        },
+        "coordination_fit": {
+          "before": "weak",
+          "after": "review pending"
+        },
+        "federalism_fit": {
+          "before": "not directly implicated",
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": "DGE as NFP is the designated actor for WHO verification requests under Art. 10(2). No domestic provision specifies the 24-hour response window, internal authorization chain, or coordination procedure between DGE, SRE-DGRI, and relevant state health authorities.",
+          "after": "This provision forms part of the preliminary mapping for IHR-OBL-009. A conclusion that procedures are absent is not supported by this provision alone: NOM-017 §§6.6.3–6.6.4 assigns inter-level duties and refers to the IHR and an international surveillance manual; §8.1.4 defines a domestic immediate-notification chain. The scope of these provisions for this specific obligation and the referred manual remain to be reviewed."
+        },
+        "gap_type": {
+          "before": "procedural gap",
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": "low",
+          "after": "not assessed"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: absence claim withheld; referral and domestic procedure located. This does not establish complete implementation."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_010_003",
+      "obligation_id": "IHR-OBL-010",
+      "changes": {
+        "match_type": {
+          "before": "indirect statutory",
+          "after": "regulatory"
+        },
+        "review_status": {
+          "before": "preliminary",
+          "after": "preliminary_ai_assisted"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "inherited_preliminary"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "not_rechecked_in_this_audit"
+        },
+        "score_status": {
+          "before": null,
+          "after": "legacy_unaudited"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": ""
+        },
+        "audit_note": {
+          "before": null,
+          "after": " Instrument is a regulation, not a statute."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_014_002",
+      "obligation_id": "IHR-OBL-014",
+      "changes": {
+        "anchoring_level": {
+          "before": "2",
+          "after": ""
+        },
+        "procedure_fit": {
+          "before": "partial",
+          "after": "review pending"
+        },
+        "coordination_fit": {
+          "before": "partial",
+          "after": "review pending"
+        },
+        "federalism_fit": {
+          "before": "partial",
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": "NOM-017 numeral 6.6.1-6.6.2 specifically assigns DGE as NFP for PHEIC assessment and notification, providing direct regulatory anchoring for national-level event assessment. The 48-hour response window is not domestically codified.",
+          "after": "This provision forms part of the preliminary mapping for IHR-OBL-014. A conclusion that procedures are absent is not supported by this provision alone: NOM-017 §§6.6.3–6.6.4 assigns inter-level duties and refers to the IHR and an international surveillance manual; §8.1.4 defines a domestic immediate-notification chain. The scope of these provisions for this specific obligation and the referred manual remain to be reviewed."
+        },
+        "gap_type": {
+          "before": "procedural gap",
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": "high",
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": "preliminary",
+          "after": "requires_human_review"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: absence claim withheld; referral and domestic procedure located. This does not establish complete implementation."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_015_002",
+      "obligation_id": "IHR-OBL-015",
+      "changes": {
+        "match_type": {
+          "before": "indirect statutory",
+          "after": "regulatory"
+        },
+        "review_status": {
+          "before": "preliminary",
+          "after": "preliminary_ai_assisted"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "inherited_preliminary"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "not_rechecked_in_this_audit"
+        },
+        "score_status": {
+          "before": null,
+          "after": "legacy_unaudited"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": ""
+        },
+        "audit_note": {
+          "before": null,
+          "after": " Instrument is a regulation, not a statute."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_034_001",
+      "obligation_id": "IHR-OBL-034",
+      "changes": {
+        "domestic_provision_id": {
+          "before": "MEX_PROV_RISS2025_ART009_001",
+          "after": "MEX_PROV_RISI_ART031_AUDIT20261014"
+        },
+        "domestic_article": {
+          "before": "Art. 9",
+          "after": "Art. 31"
+        },
+        "anchoring_level": {
+          "before": "2",
+          "after": ""
+        },
+        "actor_fit": {
+          "before": "strong",
+          "after": "source identified"
+        },
+        "procedure_fit": {
+          "before": "partial",
+          "after": "source identified"
+        },
+        "coordination_fit": {
+          "before": "partial",
+          "after": "source identified"
+        },
+        "assessment_summary": {
+          "before": "Art. 9 RLGS lists required maritime health documentation and governs its use at designated ports, partially anchoring the Art. 37 Maritime Declaration of Health obligation. Specific form, content requirements, and submission timing for the Maritime Declaration are not specified in the domestic corpus.",
+          "after": "Article 31 specifies who must present the maritime health declaration to the Health Ministry on arrival and refers to the form established by the IHR. This corrects the prior omission based on Article 9 alone. Compatibility with the applicable IHR form and exceptions remains to be reviewed."
+        },
+        "gap_type": {
+          "before": "procedural gap",
+          "after": "update review pending"
+        },
+        "confidence_level": {
+          "before": "medium",
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": "preliminary",
+          "after": "requires_human_review"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "procedure_and_form_reference_identified"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-DECLARATIONS: responsible person, arrival trigger and form reference located; complete compliance not determined."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_035_001",
+      "obligation_id": "IHR-OBL-035",
+      "changes": {
+        "domestic_provision_id": {
+          "before": "MEX_PROV_RISS2025_ART009_001",
+          "after": "MEX_PROV_RISI_ART030_AUDIT20261014"
+        },
+        "domestic_article": {
+          "before": "Art. 9",
+          "after": "Art. 30"
+        },
+        "anchoring_level": {
+          "before": "2",
+          "after": ""
+        },
+        "actor_fit": {
+          "before": "strong",
+          "after": "source identified"
+        },
+        "procedure_fit": {
+          "before": "partial",
+          "after": "source identified"
+        },
+        "coordination_fit": {
+          "before": "partial",
+          "after": "source identified"
+        },
+        "assessment_summary": {
+          "before": "Art. 9 RLGS governs aviation health documentation at designated international airports, partially anchoring Art. 38 Aircraft General Declaration requirements. Art. 5 RLGS definition of aeronautical terms provides definitional anchoring. Specific form and completion requirements for the Health Part are not domestically codified.",
+          "after": "Article 30 specifies who must present the aircraft health declaration to the Health Ministry on arrival and refers to the form established by the IHR. This corrects the prior omission based on Article 9 alone. Compatibility with the applicable IHR form and exceptions remains to be reviewed."
+        },
+        "gap_type": {
+          "before": "procedural gap",
+          "after": "update review pending"
+        },
+        "confidence_level": {
+          "before": "medium",
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": "preliminary",
+          "after": "requires_human_review"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "procedure_and_form_reference_identified"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-DECLARATIONS: responsible person, arrival trigger and form reference located; complete compliance not determined."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_037_001",
+      "obligation_id": "IHR-OBL-037",
+      "changes": {
+        "domestic_provision_id": {
+          "before": "NO_MATCH_IDENTIFIED",
+          "after": "MEX_PROV_RISI_ART007_AUDIT20261014"
+        },
+        "domestic_norm": {
+          "before": "",
+          "after": "Reglamento de la Ley General de Salud en Materia de Sanidad Internacional"
+        },
+        "domestic_article": {
+          "before": "",
+          "after": "Art. 7o."
+        },
+        "match_type": {
+          "before": "no match identified",
+          "after": "regulatory"
+        },
+        "anchoring_level": {
+          "before": "0",
+          "after": ""
+        },
+        "actor_fit": {
+          "before": "none identified",
+          "after": "source identified"
+        },
+        "procedure_fit": {
+          "before": "none identified",
+          "after": "review pending"
+        },
+        "coordination_fit": {
+          "before": "none identified",
+          "after": "not directly implicated"
+        },
+        "enforcement_fit": {
+          "before": "none identified",
+          "after": "review pending"
+        },
+        "rights_safeguard_fit": {
+          "before": "not directly implicated",
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": "No domestic provision found that specifically prohibits charging travellers for personal health measures (examination, vaccination, prophylaxis, health documents) required under IHR Art. 40. The corpus does not contain a traveller health measures fee framework.",
+          "after": "Article 7 provides a general gratuity rule for international health services and documents, with exceptions. A relevant domestic provision is therefore identified. Its coverage and fee exceptions must be assessed against IHR Art. 40 and fiscal provisions before assigning an anchoring or compliance conclusion."
+        },
+        "gap_type": {
+          "before": "full gap",
+          "after": "scope review pending"
+        },
+        "confidence_level": {
+          "before": "high",
+          "after": "not assessed"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "candidate_provision_identified_scope_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-FEES-040: NO_MATCH_IDENTIFIED withdrawn. Unscored is not zero; legacy value retained in legacy_anchoring_level."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_038_001",
+      "obligation_id": "IHR-OBL-038",
+      "changes": {
+        "match_type": {
+          "before": "contextual constitutional",
+          "after": "indirect statutory"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "inherited_preliminary"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "not_rechecked_in_this_audit"
+        },
+        "score_status": {
+          "before": null,
+          "after": "legacy_unaudited"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": ""
+        },
+        "audit_note": {
+          "before": null,
+          "after": " Customs Law is statutory, not constitutional."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_041_001",
+      "obligation_id": "IHR-OBL-041",
+      "changes": {
+        "assessment_summary": {
+          "before": "The NFP (DGE) is the institutional actor through which Art. 43(3)+(5) reporting obligations to WHO would be discharged. No domestic provision establishes a procedure for notifying WHO of additional health measures implemented beyond IHR requirements, nor for the 48-hour reporting window under Art. 43(3).",
+          "after": "The NFP (DGE) is the institutional actor through which Art. 43(3)+(5) reporting obligations to WHO would be discharged. No domestic provision establishes a procedure for notifying WHO of additional health measures implemented beyond IHR requirements, nor for the 48-hour notification window under Art. 43(5)."
+        },
+        "audit_status": {
+          "before": null,
+          "after": "inherited_preliminary"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "not_rechecked_in_this_audit"
+        },
+        "score_status": {
+          "before": null,
+          "after": "legacy_unaudited"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": ""
+        },
+        "audit_note": {
+          "before": null,
+          "after": ""
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_045_001",
+      "obligation_id": "IHR-OBL-045",
+      "changes": {
+        "match_type": {
+          "before": "indirect statutory",
+          "after": "regulatory"
+        },
+        "audit_status": {
+          "before": null,
+          "after": "inherited_preliminary"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "not_rechecked_in_this_audit"
+        },
+        "score_status": {
+          "before": null,
+          "after": "legacy_unaudited"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": ""
+        },
+        "audit_note": {
+          "before": null,
+          "after": " Instrument is a regulation, not a statute."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_001_AUDIT_663",
+      "obligation_id": "IHR-OBL-001",
+      "changes": {
+        "mapping_id": {
+          "before": null,
+          "after": "MEX_MAP_IHR2005_001_AUDIT_663"
+        },
+        "obligation_id": {
+          "before": null,
+          "after": "IHR-OBL-001"
+        },
+        "domestic_provision_id": {
+          "before": null,
+          "after": "MEX_PROV_NOM017_SEC663_664_AUDIT20261014"
+        },
+        "domestic_norm": {
+          "before": null,
+          "after": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica"
+        },
+        "domestic_article": {
+          "before": null,
+          "after": "Numerales 6.6.3–6.6.4"
+        },
+        "match_type": {
+          "before": null,
+          "after": "regulatory"
+        },
+        "anchoring_level": {
+          "before": null,
+          "after": ""
+        },
+        "actor_fit": {
+          "before": null,
+          "after": "source identified"
+        },
+        "procedure_fit": {
+          "before": null,
+          "after": "source identified"
+        },
+        "coordination_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "enforcement_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "rights_safeguard_fit": {
+          "before": null,
+          "after": "not assessed"
+        },
+        "federalism_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": null,
+          "after": "International surveillance responsibility is allocated across technical-administrative levels. The norm refers to the IHR and the international surveillance manual; the referred manual must be examined before evaluating complete procedures."
+        },
+        "gap_type": {
+          "before": null,
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": null,
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": null,
+          "after": "requires_human_review"
+        },
+        "reviewer_notes": {
+          "before": null,
+          "after": ""
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_added"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: supplemental correspondence, not a compliance determination."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_001_AUDIT_814",
+      "obligation_id": "IHR-OBL-001",
+      "changes": {
+        "mapping_id": {
+          "before": null,
+          "after": "MEX_MAP_IHR2005_001_AUDIT_814"
+        },
+        "obligation_id": {
+          "before": null,
+          "after": "IHR-OBL-001"
+        },
+        "domestic_provision_id": {
+          "before": null,
+          "after": "MEX_PROV_NOM017_SEC814_AUDIT20261014"
+        },
+        "domestic_norm": {
+          "before": null,
+          "after": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica"
+        },
+        "domestic_article": {
+          "before": null,
+          "after": "Numeral 8.1.4"
+        },
+        "match_type": {
+          "before": null,
+          "after": "regulatory"
+        },
+        "anchoring_level": {
+          "before": null,
+          "after": ""
+        },
+        "actor_fit": {
+          "before": null,
+          "after": "source identified"
+        },
+        "procedure_fit": {
+          "before": null,
+          "after": "source identified"
+        },
+        "coordination_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "enforcement_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "rights_safeguard_fit": {
+          "before": null,
+          "after": "not assessed"
+        },
+        "federalism_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": null,
+          "after": "NOM-017 §8.1.4 specifies a domestic chain for immediate notification up to DGE before 24 hours from knowledge. This is distinct from IHR Art. 6 notification to WHO within 24 hours of assessment. The entire international reporting obligation remains under review."
+        },
+        "gap_type": {
+          "before": null,
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": null,
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": null,
+          "after": "requires_human_review"
+        },
+        "reviewer_notes": {
+          "before": null,
+          "after": ""
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_added"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: supplemental correspondence, not a compliance determination."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_004_AUDIT_663",
+      "obligation_id": "IHR-OBL-004",
+      "changes": {
+        "mapping_id": {
+          "before": null,
+          "after": "MEX_MAP_IHR2005_004_AUDIT_663"
+        },
+        "obligation_id": {
+          "before": null,
+          "after": "IHR-OBL-004"
+        },
+        "domestic_provision_id": {
+          "before": null,
+          "after": "MEX_PROV_NOM017_SEC663_664_AUDIT20261014"
+        },
+        "domestic_norm": {
+          "before": null,
+          "after": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica"
+        },
+        "domestic_article": {
+          "before": null,
+          "after": "Numerales 6.6.3–6.6.4"
+        },
+        "match_type": {
+          "before": null,
+          "after": "regulatory"
+        },
+        "anchoring_level": {
+          "before": null,
+          "after": ""
+        },
+        "actor_fit": {
+          "before": null,
+          "after": "source identified"
+        },
+        "procedure_fit": {
+          "before": null,
+          "after": "source identified"
+        },
+        "coordination_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "enforcement_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "rights_safeguard_fit": {
+          "before": null,
+          "after": "not assessed"
+        },
+        "federalism_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": null,
+          "after": "International surveillance responsibility is allocated across technical-administrative levels. The norm refers to the IHR and the international surveillance manual; the referred manual must be examined before evaluating complete procedures."
+        },
+        "gap_type": {
+          "before": null,
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": null,
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": null,
+          "after": "requires_human_review"
+        },
+        "reviewer_notes": {
+          "before": null,
+          "after": ""
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_added"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: supplemental correspondence, not a compliance determination."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_004_AUDIT_814",
+      "obligation_id": "IHR-OBL-004",
+      "changes": {
+        "mapping_id": {
+          "before": null,
+          "after": "MEX_MAP_IHR2005_004_AUDIT_814"
+        },
+        "obligation_id": {
+          "before": null,
+          "after": "IHR-OBL-004"
+        },
+        "domestic_provision_id": {
+          "before": null,
+          "after": "MEX_PROV_NOM017_SEC814_AUDIT20261014"
+        },
+        "domestic_norm": {
+          "before": null,
+          "after": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica"
+        },
+        "domestic_article": {
+          "before": null,
+          "after": "Numeral 8.1.4"
+        },
+        "match_type": {
+          "before": null,
+          "after": "regulatory"
+        },
+        "anchoring_level": {
+          "before": null,
+          "after": ""
+        },
+        "actor_fit": {
+          "before": null,
+          "after": "source identified"
+        },
+        "procedure_fit": {
+          "before": null,
+          "after": "source identified"
+        },
+        "coordination_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "enforcement_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "rights_safeguard_fit": {
+          "before": null,
+          "after": "not assessed"
+        },
+        "federalism_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": null,
+          "after": "NOM-017 §8.1.4 specifies a domestic chain for immediate notification up to DGE before 24 hours from knowledge. This is distinct from IHR Art. 6 notification to WHO within 24 hours of assessment. The entire international reporting obligation remains under review."
+        },
+        "gap_type": {
+          "before": null,
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": null,
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": null,
+          "after": "requires_human_review"
+        },
+        "reviewer_notes": {
+          "before": null,
+          "after": ""
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_added"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: supplemental correspondence, not a compliance determination."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_014_AUDIT_663",
+      "obligation_id": "IHR-OBL-014",
+      "changes": {
+        "mapping_id": {
+          "before": null,
+          "after": "MEX_MAP_IHR2005_014_AUDIT_663"
+        },
+        "obligation_id": {
+          "before": null,
+          "after": "IHR-OBL-014"
+        },
+        "domestic_provision_id": {
+          "before": null,
+          "after": "MEX_PROV_NOM017_SEC663_664_AUDIT20261014"
+        },
+        "domestic_norm": {
+          "before": null,
+          "after": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica"
+        },
+        "domestic_article": {
+          "before": null,
+          "after": "Numerales 6.6.3–6.6.4"
+        },
+        "match_type": {
+          "before": null,
+          "after": "regulatory"
+        },
+        "anchoring_level": {
+          "before": null,
+          "after": ""
+        },
+        "actor_fit": {
+          "before": null,
+          "after": "source identified"
+        },
+        "procedure_fit": {
+          "before": null,
+          "after": "source identified"
+        },
+        "coordination_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "enforcement_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "rights_safeguard_fit": {
+          "before": null,
+          "after": "not assessed"
+        },
+        "federalism_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": null,
+          "after": "International surveillance responsibility is allocated across technical-administrative levels. The norm refers to the IHR and the international surveillance manual; the referred manual must be examined before evaluating complete procedures."
+        },
+        "gap_type": {
+          "before": null,
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": null,
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": null,
+          "after": "requires_human_review"
+        },
+        "reviewer_notes": {
+          "before": null,
+          "after": ""
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_added"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: supplemental correspondence, not a compliance determination."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_014_AUDIT_814",
+      "obligation_id": "IHR-OBL-014",
+      "changes": {
+        "mapping_id": {
+          "before": null,
+          "after": "MEX_MAP_IHR2005_014_AUDIT_814"
+        },
+        "obligation_id": {
+          "before": null,
+          "after": "IHR-OBL-014"
+        },
+        "domestic_provision_id": {
+          "before": null,
+          "after": "MEX_PROV_NOM017_SEC814_AUDIT20261014"
+        },
+        "domestic_norm": {
+          "before": null,
+          "after": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica"
+        },
+        "domestic_article": {
+          "before": null,
+          "after": "Numeral 8.1.4"
+        },
+        "match_type": {
+          "before": null,
+          "after": "regulatory"
+        },
+        "anchoring_level": {
+          "before": null,
+          "after": ""
+        },
+        "actor_fit": {
+          "before": null,
+          "after": "source identified"
+        },
+        "procedure_fit": {
+          "before": null,
+          "after": "source identified"
+        },
+        "coordination_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "enforcement_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "rights_safeguard_fit": {
+          "before": null,
+          "after": "not assessed"
+        },
+        "federalism_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": null,
+          "after": "NOM-017 §8.1.4 specifies a domestic chain for immediate notification up to DGE before 24 hours from knowledge. This is distinct from IHR Art. 6 notification to WHO within 24 hours of assessment. The entire international reporting obligation remains under review."
+        },
+        "gap_type": {
+          "before": null,
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": null,
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": null,
+          "after": "requires_human_review"
+        },
+        "reviewer_notes": {
+          "before": null,
+          "after": ""
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_added"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "AUD-NOM-017: supplemental correspondence, not a compliance determination."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      }
+    }
+  ],
+  "nia_status": {
+    "status": "designation_or_establishment_reported",
+    "reported_as_of": "2026-07-15",
+    "report_date": "2026-08-21",
+    "source": "https://iris.paho.org/bitstreams/7c461167-1eae-4e58-ad9c-d8ba8338c9dc/download",
+    "locator": "CD63/INF/1 paragraph 17",
+    "authority_name": null,
+    "domestic_instrument": null,
+    "interpretation": "PAHO report confirms designation/establishment; identity, mandate and domestic act remain to be located."
+  },
+  "retired_claims": [
+    "18 obligations with confirmed procedural/coordination gaps",
+    "7 confirmed federal-state gaps",
+    "2 complete legal pathways",
+    "6 instruments lacking safeguards",
+    "SPAR minus NormTrace as a preparedness divergence"
+  ],
+  "sources": [
+    {
+      "id": "NOM-017",
+      "url": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+      "locators": "6.6.3, 6.6.4, 8.1.4"
+    },
+    {
+      "id": "LGS",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "locators": "133(II), 134"
+    },
+    {
+      "id": "RLGS-SI",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf",
+      "locators": "7, 10, 30, 31"
+    },
+    {
+      "id": "PAHO-NIA",
+      "url": "https://iris.paho.org/bitstreams/7c461167-1eae-4e58-ad9c-d8ba8338c9dc/download",
+      "locators": "paragraph 17"
+    },
+    {
+      "id": "SPAR-2021",
+      "url": "https://cdn.who.int/media/docs/default-source/health-security-preparedness/cap/spar/9789240040120-eng-new.pdf",
+      "locators": "C1.1, C2.1"
+    },
+    {
+      "id": "IHR",
+      "url": "https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf",
+      "locators": "4, 6, 37, 38, 40"
+    }
+  ]
+}

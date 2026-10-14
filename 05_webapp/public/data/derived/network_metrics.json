@@ -1,212 +1,302 @@
 {
-  "generated_by": "06_scripts/build_tables/build_network.py",
-  "network": {
-    "modes": [
-      "instrument",
-      "obligation"
-    ],
-    "n_instruments": 9,
-    "n_obligations": 45,
-    "n_edges": 68,
-    "density": 0.168
-  },
-  "instrument_degree_ranked": [
-    {
-      "instrument": "LGS",
-      "obligations_anchored": 21,
-      "degree_norm": 0.467,
-      "betweenness": 0.5281
-    },
-    {
-      "instrument": "RLGS-SI",
-      "obligations_anchored": 19,
-      "degree_norm": 0.422,
-      "betweenness": 0.4457
-    },
-    {
-      "instrument": "RI-SS-2025",
-      "obligations_anchored": 11,
-      "degree_norm": 0.244,
-      "betweenness": 0.2119
-    },
-    {
-      "instrument": "NOM-017",
-      "obligations_anchored": 6,
-      "degree_norm": 0.133,
-      "betweenness": 0.042
-    },
-    {
-      "instrument": "CPEUM",
-      "obligations_anchored": 5,
-      "degree_norm": 0.111,
-      "betweenness": 0.0813
-    },
-    {
-      "instrument": "Ley Aduanera",
-      "obligations_anchored": 3,
-      "degree_norm": 0.067,
-      "betweenness": 0.0354
-    },
-    {
-      "instrument": "LGPDPPSO",
-      "obligations_anchored": 1,
-      "degree_norm": 0.022,
-      "betweenness": 0.0
-    },
-    {
-      "instrument": "LOAPF",
-      "obligations_anchored": 1,
-      "degree_norm": 0.022,
-      "betweenness": 0.0
-    },
-    {
-      "instrument": "RLGS-Inv",
-      "obligations_anchored": 1,
-      "degree_norm": 0.022,
-      "betweenness": 0.0
-    }
+  "actor_entries_without_matching_network_instrument": [
+    "MEX_ACTOR_CENAPRECE_001"
   ],
   "actor_reach_ranked": [
     {
+      "actor": "Autoridades portuarias y aeroportuarias (puntos de entrada)",
+      "actor_id": "MEX_ACTOR_PORTS_AIRPORTS_001",
+      "association_only": true,
+      "instruments": [
+        "LGS",
+        "RLGS-SI"
+      ],
+      "inventory_review_status": "preliminary_inventory_not_full_mandate_validation",
+      "n_instruments": 2,
+      "obligation_reach": 35
+    },
+    {
       "actor": "Secretaría de Salud",
+      "actor_id": "MEX_ACTOR_SS_001",
+      "association_only": true,
       "instruments": [
         "CPEUM",
         "LGS",
-        "LOAPF"
+        "LOAPF",
+        "RI-SS-2025"
       ],
-      "n_instruments": 3,
-      "obligation_reach": 24
+      "inventory_review_status": "preliminary_inventory_not_full_mandate_validation",
+      "n_instruments": 4,
+      "obligation_reach": 29
     },
     {
       "actor": "Consejo de Salubridad General",
+      "actor_id": "MEX_ACTOR_CSG_001",
+      "association_only": true,
       "instruments": [
         "CPEUM",
         "LGS"
       ],
+      "inventory_review_status": "preliminary_inventory_not_full_mandate_validation",
       "n_instruments": 2,
       "obligation_reach": 23
     },
     {
       "actor": "Entidades federativas (gobiernos estatales — 32 entidades)",
+      "actor_id": "MEX_ACTOR_STATES_001",
+      "association_only": true,
       "instruments": [
         "CPEUM",
         "LGS"
       ],
+      "inventory_review_status": "preliminary_inventory_not_full_mandate_validation",
       "n_instruments": 2,
       "obligation_reach": 23
     },
     {
-      "actor": "Autoridades portuarias y aeroportuarias (puntos de entrada)",
+      "actor": "Comisión Federal para la Protección contra Riesgos Sanitarios (COFEPRIS)",
+      "actor_id": "MEX_ACTOR_COFEPRIS_001",
+      "association_only": true,
       "instruments": [
         "LGS"
       ],
+      "inventory_review_status": "preliminary_inventory_not_full_mandate_validation",
       "n_instruments": 1,
       "obligation_reach": 21
     },
     {
-      "actor": "Comisión Federal para la Protección contra Riesgos Sanitarios (COFEPRIS)",
+      "actor": "Instituto Nacional de Migración",
+      "actor_id": "MEX_ACTOR_INM_001",
+      "association_only": true,
       "instruments": [
-        "LGS"
+        "LOAPF",
+        "RLGS-SI"
       ],
-      "n_instruments": 1,
+      "inventory_review_status": "preliminary_inventory_not_full_mandate_validation",
+      "n_instruments": 2,
       "obligation_reach": 21
+    },
+    {
+      "actor": "Dirección General de Epidemiología",
+      "actor_id": "MEX_ACTOR_DGE_001",
+      "association_only": true,
+      "instruments": [
+        "NOM-017",
+        "RI-SS-2025"
+      ],
+      "inventory_review_status": "preliminary_inventory_not_full_mandate_validation",
+      "n_instruments": 2,
+      "obligation_reach": 15
+    },
+    {
+      "actor": "Dirección General de Relaciones Internacionales (DGRI)",
+      "actor_id": "MEX_ACTOR_DGRI_001",
+      "association_only": true,
+      "instruments": [
+        "RI-SS-2025"
+      ],
+      "inventory_review_status": "preliminary_inventory_not_full_mandate_validation",
+      "n_instruments": 1,
+      "obligation_reach": 11
+    },
+    {
+      "actor": "Dirección General del Servicio Nacional de Salud Pública (SNSP)",
+      "actor_id": "MEX_ACTOR_SNSP_001",
+      "association_only": true,
+      "instruments": [
+        "RI-SS-2025"
+      ],
+      "inventory_review_status": "preliminary_inventory_not_full_mandate_validation",
+      "n_instruments": 1,
+      "obligation_reach": 11
     },
     {
       "actor": "Secretaría de Relaciones Exteriores",
+      "actor_id": "MEX_ACTOR_SRE_001",
+      "association_only": true,
       "instruments": [
         "CPEUM",
         "LOAPF"
       ],
+      "inventory_review_status": "preliminary_inventory_not_full_mandate_validation",
       "n_instruments": 2,
       "obligation_reach": 6
     },
     {
       "actor": "Auditoría Superior de la Federación",
+      "actor_id": "MEX_ACTOR_ASF_001",
+      "association_only": true,
       "instruments": [
         "CPEUM"
       ],
+      "inventory_review_status": "preliminary_inventory_not_full_mandate_validation",
       "n_instruments": 1,
       "obligation_reach": 5
     },
     {
       "actor": "Comisión Nacional de los Derechos Humanos (CNDH)",
+      "actor_id": "MEX_ACTOR_CNDH_001",
+      "association_only": true,
       "instruments": [
         "CPEUM"
       ],
+      "inventory_review_status": "preliminary_inventory_not_full_mandate_validation",
       "n_instruments": 1,
       "obligation_reach": 5
     },
     {
       "actor": "Congreso de la Unión",
+      "actor_id": "MEX_ACTOR_CONGRESS_001",
+      "association_only": true,
       "instruments": [
         "CPEUM"
       ],
+      "inventory_review_status": "preliminary_inventory_not_full_mandate_validation",
       "n_instruments": 1,
       "obligation_reach": 5
     },
     {
       "actor": "Cámara de Diputados",
+      "actor_id": "MEX_ACTOR_CHAMBER_DEPUTIES_001",
+      "association_only": true,
       "instruments": [
         "CPEUM"
       ],
+      "inventory_review_status": "preliminary_inventory_not_full_mandate_validation",
       "n_instruments": 1,
       "obligation_reach": 5
     },
     {
-      "actor": "Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI) / Transparencia para el Pueblo",
+      "actor": "INAI (historical entry; successor responsibilities require separate review)",
+      "actor_id": "MEX_ACTOR_INAI_001",
+      "association_only": true,
       "instruments": [
         "CPEUM",
         "LGPDPPSO"
       ],
+      "inventory_review_status": "historical_actor_succession_review_pending",
       "n_instruments": 2,
       "obligation_reach": 5
     },
     {
       "actor": "Senado de la República",
+      "actor_id": "MEX_ACTOR_SENATE_001",
+      "association_only": true,
       "instruments": [
         "CPEUM"
       ],
+      "inventory_review_status": "preliminary_inventory_not_full_mandate_validation",
       "n_instruments": 1,
       "obligation_reach": 5
     },
     {
-      "actor": "Instituto Nacional de Migración",
+      "actor": "Secretaría de Gobernación",
+      "actor_id": "MEX_ACTOR_SEGOB_001",
+      "association_only": true,
       "instruments": [
         "LOAPF"
       ],
+      "inventory_review_status": "preliminary_inventory_not_full_mandate_validation",
       "n_instruments": 1,
       "obligation_reach": 1
     },
     {
-      "actor": "Secretaría de Gobernación",
-      "instruments": [
-        "LOAPF"
-      ],
-      "n_instruments": 1,
-      "obligation_reach": 1
+      "actor": "Centro Nacional de Programas Preventivos y Control de Enfermedades (CENAPRECE)",
+      "actor_id": "MEX_ACTOR_CENAPRECE_001",
+      "association_only": true,
+      "instruments": [],
+      "inventory_review_status": "preliminary_inventory_not_full_mandate_validation",
+      "n_instruments": 0,
+      "obligation_reach": 0
     }
   ],
   "communities": {
-    "n": 5,
-    "modularity": 0.286,
+    "modularity": 0.293,
+    "n": 4,
     "sizes": [
       22,
-      20,
-      1,
+      21,
       1,
       1
     ]
   },
   "cug_test": {
-    "measure": "instrument-degree centralisation",
-    "observed": 0.6402,
-    "random_mean": 0.3282,
+    "interpretation": "Descriptive random-graph comparison; not a test of institutional power, resilience or coordination.",
+    "measure": "descriptive instrument-degree concentration",
+    "observed": 0.6349,
     "p_value_ge_random": 0.0,
-    "interpretation": "centralisation significantly ABOVE random"
+    "random_mean": 0.3284
   },
-  "isolated_obligations": [
-    "IHR-OBL-011",
-    "IHR-OBL-037"
+  "generated_by": "06_scripts/build_tables/build_network.py",
+  "instrument_degree_ranked": [
+    {
+      "betweenness": 0.5431,
+      "degree_norm": 0.467,
+      "instrument": "LGS",
+      "obligations_anchored": 21
+    },
+    {
+      "betweenness": 0.4815,
+      "degree_norm": 0.444,
+      "instrument": "RLGS-SI",
+      "obligations_anchored": 20
+    },
+    {
+      "betweenness": 0.2163,
+      "degree_norm": 0.244,
+      "instrument": "RI-SS-2025",
+      "obligations_anchored": 11
+    },
+    {
+      "betweenness": 0.0435,
+      "degree_norm": 0.133,
+      "instrument": "NOM-017",
+      "obligations_anchored": 6
+    },
+    {
+      "betweenness": 0.0831,
+      "degree_norm": 0.111,
+      "instrument": "CPEUM",
+      "obligations_anchored": 5
+    },
+    {
+      "betweenness": 0.0361,
+      "degree_norm": 0.067,
+      "instrument": "Ley Aduanera",
+      "obligations_anchored": 3
+    },
+    {
+      "betweenness": 0.0,
+      "degree_norm": 0.022,
+      "instrument": "LGPDPPSO",
+      "obligations_anchored": 1
+    },
+    {
+      "betweenness": 0.0,
+      "degree_norm": 0.022,
+      "instrument": "LOAPF",
+      "obligations_anchored": 1
+    },
+    {
+      "betweenness": 0.0,
+      "degree_norm": 0.022,
+      "instrument": "RLGS-Inv",
+      "obligations_anchored": 1
+    }
   ],
-  "provenance_note": "All figures computed from mexico_ihr2005_mapping.csv. Supersedes hard-coded degree values previously in ActorsExplorer.tsx. n_obligations always equals the full IHR-2005_obligations_domestic-anchoring.csv corpus (45): obligations with no anchoring row in the mapping (full gap / legal silence) are included as isolated, zero-degree nodes -- see isolated_obligations -- rather than dropped, so the network's coverage figure never falls below the corpus total and its worst findings stay visible instead of vanishing. n_instruments (9) legitimately covers only instruments that anchor at least one of these 45 obligations; the broader 18-instrument legal corpus includes instruments scoped to the Pandemic Agreement, PABS, or general administrative matters outside IHR 2005, which this IHR-anchoring network does not include."
+  "isolated_obligations": [
+    "IHR-OBL-011"
+  ],
+  "network": {
+    "density": 0.17,
+    "modes": [
+      "instrument",
+      "obligation"
+    ],
+    "n_edges": 69,
+    "n_instruments": 9,
+    "n_obligations": 45
+  },
+  "provenance_note": "All 45 registry obligations remain visible. Links record candidate provisions, including unscored and review-pending records. Isolated nodes indicate missing candidates in this dataset, not established legal silence. Actor reach counts documentary associations through inventory-listed instruments; it is not competence, amendment power, actual exchange, or performance. Edge width is correspondence count, never legal strength. Individually sourced duties are in mexico_institutional_relations.csv.",
+  "semantics_version": "documentary-network-20261014"
 }

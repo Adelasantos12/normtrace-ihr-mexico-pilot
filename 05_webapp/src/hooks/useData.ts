@@ -24,7 +24,7 @@ export function useCsvData<T>(fileName: string) {
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    fetch(`/data/${fileName}`)
+    fetch(`/data/${fileName}`, { cache: 'no-cache' })
       .then((r) => {
         if (!r.ok) throw new Error(`Failed to fetch ${fileName}`);
         return r.text();
@@ -43,7 +43,7 @@ export function useJsonData<T>(fileName: string) {
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    fetch(`/data/${fileName}`)
+    fetch(`/data/${fileName}`, { cache: 'no-cache' })
       .then((r) => {
         if (!r.ok) throw new Error(`Failed to fetch ${fileName}`);
         return r.json();
@@ -62,7 +62,7 @@ export function useMarkdownData(fileName: string) {
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    fetch(`/data/markdown/${fileName}`)
+    fetch(`/data/markdown/${fileName}`, { cache: 'no-cache' })
       .then((r) => {
         if (!r.ok) throw new Error(`Failed to fetch ${fileName}`);
         return r.text();

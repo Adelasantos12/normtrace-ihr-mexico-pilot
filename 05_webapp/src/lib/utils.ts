@@ -17,15 +17,8 @@ export function getStatusLabel(status: string) {
 }
 
 export function getAnchoringLabel(level: string | number) {
-  const labels: Record<string, string> = {
-    '0': 'No identifiable anchoring',
-    '1': 'Indirect contextual anchoring',
-    '2': 'Administrative/operational anchoring',
-    '3': 'Partial statutory anchoring',
-    '4': 'Strong statutory-administrative anchoring',
-    '5': 'Integrated implementation anchoring'
-  };
-  return labels[String(level)] || `Level ${level}`;
+  if (level === '' || level === null || level === undefined) return 'Unscored — review pending';
+  return `Legacy L${level} — unvalidated pilot coding`;
 }
 
 export function getConfidenceColor(level: string) {
