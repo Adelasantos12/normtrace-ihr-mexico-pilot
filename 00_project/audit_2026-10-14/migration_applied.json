@@ -1,0 +1,128 @@
+{
+  "payload_sha256": "977463cfeb63b3f72b2f95b4a196b3354674d50ede4213938d75a3397768347a",
+  "base_commit": "518910d558f41640cc3802a95bd09c575229cc36",
+  "files": [
+    {
+      "path": "00_project/audit_2026-10-14/README.md",
+      "sha256": "3fe58ac4cc01999090ed5a0fca49c5e5bf07d7b6babf7ae3c9d67a5ca0d081cd"
+    },
+    {
+      "path": "00_project/audit_2026-10-14/baseline.json",
+      "sha256": "ba92e31b89e9d02aa485b697b189c9cf00b83ce28dc76ddf6369d01109805bc7"
+    },
+    {
+      "path": "00_project/audit_2026-10-14/issues.json",
+      "sha256": "c5db68e1e311a2ebc3702700b0257d8c5fb7990d64a09237edef47cc633e8b61"
+    },
+    {
+      "path": "00_project/audit_2026-10-14/nia_status.json",
+      "sha256": "eb505fce08813d85b72d3b21586bd709e244256fc3f374d79aa86d5afe2c5c78"
+    },
+    {
+      "path": "00_project/normtrace_ihr_methodology_full.md",
+      "sha256": "3fe58ac4cc01999090ed5a0fca49c5e5bf07d7b6babf7ae3c9d67a5ca0d081cd"
+    },
+    {
+      "path": "03_tables/actors/mexico_evidenced_relationships.csv",
+      "sha256": "c77aea6d816c43af5868aad049f79d7b6e2a3be00326a6ee812afa7765b88d47"
+    },
+    {
+      "path": "03_tables/actors/mexico_health_governance_actors.csv",
+      "sha256": "04f94d7205bfd6e2dd7e61ea3928b34a5b09a777879c20f94c1b297e294b5dcd"
+    },
+    {
+      "path": "03_tables/country_legal_mapping/mexico_ihr2005_mapping.csv",
+      "sha256": "3a87536e01ca233dd3716399c88e7cc8785c5132a789610c468c978d999490d3"
+    },
+    {
+      "path": "03_tables/country_legal_mapping/mexico_legal_provisions.csv",
+      "sha256": "3a3b113bea0748aff3fa6d1c4da31d1ca95be9846647df16b6986a6630b30a2c"
+    },
+    {
+      "path": "03_tables/country_legal_mapping/mexico_normative_corpus_index.csv",
+      "sha256": "37d0cb3ab359b33979aff663f7971f06bad4a04d7f084b84dc804acee5db4761"
+    },
+    {
+      "path": "05_webapp/public/data/markdown/mexico_capacity_building_entry_points.md",
+      "sha256": "4f8594e3dce5bffca70101c079802e20c4151d3c8ccdebb934f84e529f959916"
+    },
+    {
+      "path": "05_webapp/public/data/markdown/mexico_legal_internalisation_snapshot.md",
+      "sha256": "725e743b7a4ae159c6549cd8a3af0eae287c2cf65ea9f052c84fb29301383826"
+    },
+    {
+      "path": "05_webapp/public/data/markdown/normtrace_ihr_methodology_full.md",
+      "sha256": "3fe58ac4cc01999090ed5a0fca49c5e5bf07d7b6babf7ae3c9d67a5ca0d081cd"
+    },
+    {
+      "path": "05_webapp/public/data/markdown/normtrace_ihr_methodology_web.md",
+      "sha256": "3fe58ac4cc01999090ed5a0fca49c5e5bf07d7b6babf7ae3c9d67a5ca0d081cd"
+    },
+    {
+      "path": "05_webapp/src/App.tsx",
+      "sha256": "645126a3b0b428761642b104a70d1603f022c9f4b77ec0eeaa40b9ab211586ed"
+    },
+    {
+      "path": "05_webapp/src/Layout.tsx",
+      "sha256": "c12ca3c49bcf6d0076870d8624fda6339f547c1773e4a2d13d65ad4a45a84565"
+    },
+    {
+      "path": "05_webapp/src/components/AuditStatus.tsx",
+      "sha256": "13fb24a4d30f025a911e17cb5b6b1f7e1632f27bd245cb68795d9043f102ba0c"
+    },
+    {
+      "path": "05_webapp/src/lib/utils.ts",
+      "sha256": "5af57cabf8eccff4609866da20875d16d6405d7a0563dfed0d576b88b89975cb"
+    },
+    {
+      "path": "05_webapp/src/pages/ActorsExplorer.tsx",
+      "sha256": "7d929349f0854b12ff79f03fcbc27dc84b8298dacea4be82004f3b5dbe5d5997"
+    },
+    {
+      "path": "05_webapp/src/pages/EvidenceReview.tsx",
+      "sha256": "1b2bd1ba565fef7841f912b8623d370d71a548ae21e414ef533f161bea6c4c41"
+    },
+    {
+      "path": "05_webapp/src/pages/LandingPage.tsx",
+      "sha256": "9e74b4a978df8f3abe187ee601f21898e3530dcfd0484fdab85e4ad9c251c36b"
+    },
+    {
+      "path": "05_webapp/src/pages/MappingExplorer.tsx",
+      "sha256": "c34b5aaaa31141eb1f201b0c43159c2f90ab3ba6131f251353067653ae5af5e6"
+    },
+    {
+      "path": "05_webapp/src/pages/Methodology.tsx",
+      "sha256": "eb16f579b5edab96cb1de661fd29682be428166502b53815d171223fb4b6abd4"
+    },
+    {
+      "path": "05_webapp/src/pages/ProvisionsExplorer.tsx",
+      "sha256": "be69118c51597e06364729838859fdbb06a44d40060d395ac2907fadf003eda7"
+    },
+    {
+      "path": "05_webapp/src/pages/SparBridge.tsx",
+      "sha256": "7001f368be803b8e3c9254567086708733f23bfa62c990326d2c70b633755d6d"
+    },
+    {
+      "path": "05_webapp/tests/audit-regression.spec.ts",
+      "sha256": "74562506c706ccd67ea7f197d9b8db224e3e1b594f9c3ca381628f460ddd7324"
+    },
+    {
+      "path": "06_scripts/build_tables/build_audit_release.py",
+      "sha256": "b55f55bc3ddea281c4b06c1ff9a23fcbb0054d1f97acaa4fdbb1e3c3455e12f5"
+    },
+    {
+      "path": "06_scripts/build_tables/build_network.py",
+      "sha256": "d0f2c4a6db20ad8a42f11cdc4b05fd4290b23c70895babb0568825a9097aa362"
+    },
+    {
+      "path": "06_scripts/build_tables/spar_normtrace_bridge.py",
+      "sha256": "f1b0453e27cb3df6dc7dbf0ecd9f4d88f20aeed481bc8e3bac48d07a0749beac"
+    },
+    {
+      "path": "06_scripts/validation/validate_content.py",
+      "sha256": "11cb9a59882f634ca9e9476fc8481c22e76c8b9e28983e1b4f7f0b11777c251e"
+    }
+  ],
+  "field_level_changes": 2233,
+  "legal_validation": "pending"
+}

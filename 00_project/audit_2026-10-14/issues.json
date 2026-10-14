@@ -1,0 +1,72 @@
+[
+  {
+    "issue_id": "SPAR",
+    "title": "Corrected scope of SPAR and removed invalid score subtraction",
+    "detail": "SPAR C1.1 already requests national and subnational legal analysis/mapping. Its aggregate score is not interchangeable with an obligation-level ordinal legal coding.",
+    "source_url": "https://cdn.who.int/media/docs/default-source/health-security-preparedness/cap/spar/9789240040120-eng-new.pdf?sfvrsn=5dc09bd9_3",
+    "status": "implemented"
+  },
+  {
+    "issue_id": "NIA",
+    "title": "Replaced future designation speculation",
+    "detail": "PAHO reports Mexico confirmation as of 15 July 2026; the specific Mexican institution and domestic act are not identified by that report.",
+    "source_url": "https://iris.paho.org/bitstreams/7c461167-1eae-4e58-ad9c-d8ba8338c9dc/download",
+    "status": "identity_and_instrument_pending"
+  },
+  {
+    "issue_id": "NOM",
+    "title": "Added enacted notification, coordination and reference provisions",
+    "detail": "Final NOM 6.6.3–6.6.4, 8.1.4, 3.1.30 and selected section 5 rules added. The earlier audit linked the 2012 project; this correction cites the enacted 19 February 2013 NOM. Manual review remains open.",
+    "source_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225",
+    "status": "text_corrected_reference_review_pending"
+  },
+  {
+    "issue_id": "LGS",
+    "title": "Corrected SINAVE statutory attribution",
+    "detail": "Express establish/operate competence is Article 133(II); Article 134 lists communicable diseases. Added the correct provision and corrected the affected descriptions.",
+    "source_url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+    "status": "text_corrected_scope_review_pending"
+  },
+  {
+    "issue_id": "FEES",
+    "title": "Withdrew no-match classification for IHR Article 40",
+    "detail": "RLGS Article 7 is a relevant candidate; exceptions and fiscal references need comparison. This is not a complete-compliance finding.",
+    "source_url": "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf",
+    "status": "text_corrected_scope_review_pending"
+  },
+  {
+    "issue_id": "DECLARATIONS",
+    "title": "Added aviation and maritime declaration provisions",
+    "detail": "RLGS Articles 30–31 identify presenters, arrival triggers and IHR form references. Old absence claims withdrawn.",
+    "source_url": "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf",
+    "status": "text_corrected_reference_review_pending"
+  },
+  {
+    "issue_id": "COUNTS",
+    "title": "Separated units and suspended unsupported gap totals",
+    "detail": "18 indexed instruments include two archived entries: 16 active in the pilot index. Coverage is 45 selected IHR2005 obligation units. Mapping/provision counts are regenerated, not hard-coded. No two-complete-path or six-instrument claim is certified.",
+    "source_url": "",
+    "status": "implemented"
+  },
+  {
+    "issue_id": "NETWORK",
+    "title": "Separated documentary association from legal dependency",
+    "detail": "Actor-instrument source references do not establish issuing power or actor-to-actor cooperation. All registry actors are retained, including DGE and unmatched historical records. Four separately sourced normative relationships are provided.",
+    "source_url": "",
+    "status": "implemented"
+  },
+  {
+    "issue_id": "SCORES",
+    "title": "Preserved original coding without presenting it as validated measurement",
+    "detail": "Original scores and fit/gap fields are retained in legacy fields and the baseline archive. Current numerical ratings and headline gap totals are withheld pending revalidation; no pending value is imputed to zero.",
+    "source_url": "",
+    "status": "implemented"
+  },
+  {
+    "issue_id": "VALIDATION",
+    "title": "Expert legal assessment remains outstanding",
+    "detail": "These changes repair documented errors and preserve review questions. They do not validate the entire corpus, administrative practice, state laws, manuals or successor competences.",
+    "source_url": "",
+    "status": "open"
+  }
+]

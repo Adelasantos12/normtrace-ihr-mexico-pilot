@@ -101,7 +101,7 @@ function GapTypologyList({ body }: { body: string }) {
   );
 }
 
-const DISCLAIMER_TEXT = 'This is a preliminary, single-coder, AI-assisted analytical mapping — not legal advice, and not a compliance assessment. All anchoring inputs require expert legal review before any policy application. Rows marked preliminary_ai_assisted have not yet been validated by a domestic public-health-law expert.';
+const DISCLAIMER_TEXT = 'This is a preliminary, single-coder, AI-assisted analytical mapping — not legal advice, and not a compliance assessment. All anchoring inputs require expert legal review before any policy application. A primary-text correction is not an independent legal adequacy validation; current numeric ratings are withheld.';
 
 export default function Methodology() {
   const [content, setContent] = useState('');
@@ -195,7 +195,7 @@ export default function Methodology() {
 
             <div className="mt-6 pt-5 border-t border-slate-200 flex items-center gap-2 text-xs text-slate-500">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
-              Audit version 0.1 (stable)
+              Evidence correction v0.2 · legal validation pending
             </div>
           </div>
         </aside>

@@ -1,0 +1,52 @@
+{
+  "release": "0.2.0-evidence-audit",
+  "audit_date": "2026-10-14",
+  "status": "targeted_source_corrections_expert_validation_pending",
+  "counts": {
+    "obligations": 45,
+    "provisions": 118,
+    "indexed_instruments": 18,
+    "active_in_pilot_index": 16,
+    "archived_instruments": 2,
+    "mapping_records": 99,
+    "actor_records": 18,
+    "source_checked_relationships": 4,
+    "source_checked_provisions": 9,
+    "mapping_records_with_targeted_corrections": 46
+  },
+  "unit_notes": {
+    "obligations": "Selected units extracted from IHR 2005; not all duties in the 2024 amendments.",
+    "indexed_instruments": "The pilot index includes archived instruments. Active-in-index does not certify current legal validity.",
+    "mapping_records": "One obligation can have multiple provision correspondences. Rows are not obligations.",
+    "source_checked_relationships": "Normative text-based relationships, not observed exchanges; two use generic reporting levels."
+  },
+  "current_anchoring_mean": null,
+  "confirmed_gap_count": null,
+  "complete_legal_pathways": null,
+  "score_status": "withheld_pending_revalidation",
+  "score_reason": "Original ratings use a preliminary coding scale that has not been revalidated after the source corrections. Pending is not zero. No subtraction from SPAR is supported.",
+  "legacy_claims_withdrawn": [
+    "18 obligations with confirmed procedural/coordination gaps",
+    "7 confirmed federal-state gaps",
+    "2 complete legal pathways",
+    "6 distinct instruments with proven missing safeguards"
+  ],
+  "evidence_status_by_record": {
+    "legacy_assessment_unchecked": 53,
+    "source_correction_applied_scope_pending": 27,
+    "text_checked_scope_pending": 19
+  },
+  "source_sha256": {
+    "03_tables/country_legal_mapping/mexico_ihr2005_mapping.csv": "3a87536e01ca233dd3716399c88e7cc8785c5132a789610c468c978d999490d3",
+    "03_tables/country_legal_mapping/mexico_legal_provisions.csv": "3a3b113bea0748aff3fa6d1c4da31d1ca95be9846647df16b6986a6630b30a2c",
+    "03_tables/country_legal_mapping/mexico_normative_corpus_index.csv": "37d0cb3ab359b33979aff663f7971f06bad4a04d7f084b84dc804acee5db4761",
+    "03_tables/actors/mexico_health_governance_actors.csv": "04f94d7205bfd6e2dd7e61ea3928b34a5b09a777879c20f94c1b297e294b5dcd",
+    "03_tables/actors/mexico_evidenced_relationships.csv": "c77aea6d816c43af5868aad049f79d7b6e2a3be00326a6ee812afa7765b88d47"
+  },
+  "limitations": [
+    "State legislation, federal-state agreements and administrative practice were not comprehensively reviewed.",
+    "Referenced manuals remain separate pending review items, not legal absences.",
+    "No new institution is identified as Mexico's National IHR Authority without a domestic designation source.",
+    "Historical actor records do not establish current successor competences."
+  ]
+}

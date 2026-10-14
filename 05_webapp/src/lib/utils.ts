@@ -16,7 +16,8 @@ export function getStatusLabel(status: string) {
   return labels[status] || status;
 }
 
-export function getAnchoringLabel(level: string | number) {
+export function getAnchoringLabel(level: string | number | null | undefined) {
+  if (level === null || level === undefined || level === '') return 'Rating withheld pending revalidation';
   const labels: Record<string, string> = {
     '0': 'No identifiable anchoring',
     '1': 'Indirect contextual anchoring',

@@ -1,0 +1,11 @@
+{
+  "source_commit": "478e795f4ec2147c17acf4c128d686eb3a5935d1",
+  "date": "2026-10-14",
+  "sha256": {
+    "03_tables/country_legal_mapping/mexico_ihr2005_mapping.csv": "6b1a0fbc6e241d752fa81bb1a8722f13478a895d8ba892f6dabd661c045936f5",
+    "03_tables/country_legal_mapping/mexico_legal_provisions.csv": "ebf9eb5ca3ef0fea05d8ccf1b9d92c982099819b0df374b821f594fd0b2cbafd",
+    "03_tables/country_legal_mapping/mexico_normative_corpus_index.csv": "83a182a0ed756fd94d9adffc3622571104199c192d86b157ccf45935273428fa",
+    "03_tables/actors/mexico_health_governance_actors.csv": "1c1d96a0164373fc0d9915ffcc5fd93002c846566e6f582eecd7277d0cc556d6"
+  },
+  "scope": "Targeted documentary corrections; not comprehensive expert legal validation."
+}

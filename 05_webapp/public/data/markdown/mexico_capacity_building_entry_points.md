@@ -1,3 +1,5 @@
+> **Historical preliminary text, superseded by the 14 October 2026 evidence correction.** The figures and absence claims below have not been revalidated and are not current findings. See the evidence review page.
+
 # Mexico Capacity-Building Entry Points for Pandemic Governance
 
 **Document type:** NormTrace-IHR Level 3 Output — Capacity-Building Brief

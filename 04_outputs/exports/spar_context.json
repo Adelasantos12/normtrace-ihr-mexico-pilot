@@ -1,0 +1,109 @@
+{
+  "release": "0.2.0-evidence-audit",
+  "country": "Mexico",
+  "series": [
+    {
+      "year": 2010,
+      "value": 50.0,
+      "series_segment": "historical predecessor/first-edition series (not harmonized)"
+    },
+    {
+      "year": 2011,
+      "value": 100.0,
+      "series_segment": "historical predecessor/first-edition series (not harmonized)"
+    },
+    {
+      "year": 2012,
+      "value": 100.0,
+      "series_segment": "historical predecessor/first-edition series (not harmonized)"
+    },
+    {
+      "year": 2013,
+      "value": 100.0,
+      "series_segment": "historical predecessor/first-edition series (not harmonized)"
+    },
+    {
+      "year": 2014,
+      "value": 100.0,
+      "series_segment": "historical predecessor/first-edition series (not harmonized)"
+    },
+    {
+      "year": 2015,
+      "value": 100.0,
+      "series_segment": "historical predecessor/first-edition series (not harmonized)"
+    },
+    {
+      "year": 2016,
+      "value": 100.0,
+      "series_segment": "historical predecessor/first-edition series (not harmonized)"
+    },
+    {
+      "year": 2017,
+      "value": 100.0,
+      "series_segment": "historical predecessor/first-edition series (not harmonized)"
+    },
+    {
+      "year": 2018,
+      "value": 100.0,
+      "series_segment": "historical predecessor/first-edition series (not harmonized)"
+    },
+    {
+      "year": 2019,
+      "value": 80.0,
+      "series_segment": "historical predecessor/first-edition series (not harmonized)"
+    },
+    {
+      "year": 2020,
+      "value": 80.0,
+      "series_segment": "historical predecessor/first-edition series (not harmonized)"
+    },
+    {
+      "year": 2021,
+      "value": 60.0,
+      "series_segment": "2021-2025 second edition"
+    },
+    {
+      "year": 2022,
+      "value": 40.0,
+      "series_segment": "2021-2025 second edition"
+    },
+    {
+      "year": 2023,
+      "value": 60.0,
+      "series_segment": "2021-2025 second edition"
+    },
+    {
+      "year": 2024,
+      "value": 60.0,
+      "series_segment": "2021-2025 second edition"
+    },
+    {
+      "year": 2025,
+      "value": 60.0,
+      "series_segment": "2021-2025 second edition"
+    }
+  ],
+  "latest": {
+    "year": 2025,
+    "value": 60.0,
+    "series_segment": "2021-2025 second edition"
+  },
+  "source_file": "02_data/raw/spar_americas_clean.csv",
+  "source_status": "Existing project panel; not a newly independently audited download of all annual reports.",
+  "construct": "C1 policy, legal and normative instruments in the 2021–2025 second-edition reporting cycles; preceding entries have different indicator definitions.",
+  "comparability": "Historical observations are retained for provenance, not treated as an invariant indicator. Do not connect across the 2021 instrument break or average across editions.",
+  "normtrace_comparator": null,
+  "numeric_difference": null,
+  "reason": "SPAR self-assessment and preliminary obligation-level legal coding lack a validated common construct and denominator. No percentage-point discrepancy, inflation claim or legal-strength reference line is calculated.",
+  "spar_scope": "SPAR second-edition C1.1 already asks for national/subnational legal analysis and mapping; C2.1 considers NFP functions. NormTrace contributes inspectable obligation-level documentary traceability, not a law dimension absent from SPAR.",
+  "sources": [
+    {
+      "label": "WHO SPAR second edition (2021), C1.1 and C2.1",
+      "url": "https://cdn.who.int/media/docs/default-source/health-security-preparedness/cap/spar/9789240040120-eng-new.pdf?sfvrsn=5dc09bd9_3"
+    },
+    {
+      "label": "WHO SPAR revision presentation, 30 September 2026",
+      "url": "https://apps.who.int/gb/mspi/pdf_files/2026/09/Item1_30-09.pdf"
+    }
+  ]
+}

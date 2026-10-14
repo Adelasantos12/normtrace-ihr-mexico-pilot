@@ -1,177 +1,77 @@
 #!/usr/bin/env python3
-"""
-NormTrace-IHR — content validation gate.
-
-Exits non-zero (and prints every failure) if the repo's derived data and
-narrative text have drifted apart. This is a guard, not a builder: it reads
-files, it does not compute or write anything. Intended to run on every push
-(see .github/workflows/validate.yml), after the build_tables scripts have
-regenerated 04_outputs/ and 05_webapp/public/data/derived/.
-
-Checks:
-  1. Every source/target in network_edges.csv exists in node_registry.csv.
-  2. Corpus row counts match the pilot's fixed scope: 45 obligations,
-     110 provisions, 18 instruments, 80 mapping rows.
-  3. The "N federal[-level institutional actors]" figure quoted in each of
-     the three paper mirrors matches count(government_level=='federal')
-     in the actors CSV.
-  4. No hard-coded `deg=NN` / `degree: NN` integer literal remains in
-     05_webapp/src/pages/*.tsx.
-  5. network_metrics.json's network.n_obligations equals the full 45-row
-     obligations corpus. build_network.py used to silently drop any
-     obligation with no anchoring row (full gap / legal silence) instead
-     of keeping it as an isolated node, so the network's coverage figure
-     could fall below the corpus total without any check catching it --
-     this guards against that regressing.
-
-Usage:  python3 06_scripts/validation/validate_content.py
-"""
-from __future__ import annotations
-import csv
-import glob
-import json
-import os
-import re
-import sys
-
-ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-
-NETWORK_EDGES = os.path.join(ROOT, "04_outputs/figures/network_edges.csv")
-NODE_REGISTRY = os.path.join(ROOT, "04_outputs/figures/node_registry.csv")
-NETWORK_METRICS = os.path.join(ROOT, "04_outputs/figures/network_metrics.json")
-OBLIGATIONS = os.path.join(ROOT, "03_tables/international_obligations/IHR-2005_obligations_domestic-anchoring.csv")
-PROVISIONS = os.path.join(ROOT, "03_tables/country_legal_mapping/mexico_legal_provisions.csv")
-CORPUS_INDEX = os.path.join(ROOT, "03_tables/country_legal_mapping/mexico_normative_corpus_index.csv")
-MAPPING = os.path.join(ROOT, "03_tables/country_legal_mapping/mexico_ihr2005_mapping.csv")
-ACTORS = os.path.join(ROOT, "03_tables/actors/mexico_health_governance_actors.csv")
-
-PAPER_FILES = [
-    os.path.join(ROOT, "00_project/normtrace_ihr_methodology_full.md"),
-    os.path.join(ROOT, "05_webapp/public/data/markdown/normtrace_ihr_methodology_full.md"),
-    os.path.join(ROOT, "05_webapp/public/data/markdown/normtrace_ihr_methodology_web.md"),
-]
-
-EXPECTED_COUNTS = {
-    "IHR 2005 obligations": (OBLIGATIONS, ";", 45),
-    "domestic legal provisions": (PROVISIONS, ",", 110),
-    "domestic instruments in corpus": (CORPUS_INDEX, ",", 18),
-    "obligation-to-provision mapping rows": (MAPPING, ",", 80),
-}
-
-WORD_NUMBERS = {
-    "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7,
-    "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12, "thirteen": 13,
-    "fourteen": 14, "fifteen": 15, "sixteen": 16, "seventeen": 17, "eighteen": 18,
-    "nineteen": 19, "twenty": 20,
-}
-
-
-def read_rows(path: str, delimiter: str) -> list[dict]:
-    with open(path, newline="", encoding="utf-8") as f:
-        return list(csv.DictReader(f, delimiter=delimiter))
-
-
-def parse_federal_actor_claim(text: str) -> int | None:
-    """Find the 'N federal[-level institutional actors]' figure in paper prose."""
-    m = re.search(r"([A-Za-z]+)\s+federal-level institutional actors\s+were\s+identified", text)
-    if m:
-        word = m.group(1).lower()
-        return WORD_NUMBERS.get(word)
-    m = re.search(r"\(?\s*(\d+)\s+federal\b", text)
-    if m:
-        return int(m.group(1))
-    return None
-
-
-def main() -> int:
-    failures: list[str] = []
-
-    # 1. Edge referential integrity.
-    if os.path.isfile(NETWORK_EDGES) and os.path.isfile(NODE_REGISTRY):
-        node_ids = {r["node_id"] for r in read_rows(NODE_REGISTRY, ",")}
-        for row in read_rows(NETWORK_EDGES, ","):
-            for end in ("source", "target"):
-                if row[end] not in node_ids:
-                    failures.append(
-                        f"network_edges.csv: {end}='{row[end]}' not found in node_registry.csv "
-                        f"(row: {row['source']} -> {row['target']})"
-                    )
-    else:
-        failures.append(
-            "network_edges.csv / node_registry.csv missing — run "
-            "06_scripts/build_tables/build_network.py first."
-        )
-
-    # 2. Corpus counts.
-    for label, (path, delimiter, expected) in EXPECTED_COUNTS.items():
-        if not os.path.isfile(path):
-            failures.append(f"corpus count check: {path} not found.")
-            continue
-        actual = len(read_rows(path, delimiter))
-        if actual != expected:
-            failures.append(
-                f"corpus count drift: {label} — expected {expected}, found {actual} rows in "
-                f"{os.path.relpath(path, ROOT)}."
-            )
-
-    # 3. Federal actor count vs paper prose.
-    if os.path.isfile(ACTORS):
-        actor_rows = read_rows(ACTORS, ",")
-        actual_federal = sum(1 for r in actor_rows if (r.get("government_level") or "").strip() == "federal")
-        for path in PAPER_FILES:
-            if not os.path.isfile(path):
-                failures.append(f"paper reconciliation: {path} not found.")
-                continue
-            with open(path, encoding="utf-8") as f:
-                text = f.read()
-            claimed = parse_federal_actor_claim(text)
-            if claimed is None:
-                failures.append(
-                    f"paper reconciliation: could not find a 'N federal actors' figure in "
-                    f"{os.path.relpath(path, ROOT)}."
-                )
-            elif claimed != actual_federal:
-                failures.append(
-                    f"paper reconciliation: {os.path.relpath(path, ROOT)} claims {claimed} federal actors, "
-                    f"actors CSV has {actual_federal} rows with government_level=='federal'."
-                )
-    else:
-        failures.append(f"actors CSV not found: {ACTORS}")
-
-    # 4. No hard-coded degree literals in the webapp pages.
-    degree_pattern = re.compile(r"\bdeg(?:ree)?\s*[:=]\s*\d+")
-    for path in sorted(glob.glob(os.path.join(ROOT, "05_webapp/src/pages/*.tsx"))):
-        with open(path, encoding="utf-8") as f:
-            for lineno, line in enumerate(f, start=1):
-                if degree_pattern.search(line):
-                    failures.append(
-                        f"hard-coded degree literal: {os.path.relpath(path, ROOT)}:{lineno}: {line.strip()}"
-                    )
-
-    # 5. Network obligation coverage vs corpus total.
-    if os.path.isfile(NETWORK_METRICS) and os.path.isfile(OBLIGATIONS):
-        with open(NETWORK_METRICS, encoding="utf-8") as f:
-            net_n_obl = json.load(f).get("network", {}).get("n_obligations")
-        expected_n_obl = len(read_rows(OBLIGATIONS, ";"))
-        if net_n_obl != expected_n_obl:
-            failures.append(
-                f"network coverage drift: network_metrics.json network.n_obligations={net_n_obl}, "
-                f"but the obligations corpus has {expected_n_obl} rows. An obligation with no "
-                f"anchoring row must still appear as an isolated node, not be dropped."
-            )
-    else:
-        failures.append(f"network_metrics.json not found: {NETWORK_METRICS}")
-
-    if failures:
-        print(f"FAIL — {len(failures)} content validation issue(s):\n")
-        for msg in failures:
-            print(f"  - {msg}")
-        return 1
-
-    print("PASS — network edges resolve, corpus counts match, paper actor count reconciled, "
-          "no hard-coded degree literals, network obligation coverage matches the corpus.")
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+"""Fail-closed regression gate for documentary integrity, not legal validation."""
+from pathlib import Path
+import csv,json,hashlib,sys,re
+R=Path(__file__).resolve().parents[2]
+def rows(path,delimiter=','):
+ with (R/path).open(encoding='utf8',newline='') as f:return list(csv.DictReader(f,delimiter=delimiter))
+def js(path):return json.loads((R/path).read_text(encoding='utf8'))
+def validate():
+ errors=[]
+ def check(ok,msg):
+  if not ok:errors.append(msg)
+ maps=rows('03_tables/country_legal_mapping/mexico_ihr2005_mapping.csv');provs=rows('03_tables/country_legal_mapping/mexico_legal_provisions.csv');norms=rows('03_tables/country_legal_mapping/mexico_normative_corpus_index.csv');obls=rows('03_tables/international_obligations/IHR-2005_obligations_domestic-anchoring.csv',';');actors=rows('03_tables/actors/mexico_health_governance_actors.csv');rels=rows('03_tables/actors/mexico_evidenced_relationships.csv')
+ manifest=js('04_outputs/exports/audit_manifest.json');network=js('04_outputs/figures/network_metrics.json')
+ ids={k:{r[k] for r in rs} for rs,k in [(maps,'mapping_id'),(provs,'provision_id'),(norms,'norm_id'),(obls,'obligation_id'),(actors,'actor_id')]}
+ for rs,k in [(maps,'mapping_id'),(provs,'provision_id'),(norms,'norm_id'),(obls,'obligation_id'),(actors,'actor_id')]:check(len(ids[k])==len(rs),f'Duplicate {k}')
+ expected={'obligations':len(obls),'provisions':len(provs),'mapping_records':len(maps),'indexed_instruments':len(norms),'active_in_pilot_index':sum(n['corpus_status']=='active_in_pilot_index' for n in norms),'archived_instruments':sum(n['corpus_status']=='archived' for n in norms),'actor_records':len(actors),'source_checked_relationships':len(rels)}
+ check(len(obls)==45,'Selected IHR2005 denominator changed unexpectedly')
+ for k,v in expected.items():check(manifest['counts'][k]==v,f'Manifest mismatch: {k}')
+ for r in maps:
+  check(r['obligation_id'] in ids['obligation_id'],f'Unknown obligation {r["mapping_id"]}')
+  check(r['domestic_provision_id']=='NO_MATCH_IDENTIFIED' or r['domestic_provision_id'] in ids['provision_id'],f'Unknown provision {r["mapping_id"]}')
+  check(r['anchoring_level']=='',f'Current numeric score unexpectedly assigned: {r["mapping_id"]}')
+  check(r['review_status']=='requires_human_review',f'False validation status {r["mapping_id"]}')
+  check(r['gap_type'] in ['unreviewed','reference_review_pending','scope_review_pending'],f'Unvalidated definitive gap {r["mapping_id"]}')
+ for p in provs:check(p['norm_id'] in ids['norm_id'],f'Unknown norm: {p["provision_id"]}')
+ # Original ratings are retained, not erased or overwritten with zero.
+ old=rows('99_archive/legal_audit_2026-10-14/03_tables/country_legal_mapping/mexico_ihr2005_mapping.csv');current={r['mapping_id']:r for r in maps}
+ for r in old:
+  check(r['mapping_id'] in current,'Missing original mapping ID')
+  for k in ['anchoring_level','gap_type','assessment_summary']:
+   check(current[r['mapping_id']].get('legacy_'+k)==r[k],f'Legacy changed: {r["mapping_id"]}/{k}')
+ pidx={p['provision_id']:p for p in provs}
+ for pid in ['MEX_AUDIT_LGS_ART133_II','MEX_AUDIT_NOM017_663_664','MEX_AUDIT_NOM017_814','MEX_AUDIT_NOM017_3130','MEX_AUDIT_NOM017_51_58','MEX_AUDIT_RLGSSI_ART007','MEX_AUDIT_RLGSSI_ART030','MEX_AUDIT_RLGSSI_ART031']:
+  check(pid in pidx,f'Missing corrected source: {pid}')
+  check(pidx.get(pid,{}).get('evidence_status')=='text_checked_scope_pending',f'Wrong source status: {pid}')
+ fee=[r for r in maps if r['obligation_id']=='IHR-OBL-037'];check(any(r['domestic_provision_id']=='MEX_AUDIT_RLGSSI_ART007' for r in fee),'IHR Article40 source omitted')
+ check(all(r['domestic_provision_id']!='NO_MATCH_IDENTIFIED' for r in fee),'False no-match Article40')
+ for oid,pid in [('IHR-OBL-034','MEX_AUDIT_RLGSSI_ART031'),('IHR-OBL-035','MEX_AUDIT_RLGSSI_ART030')]:check(any(r['obligation_id']==oid and r['domestic_provision_id']==pid for r in maps),f'Declaration source missing: {oid}')
+ for p in provs:
+  if p['norm_id']=='MEX-012':check('5288225' in p['source_url'],'Wrong final-NOM citation')
+ for rel in rels:
+  check(rel['source_provision_id'] in ids['provision_id'],'Unknown relationship source')
+  check(rel['observed_operation']=='not_assessed','Normative relation falsely treated as observed')
+ check(all(manifest[k] is None for k in ['current_anchoring_mean','confirmed_gap_count','complete_legal_pathways']),'Pending aggregate converted to number')
+ # Reproducible public/export mirrors and hashes.
+ for source,sha in manifest['source_sha256'].items():
+  b=(R/source).read_bytes();check(hashlib.sha256(b).hexdigest()==sha,f'Stale source hash {source}')
+  name=Path(source).stem
+  for mirror in [f'05_webapp/public/data/{name}_clean.csv',f'04_outputs/exports/data_package_v0_2/{name}.csv']:check((R/mirror).read_bytes()==b,f'Divergent mirror {mirror}')
+ nodes=rows('04_outputs/figures/node_registry.csv');nodeids={n['node_id'] for n in nodes};edges=rows('04_outputs/figures/network_edges.csv')
+ check({n['node_id'] for n in nodes if n['mode']=='obligation'}==ids['obligation_id'],'Network dropped an obligation')
+ check(network['network']['n_obligations']==len(obls),'Wrong network denominator')
+ check(len(network['actor_reach_ranked'])==len(actors),'Network dropped actor records')
+ dge=next((a for a in network['actor_reach_ranked'] if a['actor_id']=='MEX_ACTOR_DGE_001'),None)
+ check(dge is not None and 'NOM-017' in dge['instruments'] and 'RI-SS-2025' in dge['instruments'],'DGE alias regression')
+ for e in edges:
+  check(e['source'] in nodeids and e['target'] in nodeids,'Unresolved graph endpoint')
+  check(e['type']=='documentary_correspondence' and e['weight']=='1','Graph misrepresents legal strength')
+ check('IHR-OBL-037' not in network['isolated_obligations'],'Fee obligation still falsely isolated')
+ nia=js('05_webapp/public/data/derived/nia_status.json');check(nia['status']=='designation_or_establishment_reported','NIA reported status lost')
+ check(nia['designated_institution'] is None and nia['domestic_designating_instrument'] is None,'Invented Mexican NIA identity/instrument')
+ spar=js('04_outputs/exports/spar_context.json');retired=js('04_outputs/exports/spar_normtrace_divergence.json')
+ check(spar['numeric_difference'] is None and spar['normtrace_comparator'] is None,'Invalid SPAR comparison reintroduced')
+ check(retired['status']=='withdrawn_non_equivalent_constructs' and 'headline_cc1' not in retired,'Old divergence payload still current')
+ for path in ['05_webapp/src/pages/LandingPage.tsx','05_webapp/src/pages/SparBridge.tsx','05_webapp/src/pages/ActorsExplorer.tsx']:
+  t=(R/path).read_text();check('statutory designation IHR Art. 4 requires' not in t and '+26' not in t,f'Unsupported current claim in {path}')
+ for name in ['network_metrics.json','network_edges.csv','node_registry.csv','actor_source_links.csv']:
+  check((R/f'04_outputs/figures/{name}').read_bytes()==(R/f'05_webapp/public/data/derived/{name}').read_bytes(),f'Graph mirror mismatch: {name}')
+ check((R/'00_project/normtrace_ihr_methodology_full.md').read_bytes()==(R/'05_webapp/public/data/markdown/normtrace_ihr_methodology_web.md').read_bytes(),'Methodology mirror mismatch')
+ for h in js('00_project/audit_2026-10-14/baseline.json')['sha256'].items():
+  check(hashlib.sha256((R/'99_archive/legal_audit_2026-10-14'/h[0]).read_bytes()).hexdigest()==h[1],'Baseline archive modified')
+ if errors:
+  print('FAIL\n'+'\n'.join(errors));return 1
+ print('PASS: source and mapping integrity; original coding preserved; correct final NOM, LGS and RLGS candidates; explicit pending ratings; counts and mirrors; all obligations/actors retained; DGE aliases; NIA unknowns; no invalid SPAR subtraction. This is software/data validation, not expert legal validation.')
+ return 0
+if __name__=='__main__':sys.exit(validate())

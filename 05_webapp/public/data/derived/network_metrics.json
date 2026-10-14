@@ -1,5 +1,6 @@
 {
   "generated_by": "06_scripts/build_tables/build_network.py",
+  "release": "0.2.0-evidence-audit",
   "network": {
     "modes": [
       "instrument",
@@ -7,206 +8,285 @@
     ],
     "n_instruments": 9,
     "n_obligations": 45,
-    "n_edges": 68,
-    "density": 0.168
+    "n_actor_records": 18,
+    "n_edges": 74,
+    "density": 0.182716
   },
   "instrument_degree_ranked": [
     {
       "instrument": "LGS",
       "obligations_anchored": 21,
-      "degree_norm": 0.467,
-      "betweenness": 0.5281
+      "obligations_linked": 21,
+      "degree_norm": 0.466667,
+      "betweenness": 0.480569
     },
     {
       "instrument": "RLGS-SI",
-      "obligations_anchored": 19,
-      "degree_norm": 0.422,
-      "betweenness": 0.4457
+      "obligations_anchored": 20,
+      "obligations_linked": 20,
+      "degree_norm": 0.444444,
+      "betweenness": 0.480288
+    },
+    {
+      "instrument": "NOM-017",
+      "obligations_anchored": 11,
+      "obligations_linked": 11,
+      "degree_norm": 0.244444,
+      "betweenness": 0.12874
     },
     {
       "instrument": "RI-SS-2025",
       "obligations_anchored": 11,
-      "degree_norm": 0.244,
-      "betweenness": 0.2119
-    },
-    {
-      "instrument": "NOM-017",
-      "obligations_anchored": 6,
-      "degree_norm": 0.133,
-      "betweenness": 0.042
+      "obligations_linked": 11,
+      "degree_norm": 0.244444,
+      "betweenness": 0.13889
     },
     {
       "instrument": "CPEUM",
       "obligations_anchored": 5,
-      "degree_norm": 0.111,
-      "betweenness": 0.0813
+      "obligations_linked": 5,
+      "degree_norm": 0.111111,
+      "betweenness": 0.081745
     },
     {
       "instrument": "Ley Aduanera",
       "obligations_anchored": 3,
-      "degree_norm": 0.067,
-      "betweenness": 0.0354
+      "obligations_linked": 3,
+      "degree_norm": 0.066667,
+      "betweenness": 0.035922
     },
     {
       "instrument": "LGPDPPSO",
       "obligations_anchored": 1,
-      "degree_norm": 0.022,
+      "obligations_linked": 1,
+      "degree_norm": 0.022222,
       "betweenness": 0.0
     },
     {
       "instrument": "LOAPF",
       "obligations_anchored": 1,
-      "degree_norm": 0.022,
+      "obligations_linked": 1,
+      "degree_norm": 0.022222,
       "betweenness": 0.0
     },
     {
       "instrument": "RLGS-Inv",
       "obligations_anchored": 1,
-      "degree_norm": 0.022,
+      "obligations_linked": 1,
+      "degree_norm": 0.022222,
       "betweenness": 0.0
     }
   ],
   "actor_reach_ranked": [
     {
+      "actor_id": "MEX_ACTOR_PORTS_AIRPORTS_001",
+      "actor": "Autoridades portuarias y aeroportuarias (puntos de entrada)",
+      "instruments": [
+        "LGS",
+        "RLGS-SI"
+      ],
+      "n_instruments": 2,
+      "obligation_reach": 35,
+      "profile_status": "legacy_profile_not_revalidated",
+      "semantics": "Shared-instrument documentary reach, not assigned obligations."
+    },
+    {
+      "actor_id": "MEX_ACTOR_SS_001",
       "actor": "Secretaría de Salud",
       "instruments": [
         "CPEUM",
         "LGS",
-        "LOAPF"
+        "LOAPF",
+        "RI-SS-2025"
       ],
-      "n_instruments": 3,
-      "obligation_reach": 24
+      "n_instruments": 4,
+      "obligation_reach": 29,
+      "profile_status": "legacy_profile_not_revalidated",
+      "semantics": "Shared-instrument documentary reach, not assigned obligations."
     },
     {
+      "actor_id": "MEX_ACTOR_CSG_001",
       "actor": "Consejo de Salubridad General",
       "instruments": [
         "CPEUM",
         "LGS"
       ],
       "n_instruments": 2,
-      "obligation_reach": 23
+      "obligation_reach": 23,
+      "profile_status": "legacy_profile_not_revalidated",
+      "semantics": "Shared-instrument documentary reach, not assigned obligations."
     },
     {
+      "actor_id": "MEX_ACTOR_STATES_001",
       "actor": "Entidades federativas (gobiernos estatales — 32 entidades)",
       "instruments": [
         "CPEUM",
         "LGS"
       ],
       "n_instruments": 2,
-      "obligation_reach": 23
+      "obligation_reach": 23,
+      "profile_status": "legacy_profile_not_revalidated",
+      "semantics": "Shared-instrument documentary reach, not assigned obligations."
     },
     {
-      "actor": "Autoridades portuarias y aeroportuarias (puntos de entrada)",
-      "instruments": [
-        "LGS"
-      ],
-      "n_instruments": 1,
-      "obligation_reach": 21
-    },
-    {
+      "actor_id": "MEX_ACTOR_COFEPRIS_001",
       "actor": "Comisión Federal para la Protección contra Riesgos Sanitarios (COFEPRIS)",
       "instruments": [
         "LGS"
       ],
       "n_instruments": 1,
-      "obligation_reach": 21
+      "obligation_reach": 21,
+      "profile_status": "legacy_profile_not_revalidated",
+      "semantics": "Shared-instrument documentary reach, not assigned obligations."
     },
     {
+      "actor_id": "MEX_ACTOR_INM_001",
+      "actor": "Instituto Nacional de Migración",
+      "instruments": [
+        "LOAPF",
+        "RLGS-SI"
+      ],
+      "n_instruments": 2,
+      "obligation_reach": 21,
+      "profile_status": "legacy_profile_not_revalidated",
+      "semantics": "Shared-instrument documentary reach, not assigned obligations."
+    },
+    {
+      "actor_id": "MEX_ACTOR_DGE_001",
+      "actor": "Dirección General de Epidemiología",
+      "instruments": [
+        "NOM-017",
+        "RI-SS-2025"
+      ],
+      "n_instruments": 2,
+      "obligation_reach": 15,
+      "profile_status": "nfp_text_checked_other_profile_fields_pending",
+      "semantics": "Shared-instrument documentary reach, not assigned obligations."
+    },
+    {
+      "actor_id": "MEX_ACTOR_DGRI_001",
+      "actor": "Dirección General de Relaciones Internacionales (DGRI)",
+      "instruments": [
+        "RI-SS-2025"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 11,
+      "profile_status": "legacy_profile_not_revalidated",
+      "semantics": "Shared-instrument documentary reach, not assigned obligations."
+    },
+    {
+      "actor_id": "MEX_ACTOR_SNSP_001",
+      "actor": "Dirección General del Servicio Nacional de Salud Pública (SNSP)",
+      "instruments": [
+        "RI-SS-2025"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 11,
+      "profile_status": "legacy_profile_not_revalidated",
+      "semantics": "Shared-instrument documentary reach, not assigned obligations."
+    },
+    {
+      "actor_id": "MEX_ACTOR_SRE_001",
       "actor": "Secretaría de Relaciones Exteriores",
       "instruments": [
         "CPEUM",
         "LOAPF"
       ],
       "n_instruments": 2,
-      "obligation_reach": 6
+      "obligation_reach": 6,
+      "profile_status": "legacy_profile_not_revalidated",
+      "semantics": "Shared-instrument documentary reach, not assigned obligations."
     },
     {
+      "actor_id": "MEX_ACTOR_ASF_001",
       "actor": "Auditoría Superior de la Federación",
       "instruments": [
         "CPEUM"
       ],
       "n_instruments": 1,
-      "obligation_reach": 5
+      "obligation_reach": 5,
+      "profile_status": "legacy_profile_not_revalidated",
+      "semantics": "Shared-instrument documentary reach, not assigned obligations."
     },
     {
+      "actor_id": "MEX_ACTOR_CNDH_001",
       "actor": "Comisión Nacional de los Derechos Humanos (CNDH)",
       "instruments": [
         "CPEUM"
       ],
       "n_instruments": 1,
-      "obligation_reach": 5
+      "obligation_reach": 5,
+      "profile_status": "legacy_profile_not_revalidated",
+      "semantics": "Shared-instrument documentary reach, not assigned obligations."
     },
     {
+      "actor_id": "MEX_ACTOR_CONGRESS_001",
       "actor": "Congreso de la Unión",
       "instruments": [
         "CPEUM"
       ],
       "n_instruments": 1,
-      "obligation_reach": 5
+      "obligation_reach": 5,
+      "profile_status": "legacy_profile_not_revalidated",
+      "semantics": "Shared-instrument documentary reach, not assigned obligations."
     },
     {
+      "actor_id": "MEX_ACTOR_CHAMBER_DEPUTIES_001",
       "actor": "Cámara de Diputados",
       "instruments": [
         "CPEUM"
       ],
       "n_instruments": 1,
-      "obligation_reach": 5
+      "obligation_reach": 5,
+      "profile_status": "legacy_profile_not_revalidated",
+      "semantics": "Shared-instrument documentary reach, not assigned obligations."
     },
     {
-      "actor": "Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI) / Transparencia para el Pueblo",
-      "instruments": [
-        "CPEUM",
-        "LGPDPPSO"
-      ],
-      "n_instruments": 2,
-      "obligation_reach": 5
-    },
-    {
+      "actor_id": "MEX_ACTOR_SENATE_001",
       "actor": "Senado de la República",
       "instruments": [
         "CPEUM"
       ],
       "n_instruments": 1,
-      "obligation_reach": 5
+      "obligation_reach": 5,
+      "profile_status": "legacy_profile_not_revalidated",
+      "semantics": "Shared-instrument documentary reach, not assigned obligations."
     },
     {
-      "actor": "Instituto Nacional de Migración",
-      "instruments": [
-        "LOAPF"
-      ],
-      "n_instruments": 1,
-      "obligation_reach": 1
-    },
-    {
+      "actor_id": "MEX_ACTOR_SEGOB_001",
       "actor": "Secretaría de Gobernación",
       "instruments": [
         "LOAPF"
       ],
       "n_instruments": 1,
-      "obligation_reach": 1
+      "obligation_reach": 1,
+      "profile_status": "legacy_profile_not_revalidated",
+      "semantics": "Shared-instrument documentary reach, not assigned obligations."
+    },
+    {
+      "actor_id": "MEX_ACTOR_CENAPRECE_001",
+      "actor": "Centro Nacional de Programas Preventivos y Control de Enfermedades (CENAPRECE)",
+      "instruments": [],
+      "n_instruments": 0,
+      "obligation_reach": 0,
+      "profile_status": "legacy_profile_not_revalidated",
+      "semantics": "Shared-instrument documentary reach, not assigned obligations."
+    },
+    {
+      "actor_id": "MEX_ACTOR_INAI_001",
+      "actor": "INAI (historical record; successor competences require review)",
+      "instruments": [],
+      "n_instruments": 0,
+      "obligation_reach": 0,
+      "profile_status": "historical_successor_review_required",
+      "semantics": "Shared-instrument documentary reach, not assigned obligations."
     }
   ],
-  "communities": {
-    "n": 5,
-    "modularity": 0.286,
-    "sizes": [
-      22,
-      20,
-      1,
-      1,
-      1
-    ]
-  },
-  "cug_test": {
-    "measure": "instrument-degree centralisation",
-    "observed": 0.6402,
-    "random_mean": 0.3282,
-    "p_value_ge_random": 0.0,
-    "interpretation": "centralisation significantly ABOVE random"
-  },
   "isolated_obligations": [
-    "IHR-OBL-011",
-    "IHR-OBL-037"
+    "IHR-OBL-011"
   ],
-  "provenance_note": "All figures computed from mexico_ihr2005_mapping.csv. Supersedes hard-coded degree values previously in ActorsExplorer.tsx. n_obligations always equals the full IHR-2005_obligations_domestic-anchoring.csv corpus (45): obligations with no anchoring row in the mapping (full gap / legal silence) are included as isolated, zero-degree nodes -- see isolated_obligations -- rather than dropped, so the network's coverage figure never falls below the corpus total and its worst findings stay visible instead of vanishing. n_instruments (9) legitimately covers only instruments that anchor at least one of these 45 obligations; the broader 18-instrument legal corpus includes instruments scoped to the Pandemic Agreement, PABS, or general administrative matters outside IHR 2005, which this IHR-anchoring network does not include."
+  "edge_semantics": "Documentary correspondences and actor-profile source references. Uniform edge weights are not legal-strength scores.",
+  "provenance_note": "All selected obligation units and all actor profiles retained. Zero degree means no candidate in this graph, not proven legal silence. Actor source-reference matching is explicit and exported in actor_source_links.csv. Source-checked directed normative relationships are a separate dataset; no actor dependency is inferred from shared legislation.",
+  "causal_or_performance_inference": false,
+  "legacy_key_note": "obligations_anchored and obligation_reach are compatibility field names for documentary link counts; they do not certify legal adequacy."
 }

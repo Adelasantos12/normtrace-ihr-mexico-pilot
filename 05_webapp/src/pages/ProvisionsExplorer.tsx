@@ -57,6 +57,7 @@ export default function ProvisionsExplorer() {
 
   return (
     <div className="space-y-8 pb-20">
+      <p className="rounded-xl border border-slate-300 bg-white p-4 text-sm">Only records marked text_checked_scope_pending underwent the targeted primary-text check. Other provision texts are historical extractions awaiting review, not certified quotations. The mapping explorer shows the source and review status for each correspondence.</p>
       <header className="space-y-1">
          <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">
            Domestic Provisions Corpus

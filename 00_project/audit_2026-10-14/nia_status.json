@@ -1,0 +1,15 @@
+{
+  "country": "Mexico",
+  "status": "designation_or_establishment_reported",
+  "status_as_of": "2026-07-15",
+  "source_date": "2026-08-21",
+  "source_document": "PAHO CD63/INF/1, paragraph 17",
+  "source_url": "https://iris.paho.org/bitstreams/7c461167-1eae-4e58-ad9c-d8ba8338c9dc/download",
+  "designated_institution": null,
+  "domestic_designating_instrument": null,
+  "interpretation": "PAHO reports confirmation by Mexico. This report does not identify the Mexican institution or the domestic act. NFP and NIA must not be conflated.",
+  "nfp": "DGE, identified by final NOM-017 6.6.1",
+  "nfp_source_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225",
+  "ihr_article_4_note": "One or two entities permitted; appropriate legislative and/or administrative arrangements, not universally a statutory designation.",
+  "ihr_source_url": "https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+}

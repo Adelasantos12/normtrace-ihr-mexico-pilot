@@ -43,7 +43,7 @@ def main() -> None:
     if MARKER.exists():
         print('Migration already committed; running validation without reapplying it.')
         return
-    if os.environ.get('GITHUB_ACTIONS') == 'true' and os.environ.get('GITHUB_REF_NAME') != 'audit/legal-evidence-2026-10-14':
+    if os.environ.get('GITHUB_ACTIONS') == 'true' and os.environ.get('GITHUB_REF_NAME') != 'audit/source-evidence-2026-10-14':
         raise RuntimeError('Migration may run only on the dedicated audit branch.')
     payload_dir = Path(__file__).parent / 'audit_payload'
     packed = b''.join((payload_dir / f'part{i:02}.xzpart').read_bytes() for i in range(3))

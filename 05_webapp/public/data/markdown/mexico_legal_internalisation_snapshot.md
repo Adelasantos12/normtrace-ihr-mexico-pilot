@@ -1,3 +1,5 @@
+> **Historical preliminary text, superseded by the 14 October 2026 evidence correction.** The figures and absence claims below have not been revalidated and are not current findings. See the evidence review page.
+
 # Mexico: Legal Internalisation Profile for Pandemic Governance
 
 **Document type:** Country Snapshot — NormTrace-IHR Level 1 Output

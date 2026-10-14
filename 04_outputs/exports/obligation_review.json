@@ -1,0 +1,926 @@
+[
+  {
+    "obligation_id": "IHR-OBL-001",
+    "article": "Art. 4",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_001_001",
+      "MEX_MAP_IHR2005_001_002",
+      "MEX_MAP_IHR2005_001_003",
+      "MEX_AUDIT_IHR-OBL-001_663"
+    ],
+    "candidate_provision_ids": [
+      "MEX-017-art02-estructuraadm",
+      "MEX-017-art35-fraccXIX",
+      "MEX_AUDIT_NOM017_663_664",
+      "MEX_PROV_NOM017_SEC661_001"
+    ],
+    "n_candidate_provisions": 4,
+    "review_flags": [
+      "reference_review_pending",
+      "scope_review_pending"
+    ],
+    "review_status": "references_pending",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-002",
+    "article": "Art. 5(1)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_002_001",
+      "MEX_MAP_IHR2005_002_002",
+      "MEX_MAP_IHR2005_002_003",
+      "MEX_AUDIT_IHR-OBL-002_133",
+      "MEX_AUDIT_IHR-OBL-002_51"
+    ],
+    "candidate_provision_ids": [
+      "MEX-017-art35-fraccX",
+      "MEX_AUDIT_LGS_ART133_II",
+      "MEX_AUDIT_NOM017_51_58",
+      "MEX_PROV_LGS_ART134_001",
+      "MEX_PROV_NOM017_SEC42_001"
+    ],
+    "n_candidate_provisions": 5,
+    "review_flags": [
+      "reference_review_pending",
+      "scope_review_pending",
+      "unreviewed"
+    ],
+    "review_status": "references_pending",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-003",
+    "article": "Art. 5(2)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_003_001",
+      "MEX_MAP_IHR2005_003_002"
+    ],
+    "candidate_provision_ids": [
+      "MEX-017-art35-fraccXIX",
+      "MEX_PROV_LGS_ART136_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "reference_review_pending"
+    ],
+    "review_status": "references_pending",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-004",
+    "article": "Art. 6(1)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_004_001",
+      "MEX_MAP_IHR2005_004_002",
+      "MEX_MAP_IHR2005_004_003",
+      "MEX_AUDIT_IHR-OBL-004_663",
+      "MEX_AUDIT_IHR-OBL-004_814"
+    ],
+    "candidate_provision_ids": [
+      "MEX_AUDIT_NOM017_663_664",
+      "MEX_AUDIT_NOM017_814",
+      "MEX_PROV_LGS_ART136_001",
+      "MEX_PROV_NOM017_SEC661_001",
+      "MEX_PROV_RISI_ART014_001"
+    ],
+    "n_candidate_provisions": 5,
+    "review_flags": [
+      "reference_review_pending"
+    ],
+    "review_status": "references_pending",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-005",
+    "article": "Art. 6(2)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_005_001",
+      "MEX_MAP_IHR2005_005_002",
+      "MEX_AUDIT_IHR-OBL-005_663"
+    ],
+    "candidate_provision_ids": [
+      "MEX-017-art35-fraccXIX",
+      "MEX_AUDIT_NOM017_663_664",
+      "MEX_PROV_LGS_ART136_001"
+    ],
+    "n_candidate_provisions": 3,
+    "review_flags": [
+      "reference_review_pending"
+    ],
+    "review_status": "references_pending",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-006",
+    "article": "Art. 7",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_006_001",
+      "MEX_MAP_IHR2005_006_002"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_LGS_ART136_001",
+      "MEX_PROV_LGS_ART181_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "reference_review_pending"
+    ],
+    "review_status": "references_pending",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-007",
+    "article": "Art. 8",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_007_001",
+      "MEX_MAP_IHR2005_007_002",
+      "MEX_AUDIT_IHR-OBL-007_663"
+    ],
+    "candidate_provision_ids": [
+      "MEX-017-art33-fraccI-IV",
+      "MEX-017-art35-fraccXIX",
+      "MEX_AUDIT_NOM017_663_664"
+    ],
+    "n_candidate_provisions": 3,
+    "review_flags": [
+      "reference_review_pending"
+    ],
+    "review_status": "references_pending",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-008",
+    "article": "Art. 9(2)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_008_001",
+      "MEX_AUDIT_IHR-OBL-008_663"
+    ],
+    "candidate_provision_ids": [
+      "MEX-017-art35-fraccXIX",
+      "MEX_AUDIT_NOM017_663_664"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "reference_review_pending"
+    ],
+    "review_status": "references_pending",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-009",
+    "article": "Art. 10(2)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_009_001",
+      "MEX_AUDIT_IHR-OBL-009_663"
+    ],
+    "candidate_provision_ids": [
+      "MEX-017-art35-fraccXIX",
+      "MEX_AUDIT_NOM017_663_664"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "reference_review_pending"
+    ],
+    "review_status": "references_pending",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-010",
+    "article": "Art. 13(1)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_010_001",
+      "MEX_MAP_IHR2005_010_002",
+      "MEX_MAP_IHR2005_010_003"
+    ],
+    "candidate_provision_ids": [
+      "MEX-017-art43-fraccIX",
+      "MEX_PROV_LGS_ART181_001",
+      "MEX_PROV_LGS_ART184_001"
+    ],
+    "n_candidate_provisions": 3,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-011",
+    "article": "Annex 1A, par.2",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_011_001"
+    ],
+    "candidate_provision_ids": [],
+    "n_candidate_provisions": 0,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-012",
+    "article": "Annex 1A, par.4",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_012_001",
+      "MEX_MAP_IHR2005_012_002",
+      "MEX_AUDIT_IHR-OBL-012_133",
+      "MEX_AUDIT_IHR-OBL-012_814"
+    ],
+    "candidate_provision_ids": [
+      "MEX_AUDIT_LGS_ART133_II",
+      "MEX_AUDIT_NOM017_814",
+      "MEX_PROV_LGS_ART134_001",
+      "MEX_PROV_NOM017_SEC42_001"
+    ],
+    "n_candidate_provisions": 4,
+    "review_flags": [
+      "reference_review_pending",
+      "scope_review_pending"
+    ],
+    "review_status": "references_pending",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-013",
+    "article": "Annex 1A, par.5",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_013_001",
+      "MEX_MAP_IHR2005_013_002",
+      "MEX_AUDIT_IHR-OBL-013_814",
+      "MEX_AUDIT_IHR-OBL-013_51"
+    ],
+    "candidate_provision_ids": [
+      "MEX_AUDIT_NOM017_51_58",
+      "MEX_AUDIT_NOM017_814",
+      "MEX_PROV_LGS_ART146_001",
+      "MEX_PROV_NOM017_SEC311_001"
+    ],
+    "n_candidate_provisions": 4,
+    "review_flags": [
+      "reference_review_pending",
+      "scope_review_pending",
+      "unreviewed"
+    ],
+    "review_status": "references_pending",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-014",
+    "article": "Annex 1A, par.6 (assessment)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_014_001",
+      "MEX_MAP_IHR2005_014_002",
+      "MEX_AUDIT_IHR-OBL-014_133",
+      "MEX_AUDIT_IHR-OBL-014_663",
+      "MEX_AUDIT_IHR-OBL-014_814"
+    ],
+    "candidate_provision_ids": [
+      "MEX_AUDIT_LGS_ART133_II",
+      "MEX_AUDIT_NOM017_663_664",
+      "MEX_AUDIT_NOM017_814",
+      "MEX_PROV_LGS_ART134_001",
+      "MEX_PROV_NOM017_SEC661_001"
+    ],
+    "n_candidate_provisions": 5,
+    "review_flags": [
+      "reference_review_pending",
+      "scope_review_pending"
+    ],
+    "review_status": "references_pending",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-015",
+    "article": "Annex 1A, par.6 (response)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_015_001",
+      "MEX_MAP_IHR2005_015_002",
+      "MEX_AUDIT_IHR-OBL-015_51"
+    ],
+    "candidate_provision_ids": [
+      "MEX-017-art43-fraccIX",
+      "MEX_AUDIT_NOM017_51_58",
+      "MEX_PROV_LGS_ART181_001"
+    ],
+    "n_candidate_provisions": 3,
+    "review_flags": [
+      "reference_review_pending",
+      "unreviewed"
+    ],
+    "review_status": "references_pending",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-016",
+    "article": "Annex 1B, par.1",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_016_001",
+      "MEX_MAP_IHR2005_016_002",
+      "MEX_MAP_IHR2005_016_003"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_LGS_ART352_001",
+      "MEX_PROV_RISS2025_ART026_001",
+      "MEX_PROV_RISS2025_ART027_001"
+    ],
+    "n_candidate_provisions": 3,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-017",
+    "article": "Annex 1B, par.2",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_017_001",
+      "MEX_MAP_IHR2005_017_002"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_RISI_ART006_001",
+      "MEX_PROV_RISS2025_ART026_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-018",
+    "article": "Art. 19",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_018_001",
+      "MEX_MAP_IHR2005_018_002"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_LGS_ART352_001",
+      "MEX_PROV_RISS2025_ART010_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-019",
+    "article": "Art. 20(1)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_019_001",
+      "MEX_MAP_IHR2005_019_002"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_LGS_ART352_001",
+      "MEX_PROV_RISS2025_ART010_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-020",
+    "article": "Art. 20(2)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_020_001"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_RISS2025_ART044_001"
+    ],
+    "n_candidate_provisions": 1,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-021",
+    "article": "Art. 20(3)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_021_001"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_LGS_ART359_001"
+    ],
+    "n_candidate_provisions": 1,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-022",
+    "article": "Art. 21",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_022_001",
+      "MEX_MAP_IHR2005_022_002"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_LADUANERA_ART003_001",
+      "MEX_PROV_RISS2025_ART026_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-023",
+    "article": "Art. 22(1)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_023_001",
+      "MEX_MAP_IHR2005_023_002"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_LGS_ART017BIS_001",
+      "MEX_PROV_RISS2025_ART044_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-024",
+    "article": "Art. 23(3)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_024_001",
+      "MEX_MAP_IHR2005_024_002"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_CPEUM_ART014_001",
+      "MEX_PROV_LGS_ART139_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-025",
+    "article": "Art. 23(4)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_025_001",
+      "MEX_MAP_IHR2005_025_002"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_RISS2025_ART069_001",
+      "MEX_PROV_RISS2025_ART070_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-026",
+    "article": "Art. 24(1)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_026_001",
+      "MEX_MAP_IHR2005_026_002"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_LADUANERA_ART007_001",
+      "MEX_PROV_RISS2025_ART044_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-027",
+    "article": "Art. 27(1)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_027_001",
+      "MEX_MAP_IHR2005_027_002"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_RISS2025_ART068_001",
+      "MEX_PROV_RISS2025_ART069_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-028",
+    "article": "Art. 30",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_028_001",
+      "MEX_MAP_IHR2005_028_002"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_RISS2025_ART069_001",
+      "MEX_PROV_RISS2025_ART070_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-029",
+    "article": "Art. 31(1)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_029_001",
+      "MEX_MAP_IHR2005_029_002"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_CPEUM_ART014_001",
+      "MEX_PROV_LGS_ART139_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-030",
+    "article": "Art. 31(2)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_030_001",
+      "MEX_MAP_IHR2005_030_002"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_LGS_ART139_001",
+      "MEX_PROV_RISS2025_ART068_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-031",
+    "article": "Art. 32",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_031_001",
+      "MEX_MAP_IHR2005_031_002"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_CPEUM_ART001_001",
+      "MEX_PROV_RISS2025_ART069_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-032",
+    "article": "Art. 35",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_032_001"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_RISS2025_ART009_001"
+    ],
+    "n_candidate_provisions": 1,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-033",
+    "article": "Art. 36",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_033_001"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_RISI_ART003_001"
+    ],
+    "n_candidate_provisions": 1,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-034",
+    "article": "Art. 37",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_034_001",
+      "MEX_AUDIT_IHR-OBL-034_31"
+    ],
+    "candidate_provision_ids": [
+      "MEX_AUDIT_RLGSSI_ART031",
+      "MEX_PROV_RISS2025_ART009_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "reference_review_pending"
+    ],
+    "review_status": "references_pending",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-035",
+    "article": "Art. 38",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_035_001",
+      "MEX_AUDIT_IHR-OBL-035_30"
+    ],
+    "candidate_provision_ids": [
+      "MEX_AUDIT_RLGSSI_ART030",
+      "MEX_PROV_RISS2025_ART009_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "reference_review_pending"
+    ],
+    "review_status": "references_pending",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-036",
+    "article": "Art. 39",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_036_001"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_RISS2025_ART044_001"
+    ],
+    "n_candidate_provisions": 1,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-037",
+    "article": "Art. 40",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_037_001"
+    ],
+    "candidate_provision_ids": [
+      "MEX_AUDIT_RLGSSI_ART007"
+    ],
+    "n_candidate_provisions": 1,
+    "review_flags": [
+      "scope_review_pending"
+    ],
+    "review_status": "scope_pending",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-038",
+    "article": "Art. 41",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_038_001"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_LADUANERA_ART056_001"
+    ],
+    "n_candidate_provisions": 1,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-039",
+    "article": "Art. 42",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_039_001",
+      "MEX_MAP_IHR2005_039_002"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_CPEUM_ART001_001",
+      "MEX_PROV_LGS_ART139_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-040",
+    "article": "Art. 43(1)-(2)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_040_001",
+      "MEX_MAP_IHR2005_040_002"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_LGS_ART181_001",
+      "MEX_PROV_LGS_ART184_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-041",
+    "article": "Art. 43(3) and (5)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_041_001"
+    ],
+    "candidate_provision_ids": [
+      "MEX-017-art35-fraccXIX"
+    ],
+    "n_candidate_provisions": 1,
+    "review_flags": [
+      "scope_review_pending"
+    ],
+    "review_status": "scope_pending",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-042",
+    "article": "Art. 43(6)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_042_001"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_LGS_ART184_001"
+    ],
+    "n_candidate_provisions": 1,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-043",
+    "article": "Art. 44(1)",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_043_001",
+      "MEX_MAP_IHR2005_043_002"
+    ],
+    "candidate_provision_ids": [
+      "MEX-017-art33-fraccI-IV",
+      "MEX_PROV_LOAPF_ART028_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-044",
+    "article": "Art. 45",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_044_001",
+      "MEX_MAP_IHR2005_044_002"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_CPEUM_ART016_001",
+      "MEX_PROV_LGPDPPSO_ART016_001"
+    ],
+    "n_candidate_provisions": 2,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  },
+  {
+    "obligation_id": "IHR-OBL-045",
+    "article": "Art. 46",
+    "mapping_ids": [
+      "MEX_MAP_IHR2005_045_001"
+    ],
+    "candidate_provision_ids": [
+      "MEX_PROV_RLGS_INV_ART011_001"
+    ],
+    "n_candidate_provisions": 1,
+    "review_flags": [
+      "unreviewed"
+    ],
+    "review_status": "not_revalidated",
+    "confirmed_gap": null,
+    "complete_pathway": null,
+    "current_anchoring_score": null
+  }
+]
