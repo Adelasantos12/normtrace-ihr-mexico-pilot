@@ -89,6 +89,10 @@ additions=[
  ('MEX_PROV_RISI_ART007_AUDIT','MEX-016','Art. 7o.','Los servicios de sanidad internacional y los documentos respectivos que se expidan de acuerdo con la Ley, este Reglamento y demás disposiciones aplicables, serán gratuitos, a excepción de los siguientes servicios: I.-Los de Desinfección, Desinsectación y Desratización, y II.-Los demás que establezcan el Reglamento Sanitario Internacional, los tratados o Convenciones internacionales y la legislación fiscal aplicable.','Servicios de sanidad internacional','RISI','Candidate basis on gratuity. Scope and exceptions must be compared with IHR Article 40; not a compliance determination.','identified_text_scope_pending'),
  ('MEX_PROV_RISI_ART030_AUDIT','MEX-016','Art. 30','El comandante de la aeronave o jefe de sobrecargos a borde de un avión en tránsito internacional, al aterrizar en un aeropuerto nacional, llenará y presentará a la Secretaría un ejemplar de la declaración general de aeronave, cuya parte sanitaria contenga los informes en la forma establecida por el Reglamento Sanitario Internacional. El comandante suministrará, además, la información complementaria que requiera la Secretaría, respecto a las condiciones de sanidad a bordo durante el viaje.','Comandante de aeronave; jefe de sobrecargos; Secretaría de Salud','RISI','Identifies presenter, arrival and IHR form reference. Detailed compatibility with current annex remains to be reviewed.','identified_text_scope_pending'),
  ('MEX_PROV_RISI_ART031_AUDIT','MEX-016','Art. 31','Al arribar una embarcación al Territorio Nacional, el capitán entregará a la Secretaría la declaración marítima de sanidad en la forma establecida por el Reglamento Sanitario Internacional. El capitán de la embarcación y el médico, si lo hubiere, facilitarán los datos que les solicite la Secretaría respecto a las condiciones de sanidad a bordo durante la travesía.','Capitán; médico de embarcación; Secretaría de Salud','RISI','Identifies presenter, arrival and IHR form reference. Detailed compatibility with current annex remains to be reviewed.','identified_text_scope_pending')]
+for c in corpus:
+ if c['norm_id']=='MEX-012':
+  c['official_source']=SOURCES['NOM017']['url']
+  c['notes']=c.get('notes','')+' | Audit 2026-10-14: final NOM publication, not PROY-NOM.'
 corpus_by={p['norm_id']:p for p in corpus}
 for pid,nid,article,text,actor,source,note,status in additions:
  n=corpus_by[nid];p={k:'' for k in provisions[0]}
@@ -202,6 +206,9 @@ def main():
   for name,obj in [('evidence_network.json',graph),('audit_summary.json',summary)]: (folder/name).write_text(json.dumps(obj,ensure_ascii=False,sort_keys=True,indent=2)+'\n',encoding='utf-8')
   write(folder/'network_edges.csv',edges,list(edges[0]));write(folder/'node_registry.csv',[dict(node_id=n['id'],mode=n['mode'],degree=n['degree'],label=n['label']) for n in nodes],['node_id','mode','degree','label'])
   (folder/'network_metrics.json').write_text(json.dumps(dict(status='legacy_inference_withdrawn',replacement='evidence_network.json',network=dict(n_obligations=len(o),n_instruments=len(inst_ids),n_edges=len(edges)),note=graph['note']),indent=2)+'\n')
+ # CSV mirrors are build outputs, never independent sources of truth.
+ for source,dest in [('03_tables/country_legal_mapping/mexico_ihr2005_mapping.csv','mexico_ihr2005_mapping_clean.csv'),('03_tables/country_legal_mapping/mexico_legal_provisions.csv','mexico_legal_provisions_clean.csv'),('03_tables/country_legal_mapping/mexico_normative_corpus_index.csv','mexico_normative_corpus_index_clean.csv'),('03_tables/actors/mexico_health_governance_actors.csv','mexico_health_governance_actors_clean.csv'),('03_tables/actors/actor_obligation_evidence.csv','actor_obligation_evidence.csv')]:
+  (ROOT/'05_webapp/public/data'/dest).write_bytes((ROOT/source).read_bytes())
  print(json.dumps(summary,ensure_ascii=False))
 if __name__=='__main__':main()
 '''
@@ -341,14 +348,14 @@ export default function ActorsExplorer(){
 }
 ''')
 app=ROOT/'05_webapp/src/App.tsx';s=app.read_text()
-s="import EvidenceReview from './pages/EvidenceReview';\n"+s
+s=("import EvidenceReview from './pages/EvidenceReview';\n"+s) if "import EvidenceReview from" not in s else s
 # Withdraw only screens whose current output was calculated from the retired ratings.
 legacy_components=['Dashboard','CountrySnapshot','GapMap','CapacityBrief','NormPipeline','NormativeHierarchy','NormDiagnostic','PoliticalBrain','ReportBuilder','ReportPrint']
 for name in legacy_components:
  s=re.sub(r"import "+name+r" from '[^']+';\n",'',s);s=s.replace('<'+name+' />','<EvidenceReview />')
-s=s.replace('<Route element={<Layout />}>','<Route element={<Layout />}>\n          <Route path="/audit" element={<EvidenceReview />} />')
+if 'path="/audit"' not in s:s=s.replace('<Route element={<Layout />}>','<Route element={<Layout />}>\n          <Route path="/audit" element={<EvidenceReview />} />')
 app.write_text(s)
-layout=ROOT/'05_webapp/src/Layout.tsx';s=layout.read_text();s="import AuditNotice from './components/AuditNotice';\n"+s;s=s.replace('<Outlet />','<AuditNotice /><Outlet />').replace('Mexico Pilot v0.1','Mexico Pilot 0.1.1-audit').replace("label: 'Political Brain'","label: 'Political Brain (review)' ").replace("label: 'Implementation Gap Map'","label: 'Gap classifications (review)'")
+layout=ROOT/'05_webapp/src/Layout.tsx';s=layout.read_text();s=("import AuditNotice from './components/AuditNotice';\n"+s) if "import AuditNotice from" not in s else s;s=s.replace('<Outlet />','<AuditNotice /><Outlet />') if '<AuditNotice /><Outlet />' not in s else s.replace('Mexico Pilot v0.1','Mexico Pilot 0.1.1-audit').replace("label: 'Political Brain'","label: 'Political Brain (review)' ").replace("label: 'Implementation Gap Map'","label: 'Gap classifications (review)'")
 layout.write_text(s)
 method=ROOT/'05_webapp/src/pages/Methodology.tsx';method.write_text(method.read_text().replace('Audit version 0.1 (stable)','Scoped source audit · 14 October 2026').replace('View full academic methodology draft','Read methodology review note'))
 

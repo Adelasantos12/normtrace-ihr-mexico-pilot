@@ -37,5 +37,8 @@ def main():
   for name,obj in [('evidence_network.json',graph),('audit_summary.json',summary)]: (folder/name).write_text(json.dumps(obj,ensure_ascii=False,sort_keys=True,indent=2)+'\n',encoding='utf-8')
   write(folder/'network_edges.csv',edges,list(edges[0]));write(folder/'node_registry.csv',[dict(node_id=n['id'],mode=n['mode'],degree=n['degree'],label=n['label']) for n in nodes],['node_id','mode','degree','label'])
   (folder/'network_metrics.json').write_text(json.dumps(dict(status='legacy_inference_withdrawn',replacement='evidence_network.json',network=dict(n_obligations=len(o),n_instruments=len(inst_ids),n_edges=len(edges)),note=graph['note']),indent=2)+'\n')
+ # CSV mirrors are build outputs, never independent sources of truth.
+ for source,dest in [('03_tables/country_legal_mapping/mexico_ihr2005_mapping.csv','mexico_ihr2005_mapping_clean.csv'),('03_tables/country_legal_mapping/mexico_legal_provisions.csv','mexico_legal_provisions_clean.csv'),('03_tables/country_legal_mapping/mexico_normative_corpus_index.csv','mexico_normative_corpus_index_clean.csv'),('03_tables/actors/mexico_health_governance_actors.csv','mexico_health_governance_actors_clean.csv'),('03_tables/actors/actor_obligation_evidence.csv','actor_obligation_evidence.csv')]:
+  (ROOT/'05_webapp/public/data'/dest).write_bytes((ROOT/source).read_bytes())
  print(json.dumps(summary,ensure_ascii=False))
 if __name__=='__main__':main()
