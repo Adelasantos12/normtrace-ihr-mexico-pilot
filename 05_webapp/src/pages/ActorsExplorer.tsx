@@ -421,7 +421,7 @@ function ComputedNetworkGraph({
           </p>
           {netMetrics?.isolated_obligations && netMetrics.isolated_obligations.length > 0 && (
             <p className="text-[10px] text-amber-700 max-w-2xl leading-relaxed">
-              {netMetrics.isolated_obligations.length} obligation{netMetrics.isolated_obligations.length === 1 ? '' : 's'} ({netMetrics.isolated_obligations.map((id) => oblLookup[id]?.article || id).join(', ')}) have no domestic legal anchor at all and so carry
+              {netMetrics.isolated_obligations.length} obligation{netMetrics.isolated_obligations.length === 1 ? '' : 's'} ({netMetrics.isolated_obligations.map((id) => oblLookup[id]?.article || id).join(', ')}) have no identified source match in the reviewed corpus and so carry
               no edges: they render as disconnected circles, not as an error. Dropping them instead would hide the
               corpus's most severe finding, not just a rendering quirk.
             </p>
