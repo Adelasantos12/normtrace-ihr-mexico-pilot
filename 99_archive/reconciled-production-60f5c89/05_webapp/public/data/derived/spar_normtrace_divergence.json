@@ -1,0 +1,96 @@
+{
+  "generated_by": "06_scripts/build_tables/spar_normtrace_bridge.py",
+  "country": "Mexico",
+  "scope_note": "SPAR C1.1 already asks for national and subnational legal mapping; C2.1 addresses focal-point mandate and functioning. NormTrace organizes obligation-level documentary evidence.",
+  "thesis": "A published score does not substitute for inspectable legal sources.",
+  "primary_comparison": "not_comparable",
+  "comparison_rationale": "No validated common construct, denominator or item-level crosswalk. Subtraction withdrawn.",
+  "headline_cc1": {
+    "capacity": "C1 Legislation, policy & financing",
+    "cc_tag": "CC1",
+    "spar_self_report_latest": 60.0,
+    "spar_self_report_mean": 80.6,
+    "normtrace_legal_anchoring_pct": null,
+    "divergence_latest": null,
+    "divergence_mean": null,
+    "n_obligations": 20
+  },
+  "normtrace_corpus_anchoring_pct": null,
+  "cc1_spar_series": {
+    "latest_year": 2025,
+    "latest": 60.0,
+    "mean": 80.6,
+    "max": 100.0,
+    "trajectory": [
+      {
+        "year": 2010,
+        "value": 50.0
+      },
+      {
+        "year": 2011,
+        "value": 100.0
+      },
+      {
+        "year": 2012,
+        "value": 100.0
+      },
+      {
+        "year": 2013,
+        "value": 100.0
+      },
+      {
+        "year": 2014,
+        "value": 100.0
+      },
+      {
+        "year": 2015,
+        "value": 100.0
+      },
+      {
+        "year": 2016,
+        "value": 100.0
+      },
+      {
+        "year": 2017,
+        "value": 100.0
+      },
+      {
+        "year": 2018,
+        "value": 100.0
+      },
+      {
+        "year": 2019,
+        "value": 80.0
+      },
+      {
+        "year": 2020,
+        "value": 80.0
+      },
+      {
+        "year": 2021,
+        "value": 60.0
+      },
+      {
+        "year": 2022,
+        "value": 40.0
+      },
+      {
+        "year": 2023,
+        "value": 60.0
+      },
+      {
+        "year": 2024,
+        "value": 60.0
+      },
+      {
+        "year": 2025,
+        "value": 60.0
+      }
+    ]
+  },
+  "caveats": [
+    "SPAR and NormTrace are not equivalent measurements. No divergence or overstatement is inferred.",
+    "The SPAR instrument changed across reporting editions; the historical series is not measurement-invariant.",
+    "NormTrace source corrections remain subject to legal scope review."
+  ]
+}

@@ -1,0 +1,59 @@
+name: Reconcile final NOM and validate audit
+on:
+  push:
+    branches: [audit/legal-evidence-2026-10-14]
+    paths: ['06_scripts/maintenance/reconcile_legal_audit_20261014.py', '.github/workflows/reconcile-audit-20261014.yml']
+permissions:
+  contents: write
+concurrency:
+  group: final-nom-reconciliation
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install networkx==3.6.1 pandas==3.0.6
+      - name: Reconcile final standard and regenerate consumers
+        run: |
+          python3 06_scripts/maintenance/reconcile_legal_audit_20261014.py
+          python3 06_scripts/build_tables/build_audit_summary.py
+          python3 06_scripts/build_tables/build_network.py
+          python3 06_scripts/build_tables/spar_normtrace_bridge.py
+          python3 06_scripts/validation/validate_content.py
+          python3 -m unittest discover -s 06_scripts/validation -p 'test_*.py' -v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: 05_webapp/package-lock.json
+      - name: Build and test all audited routes
+        working-directory: 05_webapp
+        run: |
+          npm ci
+          npm run build
+          npx playwright install --with-deps chromium
+          npx playwright test tests/audit_20261014.spec.ts --reporter=line
+      - name: Persist only validated source and generated data
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 00_project 03_tables 04_outputs 05_webapp/public/data 05_webapp/tests 06_scripts
+          git commit -m "fix(audit): use final NOM, reconcile candidate matches and retain withheld scores"
+          git push origin HEAD:${{ github.ref_name }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: final-nom-reconciliation-evidence
+          path: |
+            05_webapp/test-results
+            04_outputs/exports/data_package_v0_2_audit
+            00_project/legal_audit_applied.json
+            00_project/AUDIT_RECONCILIATION_20261014.md
+          retention-days: 14

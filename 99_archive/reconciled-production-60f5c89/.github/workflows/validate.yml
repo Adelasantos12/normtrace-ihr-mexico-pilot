@@ -1,0 +1,42 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  content-and-build:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONHASHSEED: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install reproducible pipeline dependencies
+        run: pip install networkx==3.2.1 pandas==2.2.3
+      - name: Regenerate network and SPAR context
+        run: |
+          python3 06_scripts/build_tables/build_network.py
+          python3 06_scripts/build_tables/spar_normtrace_bridge.py
+      - name: Validate sources, references, units and withdrawn claims
+        run: python3 06_scripts/validation/validate_content.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: 05_webapp/package-lock.json
+      - name: Install application dependencies
+        working-directory: 05_webapp
+        run: npm ci
+      - name: Build application
+        working-directory: 05_webapp
+        run: npm run build
+      - name: Check committed derivations are reproducible
+        run: |
+          git diff --stat
+          git diff --quiet -- 04_outputs 05_webapp/public/data/derived || {
+            echo '::error::Generated data differs from the committed version. Rebuild, review and commit it.';
+            exit 1;
+          }

@@ -1,0 +1,20 @@
+import type { ReactNode } from 'react';
+import { useJsonData } from '../hooks/useData';
+export default function AuditReview() {
+ const { data, loading, error } = useJsonData<any>('derived/audit_20261014.json');
+ if (loading) return <p role="status">Loading audit records…</p>;
+ if (error || !data) return <p role="alert">Audit records could not be loaded. Do not use previous counts as current findings.</p>;
+ return <article className="space-y-6 pb-12">
+ <header><h1 className="text-3xl font-bold">Source corrections and review status</h1><p className="mt-3">{data.version} · {data.status}</p></header>
+ <div className="grid grid-cols-2 md:grid-cols-5 gap-3">{Object.entries(data.counts).map(([k,v])=><div className="p-4 border rounded-xl bg-white" key={k}><strong className="text-2xl">{String(v)}</strong><p>{k.replaceAll('_',' ')}</p></div>)}</div>
+ <p>{data.aggregation_note}</p><p>{data.complete_pathway_note}</p>
+ <section className="space-y-2"><h2 className="text-xl font-semibold">National IHR Authority</h2><p>PAHO reports that Mexico had confirmed designation or establishment by 15 July 2026 (CD63/INF/1, paragraph 17). This report does not identify the institution or domestic designation instrument. The DGE focal-point function must not be equated with this new role without the corresponding source.</p><a className="underline" href={data.sources.paho}>PAHO report, 21 August 2026</a></section>
+ <section className="space-y-2"><h2 className="text-xl font-semibold">Legal-source network</h2><p>Edges connect obligations to instruments and actor profiles to their cited sources. Sharing an instrument does not prove a directed dependency, a power to issue the instrument, or an observed exchange. The DGE is included through explicit NOM-017 and Interior Regulation source aliases. Obligations without a source match remain visible as isolated nodes.</p><a className="underline" href="/data/derived/legally_described_relationships.csv" download>Download the separately sourced notification-path record</a></section>
+ <section><h2 className="text-xl font-semibold">Current provisional flags</h2><p>These overlapping categories describe unrevalidated record-level codes, not confirmed legal gaps.</p><div className="overflow-x-auto"><table className="w-full mt-3 text-sm"><thead><tr><th className="text-left">Code</th><th>Distinct obligations</th><th className="text-left">Identifiers</th></tr></thead><tbody>{Object.entries(data.provisional_flags).map(([k,v]:[string,any])=><tr className="border-t" key={k}><td className="py-2">{k}</td><td className="text-center">{v.count}</td><td className="py-2 break-words">{v.obligation_ids.join(', ')}</td></tr>)}</tbody></table></div></section>
+ <section><h2 className="text-xl font-semibold">Source corrections</h2>{data.changes.map((c:any)=><details className="border rounded-lg p-3 mt-2 bg-white" key={c.mapping_id}><summary className="cursor-pointer">{c.obligation_id} · {c.after.domestic_article} · {c.after.evidence_status}</summary><p className="mt-3">{c.after.assessment_summary}</p><p className="mt-2 text-sm">{c.after.reviewer_notes}</p>{c.after.audit_sources && <a className="underline block mt-2" href={c.after.audit_sources}>Primary source</a>}<pre className="text-xs whitespace-pre-wrap break-words mt-3">{JSON.stringify({before:c.before,after:c.after},null,2)}</pre></details>)}</section>
+ <p><a className="underline" href="/data/derived/audit_20261014.json" download>Download versioned audit and before/after records</a></p>
+ </article>;
+}
+export function ReviewGate({ children }: { children: ReactNode }) {
+ return <><AuditReview /><details className="border border-amber-300 rounded-xl p-5 mb-8"><summary className="font-semibold cursor-pointer">Archived exploratory view — not revalidated after source corrections</summary><p className="my-4">This earlier synthesis is retained for research continuity. Its automatic gap, hierarchy and operational interpretations are not current findings. Use the corrected records and sources above.</p>{children}</details></>;
+}
