@@ -1,0 +1,27 @@
+name: Legal audit 2026-10-14
+on:
+  push:
+    branches: [audit/legal-2026-10-14]
+    paths:
+      - .github/workflows/legal-audit-20261014.yml
+      - 06_scripts/audit_2026_10_14.py
+permissions:
+  contents: read
+concurrency:
+  group: legal-audit-20261014
+  cancel-in-progress: true
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Export tracked source for audit and reproducibility
+        run: git archive --format=zip --output=/tmp/normtrace-source.zip HEAD
+      - uses: actions/upload-artifact@v4
+        with:
+          name: normtrace-source
+          path: /tmp/normtrace-source.zip
+          retention-days: 7
