@@ -1,0 +1,114 @@
+name: Implement and verify scoped legal audit
+on:
+  push:
+    branches: [audit/implemented-corrections-20261014]
+    paths:
+      - '06_scripts/audit/**'
+      - '.github/workflows/implement-legal-audit.yml'
+permissions:
+  contents: write
+concurrency:
+  group: legal-audit-20261014
+  cancel-in-progress: false
+jobs:
+  implement:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/implemented-corrections-20261014
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: 05_webapp/package-lock.json
+      - name: Apply source corrections and regenerate descriptive artifacts
+        run: python3 06_scripts/audit/apply_20261014.py
+      - name: Verify builder determinism
+        run: |
+          sha256sum 04_outputs/figures/* 05_webapp/public/data/derived/* > /tmp/before-hashes
+          python3 06_scripts/build_tables/build_network.py
+          python3 06_scripts/build_tables/spar_normtrace_bridge.py
+          sha256sum 04_outputs/figures/* 05_webapp/public/data/derived/* > /tmp/after-hashes
+          diff /tmp/before-hashes /tmp/after-hashes
+          python3 06_scripts/validation/validate_content.py
+      - name: Install and build
+        working-directory: 05_webapp
+        run: npm ci && npm run build
+      - name: Browser dependencies
+        working-directory: 05_webapp
+        run: npx playwright install --with-deps chromium
+      - name: Browser regression and screenshots
+        working-directory: 05_webapp
+        run: |
+          mkdir -p ../04_outputs/reports/audit-browser
+          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/audit-preview.log 2>&1 &
+          node --input-type=module <<'JS'
+          import { chromium } from '@playwright/test';
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs';
+          const browser = await chromium.launch({headless:true});
+          const page = await browser.newPage({viewport:{width:1440,height:1000},reducedMotion:'reduce'});
+          const errors=[]; page.on('pageerror',e=>errors.push(String(e)));
+          const checked=[];
+          for(const route of ['/', '/mapping','/actors','/spar-bridge','/methodology','/audit','/provisions','/international','/dashboard','/pipeline','/snapshot','/report/print']){
+            await page.goto('http://127.0.0.1:4173'+route,{waitUntil:'networkidle'});
+            const text=await page.locator('body').innerText();
+            assert(text.length>150,route+' has content');
+            assert(!text.includes('Could not load'),route+' loads data');
+            assert(!text.includes('NaN'),route+' has no invalid numerical rendering');
+            assert(!text.includes('+26'),route+' does not render withdrawn divergence');
+            checked.push(route);
+          }
+          await page.goto('http://127.0.0.1:4173/mapping',{waitUntil:'networkidle'});
+          await page.getByLabel('Search correspondences').fill('IHR-OBL-037');
+          await page.waitForTimeout(200);
+          assert((await page.locator('article').count())===1,'Article40 active replacement is unique');
+          assert((await page.locator('article').innerText()).includes('Art. 7'),'Article40 links to Article7');
+          await page.getByText('Include superseded records').click();
+          assert((await page.locator('article').count())===2,'Superseded no-match is available only when requested');
+          await page.goto('http://127.0.0.1:4173/actors',{waitUntil:'networkidle'});
+          await page.getByLabel('Select a network node').selectOption('MEX_ACTOR_DGE_001');
+          assert((await page.locator('body').innerText()).includes('Dirección General de Epidemiología'),'DGE separately selectable');
+          await page.getByRole('button',{name:'Zoom in',exact:true}).click();
+          await page.getByRole('button',{name:'Fit',exact:true}).click();
+          await page.screenshot({path:'../04_outputs/reports/audit-browser/actors-desktop.png',fullPage:true});
+          const response=await page.request.get('http://127.0.0.1:4173/data/derived/audit_summary.json');
+          const summary=await response.json(); assert.equal(summary.obligations,45); assert.equal(summary.active_mapping_records,89); assert.equal(summary.confirmed_gap_count,null);
+          await page.setViewportSize({width:390,height:844});
+          await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});
+          const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2);
+          assert(!overflow,'Home has no mobile document overflow');
+          await page.screenshot({path:'../04_outputs/reports/audit-browser/home-mobile.png',fullPage:true});
+          assert.equal(errors.length,0,errors.join('\n'));
+          fs.writeFileSync('../04_outputs/reports/audit_browser_20261014.json',JSON.stringify({status:'passed',routes:checked,page_errors:errors,checks:['Article40 replacement','superseded visibility','DGE selection','zoom and fit','summary counts','mobile home overflow'],scope:'Browser/data regression, not legal validity'},null,2)+'\n');
+          await browser.close();
+          JS
+      - name: Save tested corrections on audit branch only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 00_project 03_tables 04_outputs 05_webapp/src 05_webapp/public/data 06_scripts 99_archive/legal_audit_20261014
+          if ! git diff --cached --quiet; then
+            git commit -m 'fix: apply verified source corrections and withdraw unsupported legal inferences [skip ci]'
+            git push origin HEAD:audit/implemented-corrections-20261014
+          fi
+          git rev-parse HEAD > /tmp/audit-tested-sha.txt
+      - name: Package test evidence and corrected source
+        if: always()
+        run: |
+          mkdir -p /tmp/audit-package
+          tar --exclude=.git --exclude=node_modules --exclude=dist -czf /tmp/audit-package/corrected-source.tar.gz .
+          cp /tmp/audit-tested-sha.txt /tmp/audit-package/ 2>/dev/null || true
+          cp -r 04_outputs/reports/audit-browser /tmp/audit-package/ 2>/dev/null || true
+          cp 04_outputs/reports/audit*20261014.json /tmp/audit-package/ 2>/dev/null || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: normtrace-corrected-source-and-tests
+          path: /tmp/audit-package
+          retention-days: 7
