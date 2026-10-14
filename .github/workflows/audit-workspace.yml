@@ -1,0 +1,23 @@
+name: Audit workspace
+on:
+  push:
+    branches: ['audit/legal-traceability-2026-10-14']
+    paths:
+      - '.github/workflows/audit-workspace.yml'
+      - '06_scripts/audit/**'
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Package tracked source for the authorized audit
+        run: git archive --format=tar.gz -o /tmp/normtrace-audit-source.tar.gz HEAD
+      - uses: actions/upload-artifact@v4
+        with:
+          name: normtrace-audit-source
+          path: /tmp/normtrace-audit-source.tar.gz
+          retention-days: 3
+          if-no-files-found: error
