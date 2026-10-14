@@ -15,7 +15,7 @@ def main():
  'instruments':read('03_tables/country_legal_mapping/mexico_normative_corpus_index.csv'),
  'mappings':read('03_tables/country_legal_mapping/mexico_ihr2005_mapping.csv'),
  'actors':read('03_tables/actors/mexico_health_governance_actors.csv')}
- expected={'obligations':45,'provisions':117,'instruments':18,'mappings':93,'actors':18}
+ expected={'obligations':45,'provisions':117,'instruments':18,'mappings':94,'actors':18}
  for key,n in expected.items():check(len(data[key])==n,f'{key}: release expects {n}, found {len(data[key])}')
  for key,field in [('obligations','obligation_id'),('provisions','provision_id'),('instruments','norm_id'),('mappings','mapping_id'),('actors','actor_id')]:
   vals=[r[field] for r in data[key]];check(len(vals)==len(set(vals)) and all(vals),f'{key}: duplicate or blank identifiers')

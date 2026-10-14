@@ -1731,5 +1731,40 @@
       "audit_source_urls"
     ],
     "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_AUDIT20261014_013_MEX_PROV_NOM017_SEC663_AUDIT",
+    "obligation_id": "IHR-OBL-013",
+    "change": "concurrent_source_correspondence_retained",
+    "before": null,
+    "after": {
+      "mapping_id": "MEX_MAP_AUDIT20261014_013_MEX_PROV_NOM017_SEC663_AUDIT",
+      "obligation_id": "IHR-OBL-013",
+      "domestic_provision_id": "MEX_PROV_NOM017_SEC663_AUDIT",
+      "domestic_norm": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica",
+      "domestic_article": "Numeral 6.6.3",
+      "match_type": "regulatory",
+      "anchoring_level": "",
+      "actor_fit": "identified in source",
+      "procedure_fit": "review pending",
+      "coordination_fit": "review pending",
+      "enforcement_fit": "not assessed",
+      "rights_safeguard_fit": "not assessed",
+      "federalism_fit": "review pending",
+      "assessment_summary": "International surveillance duties are allocated across technical-administrative levels. Extent of obligation-specific coordination requires review.",
+      "gap_type": "review pending",
+      "confidence_level": "not rated",
+      "review_status": "requires_human_review",
+      "reviewer_notes": "Source text checked; adequacy and scoring not certified.",
+      "legacy_anchoring_level": "",
+      "legacy_gap_type": "",
+      "audit_date": "2026-10-14",
+      "audit_status": "source_added_reassessment_required",
+      "source_verification_status": "relevant_source_checked",
+      "referral_status": "manual_review_pending",
+      "audit_source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225",
+      "audit_notes": "Source identification/text checked against the official instrument. Legal adequacy, current implementation and scoring are not certified. Retained concurrent audit correspondence from 60f5c89903511710ed1615cbf7e7566c5ebd9d40; intermediate-level scope remains pending review."
+    },
+    "concurrent_commit": "60f5c89903511710ed1615cbf7e7566c5ebd9d40"
   }
 ]

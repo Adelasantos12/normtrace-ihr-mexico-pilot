@@ -3,10 +3,10 @@ import fs from 'node:fs';
 
 test('release manifest and landing show current evidence counts, not divergence', async ({page,request})=>{
  const manifest=await (await request.get('/data/derived/audit_manifest.json')).json();
- expect(manifest.counts).toEqual({obligations:45,provisions:117,instruments:18,mappings:93,actors:18});
+ expect(manifest.counts).toEqual({obligations:45,provisions:117,instruments:18,mappings:94,actors:18});
  expect(manifest.current_mean_anchoring).toBeNull();expect(manifest.complete_pathways).toBeNull();
  await page.goto('/');await expect(page.getByRole('heading',{name:'Follow the law behind IHR implementation'})).toBeVisible();
- await expect(page.getByText('117',{exact:true})).toBeVisible();await expect(page.getByText('93',{exact:true})).toBeVisible();
+ await expect(page.getByText('117',{exact:true})).toBeVisible();await expect(page.getByText('94',{exact:true})).toBeVisible();
  await expect(page.getByText('+26 pts',{exact:true})).toHaveCount(0);
  fs.mkdirSync('audit-screenshots',{recursive:true});await page.screenshot({path:'audit-screenshots/landing-desktop.png',fullPage:true});
 });

@@ -15,7 +15,7 @@ A correspondence links one selected requirement to a particular domestic provisi
 | Selected IHR 2005 requirements | 45 |
 | Corpus instruments | 18 |
 | Extracted domestic provisions | 117 |
-| Provision-level correspondences | 93 |
+| Provision-level correspondences | 94 |
 | Actor profiles retained, including review-sensitive profiles | 18 |
 | Selected requirements in the targeted reassessment cohort | 15 |
 

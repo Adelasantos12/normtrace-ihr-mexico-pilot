@@ -69,11 +69,19 @@
   ],
   "scope": "Targeted correction of documented source errors and invalid inferences; not a full legal-compliance audit or independent expert validation.",
   "historical_archive": "99_archive/audit_2026_10_14",
+  "reconciliation": {
+    "concurrent_commit": "60f5c89903511710ed1615cbf7e7566c5ebd9d40",
+    "concurrent_archive": "99_archive/concurrent_audit_60f5c899",
+    "retained_notification_path": "03_tables/actors/legally_described_relationships.csv",
+    "crosswalk": "00_project/audit_reconciliation_crosswalk.csv",
+    "added_mapping_id": "MEX_MAP_AUDIT20261014_013_MEX_PROV_NOM017_SEC663_AUDIT",
+    "resolution": "All seven added concurrent mapping pairs retained, six already present and one added. Existing before/after documents, scripts, data and UI retained in a complete historical snapshot. Current source-added scores stay blank pending substantive review; incompatible 87-row manifests are historical, not current."
+  },
   "counts": {
     "obligations": 45,
     "provisions": 117,
     "instruments": 18,
-    "mappings": 93,
+    "mappings": 94,
     "actors": 18
   },
   "targeted_reassessment_obligation_ids": [
@@ -242,6 +250,7 @@
         "MEX_MAP_AUDIT20261014_004_MEX_PROV_NOM017_SEC664_AUDIT",
         "MEX_MAP_AUDIT20261014_004_MEX_PROV_NOM017_SEC814_AUDIT",
         "MEX_MAP_AUDIT20261014_012_MEX_PROV_NOM017_SEC814_AUDIT",
+        "MEX_MAP_AUDIT20261014_013_MEX_PROV_NOM017_SEC663_AUDIT",
         "MEX_MAP_AUDIT20261014_013_MEX_PROV_NOM017_SEC814_AUDIT",
         "MEX_MAP_AUDIT20261014_014_MEX_PROV_NOM017_SEC663_AUDIT",
         "MEX_MAP_AUDIT20261014_014_MEX_PROV_NOM017_SEC664_AUDIT",
@@ -279,7 +288,7 @@
     "obligations": "da36011c82a4e4477fe1b28a0389a14a85497b3e39331a95b477c190aeab53a6",
     "provisions": "552010d4bb019cdfc37b61fc12823b66ab16e299d39747e8c4e7315aa3f55eba",
     "instruments": "c91e78f3336e9f88f9f6391751a67d3a7800c624cb48ecc11429103d9b07617d",
-    "mappings": "8f5bbe143f47462f51a703043bc5892074b3a410eaae9e86da6f88c89ddc9fdb",
+    "mappings": "73214a5c43584931e88281a1e315efa88714a97e4f58bc059b6444bf3b4b50c1",
     "actors": "bfe4fb29880bcfd1ec4a474762adc63685a9f5883f57cd23262159a6d53b4077"
   },
   "baseline_counts": {
