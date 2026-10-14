@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "routes": [
+    "/",
+    "/mapping",
+    "/actors",
+    "/spar-bridge",
+    "/methodology",
+    "/audit",
+    "/provisions",
+    "/international",
+    "/dashboard",
+    "/pipeline",
+    "/snapshot",
+    "/report/print"
+  ],
+  "page_errors": [],
+  "checks": [
+    "Article40 replacement",
+    "superseded visibility",
+    "DGE selection",
+    "zoom and fit",
+    "summary counts",
+    "mobile home overflow"
+  ],
+  "scope": "Browser/data regression, not legal validity"
+}

@@ -1,0 +1,32 @@
+{
+  "active_mapping_records": 89,
+  "actor_role_references": 6,
+  "complete_pathways": null,
+  "confirmed_gap_count": null,
+  "connected_instruments": 9,
+  "corpus_instruments": 18,
+  "date": "2026-10-14",
+  "expert_compliance_validation": false,
+  "inventory_actors": 18,
+  "isolated_obligations": [
+    "IHR-OBL-011"
+  ],
+  "mapping_records": 90,
+  "network_actors": 2,
+  "network_edges": 75,
+  "network_nodes": 56,
+  "obligations": 45,
+  "provisions": 117,
+  "review_status": {
+    "legacy_unvalidated": 69,
+    "source_corrected_scope_pending": 20
+  },
+  "scores_status": "withdrawn_pending_consistent_recoding",
+  "source_sha256": {
+    "03_tables/actors/actor_obligation_evidence.csv": "ad4d7b582b7cb040987cfbb695b4fe26aefd4dd3c22efb6f4f105f925919cfdf",
+    "03_tables/country_legal_mapping/mexico_ihr2005_mapping.csv": "a013cceae0efb5f30e21eaa82fe68e8695a5f099ced4f430a679c4484452244f",
+    "03_tables/country_legal_mapping/mexico_legal_provisions.csv": "a8c14e5eae55b4bbf6e7284b2818bf4140f3d1aec409b589e286908b664d52e6"
+  },
+  "superseded_records": 1,
+  "version": "0.1.1-audit"
+}

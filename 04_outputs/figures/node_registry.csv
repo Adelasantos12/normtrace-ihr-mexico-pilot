@@ -1,55 +1,57 @@
-node_id,mode,degree,degree_norm,betweenness,community
-CPEUM,instrument,5,0.111,0.0813,
-LGPDPPSO,instrument,1,0.022,0.0,
-LGS,instrument,21,0.467,0.5281,
-LOAPF,instrument,1,0.022,0.0,
-Ley Aduanera,instrument,3,0.067,0.0354,
-NOM-017,instrument,6,0.133,0.042,
-RI-SS-2025,instrument,11,0.244,0.2119,
-RLGS-Inv,instrument,1,0.022,0.0,
-RLGS-SI,instrument,19,0.422,0.4457,
-IHR-OBL-001,obligation,2,0.222,0.0092,0
-IHR-OBL-002,obligation,3,0.333,0.0526,0
-IHR-OBL-003,obligation,2,0.222,0.0392,0
-IHR-OBL-004,obligation,3,0.333,0.0886,1
-IHR-OBL-005,obligation,2,0.222,0.0392,0
-IHR-OBL-006,obligation,1,0.111,0.0,0
-IHR-OBL-007,obligation,1,0.111,0.0,0
-IHR-OBL-008,obligation,1,0.111,0.0,0
-IHR-OBL-009,obligation,1,0.111,0.0,0
-IHR-OBL-010,obligation,2,0.222,0.0392,0
-IHR-OBL-011,obligation,0,0.0,0.0,2
-IHR-OBL-012,obligation,2,0.222,0.0041,0
-IHR-OBL-013,obligation,2,0.222,0.0041,0
-IHR-OBL-014,obligation,2,0.222,0.0041,0
-IHR-OBL-015,obligation,2,0.222,0.0392,0
-IHR-OBL-016,obligation,2,0.222,0.0449,1
-IHR-OBL-017,obligation,1,0.111,0.0,1
-IHR-OBL-018,obligation,2,0.222,0.0449,1
-IHR-OBL-019,obligation,2,0.222,0.0449,1
-IHR-OBL-020,obligation,1,0.111,0.0,1
-IHR-OBL-021,obligation,1,0.111,0.0,0
-IHR-OBL-022,obligation,2,0.222,0.0369,1
-IHR-OBL-023,obligation,2,0.222,0.0449,1
-IHR-OBL-024,obligation,2,0.222,0.0229,0
-IHR-OBL-025,obligation,1,0.111,0.0,1
-IHR-OBL-026,obligation,2,0.222,0.0369,1
-IHR-OBL-027,obligation,1,0.111,0.0,1
-IHR-OBL-028,obligation,1,0.111,0.0,1
-IHR-OBL-029,obligation,2,0.222,0.0229,0
-IHR-OBL-030,obligation,2,0.222,0.0449,1
-IHR-OBL-031,obligation,2,0.222,0.045,1
-IHR-OBL-032,obligation,1,0.111,0.0,1
-IHR-OBL-033,obligation,1,0.111,0.0,1
-IHR-OBL-034,obligation,1,0.111,0.0,1
-IHR-OBL-035,obligation,1,0.111,0.0,1
-IHR-OBL-036,obligation,1,0.111,0.0,1
-IHR-OBL-037,obligation,0,0.0,0.0,3
-IHR-OBL-038,obligation,1,0.111,0.0,1
-IHR-OBL-039,obligation,2,0.222,0.0229,0
-IHR-OBL-040,obligation,1,0.111,0.0,0
-IHR-OBL-041,obligation,1,0.111,0.0,0
-IHR-OBL-042,obligation,1,0.111,0.0,0
-IHR-OBL-043,obligation,2,0.222,0.0385,0
-IHR-OBL-044,obligation,2,0.222,0.0385,0
-IHR-OBL-045,obligation,1,0.111,0.0,4
+node_id,mode,degree,label
+IHR-OBL-001,obligation,2,Art. 4
+IHR-OBL-002,obligation,3,Art. 5(1)
+IHR-OBL-003,obligation,2,Art. 5(2)
+IHR-OBL-004,obligation,3,Art. 6(1)
+IHR-OBL-005,obligation,2,Art. 6(2)
+IHR-OBL-006,obligation,1,Art. 7
+IHR-OBL-007,obligation,1,Art. 8
+IHR-OBL-008,obligation,1,Art. 9(2)
+IHR-OBL-009,obligation,1,Art. 10(2)
+IHR-OBL-010,obligation,2,Art. 13(1)
+IHR-OBL-011,obligation,0,"Annex 1A, par.2"
+IHR-OBL-012,obligation,2,"Annex 1A, par.4"
+IHR-OBL-013,obligation,2,"Annex 1A, par.5"
+IHR-OBL-014,obligation,2,"Annex 1A, par.6 (assessment)"
+IHR-OBL-015,obligation,2,"Annex 1A, par.6 (response)"
+IHR-OBL-016,obligation,2,"Annex 1B, par.1"
+IHR-OBL-017,obligation,1,"Annex 1B, par.2"
+IHR-OBL-018,obligation,2,Art. 19
+IHR-OBL-019,obligation,2,Art. 20(1)
+IHR-OBL-020,obligation,1,Art. 20(2)
+IHR-OBL-021,obligation,1,Art. 20(3)
+IHR-OBL-022,obligation,2,Art. 21
+IHR-OBL-023,obligation,2,Art. 22(1)
+IHR-OBL-024,obligation,2,Art. 23(3)
+IHR-OBL-025,obligation,1,Art. 23(4)
+IHR-OBL-026,obligation,2,Art. 24(1)
+IHR-OBL-027,obligation,1,Art. 27(1)
+IHR-OBL-028,obligation,1,Art. 30
+IHR-OBL-029,obligation,2,Art. 31(1)
+IHR-OBL-030,obligation,2,Art. 31(2)
+IHR-OBL-031,obligation,2,Art. 32
+IHR-OBL-032,obligation,1,Art. 35
+IHR-OBL-033,obligation,1,Art. 36
+IHR-OBL-034,obligation,1,Art. 37
+IHR-OBL-035,obligation,1,Art. 38
+IHR-OBL-036,obligation,1,Art. 39
+IHR-OBL-037,obligation,1,Art. 40
+IHR-OBL-038,obligation,1,Art. 41
+IHR-OBL-039,obligation,2,Art. 42
+IHR-OBL-040,obligation,1,Art. 43(1)-(2)
+IHR-OBL-041,obligation,1,Art. 43(3) and (5)
+IHR-OBL-042,obligation,1,Art. 43(6)
+IHR-OBL-043,obligation,2,Art. 44(1)
+IHR-OBL-044,obligation,2,Art. 45
+IHR-OBL-045,obligation,1,Art. 46
+MEX-002,instrument,21,Ley General de Salud
+MEX-004,instrument,5,CPEUM latest reform 2026-04-23
+MEX-007,instrument,1,LGPDPPSO
+MEX-009,instrument,1,LOAPF
+MEX-012,instrument,6,NOM-017 vigilancia epidemiológica
+MEX-015,instrument,1,Reglamento LGS investigación para la salud
+MEX-016,instrument,20,Reglamento LGS sanidad internacional
+MEX-017,instrument,11,Reglamento Interior SS 2025
+MEX-018,instrument,3,Ley Aduanera
+MEX_ACTOR_DGE_001,actor,3,DGE
+MEX_ACTOR_SS_001,actor,3,Secretaría de Salud

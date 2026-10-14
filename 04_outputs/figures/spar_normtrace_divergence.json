@@ -1,0 +1,8 @@
+{
+  "status": "withdrawn_non_equivalent_constructs",
+  "divergence_latest": null,
+  "divergence_mean": null,
+  "normtrace_legal_anchoring_pct": null,
+  "note": "SPAR C1.1 already includes legal mapping. No validated denominator/construct crosswalk supports subtraction from NormTrace. This endpoint is a withdrawal notice, not a zero score.",
+  "legacy_commit": "478e795f4ec2147c17acf4c128d686eb3a5935d1"
+}

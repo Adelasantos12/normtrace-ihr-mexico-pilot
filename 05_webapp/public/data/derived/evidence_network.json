@@ -1,0 +1,1228 @@
+{
+  "edges": [
+    {
+      "mapping_ids": "MEX_MAP_AUDIT_002_ART133II;MEX_MAP_IHR2005_002_001",
+      "provision_ids": "MEX_PROV_LGS_ART133_II_AUDIT;MEX_PROV_LGS_ART134_001",
+      "review_status": "scope_pending",
+      "rows": 2,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-002",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_003_002",
+      "provision_ids": "MEX_PROV_LGS_ART136_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-003",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_004_001",
+      "provision_ids": "MEX_PROV_LGS_ART136_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-004",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_005_002",
+      "provision_ids": "MEX_PROV_LGS_ART136_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-005",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_006_001;MEX_MAP_IHR2005_006_002",
+      "provision_ids": "MEX_PROV_LGS_ART136_001;MEX_PROV_LGS_ART181_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 2,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-006",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_010_001;MEX_MAP_IHR2005_010_002",
+      "provision_ids": "MEX_PROV_LGS_ART181_001;MEX_PROV_LGS_ART184_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 2,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-010",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_012_001",
+      "provision_ids": "MEX_PROV_LGS_ART134_001",
+      "review_status": "scope_pending",
+      "rows": 1,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-012",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_013_001",
+      "provision_ids": "MEX_PROV_LGS_ART146_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-013",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_014_001",
+      "provision_ids": "MEX_PROV_LGS_ART134_001",
+      "review_status": "scope_pending",
+      "rows": 1,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-014",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_015_001",
+      "provision_ids": "MEX_PROV_LGS_ART181_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-015",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_016_003",
+      "provision_ids": "MEX_PROV_LGS_ART352_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-016",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_018_001",
+      "provision_ids": "MEX_PROV_LGS_ART352_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-018",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_019_002",
+      "provision_ids": "MEX_PROV_LGS_ART352_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-019",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_021_001",
+      "provision_ids": "MEX_PROV_LGS_ART359_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-021",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_023_001",
+      "provision_ids": "MEX_PROV_LGS_ART017BIS_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-023",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_024_002",
+      "provision_ids": "MEX_PROV_LGS_ART139_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-024",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_029_002",
+      "provision_ids": "MEX_PROV_LGS_ART139_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-029",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_030_001",
+      "provision_ids": "MEX_PROV_LGS_ART139_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-030",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_039_002",
+      "provision_ids": "MEX_PROV_LGS_ART139_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-039",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_040_001;MEX_MAP_IHR2005_040_002",
+      "provision_ids": "MEX_PROV_LGS_ART181_001;MEX_PROV_LGS_ART184_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 2,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-040",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_042_001",
+      "provision_ids": "MEX_PROV_LGS_ART184_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-002",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-042",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_024_001",
+      "provision_ids": "MEX_PROV_CPEUM_ART014_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-004",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "target": "IHR-OBL-024",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_029_001",
+      "provision_ids": "MEX_PROV_CPEUM_ART014_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-004",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "target": "IHR-OBL-029",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_031_001",
+      "provision_ids": "MEX_PROV_CPEUM_ART001_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-004",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "target": "IHR-OBL-031",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_039_001",
+      "provision_ids": "MEX_PROV_CPEUM_ART001_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-004",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "target": "IHR-OBL-039",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_044_002",
+      "provision_ids": "MEX_PROV_CPEUM_ART016_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-004",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "target": "IHR-OBL-044",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_044_001",
+      "provision_ids": "MEX_PROV_LGPDPPSO_ART016_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-007",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGPDPPSO.pdf",
+      "target": "IHR-OBL-044",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_043_002",
+      "provision_ids": "MEX_PROV_LOAPF_ART028_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-009",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/153.pdf",
+      "target": "IHR-OBL-043",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_AUDIT_001_SEC663;MEX_MAP_AUDIT_001_SEC664;MEX_MAP_IHR2005_001_002",
+      "provision_ids": "MEX_PROV_NOM017_SEC661_001;MEX_PROV_NOM017_SEC663_AUDIT;MEX_PROV_NOM017_SEC664_AUDIT",
+      "review_status": "scope_pending",
+      "rows": 3,
+      "source": "MEX-012",
+      "source_urls": "https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013;https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225",
+      "target": "IHR-OBL-001",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_002_002",
+      "provision_ids": "MEX_PROV_NOM017_SEC42_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-012",
+      "source_urls": "https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013",
+      "target": "IHR-OBL-002",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_AUDIT_004_SEC664;MEX_MAP_AUDIT_004_SEC814;MEX_MAP_IHR2005_004_003",
+      "provision_ids": "MEX_PROV_NOM017_SEC661_001;MEX_PROV_NOM017_SEC664_AUDIT;MEX_PROV_NOM017_SEC814_AUDIT",
+      "review_status": "scope_pending",
+      "rows": 3,
+      "source": "MEX-012",
+      "source_urls": "https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013;https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225",
+      "target": "IHR-OBL-004",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_012_002",
+      "provision_ids": "MEX_PROV_NOM017_SEC42_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-012",
+      "source_urls": "https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013",
+      "target": "IHR-OBL-012",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_013_002",
+      "provision_ids": "MEX_PROV_NOM017_SEC311_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-012",
+      "source_urls": "https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013",
+      "target": "IHR-OBL-013",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_AUDIT_014_SEC664;MEX_MAP_AUDIT_014_SEC814;MEX_MAP_IHR2005_014_002",
+      "provision_ids": "MEX_PROV_NOM017_SEC661_001;MEX_PROV_NOM017_SEC664_AUDIT;MEX_PROV_NOM017_SEC814_AUDIT",
+      "review_status": "scope_pending",
+      "rows": 3,
+      "source": "MEX-012",
+      "source_urls": "https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013;https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225",
+      "target": "IHR-OBL-014",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_045_001",
+      "provision_ids": "MEX_PROV_RLGS_INV_ART011_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-015",
+      "source_urls": "TBD_REVIEW",
+      "target": "IHR-OBL-045",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_004_002",
+      "provision_ids": "MEX_PROV_RISI_ART014_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-016",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/ReglLGSMSI.pdf",
+      "target": "IHR-OBL-004",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_016_001;MEX_MAP_IHR2005_016_002",
+      "provision_ids": "MEX_PROV_RISS2025_ART026_001;MEX_PROV_RISS2025_ART027_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 2,
+      "source": "MEX-016",
+      "source_urls": "TBD_REVIEW",
+      "target": "IHR-OBL-016",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_017_001;MEX_MAP_IHR2005_017_002",
+      "provision_ids": "MEX_PROV_RISI_ART006_001;MEX_PROV_RISS2025_ART026_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 2,
+      "source": "MEX-016",
+      "source_urls": "TBD_REVIEW;https://www.diputados.gob.mx/LeyesBiblio/pdf/ReglLGSMSI.pdf",
+      "target": "IHR-OBL-017",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_018_002",
+      "provision_ids": "MEX_PROV_RISS2025_ART010_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-016",
+      "source_urls": "TBD_REVIEW",
+      "target": "IHR-OBL-018",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_019_001",
+      "provision_ids": "MEX_PROV_RISS2025_ART010_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-016",
+      "source_urls": "TBD_REVIEW",
+      "target": "IHR-OBL-019",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_020_001",
+      "provision_ids": "MEX_PROV_RISS2025_ART044_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-016",
+      "source_urls": "TBD_REVIEW",
+      "target": "IHR-OBL-020",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_022_001",
+      "provision_ids": "MEX_PROV_RISS2025_ART026_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-016",
+      "source_urls": "TBD_REVIEW",
+      "target": "IHR-OBL-022",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_023_002",
+      "provision_ids": "MEX_PROV_RISS2025_ART044_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-016",
+      "source_urls": "TBD_REVIEW",
+      "target": "IHR-OBL-023",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_025_001;MEX_MAP_IHR2005_025_002",
+      "provision_ids": "MEX_PROV_RISS2025_ART069_001;MEX_PROV_RISS2025_ART070_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 2,
+      "source": "MEX-016",
+      "source_urls": "TBD_REVIEW",
+      "target": "IHR-OBL-025",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_026_001",
+      "provision_ids": "MEX_PROV_RISS2025_ART044_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-016",
+      "source_urls": "TBD_REVIEW",
+      "target": "IHR-OBL-026",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_027_001;MEX_MAP_IHR2005_027_002",
+      "provision_ids": "MEX_PROV_RISS2025_ART068_001;MEX_PROV_RISS2025_ART069_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 2,
+      "source": "MEX-016",
+      "source_urls": "TBD_REVIEW",
+      "target": "IHR-OBL-027",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_028_001;MEX_MAP_IHR2005_028_002",
+      "provision_ids": "MEX_PROV_RISS2025_ART069_001;MEX_PROV_RISS2025_ART070_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 2,
+      "source": "MEX-016",
+      "source_urls": "TBD_REVIEW",
+      "target": "IHR-OBL-028",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_030_002",
+      "provision_ids": "MEX_PROV_RISS2025_ART068_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-016",
+      "source_urls": "TBD_REVIEW",
+      "target": "IHR-OBL-030",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_031_002",
+      "provision_ids": "MEX_PROV_RISS2025_ART069_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-016",
+      "source_urls": "TBD_REVIEW",
+      "target": "IHR-OBL-031",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_032_001",
+      "provision_ids": "MEX_PROV_RISS2025_ART009_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-016",
+      "source_urls": "TBD_REVIEW",
+      "target": "IHR-OBL-032",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_033_001",
+      "provision_ids": "MEX_PROV_RISI_ART003_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-016",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/ReglLGSMSI.pdf",
+      "target": "IHR-OBL-033",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_AUDIT_034_ART031;MEX_MAP_IHR2005_034_001",
+      "provision_ids": "MEX_PROV_RISI_ART031_AUDIT;MEX_PROV_RISS2025_ART009_001",
+      "review_status": "scope_pending",
+      "rows": 2,
+      "source": "MEX-016",
+      "source_urls": "TBD_REVIEW;https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf",
+      "target": "IHR-OBL-034",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_AUDIT_035_ART030;MEX_MAP_IHR2005_035_001",
+      "provision_ids": "MEX_PROV_RISI_ART030_AUDIT;MEX_PROV_RISS2025_ART009_001",
+      "review_status": "scope_pending",
+      "rows": 2,
+      "source": "MEX-016",
+      "source_urls": "TBD_REVIEW;https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf",
+      "target": "IHR-OBL-035",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_036_001",
+      "provision_ids": "MEX_PROV_RISS2025_ART044_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-016",
+      "source_urls": "TBD_REVIEW",
+      "target": "IHR-OBL-036",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_AUDIT_037_ART007",
+      "provision_ids": "MEX_PROV_RISI_ART007_AUDIT",
+      "review_status": "scope_pending",
+      "rows": 1,
+      "source": "MEX-016",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf",
+      "target": "IHR-OBL-037",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_001_001;MEX_MAP_IHR2005_001_003",
+      "provision_ids": "MEX-017-art02-estructuraadm;MEX-017-art35-fraccXIX",
+      "review_status": "scope_pending",
+      "rows": 2,
+      "source": "MEX-017",
+      "source_urls": "DOF 2025-02-27",
+      "target": "IHR-OBL-001",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_002_003",
+      "provision_ids": "MEX-017-art35-fraccX",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-017",
+      "source_urls": "DOF 2025-02-27",
+      "target": "IHR-OBL-002",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_003_001",
+      "provision_ids": "MEX-017-art35-fraccXIX",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-017",
+      "source_urls": "DOF 2025-02-27",
+      "target": "IHR-OBL-003",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_005_001",
+      "provision_ids": "MEX-017-art35-fraccXIX",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-017",
+      "source_urls": "DOF 2025-02-27",
+      "target": "IHR-OBL-005",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_007_001;MEX_MAP_IHR2005_007_002",
+      "provision_ids": "MEX-017-art33-fraccI-IV;MEX-017-art35-fraccXIX",
+      "review_status": "legacy_unvalidated",
+      "rows": 2,
+      "source": "MEX-017",
+      "source_urls": "DOF 2025-02-27",
+      "target": "IHR-OBL-007",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_008_001",
+      "provision_ids": "MEX-017-art35-fraccXIX",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-017",
+      "source_urls": "DOF 2025-02-27",
+      "target": "IHR-OBL-008",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_009_001",
+      "provision_ids": "MEX-017-art35-fraccXIX",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-017",
+      "source_urls": "DOF 2025-02-27",
+      "target": "IHR-OBL-009",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_010_003",
+      "provision_ids": "MEX-017-art43-fraccIX",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-017",
+      "source_urls": "DOF 2025-02-27",
+      "target": "IHR-OBL-010",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_015_002",
+      "provision_ids": "MEX-017-art43-fraccIX",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-017",
+      "source_urls": "DOF 2025-02-27",
+      "target": "IHR-OBL-015",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_041_001",
+      "provision_ids": "MEX-017-art35-fraccXIX",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-017",
+      "source_urls": "DOF 2025-02-27",
+      "target": "IHR-OBL-041",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_043_001",
+      "provision_ids": "MEX-017-art33-fraccI-IV",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-017",
+      "source_urls": "DOF 2025-02-27",
+      "target": "IHR-OBL-043",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_022_002",
+      "provision_ids": "MEX_PROV_LADUANERA_ART003_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-018",
+      "source_urls": "TBD_REVIEW",
+      "target": "IHR-OBL-022",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_026_002",
+      "provision_ids": "MEX_PROV_LADUANERA_ART007_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-018",
+      "source_urls": "TBD_REVIEW",
+      "target": "IHR-OBL-026",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "MEX_MAP_IHR2005_038_001",
+      "provision_ids": "MEX_PROV_LADUANERA_ART056_001",
+      "review_status": "legacy_unvalidated",
+      "rows": 1,
+      "source": "MEX-018",
+      "source_urls": "TBD_REVIEW",
+      "target": "IHR-OBL-038",
+      "type": "documented_correspondence",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "",
+      "provision_ids": "MEX_PROV_NOM017_SEC661_001",
+      "review_status": "text_identified_scope_pending",
+      "rows": 1,
+      "source": "MEX_ACTOR_DGE_001",
+      "source_urls": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225",
+      "target": "IHR-OBL-001",
+      "type": "textual_role_reference",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "",
+      "provision_ids": "MEX_PROV_NOM017_SEC814_AUDIT",
+      "review_status": "text_identified_scope_pending",
+      "rows": 1,
+      "source": "MEX_ACTOR_DGE_001",
+      "source_urls": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225",
+      "target": "IHR-OBL-004",
+      "type": "textual_role_reference",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "",
+      "provision_ids": "MEX_PROV_NOM017_SEC814_AUDIT",
+      "review_status": "text_identified_scope_pending",
+      "rows": 1,
+      "source": "MEX_ACTOR_DGE_001",
+      "source_urls": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225",
+      "target": "IHR-OBL-014",
+      "type": "textual_role_reference",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "",
+      "provision_ids": "MEX_PROV_LGS_ART133_II_AUDIT",
+      "review_status": "text_identified_scope_pending",
+      "rows": 1,
+      "source": "MEX_ACTOR_SS_001",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "target": "IHR-OBL-002",
+      "type": "textual_role_reference",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "",
+      "provision_ids": "MEX_PROV_RISI_ART031_AUDIT",
+      "review_status": "text_identified_scope_pending",
+      "rows": 1,
+      "source": "MEX_ACTOR_SS_001",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf",
+      "target": "IHR-OBL-034",
+      "type": "textual_role_reference",
+      "weight": 1
+    },
+    {
+      "mapping_ids": "",
+      "provision_ids": "MEX_PROV_RISI_ART030_AUDIT",
+      "review_status": "text_identified_scope_pending",
+      "rows": 1,
+      "source": "MEX_ACTOR_SS_001",
+      "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf",
+      "target": "IHR-OBL-035",
+      "type": "textual_role_reference",
+      "weight": 1
+    }
+  ],
+  "isolated_obligations": [
+    "IHR-OBL-011"
+  ],
+  "nodes": [
+    {
+      "degree": 2,
+      "full": "Responsible authorities",
+      "id": "IHR-OBL-001",
+      "label": "Art. 4",
+      "mode": "obligation"
+    },
+    {
+      "degree": 3,
+      "full": "Surveillance",
+      "id": "IHR-OBL-002",
+      "label": "Art. 5(1)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "Surveillance",
+      "id": "IHR-OBL-003",
+      "label": "Art. 5(2)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 3,
+      "full": "Notification",
+      "id": "IHR-OBL-004",
+      "label": "Art. 6(1)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "Notification",
+      "id": "IHR-OBL-005",
+      "label": "Art. 6(2)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Information-sharing during unexpected or unusual public health events",
+      "id": "IHR-OBL-006",
+      "label": "Art. 7",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Consultation",
+      "id": "IHR-OBL-007",
+      "label": "Art. 8",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Other reports",
+      "id": "IHR-OBL-008",
+      "label": "Art. 9(2)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Verification",
+      "id": "IHR-OBL-009",
+      "label": "Art. 10(2)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "Public health response",
+      "id": "IHR-OBL-010",
+      "label": "Art. 13(1)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 0,
+      "full": "Core capacity requirements — self-assessment and action planning",
+      "id": "IHR-OBL-011",
+      "label": "Annex 1A, par.2",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "Core capacity — community and primary public health response level",
+      "id": "IHR-OBL-012",
+      "label": "Annex 1A, par.4",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "Core capacity — intermediate public health response level",
+      "id": "IHR-OBL-013",
+      "label": "Annex 1A, par.5",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "Core capacity — national level assessment and notification",
+      "id": "IHR-OBL-014",
+      "label": "Annex 1A, par.6 (assessment)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "Core capacity — national level public health response",
+      "id": "IHR-OBL-015",
+      "label": "Annex 1A, par.6 (response)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "Core capacity — designated PoE baseline (at all times)",
+      "id": "IHR-OBL-016",
+      "label": "Annex 1B, par.1",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Core capacity — designated PoE PHEIC response",
+      "id": "IHR-OBL-017",
+      "label": "Annex 1B, par.2",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "General obligations at points of entry",
+      "id": "IHR-OBL-018",
+      "label": "Art. 19",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "Airports and ports — designation",
+      "id": "IHR-OBL-019",
+      "label": "Art. 20(1)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Airports and ports — Ship Sanitation Certificates",
+      "id": "IHR-OBL-020",
+      "label": "Art. 20(2)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Airports and ports — notification of authorized ports to WHO",
+      "id": "IHR-OBL-021",
+      "label": "Art. 20(3)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "Ground crossings — designation and bilateral agreements",
+      "id": "IHR-OBL-022",
+      "label": "Art. 21",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "Role of competent authorities at PoE",
+      "id": "IHR-OBL-023",
+      "label": "Art. 22(1)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "Health measures on arrival and departure — informed consent",
+      "id": "IHR-OBL-024",
+      "label": "Art. 23(3)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Health measures on arrival and departure — vaccination risk information",
+      "id": "IHR-OBL-025",
+      "label": "Art. 23(4)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "Conveyance operators — obligations",
+      "id": "IHR-OBL-026",
+      "label": "Art. 24(1)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Affected conveyances — health measures",
+      "id": "IHR-OBL-027",
+      "label": "Art. 27(1)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Travellers under public health observation",
+      "id": "IHR-OBL-028",
+      "label": "Art. 30",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "Health measures relating to entry — prohibition on invasive entry conditions",
+      "id": "IHR-OBL-029",
+      "label": "Art. 31(1)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "Health measures relating to entry — compulsory measures in exceptional circumstances",
+      "id": "IHR-OBL-030",
+      "label": "Art. 31(2)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "Treatment of travellers",
+      "id": "IHR-OBL-031",
+      "label": "Art. 32",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "General rule — no additional health documents in international traffic",
+      "id": "IHR-OBL-032",
+      "label": "Art. 35",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Certificates of vaccination or other prophylaxis",
+      "id": "IHR-OBL-033",
+      "label": "Art. 36",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Maritime Declaration of Health",
+      "id": "IHR-OBL-034",
+      "label": "Art. 37",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Health Part of the Aircraft General Declaration",
+      "id": "IHR-OBL-035",
+      "label": "Art. 38",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Ship sanitation certificates — issuance and validity",
+      "id": "IHR-OBL-036",
+      "label": "Art. 39",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Charges for health measures regarding travellers",
+      "id": "IHR-OBL-037",
+      "label": "Art. 40",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Charges for health measures on goods, cargo, containers, and conveyances",
+      "id": "IHR-OBL-038",
+      "label": "Art. 41",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "Implementation of health measures — transparency and non-discrimination",
+      "id": "IHR-OBL-039",
+      "label": "Art. 42",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Additional health measures — scientific basis and proportionality",
+      "id": "IHR-OBL-040",
+      "label": "Art. 43(1)-(2)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Additional health measures — notification to WHO",
+      "id": "IHR-OBL-041",
+      "label": "Art. 43(3) and (5)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Additional health measures — periodic review",
+      "id": "IHR-OBL-042",
+      "label": "Art. 43(6)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "Collaboration and assistance between States Parties",
+      "id": "IHR-OBL-043",
+      "label": "Art. 44(1)",
+      "mode": "obligation"
+    },
+    {
+      "degree": 2,
+      "full": "Treatment of personal data",
+      "id": "IHR-OBL-044",
+      "label": "Art. 45",
+      "mode": "obligation"
+    },
+    {
+      "degree": 1,
+      "full": "Transport and handling of biological substances and diagnostic specimens",
+      "id": "IHR-OBL-045",
+      "label": "Art. 46",
+      "mode": "obligation"
+    },
+    {
+      "degree": 21,
+      "full": "Ley General de Salud",
+      "id": "MEX-002",
+      "label": "Ley General de Salud",
+      "mode": "instrument"
+    },
+    {
+      "degree": 5,
+      "full": "Constitución Política de los Estados Unidos Mexicanos",
+      "id": "MEX-004",
+      "label": "CPEUM latest reform 2026-04-23",
+      "mode": "instrument"
+    },
+    {
+      "degree": 1,
+      "full": "Ley General de Protección de Datos Personales en Posesión de Sujetos Obligados",
+      "id": "MEX-007",
+      "label": "LGPDPPSO",
+      "mode": "instrument"
+    },
+    {
+      "degree": 1,
+      "full": "Ley Orgánica de la Administración Pública Federal",
+      "id": "MEX-009",
+      "label": "LOAPF",
+      "mode": "instrument"
+    },
+    {
+      "degree": 6,
+      "full": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica",
+      "id": "MEX-012",
+      "label": "NOM-017 vigilancia epidemiológica",
+      "mode": "instrument"
+    },
+    {
+      "degree": 1,
+      "full": "Reglamento de la Ley General de Salud en Materia de Investigación para la Salud",
+      "id": "MEX-015",
+      "label": "Reglamento LGS investigación para la salud",
+      "mode": "instrument"
+    },
+    {
+      "degree": 20,
+      "full": "Reglamento de la Ley General de Salud en Materia de Sanidad Internacional",
+      "id": "MEX-016",
+      "label": "Reglamento LGS sanidad internacional",
+      "mode": "instrument"
+    },
+    {
+      "degree": 11,
+      "full": "Reglamento Interior de la Secretaría de Salud",
+      "id": "MEX-017",
+      "label": "Reglamento Interior SS 2025",
+      "mode": "instrument"
+    },
+    {
+      "degree": 3,
+      "full": "Ley Aduanera",
+      "id": "MEX-018",
+      "label": "Ley Aduanera",
+      "mode": "instrument"
+    },
+    {
+      "degree": 3,
+      "full": "Dirección General de Epidemiología",
+      "id": "MEX_ACTOR_DGE_001",
+      "label": "DGE",
+      "mode": "actor"
+    },
+    {
+      "degree": 3,
+      "full": "Secretaría de Salud",
+      "id": "MEX_ACTOR_SS_001",
+      "label": "Secretaría de Salud",
+      "mode": "actor"
+    }
+  ],
+  "note": "Source-correspondence network. Actor edges have explicit provision references; they do not represent observed coordination, issuing powers, or inter-agency dependencies. The actor-role layer is intentionally partial.",
+  "version": "0.1.1-audit"
+}

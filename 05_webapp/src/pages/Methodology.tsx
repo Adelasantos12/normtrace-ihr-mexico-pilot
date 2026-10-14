@@ -189,13 +189,13 @@ export default function Methodology() {
                 className="text-xs flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium transition-colors"
               >
                 <FileText size={14} />
-                View full academic methodology draft
+                Read methodology review note
               </a>
             </div>
 
             <div className="mt-6 pt-5 border-t border-slate-200 flex items-center gap-2 text-xs text-slate-500">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
-              Audit version 0.1 (stable)
+              Scoped source audit · 14 October 2026
             </div>
           </div>
         </aside>

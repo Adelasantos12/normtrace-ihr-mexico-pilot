@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "checks": [
+    "unique mapping IDs",
+    "unique provision IDs",
+    "selected-obligation denominator remains 45",
+    "all obligation references resolve",
+    "all provision references resolve",
+    "unvalidated numerical scores are not current",
+    "legacy classifications retained",
+    "IHR Article 40 has Article 7 candidate",
+    "old Article 40 no-match not active",
+    "candidate MEX_PROV_LGS_ART133_II_AUDIT",
+    "candidate MEX_PROV_RISI_ART031_AUDIT",
+    "candidate MEX_PROV_RISI_ART030_AUDIT",
+    "all actor-role references resolve to sources",
+    "final NOM source, not PROY",
+    "all obligations including isolates visible",
+    "all network endpoints resolve",
+    "edges carry type and provision evidence",
+    "DGE displayed separately",
+    "no invented interagency dependencies",
+    "NIA reported with identity unresolved",
+    "SPAR subtraction withdrawn, not zero",
+    "canonical/web synchronization mexico_ihr2005_mapping.csv",
+    "canonical/web synchronization mexico_legal_provisions.csv",
+    "baseline archive exists"
+  ],
+  "count": 24,
+  "scope": "Data integrity and audit regression, not expert legal validation"
+}

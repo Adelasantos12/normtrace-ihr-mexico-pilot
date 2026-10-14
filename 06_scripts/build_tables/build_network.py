@@ -1,261 +1,41 @@
 #!/usr/bin/env python3
-"""
-NormTrace-IHR — Multimodal legal-institutional network builder.
-
-Builds a *reproducible* multimodal (restricted 3-mode) network from the pilot
-mapping data and computes mode-aware centrality, projections, community
-detection and a CUG-style random baseline. Replaces the previously hard-coded
-degree figures (deg=59/23/22/20) in the webapp/paper with computed values.
-
-Modes (Knoke, Diani, Hollway & Christopoulos 2021):
-  - actor       (agentic institutions)
-  - instrument  (legal instruments / provisions — objects)
-  - obligation  (IHR 2005 obligations — objects)
-  - gap         (gap-type — attribute-node)
-
-Primary two-mode network: instrument x obligation, from the 80 mapping rows,
-weight = anchoring_level. Actor overlay: actor x instrument, from the actors
-table (source_norm). Outputs are written to 04_outputs/figures/ and mirrored
-to the webapp public/data/derived/ folder so the UI reads computed numbers.
-
-Usage:  python3 06_scripts/build_tables/build_network.py
-"""
-from __future__ import annotations
-import csv, json, os, random, statistics
-from collections import defaultdict
-import networkx as nx
-from networkx.algorithms import bipartite
-from networkx.algorithms.community import greedy_modularity_communities
-
-random.seed(42)
-
-ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-MAP = os.path.join(ROOT, "03_tables/country_legal_mapping/mexico_ihr2005_mapping.csv")
-ACTORS = os.path.join(ROOT, "03_tables/actors/mexico_health_governance_actors.csv")
-OBLIG = os.path.join(ROOT, "03_tables/international_obligations/IHR-2005_obligations_domestic-anchoring.csv")
-OUT_FIG = os.path.join(ROOT, "04_outputs/figures")
-OUT_WEB = os.path.join(ROOT, "05_webapp/public/data/derived")
-os.makedirs(OUT_FIG, exist_ok=True)
-os.makedirs(OUT_WEB, exist_ok=True)
-
-
-def read_csv(path):
-    with open(path, newline="", encoding="utf-8") as f:
-        return [ {k.strip(): (v.strip() if isinstance(v, str) else v) for k, v in row.items()}
-                 for row in csv.DictReader(f) ]
-
-
-# short, stable labels for the big legal instruments
-INSTRUMENT_ALIASES = {
-    "Ley General de Salud": "LGS",
-    "Reglamento de la Ley General de Salud en Materia de Sanidad Internacional": "RLGS-SI",
-    "Reglamento Interior de la Secretaría de Salud": "RI-SS-2025",
-    "NOM-017-SSA2-2012, Para la vigilancia epidemiológica": "NOM-017",
-    "Constitución Política de los Estados Unidos Mexicanos": "CPEUM",
-    "Ley Aduanera": "Ley Aduanera",
-    "Ley Orgánica de la Administración Pública Federal": "LOAPF",
-    "Ley General de Protección de Datos Personales en Posesión de Sujetos Obligados": "LGPDPPSO",
-    "Reglamento de la Ley General de Salud en Materia de Investigación para la Salud": "RLGS-Inv",
-}
-
-
-def alias(norm: str) -> str:
-    norm = (norm or "").strip()
-    if norm in INSTRUMENT_ALIASES:
-        return INSTRUMENT_ALIASES[norm]
-    return norm or "UNSPECIFIED"
-
-
+from pathlib import Path
+import csv,json,hashlib
+from collections import defaultdict,Counter
+ROOT=Path(__file__).resolve().parents[2]
+def rows(p,sep=','):
+ with open(ROOT/p,encoding='utf-8-sig',newline='') as f:return list(csv.DictReader(f,delimiter=sep))
+def write(p,items,fields):
+ p.parent.mkdir(parents=True,exist_ok=True)
+ with open(p,'w',encoding='utf-8',newline='') as f:
+  w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n');w.writeheader();w.writerows(items)
 def main():
-    mapping = read_csv(MAP)
-    actors = read_csv(ACTORS)
-    # OBLIG is ';'-delimited (unlike MAP/ACTORS), so read it directly rather
-    # than through read_csv()'s comma-only csv.DictReader.
-    with open(OBLIG, newline="", encoding="utf-8") as f:
-        obligations = [{k.strip(): (v.strip() if isinstance(v, str) else v) for k, v in row.items()}
-                       for row in csv.DictReader(f, delimiter=";")]
-    all_obligation_ids = {o["obligation_id"].strip() for o in obligations if o.get("obligation_id")}
-
-    # ---- Build the instrument x obligation two-mode network -----------------
-    B = nx.Graph()
-    inst_nodes, obl_nodes = set(), set()
-    row_edges = []  # keep multiplicity for weighting/audit
-    for r in mapping:
-        inst = alias(r.get("domestic_norm"))
-        obl = r.get("obligation_id", "").strip()
-        if not obl or inst == "UNSPECIFIED":
-            continue
-        try:
-            w = int(r.get("anchoring_level") or 0)
-        except ValueError:
-            w = 0
-        inst_nodes.add(inst); obl_nodes.add(obl)
-        row_edges.append((inst, obl, w, r.get("gap_type", "")))
-        # collapse multiple provisions of the same instrument -> keep max anchoring
-        if B.has_edge(inst, obl):
-            B[inst][obl]["weight"] = max(B[inst][obl]["weight"], w)
-            B[inst][obl]["rows"] += 1
-        else:
-            B.add_edge(inst, obl, weight=w, rows=1)
-
-    # Obligations with NO anchoring row at all (domestic_norm empty -> every
-    # mapping row for them was skipped above, "UNSPECIFIED") never entered
-    # obl_nodes, so they silently vanished from the network instead of
-    # appearing as the isolated, zero-degree nodes their "full gap" /
-    # "legal silence" finding actually is. That undercounts n_obligations
-    # against the corpus total (45) and -- worse -- hides precisely the
-    # most severe obligations from the one visualisation meant to surface
-    # them. Add them explicitly as isolated nodes so the network's
-    # obligation count always equals the corpus's.
-    orphaned_obligations = sorted(all_obligation_ids - obl_nodes)
-    obl_nodes |= set(orphaned_obligations)
-
-    for n in sorted(inst_nodes):
-        B.add_node(n, mode="instrument", bipartite=0)
-    for n in sorted(obl_nodes):
-        B.add_node(n, mode="obligation", bipartite=1)
-
-    # ---- Mode-aware degree (Borgatti & Everett 2-mode normalisation) --------
-    n_obl, n_inst = len(obl_nodes), len(inst_nodes)
-    inst_deg = {n: B.degree(n) for n in inst_nodes}          # distinct obligations anchored
-    obl_deg = {n: B.degree(n) for n in obl_nodes}            # distinct instruments anchoring
-    inst_deg_norm = {n: round(d / n_obl, 3) for n, d in inst_deg.items()}
-    obl_deg_norm = {n: round(d / n_inst, 3) for n, d in obl_deg.items()}
-    betw = bipartite.betweenness_centrality(B, obl_nodes) if n_obl and n_inst else {}
-
-    # ---- Actor overlay: actor x instrument, then actor reach over obligations
-    actor_inst = defaultdict(set)
-    for a in actors:
-        name = a.get("actor_name", "")
-        src = (a.get("source_norm", "") or "")
-        for full, short in INSTRUMENT_ALIASES.items():
-            if full[:30] in src and short in inst_nodes:
-                actor_inst[name].add(short)
-    actor_reach = {}  # obligations reachable via the actor's instruments
-    for actor, insts in actor_inst.items():
-        reach = set()
-        for inst in insts:
-            reach |= set(B.neighbors(inst))
-        actor_reach[actor] = {"instruments": sorted(insts),
-                              "n_instruments": len(insts),
-                              "obligation_reach": len(reach)}
-
-    # ---- Projection to obligation-obligation (shared instruments) -----------
-    G_obl = bipartite.weighted_projected_graph(B, obl_nodes)
-    raw_communities = greedy_modularity_communities(G_obl) if G_obl.number_of_edges() else []
-    # greedy_modularity_communities' output order (and therefore the community index
-    # each obligation gets) is not guaranteed stable across runs; sort communities by
-    # size (desc) then by their lexicographically-smallest member for a deterministic
-    # labeling. The partition itself (which nodes group together) does not change.
-    communities = sorted(raw_communities, key=lambda c: (-len(c), min(c)))
-    obl_comm = {}
-    for i, comm in enumerate(communities):
-        for node in sorted(comm):
-            obl_comm[node] = i
-    modularity = nx.algorithms.community.modularity(G_obl, communities) if communities else None
-
-    # ---- CUG-style baseline: is instrument-degree centralisation > random? --
-    def centralisation(degs):
-        if not degs: return 0.0
-        m = max(degs.values())
-        return sum(m - d for d in degs.values()) / (len(degs) * m) if m else 0.0
-    obs_c = centralisation(inst_deg)
-    n_edges = B.number_of_edges()
-    sims = []
-    inst_list, obl_list = sorted(inst_nodes), sorted(obl_nodes)
-    for _ in range(1000):
-        R = nx.Graph()
-        R.add_nodes_from(inst_list); R.add_nodes_from(obl_list)
-        pairs = random.sample([(i, o) for i in inst_list for o in obl_list],
-                              min(n_edges, n_inst * n_obl))
-        R.add_edges_from(pairs)
-        sims.append(centralisation({i: R.degree(i) for i in inst_list}))
-    p_ge = sum(1 for s in sims if s >= obs_c) / len(sims)
-
-    # ---- Assemble outputs ---------------------------------------------------
-    node_registry = []
-    for n in sorted(inst_nodes):
-        node_registry.append({"node_id": n, "mode": "instrument",
-                              "degree": inst_deg[n], "degree_norm": inst_deg_norm[n],
-                              "betweenness": round(betw.get(n, 0), 4)})
-    for n in sorted(obl_nodes):
-        node_registry.append({"node_id": n, "mode": "obligation",
-                              "degree": obl_deg[n], "degree_norm": obl_deg_norm[n],
-                              "betweenness": round(betw.get(n, 0), 4),
-                              "community": obl_comm.get(n)})
-
-    edges_out = [{"source": i, "target": o, "type": "anchors",
-                  "weight": B[i][o]["weight"], "rows": B[i][o]["rows"]}
-                 for i, o in B.edges()]
-
-    metrics = {
-        "generated_by": "06_scripts/build_tables/build_network.py",
-        "network": {"modes": ["instrument", "obligation"],
-                    "n_instruments": n_inst, "n_obligations": n_obl,
-                    "n_edges": n_edges,
-                    "density": round(n_edges / (n_inst * n_obl), 3) if n_inst and n_obl else 0},
-        "instrument_degree_ranked": sorted(
-            [{"instrument": n, "obligations_anchored": inst_deg[n],
-              "degree_norm": inst_deg_norm[n], "betweenness": round(betw.get(n, 0), 4)}
-             for n in inst_nodes], key=lambda x: (-x["obligations_anchored"], x["instrument"])),
-        "actor_reach_ranked": sorted(
-            [{"actor": a, **v} for a, v in actor_reach.items()],
-            key=lambda x: (-x["obligation_reach"], x["actor"])),
-        "communities": {"n": len(communities), "modularity": round(modularity, 3) if modularity else None,
-                        "sizes": [len(c) for c in communities]},
-        "cug_test": {"measure": "instrument-degree centralisation",
-                     "observed": round(obs_c, 4),
-                     "random_mean": round(statistics.mean(sims), 4),
-                     "p_value_ge_random": round(p_ge, 4),
-                     "interpretation": ("centralisation significantly ABOVE random"
-                                        if p_ge < 0.05 else
-                                        "not distinguishable from random")},
-        "isolated_obligations": orphaned_obligations,
-        "provenance_note": ("All figures computed from mexico_ihr2005_mapping.csv. "
-                            "Supersedes hard-coded degree values previously in ActorsExplorer.tsx. "
-                            "n_obligations always equals the full IHR-2005_obligations_domestic-anchoring.csv "
-                            "corpus (45): obligations with no anchoring row in the mapping (full gap / legal "
-                            "silence) are included as isolated, zero-degree nodes -- see isolated_obligations "
-                            "-- rather than dropped, so the network's coverage figure never falls below the "
-                            "corpus total and its worst findings stay visible instead of vanishing. "
-                            "n_instruments (9) legitimately covers only instruments that anchor at least one "
-                            "of these 45 obligations; the broader 18-instrument legal corpus includes "
-                            "instruments scoped to the Pandemic Agreement, PABS, or general administrative "
-                            "matters outside IHR 2005, which this IHR-anchoring network does not include."),
-    }
-
-    with open(os.path.join(OUT_FIG, "network_metrics.json"), "w", encoding="utf-8") as f:
-        json.dump(metrics, f, indent=2, ensure_ascii=False)
-    for folder in (OUT_FIG, OUT_WEB):
-        with open(os.path.join(folder, "network_metrics.json"), "w", encoding="utf-8") as f:
-            json.dump(metrics, f, indent=2, ensure_ascii=False)
-        with open(os.path.join(folder, "node_registry.csv"), "w", newline="", encoding="utf-8") as f:
-            w = csv.DictWriter(f, fieldnames=["node_id", "mode", "degree", "degree_norm",
-                                              "betweenness", "community"])
-            w.writeheader()
-            for row in node_registry:
-                w.writerow({**{"community": ""}, **row})
-        with open(os.path.join(folder, "network_edges.csv"), "w", newline="", encoding="utf-8") as f:
-            w = csv.DictWriter(f, fieldnames=["source", "target", "type", "weight", "rows"])
-            w.writeheader(); w.writerows(edges_out)
-
-    # ---- Console summary ----------------------------------------------------
-    print("=== INSTRUMENT DEGREE (distinct obligations anchored) ===")
-    for row in metrics["instrument_degree_ranked"]:
-        print(f"  {row['obligations_anchored']:2d}  {row['instrument']:<12}  norm={row['degree_norm']}")
-    print("\n=== ACTOR OBLIGATION-REACH (top 6) ===")
-    for row in metrics["actor_reach_ranked"][:6]:
-        print(f"  reach={row['obligation_reach']:2d}  ({row['n_instruments']} instr)  {row['actor']}")
-    print(f"\nCommunities: {metrics['communities']['n']}  modularity={metrics['communities']['modularity']}")
-    print(f"CUG test: observed={metrics['cug_test']['observed']}  "
-          f"random_mean={metrics['cug_test']['random_mean']}  "
-          f"p(>=random)={metrics['cug_test']['p_value_ge_random']}  "
-          f"-> {metrics['cug_test']['interpretation']}")
-    print(f"\nIsolated obligations (no anchoring row, kept as zero-degree nodes): "
-          f"{orphaned_obligations or 'none'}")
-    print(f"\nWrote network_metrics.json / node_registry.csv / network_edges.csv "
-          f"to 04_outputs/figures/ and 05_webapp/public/data/derived/")
-
-
-if __name__ == "__main__":
-    main()
+ m=rows('03_tables/country_legal_mapping/mexico_ihr2005_mapping.csv'); active=[r for r in m if r['record_status']=='active']
+ p=rows('03_tables/country_legal_mapping/mexico_legal_provisions.csv');pb={r['provision_id']:r for r in p}
+ o=rows('03_tables/international_obligations/IHR-2005_obligations_domestic-anchoring.csv',';')
+ c=rows('03_tables/country_legal_mapping/mexico_normative_corpus_index.csv'); cb={r['norm_id']:r for r in c}
+ a=rows('03_tables/actors/mexico_health_governance_actors.csv');ab={r['actor_id']:r for r in a}
+ refs=rows('03_tables/actors/actor_obligation_evidence.csv')
+ links=defaultdict(list)
+ for r in active:
+  if r['domestic_provision_id'] in pb:links[(pb[r['domestic_provision_id']]['norm_id'],r['obligation_id'])].append(r)
+ edges=[]
+ for (nid,oid),rs in sorted(links.items()):
+  edges.append(dict(source=nid,target=oid,type='documented_correspondence',weight=1,rows=len(rs),provision_ids=';'.join(sorted({r['domestic_provision_id'] for r in rs})),mapping_ids=';'.join(sorted(r['mapping_id'] for r in rs)),source_urls=';'.join(sorted({r['source_url'] for r in rs if r['source_url']})),review_status='scope_pending' if any(r['review_status']!='legacy_unvalidated' for r in rs) else 'legacy_unvalidated'))
+ for r in refs:edges.append(dict(source=r['actor_id'],target=r['obligation_id'],type='textual_role_reference',weight=1,rows=1,provision_ids=r['provision_id'],mapping_ids='',source_urls=r['source_url'],review_status=r['review_status']))
+ inst_ids=sorted({k[0] for k in links});actor_ids=sorted({r['actor_id'] for r in refs});nodes=[]
+ for r in o:nodes.append(dict(id=r['obligation_id'],mode='obligation',label=r.get('article',''),full=r.get('article_title',''),degree=sum(1 for e in edges if e['type']=='documented_correspondence' and e['target']==r['obligation_id'])))
+ for nid in inst_ids:nodes.append(dict(id=nid,mode='instrument',label=cb[nid].get('short_title') or nid,full=cb[nid]['norm_title'],degree=sum(1 for e in edges if e['source']==nid)))
+ for aid in actor_ids:nodes.append(dict(id=aid,mode='actor',label='DGE' if aid=='MEX_ACTOR_DGE_001' else 'Secretaría de Salud',full=ab[aid]['actor_name'],degree=sum(1 for e in edges if e['source']==aid)))
+ isolates=sorted(n['id'] for n in nodes if n['mode']=='obligation' and n['degree']==0)
+ graph=dict(version='0.1.1-audit',nodes=nodes,edges=edges,isolated_obligations=isolates,note='Source-correspondence network. Actor edges have explicit provision references; they do not represent observed coordination, issuing powers, or inter-agency dependencies. The actor-role layer is intentionally partial.')
+ summary=dict(version='0.1.1-audit',date='2026-10-14',obligations=len(o),corpus_instruments=len(c),provisions=len(p),mapping_records=len(m),active_mapping_records=len(active),superseded_records=len(m)-len(active),connected_instruments=len(inst_ids),inventory_actors=len(a),network_actors=len(actor_ids),actor_role_references=len(refs),network_nodes=len(nodes),network_edges=len(edges),isolated_obligations=isolates,review_status=dict(sorted(Counter(r['review_status'] for r in active).items())),scores_status='withdrawn_pending_consistent_recoding',complete_pathways=None,confirmed_gap_count=None,expert_compliance_validation=False)
+ hashes={str(f.relative_to(ROOT)):hashlib.sha256(f.read_bytes()).hexdigest() for f in [ROOT/'03_tables/country_legal_mapping/mexico_ihr2005_mapping.csv',ROOT/'03_tables/country_legal_mapping/mexico_legal_provisions.csv',ROOT/'03_tables/actors/actor_obligation_evidence.csv']}
+ summary['source_sha256']=hashes
+ for folder in [ROOT/'04_outputs/figures',ROOT/'05_webapp/public/data/derived']:
+  folder.mkdir(parents=True,exist_ok=True)
+  for name,obj in [('evidence_network.json',graph),('audit_summary.json',summary)]: (folder/name).write_text(json.dumps(obj,ensure_ascii=False,sort_keys=True,indent=2)+'\n',encoding='utf-8')
+  write(folder/'network_edges.csv',edges,list(edges[0]));write(folder/'node_registry.csv',[dict(node_id=n['id'],mode=n['mode'],degree=n['degree'],label=n['label']) for n in nodes],['node_id','mode','degree','label'])
+  (folder/'network_metrics.json').write_text(json.dumps(dict(status='legacy_inference_withdrawn',replacement='evidence_network.json',network=dict(n_obligations=len(o),n_instruments=len(inst_ids),n_edges=len(edges)),note=graph['note']),indent=2)+'\n')
+ print(json.dumps(summary,ensure_ascii=False))
+if __name__=='__main__':main()

@@ -1,3 +1,4 @@
+import AuditNotice from './components/AuditNotice';
 import { useState, useEffect } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import {
@@ -24,9 +25,9 @@ const advancedItems = [
   { path: '/pipeline', label: 'Normative Pipeline', icon: Zap },
   { path: '/normative-hierarchy', label: 'Normative Hierarchy', icon: Layers },
   { path: '/norm-diagnostic', label: 'Norm Diagnostic', icon: Activity },
-  { path: '/political-brain', label: 'Political Brain', icon: Scale },
+  { path: '/political-brain', label: 'Political Brain (review)' , icon: Scale },
   { path: '/provisions', label: 'Legal Provisions', icon: BookOpen },
-  { path: '/gap-map', label: 'Implementation Gap Map', icon: Map },
+  { path: '/gap-map', label: 'Gap classifications (review)', icon: Map },
   { path: '/capacity', label: 'Capacity Brief', icon: Info },
   { path: '/international', label: 'International Instruments', icon: Globe },
   { path: '/report', label: 'Report & Citation', icon: FileBarChart },
@@ -90,7 +91,7 @@ export default function Layout() {
       )}>
         <div className="p-6 border-b border-slate-800">
           <h2 className="text-xl font-bold text-sky-400 tracking-tight">NormTrace-IHR</h2>
-          <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-[0.2em] mt-1">Mexico Pilot v0.1</p>
+          <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-[0.2em] mt-1">Mexico Pilot 0.1.1-audit</p>
           <p className="text-[8px] text-slate-600 font-mono mt-2">DOI: 10.5281/zenodo.20085170</p>
         </div>
 
@@ -122,7 +123,7 @@ export default function Layout() {
       {/* Main Content */}
       <main className="flex-1 min-w-0 lg:ml-64 p-6 md:p-12 mt-16 lg:mt-0 min-h-screen print:m-0 print:p-0 print:bg-white print:ml-0">
         <div className="max-w-6xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <Outlet />
+          <AuditNotice /><Outlet />
         </div>
       </main>
 
@@ -146,7 +147,7 @@ export default function Layout() {
             </div>
             <div className="p-8 space-y-6 text-sm text-slate-700 leading-relaxed">
               <div className="space-y-4">
-                <p className="font-bold text-slate-900">NormTrace-IHR Mexico Pilot v0.1</p>
+                <p className="font-bold text-slate-900">NormTrace-IHR Mexico Pilot 0.1.1-audit</p>
                 <p>
                   This application provides a structural mapping of domestic legal anchoring for international health obligations.
                   It reconstructs what domestic law formally establishes — a legal-textual reading, not an observation of

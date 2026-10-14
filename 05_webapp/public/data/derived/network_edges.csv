@@ -1,69 +1,76 @@
-source,target,type,weight,rows
-RI-SS-2025,IHR-OBL-001,anchors,3,2
-RI-SS-2025,IHR-OBL-002,anchors,2,1
-RI-SS-2025,IHR-OBL-003,anchors,1,1
-RI-SS-2025,IHR-OBL-005,anchors,2,1
-RI-SS-2025,IHR-OBL-007,anchors,1,2
-RI-SS-2025,IHR-OBL-008,anchors,1,1
-RI-SS-2025,IHR-OBL-009,anchors,1,1
-RI-SS-2025,IHR-OBL-010,anchors,2,1
-RI-SS-2025,IHR-OBL-015,anchors,2,1
-RI-SS-2025,IHR-OBL-041,anchors,1,1
-RI-SS-2025,IHR-OBL-043,anchors,2,1
-IHR-OBL-001,NOM-017,anchors,3,1
-NOM-017,IHR-OBL-002,anchors,2,1
-NOM-017,IHR-OBL-004,anchors,2,1
-NOM-017,IHR-OBL-012,anchors,2,1
-NOM-017,IHR-OBL-013,anchors,2,1
-NOM-017,IHR-OBL-014,anchors,2,1
-LGS,IHR-OBL-002,anchors,2,1
-LGS,IHR-OBL-003,anchors,1,1
-LGS,IHR-OBL-004,anchors,3,1
-LGS,IHR-OBL-005,anchors,1,1
-LGS,IHR-OBL-006,anchors,2,2
-LGS,IHR-OBL-010,anchors,2,2
-LGS,IHR-OBL-012,anchors,2,1
-LGS,IHR-OBL-013,anchors,2,1
-LGS,IHR-OBL-014,anchors,2,1
-LGS,IHR-OBL-015,anchors,2,1
-LGS,IHR-OBL-016,anchors,2,1
-LGS,IHR-OBL-018,anchors,2,1
-LGS,IHR-OBL-019,anchors,2,1
-LGS,IHR-OBL-021,anchors,1,1
-LGS,IHR-OBL-023,anchors,2,1
-LGS,IHR-OBL-024,anchors,2,1
-LGS,IHR-OBL-029,anchors,2,1
-LGS,IHR-OBL-030,anchors,2,1
-LGS,IHR-OBL-039,anchors,1,1
-LGS,IHR-OBL-040,anchors,2,2
-LGS,IHR-OBL-042,anchors,1,1
-IHR-OBL-004,RLGS-SI,anchors,3,1
-RLGS-SI,IHR-OBL-016,anchors,3,2
-RLGS-SI,IHR-OBL-017,anchors,2,2
-RLGS-SI,IHR-OBL-018,anchors,2,1
-RLGS-SI,IHR-OBL-019,anchors,3,1
-RLGS-SI,IHR-OBL-020,anchors,1,1
-RLGS-SI,IHR-OBL-022,anchors,2,1
-RLGS-SI,IHR-OBL-023,anchors,2,1
-RLGS-SI,IHR-OBL-025,anchors,2,2
-RLGS-SI,IHR-OBL-026,anchors,2,1
-RLGS-SI,IHR-OBL-027,anchors,2,2
-RLGS-SI,IHR-OBL-028,anchors,2,2
-RLGS-SI,IHR-OBL-030,anchors,2,1
-RLGS-SI,IHR-OBL-031,anchors,2,1
-RLGS-SI,IHR-OBL-032,anchors,2,1
-RLGS-SI,IHR-OBL-033,anchors,1,1
-RLGS-SI,IHR-OBL-034,anchors,2,1
-RLGS-SI,IHR-OBL-035,anchors,2,1
-RLGS-SI,IHR-OBL-036,anchors,1,1
-IHR-OBL-022,Ley Aduanera,anchors,1,1
-Ley Aduanera,IHR-OBL-026,anchors,1,1
-Ley Aduanera,IHR-OBL-038,anchors,1,1
-CPEUM,IHR-OBL-024,anchors,2,1
-CPEUM,IHR-OBL-029,anchors,2,1
-CPEUM,IHR-OBL-031,anchors,2,1
-CPEUM,IHR-OBL-039,anchors,2,1
-CPEUM,IHR-OBL-044,anchors,2,1
-IHR-OBL-043,LOAPF,anchors,2,1
-LGPDPPSO,IHR-OBL-044,anchors,3,1
-RLGS-Inv,IHR-OBL-045,anchors,1,1
+source,target,type,weight,rows,provision_ids,mapping_ids,source_urls,review_status
+MEX-002,IHR-OBL-002,documented_correspondence,1,2,MEX_PROV_LGS_ART133_II_AUDIT;MEX_PROV_LGS_ART134_001,MEX_MAP_AUDIT_002_ART133II;MEX_MAP_IHR2005_002_001,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,scope_pending
+MEX-002,IHR-OBL-003,documented_correspondence,1,1,MEX_PROV_LGS_ART136_001,MEX_MAP_IHR2005_003_002,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,legacy_unvalidated
+MEX-002,IHR-OBL-004,documented_correspondence,1,1,MEX_PROV_LGS_ART136_001,MEX_MAP_IHR2005_004_001,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,legacy_unvalidated
+MEX-002,IHR-OBL-005,documented_correspondence,1,1,MEX_PROV_LGS_ART136_001,MEX_MAP_IHR2005_005_002,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,legacy_unvalidated
+MEX-002,IHR-OBL-006,documented_correspondence,1,2,MEX_PROV_LGS_ART136_001;MEX_PROV_LGS_ART181_001,MEX_MAP_IHR2005_006_001;MEX_MAP_IHR2005_006_002,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,legacy_unvalidated
+MEX-002,IHR-OBL-010,documented_correspondence,1,2,MEX_PROV_LGS_ART181_001;MEX_PROV_LGS_ART184_001,MEX_MAP_IHR2005_010_001;MEX_MAP_IHR2005_010_002,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,legacy_unvalidated
+MEX-002,IHR-OBL-012,documented_correspondence,1,1,MEX_PROV_LGS_ART134_001,MEX_MAP_IHR2005_012_001,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,scope_pending
+MEX-002,IHR-OBL-013,documented_correspondence,1,1,MEX_PROV_LGS_ART146_001,MEX_MAP_IHR2005_013_001,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,legacy_unvalidated
+MEX-002,IHR-OBL-014,documented_correspondence,1,1,MEX_PROV_LGS_ART134_001,MEX_MAP_IHR2005_014_001,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,scope_pending
+MEX-002,IHR-OBL-015,documented_correspondence,1,1,MEX_PROV_LGS_ART181_001,MEX_MAP_IHR2005_015_001,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,legacy_unvalidated
+MEX-002,IHR-OBL-016,documented_correspondence,1,1,MEX_PROV_LGS_ART352_001,MEX_MAP_IHR2005_016_003,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,legacy_unvalidated
+MEX-002,IHR-OBL-018,documented_correspondence,1,1,MEX_PROV_LGS_ART352_001,MEX_MAP_IHR2005_018_001,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,legacy_unvalidated
+MEX-002,IHR-OBL-019,documented_correspondence,1,1,MEX_PROV_LGS_ART352_001,MEX_MAP_IHR2005_019_002,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,legacy_unvalidated
+MEX-002,IHR-OBL-021,documented_correspondence,1,1,MEX_PROV_LGS_ART359_001,MEX_MAP_IHR2005_021_001,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,legacy_unvalidated
+MEX-002,IHR-OBL-023,documented_correspondence,1,1,MEX_PROV_LGS_ART017BIS_001,MEX_MAP_IHR2005_023_001,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,legacy_unvalidated
+MEX-002,IHR-OBL-024,documented_correspondence,1,1,MEX_PROV_LGS_ART139_001,MEX_MAP_IHR2005_024_002,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,legacy_unvalidated
+MEX-002,IHR-OBL-029,documented_correspondence,1,1,MEX_PROV_LGS_ART139_001,MEX_MAP_IHR2005_029_002,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,legacy_unvalidated
+MEX-002,IHR-OBL-030,documented_correspondence,1,1,MEX_PROV_LGS_ART139_001,MEX_MAP_IHR2005_030_001,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,legacy_unvalidated
+MEX-002,IHR-OBL-039,documented_correspondence,1,1,MEX_PROV_LGS_ART139_001,MEX_MAP_IHR2005_039_002,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,legacy_unvalidated
+MEX-002,IHR-OBL-040,documented_correspondence,1,2,MEX_PROV_LGS_ART181_001;MEX_PROV_LGS_ART184_001,MEX_MAP_IHR2005_040_001;MEX_MAP_IHR2005_040_002,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,legacy_unvalidated
+MEX-002,IHR-OBL-042,documented_correspondence,1,1,MEX_PROV_LGS_ART184_001,MEX_MAP_IHR2005_042_001,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,legacy_unvalidated
+MEX-004,IHR-OBL-024,documented_correspondence,1,1,MEX_PROV_CPEUM_ART014_001,MEX_MAP_IHR2005_024_001,https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf,legacy_unvalidated
+MEX-004,IHR-OBL-029,documented_correspondence,1,1,MEX_PROV_CPEUM_ART014_001,MEX_MAP_IHR2005_029_001,https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf,legacy_unvalidated
+MEX-004,IHR-OBL-031,documented_correspondence,1,1,MEX_PROV_CPEUM_ART001_001,MEX_MAP_IHR2005_031_001,https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf,legacy_unvalidated
+MEX-004,IHR-OBL-039,documented_correspondence,1,1,MEX_PROV_CPEUM_ART001_001,MEX_MAP_IHR2005_039_001,https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf,legacy_unvalidated
+MEX-004,IHR-OBL-044,documented_correspondence,1,1,MEX_PROV_CPEUM_ART016_001,MEX_MAP_IHR2005_044_002,https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf,legacy_unvalidated
+MEX-007,IHR-OBL-044,documented_correspondence,1,1,MEX_PROV_LGPDPPSO_ART016_001,MEX_MAP_IHR2005_044_001,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGPDPPSO.pdf,legacy_unvalidated
+MEX-009,IHR-OBL-043,documented_correspondence,1,1,MEX_PROV_LOAPF_ART028_001,MEX_MAP_IHR2005_043_002,https://www.diputados.gob.mx/LeyesBiblio/pdf/153.pdf,legacy_unvalidated
+MEX-012,IHR-OBL-001,documented_correspondence,1,3,MEX_PROV_NOM017_SEC661_001;MEX_PROV_NOM017_SEC663_AUDIT;MEX_PROV_NOM017_SEC664_AUDIT,MEX_MAP_AUDIT_001_SEC663;MEX_MAP_AUDIT_001_SEC664;MEX_MAP_IHR2005_001_002,https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013;https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225,scope_pending
+MEX-012,IHR-OBL-002,documented_correspondence,1,1,MEX_PROV_NOM017_SEC42_001,MEX_MAP_IHR2005_002_002,https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013,legacy_unvalidated
+MEX-012,IHR-OBL-004,documented_correspondence,1,3,MEX_PROV_NOM017_SEC661_001;MEX_PROV_NOM017_SEC664_AUDIT;MEX_PROV_NOM017_SEC814_AUDIT,MEX_MAP_AUDIT_004_SEC664;MEX_MAP_AUDIT_004_SEC814;MEX_MAP_IHR2005_004_003,https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013;https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225,scope_pending
+MEX-012,IHR-OBL-012,documented_correspondence,1,1,MEX_PROV_NOM017_SEC42_001,MEX_MAP_IHR2005_012_002,https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013,legacy_unvalidated
+MEX-012,IHR-OBL-013,documented_correspondence,1,1,MEX_PROV_NOM017_SEC311_001,MEX_MAP_IHR2005_013_002,https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013,legacy_unvalidated
+MEX-012,IHR-OBL-014,documented_correspondence,1,3,MEX_PROV_NOM017_SEC661_001;MEX_PROV_NOM017_SEC664_AUDIT;MEX_PROV_NOM017_SEC814_AUDIT,MEX_MAP_AUDIT_014_SEC664;MEX_MAP_AUDIT_014_SEC814;MEX_MAP_IHR2005_014_002,https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013;https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225,scope_pending
+MEX-015,IHR-OBL-045,documented_correspondence,1,1,MEX_PROV_RLGS_INV_ART011_001,MEX_MAP_IHR2005_045_001,TBD_REVIEW,legacy_unvalidated
+MEX-016,IHR-OBL-004,documented_correspondence,1,1,MEX_PROV_RISI_ART014_001,MEX_MAP_IHR2005_004_002,https://www.diputados.gob.mx/LeyesBiblio/pdf/ReglLGSMSI.pdf,legacy_unvalidated
+MEX-016,IHR-OBL-016,documented_correspondence,1,2,MEX_PROV_RISS2025_ART026_001;MEX_PROV_RISS2025_ART027_001,MEX_MAP_IHR2005_016_001;MEX_MAP_IHR2005_016_002,TBD_REVIEW,legacy_unvalidated
+MEX-016,IHR-OBL-017,documented_correspondence,1,2,MEX_PROV_RISI_ART006_001;MEX_PROV_RISS2025_ART026_001,MEX_MAP_IHR2005_017_001;MEX_MAP_IHR2005_017_002,TBD_REVIEW;https://www.diputados.gob.mx/LeyesBiblio/pdf/ReglLGSMSI.pdf,legacy_unvalidated
+MEX-016,IHR-OBL-018,documented_correspondence,1,1,MEX_PROV_RISS2025_ART010_001,MEX_MAP_IHR2005_018_002,TBD_REVIEW,legacy_unvalidated
+MEX-016,IHR-OBL-019,documented_correspondence,1,1,MEX_PROV_RISS2025_ART010_001,MEX_MAP_IHR2005_019_001,TBD_REVIEW,legacy_unvalidated
+MEX-016,IHR-OBL-020,documented_correspondence,1,1,MEX_PROV_RISS2025_ART044_001,MEX_MAP_IHR2005_020_001,TBD_REVIEW,legacy_unvalidated
+MEX-016,IHR-OBL-022,documented_correspondence,1,1,MEX_PROV_RISS2025_ART026_001,MEX_MAP_IHR2005_022_001,TBD_REVIEW,legacy_unvalidated
+MEX-016,IHR-OBL-023,documented_correspondence,1,1,MEX_PROV_RISS2025_ART044_001,MEX_MAP_IHR2005_023_002,TBD_REVIEW,legacy_unvalidated
+MEX-016,IHR-OBL-025,documented_correspondence,1,2,MEX_PROV_RISS2025_ART069_001;MEX_PROV_RISS2025_ART070_001,MEX_MAP_IHR2005_025_001;MEX_MAP_IHR2005_025_002,TBD_REVIEW,legacy_unvalidated
+MEX-016,IHR-OBL-026,documented_correspondence,1,1,MEX_PROV_RISS2025_ART044_001,MEX_MAP_IHR2005_026_001,TBD_REVIEW,legacy_unvalidated
+MEX-016,IHR-OBL-027,documented_correspondence,1,2,MEX_PROV_RISS2025_ART068_001;MEX_PROV_RISS2025_ART069_001,MEX_MAP_IHR2005_027_001;MEX_MAP_IHR2005_027_002,TBD_REVIEW,legacy_unvalidated
+MEX-016,IHR-OBL-028,documented_correspondence,1,2,MEX_PROV_RISS2025_ART069_001;MEX_PROV_RISS2025_ART070_001,MEX_MAP_IHR2005_028_001;MEX_MAP_IHR2005_028_002,TBD_REVIEW,legacy_unvalidated
+MEX-016,IHR-OBL-030,documented_correspondence,1,1,MEX_PROV_RISS2025_ART068_001,MEX_MAP_IHR2005_030_002,TBD_REVIEW,legacy_unvalidated
+MEX-016,IHR-OBL-031,documented_correspondence,1,1,MEX_PROV_RISS2025_ART069_001,MEX_MAP_IHR2005_031_002,TBD_REVIEW,legacy_unvalidated
+MEX-016,IHR-OBL-032,documented_correspondence,1,1,MEX_PROV_RISS2025_ART009_001,MEX_MAP_IHR2005_032_001,TBD_REVIEW,legacy_unvalidated
+MEX-016,IHR-OBL-033,documented_correspondence,1,1,MEX_PROV_RISI_ART003_001,MEX_MAP_IHR2005_033_001,https://www.diputados.gob.mx/LeyesBiblio/pdf/ReglLGSMSI.pdf,legacy_unvalidated
+MEX-016,IHR-OBL-034,documented_correspondence,1,2,MEX_PROV_RISI_ART031_AUDIT;MEX_PROV_RISS2025_ART009_001,MEX_MAP_AUDIT_034_ART031;MEX_MAP_IHR2005_034_001,TBD_REVIEW;https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf,scope_pending
+MEX-016,IHR-OBL-035,documented_correspondence,1,2,MEX_PROV_RISI_ART030_AUDIT;MEX_PROV_RISS2025_ART009_001,MEX_MAP_AUDIT_035_ART030;MEX_MAP_IHR2005_035_001,TBD_REVIEW;https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf,scope_pending
+MEX-016,IHR-OBL-036,documented_correspondence,1,1,MEX_PROV_RISS2025_ART044_001,MEX_MAP_IHR2005_036_001,TBD_REVIEW,legacy_unvalidated
+MEX-016,IHR-OBL-037,documented_correspondence,1,1,MEX_PROV_RISI_ART007_AUDIT,MEX_MAP_AUDIT_037_ART007,https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf,scope_pending
+MEX-017,IHR-OBL-001,documented_correspondence,1,2,MEX-017-art02-estructuraadm;MEX-017-art35-fraccXIX,MEX_MAP_IHR2005_001_001;MEX_MAP_IHR2005_001_003,DOF 2025-02-27,scope_pending
+MEX-017,IHR-OBL-002,documented_correspondence,1,1,MEX-017-art35-fraccX,MEX_MAP_IHR2005_002_003,DOF 2025-02-27,legacy_unvalidated
+MEX-017,IHR-OBL-003,documented_correspondence,1,1,MEX-017-art35-fraccXIX,MEX_MAP_IHR2005_003_001,DOF 2025-02-27,legacy_unvalidated
+MEX-017,IHR-OBL-005,documented_correspondence,1,1,MEX-017-art35-fraccXIX,MEX_MAP_IHR2005_005_001,DOF 2025-02-27,legacy_unvalidated
+MEX-017,IHR-OBL-007,documented_correspondence,1,2,MEX-017-art33-fraccI-IV;MEX-017-art35-fraccXIX,MEX_MAP_IHR2005_007_001;MEX_MAP_IHR2005_007_002,DOF 2025-02-27,legacy_unvalidated
+MEX-017,IHR-OBL-008,documented_correspondence,1,1,MEX-017-art35-fraccXIX,MEX_MAP_IHR2005_008_001,DOF 2025-02-27,legacy_unvalidated
+MEX-017,IHR-OBL-009,documented_correspondence,1,1,MEX-017-art35-fraccXIX,MEX_MAP_IHR2005_009_001,DOF 2025-02-27,legacy_unvalidated
+MEX-017,IHR-OBL-010,documented_correspondence,1,1,MEX-017-art43-fraccIX,MEX_MAP_IHR2005_010_003,DOF 2025-02-27,legacy_unvalidated
+MEX-017,IHR-OBL-015,documented_correspondence,1,1,MEX-017-art43-fraccIX,MEX_MAP_IHR2005_015_002,DOF 2025-02-27,legacy_unvalidated
+MEX-017,IHR-OBL-041,documented_correspondence,1,1,MEX-017-art35-fraccXIX,MEX_MAP_IHR2005_041_001,DOF 2025-02-27,legacy_unvalidated
+MEX-017,IHR-OBL-043,documented_correspondence,1,1,MEX-017-art33-fraccI-IV,MEX_MAP_IHR2005_043_001,DOF 2025-02-27,legacy_unvalidated
+MEX-018,IHR-OBL-022,documented_correspondence,1,1,MEX_PROV_LADUANERA_ART003_001,MEX_MAP_IHR2005_022_002,TBD_REVIEW,legacy_unvalidated
+MEX-018,IHR-OBL-026,documented_correspondence,1,1,MEX_PROV_LADUANERA_ART007_001,MEX_MAP_IHR2005_026_002,TBD_REVIEW,legacy_unvalidated
+MEX-018,IHR-OBL-038,documented_correspondence,1,1,MEX_PROV_LADUANERA_ART056_001,MEX_MAP_IHR2005_038_001,TBD_REVIEW,legacy_unvalidated
+MEX_ACTOR_DGE_001,IHR-OBL-001,textual_role_reference,1,1,MEX_PROV_NOM017_SEC661_001,,https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225,text_identified_scope_pending
+MEX_ACTOR_DGE_001,IHR-OBL-004,textual_role_reference,1,1,MEX_PROV_NOM017_SEC814_AUDIT,,https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225,text_identified_scope_pending
+MEX_ACTOR_DGE_001,IHR-OBL-014,textual_role_reference,1,1,MEX_PROV_NOM017_SEC814_AUDIT,,https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225,text_identified_scope_pending
+MEX_ACTOR_SS_001,IHR-OBL-002,textual_role_reference,1,1,MEX_PROV_LGS_ART133_II_AUDIT,,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,text_identified_scope_pending
+MEX_ACTOR_SS_001,IHR-OBL-034,textual_role_reference,1,1,MEX_PROV_RISI_ART031_AUDIT,,https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf,text_identified_scope_pending
+MEX_ACTOR_SS_001,IHR-OBL-035,textual_role_reference,1,1,MEX_PROV_RISI_ART030_AUDIT,,https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf,text_identified_scope_pending

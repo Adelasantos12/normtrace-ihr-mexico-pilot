@@ -1,0 +1,7 @@
+actor_id,obligation_id,provision_id,relation_type,role,source_url,review_status,audit_version
+MEX_ACTOR_DGE_001,IHR-OBL-001,MEX_PROV_NOM017_SEC661_001,textual_role_reference,National IHR Focal Point,https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225,text_identified_scope_pending,0.1.1-audit
+MEX_ACTOR_DGE_001,IHR-OBL-004,MEX_PROV_NOM017_SEC814_AUDIT,textual_role_reference,Domestic notification recipient; WHO deadline is distinct,https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225,text_identified_scope_pending,0.1.1-audit
+MEX_ACTOR_DGE_001,IHR-OBL-014,MEX_PROV_NOM017_SEC814_AUDIT,textual_role_reference,Domestic notification recipient; assessment procedure requires further review,https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225,text_identified_scope_pending,0.1.1-audit
+MEX_ACTOR_SS_001,IHR-OBL-002,MEX_PROV_LGS_ART133_II_AUDIT,textual_role_reference,Establish and operate SINAVE,https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf,text_identified_scope_pending,0.1.1-audit
+MEX_ACTOR_SS_001,IHR-OBL-034,MEX_PROV_RISI_ART031_AUDIT,textual_role_reference,Receive maritime health declaration,https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf,text_identified_scope_pending,0.1.1-audit
+MEX_ACTOR_SS_001,IHR-OBL-035,MEX_PROV_RISI_ART030_AUDIT,textual_role_reference,Receive aircraft health declaration,https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf,text_identified_scope_pending,0.1.1-audit
