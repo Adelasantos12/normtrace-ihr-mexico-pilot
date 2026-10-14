@@ -5,18 +5,75 @@ on:
     paths:
       - '.github/workflows/legal-audit-20261014.yml'
       - '06_scripts/audit_20261014/**'
+      - '05_webapp/tests/audit-20261014.spec.ts'
+      - '05_webapp/playwright.audit.config.ts'
 permissions:
-  contents: read
+  contents: write
+concurrency:
+  group: normtrace-legal-audit-20261014
+  cancel-in-progress: false
 jobs:
   audit:
+    if: github.ref == 'refs/heads/audit/legal-corrections-2026-10-14'
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      PYTHONHASHSEED: '0'
     steps:
       - uses: actions/checkout@v4
-      - name: Prepare source snapshot
-        run: git archive --format=tar.gz -o /tmp/normtrace-source.tar.gz HEAD
-      - uses: actions/upload-artifact@v4
         with:
-          name: normtrace-source-audit
-          path: /tmp/normtrace-source.tar.gz
+          ref: audit/legal-corrections-2026-10-14
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install networkx==3.2.1 pandas==2.2.3
+      - name: Apply documentary corrections and review labels
+        run: |
+          python3 06_scripts/audit_20261014/apply.py
+          python3 06_scripts/audit_20261014/finalize.py
+      - name: Rebuild and verify data
+        run: |
+          python3 06_scripts/build_tables/build_network.py
+          python3 06_scripts/build_tables/spar_normtrace_bridge.py
+          python3 06_scripts/validation/validate_content.py
+          find 04_outputs/figures 04_outputs/exports 05_webapp/public/data/derived -type f -print0 | sort -z | xargs -0 sha256sum > /tmp/derived-before.sha256
+          python3 06_scripts/build_tables/build_network.py
+          python3 06_scripts/build_tables/spar_normtrace_bridge.py
+          find 04_outputs/figures 04_outputs/exports 05_webapp/public/data/derived -type f -print0 | sort -z | xargs -0 sha256sum > /tmp/derived-after.sha256
+          diff -u /tmp/derived-before.sha256 /tmp/derived-after.sha256
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: 05_webapp/package-lock.json
+      - name: Install and build application
+        working-directory: 05_webapp
+        run: npm ci && npm run build
+      - name: Browser regression tests
+        working-directory: 05_webapp
+        run: |
+          npx playwright install --with-deps chromium
+          npx playwright test --config=playwright.audit.config.ts
+      - name: Commit tested corrections to the isolated audit branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 00_project 03_tables 04_outputs 05_webapp/src 05_webapp/public/data 06_scripts/validation 06_scripts/build_tables .github/workflows/validate.yml 99_archive/audit_20261014
+          if ! git diff --cached --quiet; then
+            git commit -m 'fix: apply source audit, regenerate traceability data and withdraw unsupported claims'
+            git push origin HEAD:refs/heads/audit/legal-corrections-2026-10-14
+          fi
+          git rev-parse HEAD > /tmp/audit-tested-commit.txt
+          git archive --format=tar.gz -o /tmp/normtrace-source-audited.tar.gz HEAD
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: normtrace-audit-validation
+          path: |
+            05_webapp/test-results/
+            /tmp/audit-tested-commit.txt
+            /tmp/normtrace-source-audited.tar.gz
+            00_project/audit_20261014.json
+            00_project/AUDIT_20261014.md
           retention-days: 7
