@@ -1,0 +1,64 @@
+name: Reconcile legal audit
+on:
+  push:
+    branches: [audit/legal-2026-10-14]
+    paths: [.github/workflows/reconcile-audit-20261014.yml, 06_scripts/reconcile_audit_20261014.py]
+permissions:
+  contents: write
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Reconcile and test source data
+        run: |
+          python 06_scripts/reconcile_audit_20261014.py
+          pip install -r 06_scripts/requirements-audit.txt
+          python 06_scripts/build_tables/build_network.py
+          python 06_scripts/build_tables/spar_normtrace_bridge.py
+          python 06_scripts/build_tables/build_audit_manifest.py
+          python 06_scripts/validation/validate_content.py
+          python -m unittest discover -s 06_scripts/validation -p 'test_audit_*.py' -v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: 05_webapp/package-lock.json
+      - name: Build and browser regression tests
+        working-directory: 05_webapp
+        run: |
+          npm ci
+          npm run build
+          npx playwright install --with-deps chromium
+          npx playwright test tests/audit_20261014.spec.ts --reporter=list
+      - name: Commit tested reconciliation to audit branch only
+        run: |
+          test "$(git ls-remote origin refs/heads/audit/legal-2026-10-14 | cut -f1)" = "$GITHUB_SHA"
+          git config user.name 'NormTrace audit'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 00_project 03_tables 04_outputs 05_webapp 06_scripts/validation
+          git commit -m 'fix(audit): reconcile concurrent source corrections and regenerate 94-record release'
+          git push origin HEAD:refs/heads/audit/legal-2026-10-14
+          git rev-parse HEAD > /tmp/reconciled-commit.txt
+      - name: Export reproducible source
+        if: always()
+        run: |
+          git add -A
+          git archive --format=zip --output=/tmp/normtrace-reconciled.zip "$(git write-tree)"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: normtrace-reconciled-evidence
+          path: |
+            /tmp/normtrace-reconciled.zip
+            /tmp/reconciled-commit.txt
+            05_webapp/audit-screenshots
+            05_webapp/test-results
+            05_webapp/dist
+          retention-days: 14
