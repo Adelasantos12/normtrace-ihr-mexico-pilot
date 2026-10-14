@@ -55,6 +55,8 @@ jobs:
               p.parent.mkdir(parents=True, exist_ok=True)
               p.write_bytes(new)
           print(f'Applied {len(prepared)} hash-verified source changes')
+          p = Path('00_project/data_dictionary.md')
+          p.write_text(p.read_text().replace('99_archive/pre-audit-2026-10-14/00_project/data_dictionary.md', '99_archive/pre-audit-2026-10-14/documents/00_project/data_dictionary.md'))
           p = Path('05_webapp/src/pages/MappingExplorer.tsx')
           text = p.read_text()
           old = "  const [tab, setTab] = useState<Tab>('ihr2005');"
@@ -100,7 +102,10 @@ jobs:
           cache-dependency-path: 05_webapp/package-lock.json
       - name: Install web dependencies and build
         working-directory: 05_webapp
-        run: npm ci && npm run build
+        run: |
+          npm ci
+          npm run build
+          npm audit --json > /tmp/npm-audit-20261014.json || true
       - name: Install Chromium
         working-directory: 05_webapp
         run: npx playwright install --with-deps chromium
@@ -111,8 +116,9 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git restore --source=HEAD --worktree --staged .github/workflows/validate.yml
           rm -rf .audit-bootstrap
-          git add 00_project 03_tables 04_outputs 05_webapp 06_scripts 99_archive README.md .github/workflows/validate.yml .audit-bootstrap
+          git add 00_project 03_tables 04_outputs 05_webapp 06_scripts 99_archive README.md .audit-bootstrap
           git reset -- 05_webapp/test-results 05_webapp/playwright-report
           git commit -m "fix(audit): correct legal evidence, preserve provenance and align public diagnostics"
           git push origin HEAD:${{ github.ref_name }}
@@ -124,6 +130,7 @@ jobs:
           git diff --stat > /tmp/audit-evidence/diff-stat.txt
           git rev-parse HEAD > /tmp/audit-evidence/working-commit.txt
           cp /tmp/audit-validated-commit.txt /tmp/audit-evidence/ 2>/dev/null || true
+          cp /tmp/npm-audit-20261014.json /tmp/audit-evidence/ 2>/dev/null || true
           tar --exclude='.git' --exclude='node_modules' --exclude='dist' --exclude='test-results' --exclude='playwright-report' --exclude='.audit-bootstrap' -czf /tmp/audit-evidence/source.tar.gz .
       - uses: actions/upload-artifact@v4
         if: always()
