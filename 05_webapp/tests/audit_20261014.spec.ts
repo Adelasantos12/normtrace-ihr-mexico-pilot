@@ -10,7 +10,7 @@ for (const route of routes) test(`route ${route} loads without uncaught errors`,
 });
 test('current source counts and absence withdrawal',async({request})=>{
  const s=await (await request.get('/data/derived/audit_summary.json')).json();
- expect(s.counts).toMatchObject({obligations:45,provisions:116,instruments:18,mapping_rows:86});
+ expect(s.counts).toMatchObject({obligations:45,provisions:116,instruments:18,mapping_rows:88});
  expect(s.unmatched_obligation_ids).not.toContain('IHR-OBL-037');
  const b=await (await request.get('/data/derived/spar_normtrace_divergence.json')).json();expect(b.comparison_permitted).toBe(false);expect(b.divergence_latest).toBeNull();
 });

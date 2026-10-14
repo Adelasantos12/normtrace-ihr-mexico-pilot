@@ -2,7 +2,7 @@
   "audit_id": "0.2.0-audit.20261014",
   "applied_date": "2026-10-14",
   "baseline_mapping_sha256": "6b1a0fbc6e241d752fa81bb1a8722f13478a895d8ba892f6dabd661c045936f5",
-  "corrected_mapping_records": 31,
+  "corrected_mapping_records": 35,
   "added_provisions": 6,
   "legal_validation": "not_completed",
   "scope": "Targeted correction of source descriptions, references and unsupported public claims; not full legal validation.",
@@ -2040,6 +2040,637 @@
           "after": "0.2.0-audit.20261014"
         }
       }
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_001_001",
+      "obligation_id": "IHR-OBL-001",
+      "changes": {
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_001_002",
+      "obligation_id": "IHR-OBL-001",
+      "changes": {
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_001_003",
+      "obligation_id": "IHR-OBL-001",
+      "changes": {
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_003_001",
+      "obligation_id": "IHR-OBL-003",
+      "changes": {
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_003_002",
+      "obligation_id": "IHR-OBL-003",
+      "changes": {
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_004_001",
+      "obligation_id": "IHR-OBL-004",
+      "changes": {
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_004_002",
+      "obligation_id": "IHR-OBL-004",
+      "changes": {
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_004_003",
+      "obligation_id": "IHR-OBL-004",
+      "changes": {
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_005_001",
+      "obligation_id": "IHR-OBL-005",
+      "changes": {
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_005_002",
+      "obligation_id": "IHR-OBL-005",
+      "changes": {
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_007_001",
+      "obligation_id": "IHR-OBL-007",
+      "changes": {
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_007_002",
+      "obligation_id": "IHR-OBL-007",
+      "changes": {
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_008_001",
+      "obligation_id": "IHR-OBL-008",
+      "changes": {
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_009_001",
+      "obligation_id": "IHR-OBL-009",
+      "changes": {
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_012_001",
+      "obligation_id": "IHR-OBL-012",
+      "changes": {
+        "anchoring_level": {
+          "before": "2",
+          "after": ""
+        },
+        "assessment_summary": {
+          "before": "Art. 134 SINAVE mandate covers detection and notification at all levels including primary care and community levels (fracs. IV, V, VI). This provides partial anchoring for Annex 1A par.4 community-level detection capacities. No provision specifies the minimum capacity benchmarks from IHR Annex 1A par.4.",
+          "after": "Article 134 concerns surveillance, prevention and control of the diseases listed in its sections. The express SINAVE establishment and operation power is in Article 133 II. Read with the final NOM-017 and referred manuals; Article 134 alone cannot establish that IHR procedures are absent."
+        },
+        "gap_type": {
+          "before": "regulatory gap",
+          "after": "reference follow-up pending"
+        },
+        "review_status": {
+          "before": "preliminary_ai_assisted",
+          "after": "requires_human_review"
+        },
+        "audit_status": {
+          "before": "inherited_preliminary",
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": "not_rechecked_in_this_audit",
+          "after": "relevant_provision_scope_review_pending"
+        },
+        "score_status": {
+          "before": "legacy_unaudited",
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": "",
+          "after": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf"
+        },
+        "audit_note": {
+          "before": "",
+          "after": "Final reconciliation extends the Article 134 correction to every use of that provision; no legal re-scoring."
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_014_001",
+      "obligation_id": "IHR-OBL-014",
+      "changes": {
+        "anchoring_level": {
+          "before": "2",
+          "after": ""
+        },
+        "assessment_summary": {
+          "before": "Art. 134 assigns SS the authority to assess all epidemiological events, underpinning the national-level 48-hour assessment capacity required by Annex 1A par. 6. The article does not specify the 48-hour window or IHR risk assessment methodology.",
+          "after": "Article 134 concerns surveillance, prevention and control of the diseases listed in its sections. The express SINAVE establishment and operation power is in Article 133 II. Read with the final NOM-017 and referred manuals; Article 134 alone cannot establish that IHR procedures are absent."
+        },
+        "gap_type": {
+          "before": "regulatory gap",
+          "after": "reference follow-up pending"
+        },
+        "review_status": {
+          "before": "preliminary_ai_assisted",
+          "after": "requires_human_review"
+        },
+        "audit_status": {
+          "before": "inherited_preliminary",
+          "after": "source_correction_applied"
+        },
+        "evidence_status": {
+          "before": "not_rechecked_in_this_audit",
+          "after": "relevant_provision_scope_review_pending"
+        },
+        "score_status": {
+          "before": "legacy_unaudited",
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": "",
+          "after": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf"
+        },
+        "audit_note": {
+          "before": "",
+          "after": "Final reconciliation extends the Article 134 correction to every use of that provision; no legal re-scoring."
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_014_002",
+      "obligation_id": "IHR-OBL-014",
+      "changes": {
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_001_AUDIT_663",
+      "obligation_id": "IHR-OBL-001",
+      "changes": {
+        "assessment_summary": {
+          "before": "International surveillance responsibility is allocated across technical-administrative levels. The norm refers to the IHR and the international surveillance manual; the referred manual must be examined before evaluating complete procedures.",
+          "after": "Final NOM-017 sections 6.6.3 and 6.6.4 assign coordination and international-surveillance responsibilities across SNS technical-administrative levels, and refer to the IHR and the international surveillance manual. The manual remains to be reviewed for this obligation."
+        },
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_001_AUDIT_814",
+      "obligation_id": "IHR-OBL-001",
+      "changes": {
+        "assessment_summary": {
+          "before": "NOM-017 §8.1.4 specifies a domestic chain for immediate notification up to DGE before 24 hours from knowledge. This is distinct from IHR Art. 6 notification to WHO within 24 hours of assessment. The entire international reporting obligation remains under review.",
+          "after": "The final NOM-017 section 8.1.4 requires epidemiological surveillance units or their equivalents at the different technical-administrative levels to notify up to DGE before 24 hours from knowledge of the event, by telephone, fax or electronic means. This is not a finding of a direct exchange from every unit to DGE. The IHR Article 6 deadline instead runs from assessment."
+        },
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        },
+        "audit_note": {
+          "before": "AUD-NOM-017: supplemental correspondence, not a compliance determination.",
+          "after": "AUD-NOM-017: supplemental correspondence, not a compliance determination. Final-NOM source confirmed; earlier draft wording withdrawn."
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_004_AUDIT_663",
+      "obligation_id": "IHR-OBL-004",
+      "changes": {
+        "assessment_summary": {
+          "before": "International surveillance responsibility is allocated across technical-administrative levels. The norm refers to the IHR and the international surveillance manual; the referred manual must be examined before evaluating complete procedures.",
+          "after": "Final NOM-017 sections 6.6.3 and 6.6.4 assign coordination and international-surveillance responsibilities across SNS technical-administrative levels, and refer to the IHR and the international surveillance manual. The manual remains to be reviewed for this obligation."
+        },
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_004_AUDIT_814",
+      "obligation_id": "IHR-OBL-004",
+      "changes": {
+        "assessment_summary": {
+          "before": "NOM-017 §8.1.4 specifies a domestic chain for immediate notification up to DGE before 24 hours from knowledge. This is distinct from IHR Art. 6 notification to WHO within 24 hours of assessment. The entire international reporting obligation remains under review.",
+          "after": "The final NOM-017 section 8.1.4 requires epidemiological surveillance units or their equivalents at the different technical-administrative levels to notify up to DGE before 24 hours from knowledge of the event, by telephone, fax or electronic means. This is not a finding of a direct exchange from every unit to DGE. The IHR Article 6 deadline instead runs from assessment."
+        },
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        },
+        "audit_note": {
+          "before": "AUD-NOM-017: supplemental correspondence, not a compliance determination.",
+          "after": "AUD-NOM-017: supplemental correspondence, not a compliance determination. Final-NOM source confirmed; earlier draft wording withdrawn."
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_014_AUDIT_663",
+      "obligation_id": "IHR-OBL-014",
+      "changes": {
+        "assessment_summary": {
+          "before": "International surveillance responsibility is allocated across technical-administrative levels. The norm refers to the IHR and the international surveillance manual; the referred manual must be examined before evaluating complete procedures.",
+          "after": "Final NOM-017 sections 6.6.3 and 6.6.4 assign coordination and international-surveillance responsibilities across SNS technical-administrative levels, and refer to the IHR and the international surveillance manual. The manual remains to be reviewed for this obligation."
+        },
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_014_AUDIT_814",
+      "obligation_id": "IHR-OBL-014",
+      "changes": {
+        "assessment_summary": {
+          "before": "NOM-017 §8.1.4 specifies a domestic chain for immediate notification up to DGE before 24 hours from knowledge. This is distinct from IHR Art. 6 notification to WHO within 24 hours of assessment. The entire international reporting obligation remains under review.",
+          "after": "The final NOM-017 section 8.1.4 requires epidemiological surveillance units or their equivalents at the different technical-administrative levels to notify up to DGE before 24 hours from knowledge of the event, by telephone, fax or electronic means. This is not a finding of a direct exchange from every unit to DGE. The IHR Article 6 deadline instead runs from assessment."
+        },
+        "audit_source_url": {
+          "before": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        },
+        "audit_note": {
+          "before": "AUD-NOM-017: supplemental correspondence, not a compliance determination.",
+          "after": "AUD-NOM-017: supplemental correspondence, not a compliance determination. Final-NOM source confirmed; earlier draft wording withdrawn."
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_012_AUDIT_814",
+      "obligation_id": "IHR-OBL-012",
+      "changes": {
+        "mapping_id": {
+          "before": null,
+          "after": "MEX_MAP_IHR2005_012_AUDIT_814"
+        },
+        "obligation_id": {
+          "before": null,
+          "after": "IHR-OBL-012"
+        },
+        "domestic_provision_id": {
+          "before": null,
+          "after": "MEX_PROV_NOM017_SEC814_AUDIT20261014"
+        },
+        "domestic_norm": {
+          "before": null,
+          "after": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica"
+        },
+        "domestic_article": {
+          "before": null,
+          "after": "Numeral 8.1.4"
+        },
+        "match_type": {
+          "before": null,
+          "after": "regulatory"
+        },
+        "anchoring_level": {
+          "before": null,
+          "after": ""
+        },
+        "actor_fit": {
+          "before": null,
+          "after": "source identified"
+        },
+        "procedure_fit": {
+          "before": null,
+          "after": "source identified"
+        },
+        "coordination_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "enforcement_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "rights_safeguard_fit": {
+          "before": null,
+          "after": "not assessed"
+        },
+        "federalism_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": null,
+          "after": "The final NOM-017 section 8.1.4 requires epidemiological surveillance units or their equivalents at the different technical-administrative levels to notify up to DGE before 24 hours from knowledge of the event, by telephone, fax or electronic means. This is not a finding of a direct exchange from every unit to DGE. The IHR Article 6 deadline instead runs from assessment."
+        },
+        "gap_type": {
+          "before": null,
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": null,
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": null,
+          "after": "requires_human_review"
+        },
+        "reviewer_notes": {
+          "before": null,
+          "after": ""
+        },
+        "legacy_anchoring_level": {
+          "before": null,
+          "after": ""
+        },
+        "legacy_gap_type": {
+          "before": null,
+          "after": ""
+        },
+        "legacy_review_status": {
+          "before": null,
+          "after": ""
+        },
+        "legacy_actor_fit": {
+          "before": null,
+          "after": ""
+        },
+        "legacy_procedure_fit": {
+          "before": null,
+          "after": ""
+        },
+        "legacy_coordination_fit": {
+          "before": null,
+          "after": ""
+        },
+        "legacy_enforcement_fit": {
+          "before": null,
+          "after": ""
+        },
+        "legacy_rights_safeguard_fit": {
+          "before": null,
+          "after": ""
+        },
+        "legacy_federalism_fit": {
+          "before": null,
+          "after": ""
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_added"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "Candidate correspondence retained when reconciling the production audit. Source identification does not establish full satisfaction of this Annex 1 obligation."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
+    },
+    {
+      "record_id": "MEX_MAP_IHR2005_013_AUDIT_663",
+      "obligation_id": "IHR-OBL-013",
+      "changes": {
+        "mapping_id": {
+          "before": null,
+          "after": "MEX_MAP_IHR2005_013_AUDIT_663"
+        },
+        "obligation_id": {
+          "before": null,
+          "after": "IHR-OBL-013"
+        },
+        "domestic_provision_id": {
+          "before": null,
+          "after": "MEX_PROV_NOM017_SEC663_664_AUDIT20261014"
+        },
+        "domestic_norm": {
+          "before": null,
+          "after": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica"
+        },
+        "domestic_article": {
+          "before": null,
+          "after": "Numerales 6.6.3–6.6.4"
+        },
+        "match_type": {
+          "before": null,
+          "after": "regulatory"
+        },
+        "anchoring_level": {
+          "before": null,
+          "after": ""
+        },
+        "actor_fit": {
+          "before": null,
+          "after": "source identified"
+        },
+        "procedure_fit": {
+          "before": null,
+          "after": "source identified"
+        },
+        "coordination_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "enforcement_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "rights_safeguard_fit": {
+          "before": null,
+          "after": "not assessed"
+        },
+        "federalism_fit": {
+          "before": null,
+          "after": "review pending"
+        },
+        "assessment_summary": {
+          "before": null,
+          "after": "Final NOM-017 sections 6.6.3 and 6.6.4 assign coordination and international-surveillance responsibilities across SNS technical-administrative levels, and refer to the IHR and the international surveillance manual. The manual remains to be reviewed for this obligation."
+        },
+        "gap_type": {
+          "before": null,
+          "after": "reference follow-up pending"
+        },
+        "confidence_level": {
+          "before": null,
+          "after": "not assessed"
+        },
+        "review_status": {
+          "before": null,
+          "after": "requires_human_review"
+        },
+        "reviewer_notes": {
+          "before": null,
+          "after": ""
+        },
+        "legacy_anchoring_level": {
+          "before": null,
+          "after": ""
+        },
+        "legacy_gap_type": {
+          "before": null,
+          "after": ""
+        },
+        "legacy_review_status": {
+          "before": null,
+          "after": ""
+        },
+        "legacy_actor_fit": {
+          "before": null,
+          "after": ""
+        },
+        "legacy_procedure_fit": {
+          "before": null,
+          "after": ""
+        },
+        "legacy_coordination_fit": {
+          "before": null,
+          "after": ""
+        },
+        "legacy_enforcement_fit": {
+          "before": null,
+          "after": ""
+        },
+        "legacy_rights_safeguard_fit": {
+          "before": null,
+          "after": ""
+        },
+        "legacy_federalism_fit": {
+          "before": null,
+          "after": ""
+        },
+        "audit_status": {
+          "before": null,
+          "after": "source_added"
+        },
+        "evidence_status": {
+          "before": null,
+          "after": "reference_identified_target_document_pending"
+        },
+        "score_status": {
+          "before": null,
+          "after": "withheld_pending_legal_review"
+        },
+        "audit_source_url": {
+          "before": null,
+          "after": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
+        },
+        "audit_note": {
+          "before": null,
+          "after": "Candidate correspondence retained when reconciling the production audit. Source identification does not establish full satisfaction of this Annex 1 obligation."
+        },
+        "dataset_version": {
+          "before": null,
+          "after": "0.2.0-audit.20261014"
+        }
+      },
+      "stage": "2026-10-14-final-NOM-reconciliation"
     }
   ],
   "nia_status": {
@@ -2062,8 +2693,9 @@
   "sources": [
     {
       "id": "NOM-017",
-      "url": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
-      "locators": "6.6.3, 6.6.4, 8.1.4"
+      "url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225",
+      "locators": "6.6.3, 6.6.4, 8.1.4",
+      "document_status": "final standard; draft not used as operative text"
     },
     {
       "id": "LGS",
@@ -2089,6 +2721,417 @@
       "id": "IHR",
       "url": "https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf",
       "locators": "4, 6, 37, 38, 40"
+    }
+  ],
+  "reconciliation_id": "2026-10-14-final-NOM-reconciliation",
+  "reconciliation_production_commit": "60f5c89903511710ed1615cbf7e7566c5ebd9d40",
+  "reconciliation_note": "Two audit implementations were reconciled. The final NOM (DOF 5288225) replaces the draft source. The prior production snapshot is archived. The consolidated dataset retains one combined 6.6.3-6.6.4 source record and adds the community/intermediate candidate links; counts therefore differ from both intermediate drafts. No scoring was inferred.",
+  "source_record_corrections": [
+    {
+      "provision_id": "MEX_PROV_NOM017_SEC311_001",
+      "before": {
+        "provision_id": "MEX_PROV_NOM017_SEC311_001",
+        "norm_id": "MEX-012",
+        "norm_title": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica",
+        "norm_type": "official mexican standard / NOM",
+        "hierarchy_level": "7_NOM_or_technical_standard",
+        "jurisdiction": "federal",
+        "article": "Numeral 3.1.11–3.1.12",
+        "provision_text": "3.1.11 Comité Nacional para la Vigilancia Epidemiológica (CONAVE), órgano colegiado a nivel federal interdisciplinario responsable de las políticas de vigilancia epidemiológica en el que participan las instituciones que conforman el Sistema Nacional de Salud. 3.1.12 Consejo de Salubridad General, Organo Colegiado dependiente directamente del Presidente de la República con carácter de autoridad sanitaria, sin intervención de ninguna Secretaría de Estado y sus disposiciones generales son obligatorias para las autoridades administrativas del país.",
+        "topic": "epidemiological surveillance; institutional definitions; CONAVE; CSG",
+        "actor_mentioned": "CONAVE; Consejo de Salubridad General; Sistema Nacional de Salud",
+        "power_granted": "CSG: disposiciones generales obligatorias para autoridades administrativas",
+        "duty_created": "CONAVE: responsable de políticas de vigilancia epidemiológica",
+        "procedure_created": "",
+        "coordination_mechanism": "CONAVE como órgano colegiado interinstitucional federal para vigilancia epidemiológica",
+        "enforcement_or_sanction": "disposiciones del CSG son obligatorias para todas las autoridades administrativas del país",
+        "rights_safeguard": "",
+        "budget_or_resource_implication": "no",
+        "relevance_to_ihr": "High — CONAVE is the technical governance body for SINAVE; CSG definition confirms its constitutional authority over epidemiological surveillance",
+        "relevance_to_pandemic_agreement": "High — these bodies are central to epidemic/pandemic surveillance governance and alert systems",
+        "source_url": "https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013",
+        "version_date": "2013-02-19",
+        "source_check_date": "",
+        "source_verification_status": "",
+        "legal_assessment_status": "",
+        "text_type": ""
+      },
+      "after": {
+        "provision_id": "MEX_PROV_NOM017_SEC311_001",
+        "norm_id": "MEX-012",
+        "norm_title": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica",
+        "norm_type": "official mexican standard / NOM",
+        "hierarchy_level": "7_NOM_or_technical_standard",
+        "jurisdiction": "federal",
+        "article": "Numeral 3.1.11–3.1.12",
+        "provision_text": "3.1.11 Comité Nacional para la Vigilancia Epidemiológica (CONAVE), órgano colegiado a nivel federal interdisciplinario responsable de las políticas de vigilancia epidemiológica en el que participan las instituciones que conforman el Sistema Nacional de Salud. 3.1.12 Consejo de Salubridad General, Organo Colegiado dependiente directamente del Presidente de la República con carácter de autoridad sanitaria, sin intervención de ninguna Secretaría de Estado y sus disposiciones generales son obligatorias para las autoridades administrativas del país.",
+        "topic": "epidemiological surveillance; institutional definitions; CONAVE; CSG",
+        "actor_mentioned": "CONAVE; Consejo de Salubridad General; Sistema Nacional de Salud",
+        "power_granted": "CSG: disposiciones generales obligatorias para autoridades administrativas",
+        "duty_created": "CONAVE: responsable de políticas de vigilancia epidemiológica",
+        "procedure_created": "",
+        "coordination_mechanism": "CONAVE como órgano colegiado interinstitucional federal para vigilancia epidemiológica",
+        "enforcement_or_sanction": "disposiciones del CSG son obligatorias para todas las autoridades administrativas del país",
+        "rights_safeguard": "",
+        "budget_or_resource_implication": "no",
+        "relevance_to_ihr": "High — CONAVE is the technical governance body for SINAVE; CSG definition confirms its constitutional authority over epidemiological surveillance",
+        "relevance_to_pandemic_agreement": "High — these bodies are central to epidemic/pandemic surveillance governance and alert systems",
+        "source_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225",
+        "version_date": "2013-02-19",
+        "source_check_date": "",
+        "source_verification_status": "",
+        "legal_assessment_status": "",
+        "text_type": "",
+        "legacy_source_url": "https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013"
+      }
+    },
+    {
+      "provision_id": "MEX_PROV_NOM017_SEC3115_001",
+      "before": {
+        "provision_id": "MEX_PROV_NOM017_SEC3115_001",
+        "norm_id": "MEX-012",
+        "norm_title": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica",
+        "norm_type": "official mexican standard / NOM",
+        "hierarchy_level": "7_NOM_or_technical_standard",
+        "jurisdiction": "federal",
+        "article": "Numeral 3.1.14–3.1.15",
+        "provision_text": "3.1.14 Emergencia epidemiológica, al evento de nueva aparición o reaparición, cuya presencia pone en riesgo la salud de la población, y que por su magnitud requiere de acciones inmediatas. 3.1.15 Emergencia en Salud Pública de Importancia Internacional (ESPII), significa un evento extraordinario que, de conformidad con el presente Reglamento Sanitario, se ha determinado que constituye un riesgo para la salud pública de otros estados a causa de la propagación internacional de una enfermedad, y podría exigir una respuesta internacional coordinada.",
+        "topic": "definitions; PHEIC/ESPII; epidemiological emergency",
+        "actor_mentioned": "",
+        "power_granted": "",
+        "duty_created": "",
+        "procedure_created": "",
+        "coordination_mechanism": "respuesta internacional coordinada requerida en caso de ESPII",
+        "enforcement_or_sanction": "",
+        "rights_safeguard": "",
+        "budget_or_resource_implication": "no",
+        "relevance_to_ihr": "High — ESPII definition reproduces IHR Art. 1 PHEIC definition; direct domestic anchoring of the IHR's core triggering concept",
+        "relevance_to_pandemic_agreement": "High — ESPII/PHEIC is the primary trigger for pandemic agreement activation; domestic definition alignment critical",
+        "source_url": "https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013",
+        "version_date": "2013-02-19",
+        "source_check_date": "",
+        "source_verification_status": "",
+        "legal_assessment_status": "",
+        "text_type": ""
+      },
+      "after": {
+        "provision_id": "MEX_PROV_NOM017_SEC3115_001",
+        "norm_id": "MEX-012",
+        "norm_title": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica",
+        "norm_type": "official mexican standard / NOM",
+        "hierarchy_level": "7_NOM_or_technical_standard",
+        "jurisdiction": "federal",
+        "article": "Numeral 3.1.14–3.1.15",
+        "provision_text": "3.1.14 Emergencia epidemiológica, al evento de nueva aparición o reaparición, cuya presencia pone en riesgo la salud de la población, y que por su magnitud requiere de acciones inmediatas. 3.1.15 Emergencia en Salud Pública de Importancia Internacional (ESPII), significa un evento extraordinario que, de conformidad con el presente Reglamento Sanitario, se ha determinado que constituye un riesgo para la salud pública de otros estados a causa de la propagación internacional de una enfermedad, y podría exigir una respuesta internacional coordinada.",
+        "topic": "definitions; PHEIC/ESPII; epidemiological emergency",
+        "actor_mentioned": "",
+        "power_granted": "",
+        "duty_created": "",
+        "procedure_created": "",
+        "coordination_mechanism": "respuesta internacional coordinada requerida en caso de ESPII",
+        "enforcement_or_sanction": "",
+        "rights_safeguard": "",
+        "budget_or_resource_implication": "no",
+        "relevance_to_ihr": "High — ESPII definition reproduces IHR Art. 1 PHEIC definition; direct domestic anchoring of the IHR's core triggering concept",
+        "relevance_to_pandemic_agreement": "High — ESPII/PHEIC is the primary trigger for pandemic agreement activation; domestic definition alignment critical",
+        "source_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225",
+        "version_date": "2013-02-19",
+        "source_check_date": "",
+        "source_verification_status": "",
+        "legal_assessment_status": "",
+        "text_type": "",
+        "legacy_source_url": "https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013"
+      }
+    },
+    {
+      "provision_id": "MEX_PROV_NOM017_SEC42_001",
+      "before": {
+        "provision_id": "MEX_PROV_NOM017_SEC42_001",
+        "norm_id": "MEX-012",
+        "norm_title": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica",
+        "norm_type": "official mexican standard / NOM",
+        "hierarchy_level": "7_NOM_or_technical_standard",
+        "jurisdiction": "federal",
+        "article": "Numeral 4.2–4.3",
+        "provision_text": "4.2 La Secretaría de Salud es el órgano rector del SINAVE y funge como la instancia responsable de recopilar, procesar y difundir toda la información generada por el SNS. 4.3 La coordinación de los mecanismos de la vigilancia, diagnóstico y referencia epidemiológicos, se ejerce por conducto de la DGE, de conformidad con las disposiciones aplicables vigentes, en coordinación con los diferentes sectores del SNS.",
+        "topic": "SINAVE governance; DGE coordination; SS as rector",
+        "actor_mentioned": "Secretaría de Salud; DGE; Sistema Nacional de Salud; SINAVE",
+        "power_granted": "SS: órgano rector del SINAVE; DGE: coordinación de mecanismos de vigilancia, diagnóstico y referencia epidemiológicos",
+        "duty_created": "SS: recopilar, procesar y difundir información del SNS; DGE: coordinar vigilancia epidemiológica",
+        "procedure_created": "",
+        "coordination_mechanism": "DGE coordina sectores del SNS para vigilancia epidemiológica",
+        "enforcement_or_sanction": "",
+        "rights_safeguard": "",
+        "budget_or_resource_implication": "no",
+        "relevance_to_ihr": "High — confirms SS/DGE as operational IHR surveillance governance; DGE is NFP focal point for epidemiological notification",
+        "relevance_to_pandemic_agreement": "High — SINAVE institutional governance is the operational backbone for pandemic surveillance obligations",
+        "source_url": "https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013",
+        "version_date": "2013-02-19",
+        "source_check_date": "",
+        "source_verification_status": "",
+        "legal_assessment_status": "",
+        "text_type": ""
+      },
+      "after": {
+        "provision_id": "MEX_PROV_NOM017_SEC42_001",
+        "norm_id": "MEX-012",
+        "norm_title": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica",
+        "norm_type": "official mexican standard / NOM",
+        "hierarchy_level": "7_NOM_or_technical_standard",
+        "jurisdiction": "federal",
+        "article": "Numeral 4.2–4.3",
+        "provision_text": "4.2 La Secretaría de Salud es el órgano rector del SINAVE y funge como la instancia responsable de recopilar, procesar y difundir toda la información generada por el SNS. 4.3 La coordinación de los mecanismos de la vigilancia, diagnóstico y referencia epidemiológicos, se ejerce por conducto de la DGE, de conformidad con las disposiciones aplicables vigentes, en coordinación con los diferentes sectores del SNS.",
+        "topic": "SINAVE governance; DGE coordination; SS as rector",
+        "actor_mentioned": "Secretaría de Salud; DGE; Sistema Nacional de Salud; SINAVE",
+        "power_granted": "SS: órgano rector del SINAVE; DGE: coordinación de mecanismos de vigilancia, diagnóstico y referencia epidemiológicos",
+        "duty_created": "SS: recopilar, procesar y difundir información del SNS; DGE: coordinar vigilancia epidemiológica",
+        "procedure_created": "",
+        "coordination_mechanism": "DGE coordina sectores del SNS para vigilancia epidemiológica",
+        "enforcement_or_sanction": "",
+        "rights_safeguard": "",
+        "budget_or_resource_implication": "no",
+        "relevance_to_ihr": "High — confirms SS/DGE as operational IHR surveillance governance; DGE is NFP focal point for epidemiological notification",
+        "relevance_to_pandemic_agreement": "High — SINAVE institutional governance is the operational backbone for pandemic surveillance obligations",
+        "source_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225",
+        "version_date": "2013-02-19",
+        "source_check_date": "",
+        "source_verification_status": "",
+        "legal_assessment_status": "",
+        "text_type": "",
+        "legacy_source_url": "https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013"
+      }
+    },
+    {
+      "provision_id": "MEX_PROV_NOM017_SEC45_001",
+      "before": {
+        "provision_id": "MEX_PROV_NOM017_SEC45_001",
+        "norm_id": "MEX-012",
+        "norm_title": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica",
+        "norm_type": "official mexican standard / NOM",
+        "hierarchy_level": "7_NOM_or_technical_standard",
+        "jurisdiction": "federal",
+        "article": "Numeral 4.5",
+        "provision_text": "Es facultad del Consejo de Salubridad General determinar la adición, eliminación o actualización de los padecimientos, condiciones, eventos o urgencias epidemiológicas emergentes o reemergentes que pongan en riesgo la salud de la población, así como las causas de muerte de interés para la vigilancia epidemiológica.",
+        "topic": "CSG powers; notifiable diseases list; epidemiological update",
+        "actor_mentioned": "Consejo de Salubridad General",
+        "power_granted": "CSG determina adición, eliminación o actualización de padecimientos y eventos bajo vigilancia epidemiológica",
+        "duty_created": "",
+        "procedure_created": "",
+        "coordination_mechanism": "",
+        "enforcement_or_sanction": "",
+        "rights_safeguard": "",
+        "budget_or_resource_implication": "no",
+        "relevance_to_ihr": "High — CSG authority to dynamically update notifiable disease/event list enables rapid alignment with IHR notifications and PHEIC declarations",
+        "relevance_to_pandemic_agreement": "High — dynamic disease list governance essential for pandemic response adaptation",
+        "source_url": "https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013",
+        "version_date": "2013-02-19",
+        "source_check_date": "",
+        "source_verification_status": "",
+        "legal_assessment_status": "",
+        "text_type": ""
+      },
+      "after": {
+        "provision_id": "MEX_PROV_NOM017_SEC45_001",
+        "norm_id": "MEX-012",
+        "norm_title": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica",
+        "norm_type": "official mexican standard / NOM",
+        "hierarchy_level": "7_NOM_or_technical_standard",
+        "jurisdiction": "federal",
+        "article": "Numeral 4.5",
+        "provision_text": "Es facultad del Consejo de Salubridad General determinar la adición, eliminación o actualización de los padecimientos, condiciones, eventos o urgencias epidemiológicas emergentes o reemergentes que pongan en riesgo la salud de la población, así como las causas de muerte de interés para la vigilancia epidemiológica.",
+        "topic": "CSG powers; notifiable diseases list; epidemiological update",
+        "actor_mentioned": "Consejo de Salubridad General",
+        "power_granted": "CSG determina adición, eliminación o actualización de padecimientos y eventos bajo vigilancia epidemiológica",
+        "duty_created": "",
+        "procedure_created": "",
+        "coordination_mechanism": "",
+        "enforcement_or_sanction": "",
+        "rights_safeguard": "",
+        "budget_or_resource_implication": "no",
+        "relevance_to_ihr": "High — CSG authority to dynamically update notifiable disease/event list enables rapid alignment with IHR notifications and PHEIC declarations",
+        "relevance_to_pandemic_agreement": "High — dynamic disease list governance essential for pandemic response adaptation",
+        "source_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225",
+        "version_date": "2013-02-19",
+        "source_check_date": "",
+        "source_verification_status": "",
+        "legal_assessment_status": "",
+        "text_type": "",
+        "legacy_source_url": "https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013"
+      }
+    },
+    {
+      "provision_id": "MEX_PROV_NOM017_SEC661_001",
+      "before": {
+        "provision_id": "MEX_PROV_NOM017_SEC661_001",
+        "norm_id": "MEX-012",
+        "norm_title": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica",
+        "norm_type": "official mexican standard / NOM",
+        "hierarchy_level": "7_NOM_or_technical_standard",
+        "jurisdiction": "federal",
+        "article": "Numeral 6.6.1–6.6.2",
+        "provision_text": "6.6.1 La DGE es el Centro Nacional de Enlace para el RSI para todo el territorio nacional y todas las instituciones dentro y fuera del sector. 6.6.2 El Centro Nacional de Enlace es la autoridad nacional responsable de notificar a las instancias internacionales sobre la existencia de una potencial ESPII.",
+        "topic": "IHR National Focal Point; DGE; PHEIC notification; RSI",
+        "actor_mentioned": "DGE; Centro Nacional de Enlace para el RSI",
+        "power_granted": "",
+        "duty_created": "DGE es el NFP para el RSI; obligación de notificar a instancias internacionales sobre potencial ESPII",
+        "procedure_created": "notificación internacional de potencial ESPII a través del CNE/DGE",
+        "coordination_mechanism": "DGE como punto único de enlace nacional para el RSI en todo el territorio y todos los sectores",
+        "enforcement_or_sanction": "",
+        "rights_safeguard": "",
+        "budget_or_resource_implication": "no",
+        "relevance_to_ihr": "High — explicitly designates DGE as IHR National Focal Point; this is the key operational provision for IHR Art. 4 implementation",
+        "relevance_to_pandemic_agreement": "High — NFP designation is foundational for pandemic agreement information-sharing and alert obligations",
+        "source_url": "https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013",
+        "version_date": "2013-02-19",
+        "source_check_date": "",
+        "source_verification_status": "",
+        "legal_assessment_status": "",
+        "text_type": ""
+      },
+      "after": {
+        "provision_id": "MEX_PROV_NOM017_SEC661_001",
+        "norm_id": "MEX-012",
+        "norm_title": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica",
+        "norm_type": "official mexican standard / NOM",
+        "hierarchy_level": "7_NOM_or_technical_standard",
+        "jurisdiction": "federal",
+        "article": "Numeral 6.6.1–6.6.2",
+        "provision_text": "6.6.1 La DGE es el Centro Nacional de Enlace para el RSI para todo el territorio nacional y todas las instituciones dentro y fuera del sector. 6.6.2 El Centro Nacional de Enlace es la autoridad nacional responsable de notificar a las instancias internacionales sobre la existencia de una potencial ESPII.",
+        "topic": "IHR National Focal Point; DGE; PHEIC notification; RSI",
+        "actor_mentioned": "DGE; Centro Nacional de Enlace para el RSI",
+        "power_granted": "",
+        "duty_created": "DGE es el NFP para el RSI; obligación de notificar a instancias internacionales sobre potencial ESPII",
+        "procedure_created": "notificación internacional de potencial ESPII a través del CNE/DGE",
+        "coordination_mechanism": "DGE como punto único de enlace nacional para el RSI en todo el territorio y todos los sectores",
+        "enforcement_or_sanction": "",
+        "rights_safeguard": "",
+        "budget_or_resource_implication": "no",
+        "relevance_to_ihr": "High — explicitly designates DGE as IHR National Focal Point; this is the key operational provision for IHR Art. 4 implementation",
+        "relevance_to_pandemic_agreement": "High — NFP designation is foundational for pandemic agreement information-sharing and alert obligations",
+        "source_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225",
+        "version_date": "2013-02-19",
+        "source_check_date": "",
+        "source_verification_status": "",
+        "legal_assessment_status": "",
+        "text_type": "",
+        "legacy_source_url": "https://dof.gob.mx/nota_detalle.php?codigo=5287967&fecha=19/02/2013"
+      }
+    },
+    {
+      "provision_id": "MEX_PROV_NOM017_SEC663_664_AUDIT20261014",
+      "before": {
+        "provision_id": "MEX_PROV_NOM017_SEC663_664_AUDIT20261014",
+        "norm_id": "MEX-012",
+        "norm_title": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica",
+        "norm_type": "official mexican standard / NOM",
+        "hierarchy_level": "7_NOM_or_technical_standard",
+        "jurisdiction": "federal",
+        "article": "Numerales 6.6.3–6.6.4",
+        "provision_text": "6.6.3 El personal de epidemiología o equivalentes en los distintos niveles técnico-administrativos del SNS son responsables de realizar la vigilancia epidemiológica internacional. 6.6.4 Los criterios y procedimientos de vigilancia internacional son los establecidos en el RSI y el manual de vigilancia internacional consensuados en el CONAVE a disposición del público para su consulta, en el portal electrónico de la DGE en www.dgepi.salud.gob.mx,",
+        "topic": "International surveillance responsibilities and incorporation by reference",
+        "actor_mentioned": "Epidemiology personnel at SNS technical-administrative levels; DGE; CONAVE",
+        "power_granted": "",
+        "duty_created": "International epidemiological surveillance at the specified administrative levels.",
+        "procedure_created": "Explicit reference to the IHR and international surveillance manual.",
+        "coordination_mechanism": "Inter-level responsibilities; further manual examination required.",
+        "enforcement_or_sanction": "",
+        "rights_safeguard": "",
+        "budget_or_resource_implication": "",
+        "relevance_to_ihr": "Arts. 4–10 and Annex 1; the scope of each match requires examination.",
+        "relevance_to_pandemic_agreement": "",
+        "source_url": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+        "version_date": "2013-02-19",
+        "source_check_date": "2026-10-14",
+        "source_verification_status": "text_checked_targeted_audit",
+        "legal_assessment_status": "expert_review_pending",
+        "text_type": "source_excerpt"
+      },
+      "after": {
+        "provision_id": "MEX_PROV_NOM017_SEC663_664_AUDIT20261014",
+        "norm_id": "MEX-012",
+        "norm_title": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica",
+        "norm_type": "official mexican standard / NOM",
+        "hierarchy_level": "7_NOM_or_technical_standard",
+        "jurisdiction": "federal",
+        "article": "Numerales 6.6.3–6.6.4",
+        "provision_text": "6.6.3 Son responsables de coordinar y realizar la vigilancia epidemiológica internacional el personal de epidemiologia o equivalentes en los distintos niveles técnico-administrativos del SNS. 6.6.4 Los criterios y procedimientos de vigilancia internacional son los establecidos en el RSI y el manual de vigilancia internacional consensuados en el CONAVE a disposición del público para su consulta, en el portal electrónico de la DGE en: www.dgepi.salud.gob.mx,",
+        "topic": "International surveillance responsibilities and incorporation by reference",
+        "actor_mentioned": "Epidemiology personnel at SNS technical-administrative levels; DGE; CONAVE",
+        "power_granted": "",
+        "duty_created": "Coordinate and carry out international epidemiological surveillance at the SNS technical-administrative levels.",
+        "procedure_created": "Explicit reference to the IHR and international surveillance manual.",
+        "coordination_mechanism": "Inter-level responsibilities; further manual examination required.",
+        "enforcement_or_sanction": "",
+        "rights_safeguard": "",
+        "budget_or_resource_implication": "",
+        "relevance_to_ihr": "Arts. 4–10 and Annex 1; the scope of each match requires examination.",
+        "relevance_to_pandemic_agreement": "",
+        "source_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225",
+        "version_date": "2013-02-19",
+        "source_check_date": "2026-10-14",
+        "source_verification_status": "final_NOM_text_checked",
+        "legal_assessment_status": "expert_review_pending",
+        "text_type": "source_excerpt_whitespace_normalized",
+        "legacy_source_url": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+      }
+    },
+    {
+      "provision_id": "MEX_PROV_NOM017_SEC814_AUDIT20261014",
+      "before": {
+        "provision_id": "MEX_PROV_NOM017_SEC814_AUDIT20261014",
+        "norm_id": "MEX-012",
+        "norm_title": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica",
+        "norm_type": "official mexican standard / NOM",
+        "hierarchy_level": "7_NOM_or_technical_standard",
+        "jurisdiction": "federal",
+        "article": "Numeral 8.1.4",
+        "provision_text": "8.1.4 La notificación inmediata de los padecimientos, condiciones, eventos o urgencias epidemiológicas emergentes o reemergentes se realiza por la autoridad sanitaria correspondiente al nivel inmediato superior hasta la DGE antes de que transcurran 24 horas de su conocimiento por el procedimiento de notificación establecido vía telefónica, fax o medio electrónico.",
+        "topic": "Immediate domestic notification chain",
+        "actor_mentioned": "Corresponding sanitary authority; immediately superior administrative level; DGE",
+        "power_granted": "",
+        "duty_created": "Notify the immediately superior level, successively up to the DGE, before 24 hours from knowledge.",
+        "procedure_created": "Domestic reporting chain with telephone, fax or electronic means and a knowledge-based clock.",
+        "coordination_mechanism": "Successive technical-administrative reporting levels up to DGE.",
+        "enforcement_or_sanction": "",
+        "rights_safeguard": "",
+        "budget_or_resource_implication": "",
+        "relevance_to_ihr": "Domestic reporting supports Art. 6 and Annex 1; the WHO notification clock runs from assessment, not knowledge.",
+        "relevance_to_pandemic_agreement": "",
+        "source_url": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html",
+        "version_date": "2013-02-19",
+        "source_check_date": "2026-10-14",
+        "source_verification_status": "text_checked_targeted_audit",
+        "legal_assessment_status": "expert_review_pending",
+        "text_type": "source_excerpt"
+      },
+      "after": {
+        "provision_id": "MEX_PROV_NOM017_SEC814_AUDIT20261014",
+        "norm_id": "MEX-012",
+        "norm_title": "NOM-017-SSA2-2012, Para la vigilancia epidemiológica",
+        "norm_type": "official mexican standard / NOM",
+        "hierarchy_level": "7_NOM_or_technical_standard",
+        "jurisdiction": "federal",
+        "article": "Numeral 8.1.4",
+        "provision_text": "8.1.4 La notificación inmediata de los padecimientos, condiciones, eventos o urgencia epidemiológicas emergentes o reemergentes se realiza por las unidades de vigilancia epidemiológica o sus equivalentes en cada uno de los niveles técnico-administrativos hasta la DGE antes de que transcurran 24 horas de su conocimiento por el procedimiento de notificación establecido vía telefónica, fax o medio electrónico.",
+        "topic": "Immediate domestic reporting at technical-administrative levels",
+        "actor_mentioned": "Epidemiological surveillance units or equivalents at each technical-administrative level; DGE",
+        "power_granted": "",
+        "duty_created": "Immediate notification by surveillance units or equivalents at the technical-administrative levels up to DGE, before 24 hours from knowledge.",
+        "procedure_created": "Knowledge-based domestic notification deadline; telephone, fax or electronic means.",
+        "coordination_mechanism": "Multi-level reporting up to DGE; the final text does not use the draft wording successive superior levels.",
+        "enforcement_or_sanction": "",
+        "rights_safeguard": "",
+        "budget_or_resource_implication": "",
+        "relevance_to_ihr": "The final NOM-017 section 8.1.4 requires epidemiological surveillance units or their equivalents at the different technical-administrative levels to notify up to DGE before 24 hours from knowledge of the event, by telephone, fax or electronic means. This is not a finding of a direct exchange from every unit to DGE. The IHR Article 6 deadline instead runs from assessment.",
+        "relevance_to_pandemic_agreement": "",
+        "source_url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225",
+        "version_date": "2013-02-19",
+        "source_check_date": "2026-10-14",
+        "source_verification_status": "final_NOM_text_checked",
+        "legal_assessment_status": "expert_review_pending",
+        "text_type": "source_excerpt_whitespace_normalized",
+        "legacy_source_url": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+      }
     }
   ]
 }

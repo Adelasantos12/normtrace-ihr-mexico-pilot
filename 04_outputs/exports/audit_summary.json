@@ -9,15 +9,15 @@
   },
   "counts": {
     "actor_entries": 18,
-    "changed_or_added_mapping_records": 31,
+    "changed_or_added_mapping_records": 35,
     "explicit_relation_records": 4,
     "instruments": 18,
-    "mapping_rows": 86,
+    "mapping_rows": 88,
     "obligations": 45,
     "provisions": 116,
     "reference_records": 4,
     "unmatched_obligations_in_current_dataset": 1,
-    "unscored_mapping_rows": 25
+    "unscored_mapping_rows": 29
   },
   "date": "2026-10-14",
   "labels_to_obligation_ids": {
@@ -65,6 +65,8 @@
       "IHR-OBL-007",
       "IHR-OBL-008",
       "IHR-OBL-009",
+      "IHR-OBL-012",
+      "IHR-OBL-013",
       "IHR-OBL-014"
     ],
     "regulatory gap": [
@@ -72,7 +74,6 @@
       "IHR-OBL-010",
       "IHR-OBL-012",
       "IHR-OBL-013",
-      "IHR-OBL-014",
       "IHR-OBL-015",
       "IHR-OBL-016",
       "IHR-OBL-017",
@@ -359,49 +360,57 @@
     },
     {
       "audit_statuses": [
-        "inherited_preliminary"
+        "inherited_preliminary",
+        "source_added",
+        "source_correction_applied"
       ],
       "candidate_provision_ids": [
         "MEX_PROV_LGS_ART134_001",
-        "MEX_PROV_NOM017_SEC42_001"
+        "MEX_PROV_NOM017_SEC42_001",
+        "MEX_PROV_NOM017_SEC814_AUDIT20261014"
       ],
       "current_review_labels": [
+        "reference follow-up pending",
         "regulatory gap"
       ],
       "full_obligation_legal_validation": "not_completed",
       "mapping_ids": [
         "MEX_MAP_IHR2005_012_001",
-        "MEX_MAP_IHR2005_012_002"
+        "MEX_MAP_IHR2005_012_002",
+        "MEX_MAP_IHR2005_012_AUDIT_814"
       ],
       "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
       "obligation_id": "IHR-OBL-012",
       "title": "Annex 1A, par.4",
-      "unscored_records": 0
+      "unscored_records": 2
     },
     {
       "audit_statuses": [
-        "inherited_preliminary"
+        "inherited_preliminary",
+        "source_added"
       ],
       "candidate_provision_ids": [
         "MEX_PROV_LGS_ART146_001",
-        "MEX_PROV_NOM017_SEC311_001"
+        "MEX_PROV_NOM017_SEC311_001",
+        "MEX_PROV_NOM017_SEC663_664_AUDIT20261014"
       ],
       "current_review_labels": [
+        "reference follow-up pending",
         "regulatory gap"
       ],
       "full_obligation_legal_validation": "not_completed",
       "mapping_ids": [
         "MEX_MAP_IHR2005_013_001",
-        "MEX_MAP_IHR2005_013_002"
+        "MEX_MAP_IHR2005_013_002",
+        "MEX_MAP_IHR2005_013_AUDIT_663"
       ],
       "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
       "obligation_id": "IHR-OBL-013",
       "title": "Annex 1A, par.5",
-      "unscored_records": 0
+      "unscored_records": 1
     },
     {
       "audit_statuses": [
-        "inherited_preliminary",
         "source_added",
         "source_correction_applied"
       ],
@@ -412,8 +421,7 @@
         "MEX_PROV_NOM017_SEC814_AUDIT20261014"
       ],
       "current_review_labels": [
-        "reference follow-up pending",
-        "regulatory gap"
+        "reference follow-up pending"
       ],
       "full_obligation_legal_validation": "not_completed",
       "mapping_ids": [
@@ -425,7 +433,7 @@
       "note": "Union of row labels, not a mutually exclusive diagnosis. A row with no gap does not make the whole obligation complete.",
       "obligation_id": "IHR-OBL-014",
       "title": "Annex 1A, par.6 (assessment)",
-      "unscored_records": 3
+      "unscored_records": 4
     },
     {
       "audit_statuses": [
@@ -1078,9 +1086,10 @@
   ],
   "sources": [
     {
+      "document_status": "final standard; draft not used as operative text",
       "id": "NOM-017",
       "locators": "6.6.3, 6.6.4, 8.1.4",
-      "url": "https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html"
+      "url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225"
     },
     {
       "id": "LGS",

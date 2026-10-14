@@ -18,7 +18,7 @@ GAPS = ROOT / '04_outputs/country_profiles/mexico_implementation_gap_map.csv'
 LGS = 'Ley General de Salud'
 NOM = 'NOM-017-SSA2-2012, Para la vigilancia epidemiológica'
 REG = 'Reglamento de la Ley General de Salud en Materia de Sanidad Internacional'
-NOM_URL = 'https://dof.gob.mx/normasOficiales/4823/salud12_C/salud12_C.html'
+NOM_URL = 'https://dof.gob.mx/nota_detalle_popup.php?codigo=5288225'
 REG_URL = 'https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf'
 LGS_URL = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf'
 PAHO_URL = 'https://iris.paho.org/bitstreams/7c461167-1eae-4e58-ad9c-d8ba8338c9dc/download'
@@ -85,7 +85,7 @@ def main():
     # Add explicit inter-level duties and referrals previously omitted from the mapping.
     pid663='MEX_PROV_NOM017_SEC663_664_AUDIT20261014'
     addprov(pid663,'MEX_PROV_NOM017_SEC661_001',article='Numerales 6.6.3–6.6.4',
-        provision_text='6.6.3 El personal de epidemiología o equivalentes en los distintos niveles técnico-administrativos del SNS son responsables de realizar la vigilancia epidemiológica internacional. 6.6.4 Los criterios y procedimientos de vigilancia internacional son los establecidos en el RSI y el manual de vigilancia internacional consensuados en el CONAVE a disposición del público para su consulta, en el portal electrónico de la DGE en www.dgepi.salud.gob.mx,',
+        provision_text='6.6.3 Son responsables de coordinar y realizar la vigilancia epidemiológica internacional el personal de epidemiologia o equivalentes en los distintos niveles técnico-administrativos del SNS. 6.6.4 Los criterios y procedimientos de vigilancia internacional son los establecidos en el RSI y el manual de vigilancia internacional consensuados en el CONAVE a disposición del público para su consulta, en el portal electrónico de la DGE en: www.dgepi.salud.gob.mx,',
         topic='International surveillance responsibilities and incorporation by reference',actor_mentioned='Epidemiology personnel at SNS technical-administrative levels; DGE; CONAVE',
         duty_created='International epidemiological surveillance at the specified administrative levels.',
         procedure_created='Explicit reference to the IHR and international surveillance manual.',
@@ -93,11 +93,11 @@ def main():
         source_url=NOM_URL,relevance_to_ihr='Arts. 4–10 and Annex 1; the scope of each match requires examination.')
     pid814='MEX_PROV_NOM017_SEC814_AUDIT20261014'
     addprov(pid814,'MEX_PROV_NOM017_SEC661_001',article='Numeral 8.1.4',
-        provision_text='8.1.4 La notificación inmediata de los padecimientos, condiciones, eventos o urgencias epidemiológicas emergentes o reemergentes se realiza por la autoridad sanitaria correspondiente al nivel inmediato superior hasta la DGE antes de que transcurran 24 horas de su conocimiento por el procedimiento de notificación establecido vía telefónica, fax o medio electrónico.',
-        topic='Immediate domestic notification chain',actor_mentioned='Corresponding sanitary authority; immediately superior administrative level; DGE',
-        duty_created='Notify the immediately superior level, successively up to the DGE, before 24 hours from knowledge.',
+        provision_text='8.1.4 La notificación inmediata de los padecimientos, condiciones, eventos o urgencia epidemiológicas emergentes o reemergentes se realiza por las unidades de vigilancia epidemiológica o sus equivalentes en cada uno de los niveles técnico-administrativos hasta la DGE antes de que transcurran 24 horas de su conocimiento por el procedimiento de notificación establecido vía telefónica, fax o medio electrónico.',
+        topic='Immediate domestic notification chain',actor_mentioned='Epidemiological surveillance units or equivalents at technical-administrative levels; DGE',
+        duty_created='Notify at the technical-administrative levels up to DGE, before 24 hours from knowledge.',
         procedure_created='Domestic reporting chain with telephone, fax or electronic means and a knowledge-based clock.',
-        coordination_mechanism='Successive technical-administrative reporting levels up to DGE.',
+        coordination_mechanism='Multi-level reporting up to DGE; final NOM wording.',
         source_url=NOM_URL,relevance_to_ihr='Domestic reporting supports Art. 6 and Annex 1; the WHO notification clock runs from assessment, not knowledge.')
     nom_oids={'IHR-OBL-001','IHR-OBL-003','IHR-OBL-004','IHR-OBL-005','IHR-OBL-007','IHR-OBL-008','IHR-OBL-009','IHR-OBL-014'}
     for r in list(rows):
@@ -189,7 +189,7 @@ def main():
         dict(reference_id='REF-AIR-FORM',source_provision_id=declarations[1][2],target='IHR aircraft health declaration form',target_type='international_form',retrieval_status='identified_scope_review_pending',source_url=IHR_URL,note='Domestic provision specifies the form by reference; verify current-form compatibility.'),
         dict(reference_id='REF-SHIP-FORM',source_provision_id=declarations[0][2],target='IHR maritime health declaration form',target_type='international_form',retrieval_status='identified_scope_review_pending',source_url=IHR_URL,note='Domestic provision specifies the form by reference; verify current-form compatibility.')]
     write(ROOT/'03_tables/country_legal_mapping/mexico_legal_references.csv',references)
-    relations=[dict(relation_id='REL-NOM-NOTIFICATION',source_actor='Corresponding sanitary authority',target_actor='Immediately superior administrative level, successively up to DGE',relationship_type='domestic_reporting_chain',action='Immediate notification before 24 hours from knowledge; telephone, fax or electronic means',source_provision_id=pid814,source_url=NOM_URL,source_locator='NOM-017 §8.1.4',evidence_status='explicit_legal_text_not_observed_exchange',scope_note='Do not draw a direct state-to-WHO edge. Intermediary levels and the knowledge-based domestic clock are retained.'),
+    relations=[dict(relation_id='REL-NOM-NOTIFICATION',source_actor='Epidemiological surveillance units or equivalents at technical-administrative levels',target_actor='DGE, within the multi-level reporting process',relationship_type='domestic_reporting_chain',action='Immediate notification before 24 hours from knowledge; telephone, fax or electronic means',source_provision_id=pid814,source_url=NOM_URL,source_locator='NOM-017 §8.1.4',evidence_status='explicit_legal_text_not_observed_exchange',scope_note='Do not draw a direct state-to-WHO edge. Intermediary levels and the knowledge-based domestic clock are retained.'),
         dict(relation_id='REL-REG-PORTLIST',source_actor='Secretaría de Salud',target_actor='Secretaría de Relaciones Exteriores',relationship_type='information_provision',action='Provide lists of international surveillance airports, seaports and border posts for communication to other nations',source_provision_id='MEX_PROV_RISS2025_ART010_001',source_url=REG_URL,source_locator='RLGS Sanidad Internacional Art.10',evidence_status='explicit_legal_text_not_observed_exchange',scope_note='A documented legal information duty; not proof of actual exchange or instrument-issuing power.')]
     for suffix,article,pid,_,actor,kind in declarations:
         relations.append(dict(relation_id='REL-REG-DECL-'+suffix,source_actor=actor.split(';')[0],target_actor='Secretaría de Salud',relationship_type='declaration_submission',action=f'Submit {kind} health declaration on arrival; provide requested supplementary health information',source_provision_id=pid,source_url=REG_URL,source_locator='RLGS Sanidad Internacional Art.'+article,evidence_status='explicit_legal_text_not_observed_exchange',scope_note='Legal duty under the cited domestic provision; not an empirical observation.'))
