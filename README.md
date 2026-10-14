@@ -1,3 +1,5 @@
+> **Correction release 0.1.1-audit.20261014:** Earlier numeric/conceptual findings below are historical. See `00_project/audit_2026_10_14.json`, the current methodology, and `04_outputs/exports/audit_manifest.json`. The prior SPAR differences, universal statutory-designation claim and operational-network interpretations are withdrawn.
+
 # NormTrace-IHR
 
 **Legal Internalisation Mapping Infrastructure for International Health Regulations**

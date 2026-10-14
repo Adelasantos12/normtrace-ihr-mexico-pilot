@@ -1,0 +1,72 @@
+{
+  "audit_version": "0.1.1-audit.20261014",
+  "audit_date": "2026-10-14",
+  "nia": {
+    "country": "Mexico",
+    "international_status": "designation_or_establishment_reported",
+    "status_date": "2026-07-15",
+    "publication_date": "2026-08-21",
+    "source": "https://iris.paho.org/bitstreams/7c461167-1eae-4e58-ad9c-d8ba8338c9dc/download",
+    "locator": "CD63/INF/1, paragraph 17",
+    "institution_identified": null,
+    "domestic_designation_instrument": null,
+    "mandate_assessment": "pending_domestic_source",
+    "note": "PAHO reports designation/establishment. The report does not name the Mexican entity or reproduce its domestic mandate; do not infer DGE=NIA."
+  },
+  "sources": [
+    {
+      "id": "NOM017_FINAL",
+      "url": "https://sidof.segob.gob.mx/notas/docFuente/5288225",
+      "locator": "Final NOM, 2013-02-19: 6.6.3, 6.6.4 and 8.1.4",
+      "checked": true
+    },
+    {
+      "id": "LGS133",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "locator": "Articles 133(II) and 134",
+      "checked": true
+    },
+    {
+      "id": "RLGS_SI",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf",
+      "locator": "Articles 7, 30 and 31",
+      "checked": true
+    },
+    {
+      "id": "SPAR2021",
+      "url": "https://cdn.who.int/media/docs/default-source/health-security-preparedness/cap/spar/9789240040120-eng-new.pdf",
+      "locator": "C1.1 and C2.1",
+      "checked": true
+    },
+    {
+      "id": "PAHO_NIA",
+      "url": "https://iris.paho.org/bitstreams/7c461167-1eae-4e58-ad9c-d8ba8338c9dc/download",
+      "locator": "CD63/INF/1 paragraph17",
+      "checked": true
+    },
+    {
+      "id": "IHR2024",
+      "url": "https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf",
+      "locator": "Article4",
+      "checked": true
+    }
+  ],
+  "pending": [
+    "Retrieve and assess the international surveillance manual referred to by final NOM-017 6.6.4.",
+    "Compare the gratuity rule and its exceptions with the full requirements of IHR Article 40.",
+    "Assess the current IHR form references in Articles 30-31 of the 1985 regulation.",
+    "Locate Mexico's domestic NIA designation/establishment instrument and its competent entity.",
+    "Revalidate anchoring scales, obligation-level aggregation and remaining corpus matches with independent legal review.",
+    "Review institutional succession in the legacy INAI/successor actor record."
+  ],
+  "withdrawn_claims": [
+    "18 obligations as a confirmed procedural/coordination deficit count",
+    "7 obligations as a confirmed federal-state deficit count",
+    "2 fully complete legal pathways",
+    "6 distinct instruments lacking IHR safeguards",
+    "SPAR minus NormTrace as a comparable percentage-point divergence",
+    "A statute is universally required to designate an IHR authority"
+  ],
+  "scope": "Targeted correction of documented source errors and invalid inferences; not a full legal-compliance audit or independent expert validation.",
+  "historical_archive": "99_archive/audit_2026_10_14"
+}

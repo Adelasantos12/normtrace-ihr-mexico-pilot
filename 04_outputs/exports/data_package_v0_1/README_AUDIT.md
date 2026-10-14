@@ -1,0 +1,1 @@
+The historical folder name is retained for compatibility. Its CSVs now mirror correction release 0.1.1-audit.20261014. Original data are preserved in 99_archive/audit_2026_10_14. See audit_manifest.json for current counts and unresolved assessments.

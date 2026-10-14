@@ -1,3 +1,5 @@
+> **Correction release 0.1.1-audit.20261014:** Earlier numeric/conceptual findings below are historical. See `00_project/audit_2026_10_14.json`, the current methodology, and `04_outputs/exports/audit_manifest.json`. The prior SPAR differences, universal statutory-designation claim and operational-network interpretations are withdrawn.
+
 # Data Dictionary — NormTrace-IHR
 
 **Version:** 0.1.0-pilot  
@@ -103,3 +105,15 @@ Controlled vocabulary lists for fields marked with fixed categories are maintain
 - `lookup_competence_types.csv`
 - `lookup_gap_types.csv`
 - `lookup_review_status.csv`
+
+
+## October 2026 correction fields
+
+- `anchoring_level`: empty means pending and must never be coerced to zero. Unchanged legacy codes are not revalidated.
+- `legacy_anchoring_level`, `legacy_gap_type`: superseded provenance, not current findings.
+- `audit_status`: legacy preliminary, reassessment required, or source added with reassessment required.
+- `source_verification_status`: distinguishes located/checked text from legal adequacy.
+- `referral_status`: manual review pending, scope review pending, or not assessed.
+- `audit_source_urls`, `audit_notes`, `audit_date`: source correction provenance.
+- Actor–instrument `association_type`: source cited in actor profile; not issuance or assigned competence.
+- The audit manifest lists exact row/obligation cohort IDs and input hashes. Cohorts overlap and are not additive deficit categories.

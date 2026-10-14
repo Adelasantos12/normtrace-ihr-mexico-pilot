@@ -1,0 +1,1735 @@
+[
+  {
+    "mapping_id": "MEX_MAP_IHR2005_001_001",
+    "obligation_id": "IHR-OBL-001",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "match_type",
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_001_002",
+    "obligation_id": "IHR-OBL-001",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_001_003",
+    "obligation_id": "IHR-OBL-001",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_002_001",
+    "obligation_id": "IHR-OBL-002",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf; https://sidof.segob.gob.mx/notas/docFuente/5288225"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_002_002",
+    "obligation_id": "IHR-OBL-002",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf; https://sidof.segob.gob.mx/notas/docFuente/5288225"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_002_003",
+    "obligation_id": "IHR-OBL-002",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "match_type",
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf; https://sidof.segob.gob.mx/notas/docFuente/5288225"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_003_001",
+    "obligation_id": "IHR-OBL-003",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_003_002",
+    "obligation_id": "IHR-OBL-003",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_004_001",
+    "obligation_id": "IHR-OBL-004",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_004_002",
+    "obligation_id": "IHR-OBL-004",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "match_type",
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_004_003",
+    "obligation_id": "IHR-OBL-004",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_005_001",
+    "obligation_id": "IHR-OBL-005",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_005_002",
+    "obligation_id": "IHR-OBL-005",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_006_001",
+    "obligation_id": "IHR-OBL-006",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_006_002",
+    "obligation_id": "IHR-OBL-006",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_007_001",
+    "obligation_id": "IHR-OBL-007",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_007_002",
+    "obligation_id": "IHR-OBL-007",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_008_001",
+    "obligation_id": "IHR-OBL-008",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_009_001",
+    "obligation_id": "IHR-OBL-009",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_010_001",
+    "obligation_id": "IHR-OBL-010",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_010_002",
+    "obligation_id": "IHR-OBL-010",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_010_003",
+    "obligation_id": "IHR-OBL-010",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "match_type",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_011_001",
+    "obligation_id": "IHR-OBL-011",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_012_001",
+    "obligation_id": "IHR-OBL-012",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_012_002",
+    "obligation_id": "IHR-OBL-012",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_013_001",
+    "obligation_id": "IHR-OBL-013",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_013_002",
+    "obligation_id": "IHR-OBL-013",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_014_001",
+    "obligation_id": "IHR-OBL-014",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_014_002",
+    "obligation_id": "IHR-OBL-014",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_015_001",
+    "obligation_id": "IHR-OBL-015",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_015_002",
+    "obligation_id": "IHR-OBL-015",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "match_type",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_016_001",
+    "obligation_id": "IHR-OBL-016",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_016_002",
+    "obligation_id": "IHR-OBL-016",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_016_003",
+    "obligation_id": "IHR-OBL-016",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_017_001",
+    "obligation_id": "IHR-OBL-017",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_017_002",
+    "obligation_id": "IHR-OBL-017",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_018_001",
+    "obligation_id": "IHR-OBL-018",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_018_002",
+    "obligation_id": "IHR-OBL-018",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_019_001",
+    "obligation_id": "IHR-OBL-019",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_019_002",
+    "obligation_id": "IHR-OBL-019",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_020_001",
+    "obligation_id": "IHR-OBL-020",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_021_001",
+    "obligation_id": "IHR-OBL-021",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_022_001",
+    "obligation_id": "IHR-OBL-022",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_022_002",
+    "obligation_id": "IHR-OBL-022",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_023_001",
+    "obligation_id": "IHR-OBL-023",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_023_002",
+    "obligation_id": "IHR-OBL-023",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_024_001",
+    "obligation_id": "IHR-OBL-024",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_024_002",
+    "obligation_id": "IHR-OBL-024",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_025_001",
+    "obligation_id": "IHR-OBL-025",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_025_002",
+    "obligation_id": "IHR-OBL-025",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_026_001",
+    "obligation_id": "IHR-OBL-026",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_026_002",
+    "obligation_id": "IHR-OBL-026",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_027_001",
+    "obligation_id": "IHR-OBL-027",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_027_002",
+    "obligation_id": "IHR-OBL-027",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_028_001",
+    "obligation_id": "IHR-OBL-028",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_028_002",
+    "obligation_id": "IHR-OBL-028",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_029_001",
+    "obligation_id": "IHR-OBL-029",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_029_002",
+    "obligation_id": "IHR-OBL-029",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_030_001",
+    "obligation_id": "IHR-OBL-030",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_030_002",
+    "obligation_id": "IHR-OBL-030",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_031_001",
+    "obligation_id": "IHR-OBL-031",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_031_002",
+    "obligation_id": "IHR-OBL-031",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_032_001",
+    "obligation_id": "IHR-OBL-032",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_033_001",
+    "obligation_id": "IHR-OBL-033",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_034_001",
+    "obligation_id": "IHR-OBL-034",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_035_001",
+    "obligation_id": "IHR-OBL-035",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_036_001",
+    "obligation_id": "IHR-OBL-036",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_037_001",
+    "obligation_id": "IHR-OBL-037",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "domestic_provision_id",
+      "domestic_norm",
+      "domestic_article",
+      "match_type",
+      "anchoring_level",
+      "actor_fit",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_038_001",
+    "obligation_id": "IHR-OBL-038",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "match_type",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_039_001",
+    "obligation_id": "IHR-OBL-039",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_039_002",
+    "obligation_id": "IHR-OBL-039",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_040_001",
+    "obligation_id": "IHR-OBL-040",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_040_002",
+    "obligation_id": "IHR-OBL-040",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_041_001",
+    "obligation_id": "IHR-OBL-041",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "anchoring_level",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225; https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_042_001",
+    "obligation_id": "IHR-OBL-042",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_043_001",
+    "obligation_id": "IHR-OBL-043",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_043_002",
+    "obligation_id": "IHR-OBL-043",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_044_001",
+    "obligation_id": "IHR-OBL-044",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_044_002",
+    "obligation_id": "IHR-OBL-044",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_IHR2005_045_001",
+    "obligation_id": "IHR-OBL-045",
+    "change": "corrected_or_status_recorded",
+    "changed_fields": [
+      "match_type",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_status",
+      "source_verification_status",
+      "referral_status"
+    ],
+    "source_urls": ""
+  },
+  {
+    "mapping_id": "MEX_MAP_AUDIT20261014_002_MEX_PROV_LGS_ART133_II_AUDIT",
+    "obligation_id": "IHR-OBL-002",
+    "change": "added",
+    "changed_fields": [
+      "mapping_id",
+      "obligation_id",
+      "domestic_provision_id",
+      "domestic_norm",
+      "domestic_article",
+      "match_type",
+      "anchoring_level",
+      "actor_fit",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "rights_safeguard_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "confidence_level",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_AUDIT20261014_001_MEX_PROV_NOM017_SEC663_AUDIT",
+    "obligation_id": "IHR-OBL-001",
+    "change": "added",
+    "changed_fields": [
+      "mapping_id",
+      "obligation_id",
+      "domestic_provision_id",
+      "domestic_norm",
+      "domestic_article",
+      "match_type",
+      "anchoring_level",
+      "actor_fit",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "rights_safeguard_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "confidence_level",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225"
+  },
+  {
+    "mapping_id": "MEX_MAP_AUDIT20261014_001_MEX_PROV_NOM017_SEC664_AUDIT",
+    "obligation_id": "IHR-OBL-001",
+    "change": "added",
+    "changed_fields": [
+      "mapping_id",
+      "obligation_id",
+      "domestic_provision_id",
+      "domestic_norm",
+      "domestic_article",
+      "match_type",
+      "anchoring_level",
+      "actor_fit",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "rights_safeguard_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "confidence_level",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225"
+  },
+  {
+    "mapping_id": "MEX_MAP_AUDIT20261014_004_MEX_PROV_NOM017_SEC663_AUDIT",
+    "obligation_id": "IHR-OBL-004",
+    "change": "added",
+    "changed_fields": [
+      "mapping_id",
+      "obligation_id",
+      "domestic_provision_id",
+      "domestic_norm",
+      "domestic_article",
+      "match_type",
+      "anchoring_level",
+      "actor_fit",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "rights_safeguard_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "confidence_level",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225"
+  },
+  {
+    "mapping_id": "MEX_MAP_AUDIT20261014_004_MEX_PROV_NOM017_SEC664_AUDIT",
+    "obligation_id": "IHR-OBL-004",
+    "change": "added",
+    "changed_fields": [
+      "mapping_id",
+      "obligation_id",
+      "domestic_provision_id",
+      "domestic_norm",
+      "domestic_article",
+      "match_type",
+      "anchoring_level",
+      "actor_fit",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "rights_safeguard_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "confidence_level",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225"
+  },
+  {
+    "mapping_id": "MEX_MAP_AUDIT20261014_014_MEX_PROV_NOM017_SEC663_AUDIT",
+    "obligation_id": "IHR-OBL-014",
+    "change": "added",
+    "changed_fields": [
+      "mapping_id",
+      "obligation_id",
+      "domestic_provision_id",
+      "domestic_norm",
+      "domestic_article",
+      "match_type",
+      "anchoring_level",
+      "actor_fit",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "rights_safeguard_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "confidence_level",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225"
+  },
+  {
+    "mapping_id": "MEX_MAP_AUDIT20261014_014_MEX_PROV_NOM017_SEC664_AUDIT",
+    "obligation_id": "IHR-OBL-014",
+    "change": "added",
+    "changed_fields": [
+      "mapping_id",
+      "obligation_id",
+      "domestic_provision_id",
+      "domestic_norm",
+      "domestic_article",
+      "match_type",
+      "anchoring_level",
+      "actor_fit",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "rights_safeguard_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "confidence_level",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225"
+  },
+  {
+    "mapping_id": "MEX_MAP_AUDIT20261014_004_MEX_PROV_NOM017_SEC814_AUDIT",
+    "obligation_id": "IHR-OBL-004",
+    "change": "added",
+    "changed_fields": [
+      "mapping_id",
+      "obligation_id",
+      "domestic_provision_id",
+      "domestic_norm",
+      "domestic_article",
+      "match_type",
+      "anchoring_level",
+      "actor_fit",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "rights_safeguard_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "confidence_level",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225"
+  },
+  {
+    "mapping_id": "MEX_MAP_AUDIT20261014_012_MEX_PROV_NOM017_SEC814_AUDIT",
+    "obligation_id": "IHR-OBL-012",
+    "change": "added",
+    "changed_fields": [
+      "mapping_id",
+      "obligation_id",
+      "domestic_provision_id",
+      "domestic_norm",
+      "domestic_article",
+      "match_type",
+      "anchoring_level",
+      "actor_fit",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "rights_safeguard_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "confidence_level",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225"
+  },
+  {
+    "mapping_id": "MEX_MAP_AUDIT20261014_013_MEX_PROV_NOM017_SEC814_AUDIT",
+    "obligation_id": "IHR-OBL-013",
+    "change": "added",
+    "changed_fields": [
+      "mapping_id",
+      "obligation_id",
+      "domestic_provision_id",
+      "domestic_norm",
+      "domestic_article",
+      "match_type",
+      "anchoring_level",
+      "actor_fit",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "rights_safeguard_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "confidence_level",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225"
+  },
+  {
+    "mapping_id": "MEX_MAP_AUDIT20261014_014_MEX_PROV_NOM017_SEC814_AUDIT",
+    "obligation_id": "IHR-OBL-014",
+    "change": "added",
+    "changed_fields": [
+      "mapping_id",
+      "obligation_id",
+      "domestic_provision_id",
+      "domestic_norm",
+      "domestic_article",
+      "match_type",
+      "anchoring_level",
+      "actor_fit",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "rights_safeguard_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "confidence_level",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://sidof.segob.gob.mx/notas/docFuente/5288225"
+  },
+  {
+    "mapping_id": "MEX_MAP_AUDIT20261014_034_MEX_PROV_RISI_ART031_AUDIT",
+    "obligation_id": "IHR-OBL-034",
+    "change": "added",
+    "changed_fields": [
+      "mapping_id",
+      "obligation_id",
+      "domestic_provision_id",
+      "domestic_norm",
+      "domestic_article",
+      "match_type",
+      "anchoring_level",
+      "actor_fit",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "rights_safeguard_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "confidence_level",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf"
+  },
+  {
+    "mapping_id": "MEX_MAP_AUDIT20261014_035_MEX_PROV_RISI_ART030_AUDIT",
+    "obligation_id": "IHR-OBL-035",
+    "change": "added",
+    "changed_fields": [
+      "mapping_id",
+      "obligation_id",
+      "domestic_provision_id",
+      "domestic_norm",
+      "domestic_article",
+      "match_type",
+      "anchoring_level",
+      "actor_fit",
+      "procedure_fit",
+      "coordination_fit",
+      "enforcement_fit",
+      "rights_safeguard_fit",
+      "federalism_fit",
+      "assessment_summary",
+      "gap_type",
+      "confidence_level",
+      "review_status",
+      "legacy_anchoring_level",
+      "legacy_gap_type",
+      "audit_date",
+      "audit_status",
+      "source_verification_status",
+      "referral_status",
+      "audit_source_urls"
+    ],
+    "source_urls": "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf"
+  }
+]

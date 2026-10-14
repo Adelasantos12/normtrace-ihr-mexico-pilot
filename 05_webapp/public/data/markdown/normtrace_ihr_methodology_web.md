@@ -1,158 +1,96 @@
-# NormTrace-IHR — Methodology
+# NormTrace-IHR Mexico: method and limits after the October 2026 source audit
 
-## Analytical Framework: Complex Adaptive Systems and Legal-Institutional Traceability
+Working correction release **0.1.1-audit.20261014**, dated 14 October 2026. This is a preliminary, single-coder, AI-assisted research pilot. Targeted source checking is not independent expert legal validation, a compliance assessment, or evidence of operational performance.
 
-NormTrace-IHR treats domestic legal architectures as **complex adaptive systems (CAS)**: multi-agent networks with emergent properties, feedback loops, and non-linear responses to change. IHR compliance — or non-compliance — is not reducible to any single norm, actor, or decision. It is an emergent property of the interactions among constitutional provisions, statutory mandates, regulatory instruments, institutional actors, procedural mechanisms, and coordination structures.
+## The question and unit of analysis
 
-This perspective generates a diagnostic approach that aggregate capacity scores (SPAR, JEE) cannot replicate: mapping the specific points in the normative system where flow is blocked, where agents are decoupled from their obligations, and where structural holes prevent coordination from producing implementation.
+The pilot organizes 45 selected requirements and powers extracted from the IHR 2005. These are researcher-defined analytical units, not a claim to enumerate every operative duty of the Regulations. The separate IHR 2024, Pandemic Agreement and PABS registries have different units and dates; they must not be combined with the baseline count or treated as interchangeable operative obligations.
 
-> **NormTrace-IHR is not a compliance score. It is a legal-institutional traceability infrastructure that maps, obligation by obligation, the normative pipeline through which each IHR requirement must travel to produce domestic operative effect.**
+A correspondence links one selected requirement to a particular domestic provision. An instrument may support several correspondences; an obligation may need multiple provisions read together. Counting a row, a distinct obligation and a legal instrument answers three different questions.
 
----
+## Current scope and counts
 
-## The Core Problem
+| Unit | Correction release |
+|---|---:|
+| Selected IHR 2005 requirements | 45 |
+| Corpus instruments | 18 |
+| Extracted domestic provisions | 117 |
+| Provision-level correspondences | 93 |
+| Actor profiles retained, including review-sensitive profiles | 18 |
+| Selected requirements in the targeted reassessment cohort | 15 |
 
-The IHR Monitoring and Evaluation Framework (SPAR, JEE, AAR, SimEx) assesses reported capacity levels but does not reconstruct, at the obligation level, *which domestic legal authority*, *which institutional actor*, *which procedure*, and *which coordination mechanism* currently anchor each IHR requirement. This gap is analytically consequential:
+These counts are generated and checked against the canonical data by `build_audit_manifest.py`. The manifest publishes the input hashes and each review cohort’s identifiers. Cohorts may overlap. The 15 requirements identify reassessment work; they are not 15 proven deficits.
 
-- A country may perform an IHR function adequately in practice without a stable legal basis for that function — generating a capacity score that accurately reflects current performance while overstating legal-institutional resilience.
-- In federal systems, weak statutory anchoring creates particular vulnerabilities: functions assigned informally at the national level may not bind subnational authorities and may not survive administrative reorganisation.
-- Core Capacity 1 (national legislation, policy and financing) is assessed as an aggregate construct, not traced to specific legal texts, articles, and competence attributions.
+The corpus is federal/national. State legislation, federal-state agreements, administrative practice, judicial interpretation and the referred international surveillance manual have not been comprehensively examined. An absent corpus match is not proof that a legal basis or a working procedure does not exist.
 
-NormTrace adds an obligation-level legal conversion layer to the existing IHRMEF ecosystem.
+## Source corrections implemented
 
----
+**SINAVE.** The express statutory mandate to establish and operate SINAVE is in General Health Law Article 133(II). Article 134 concerns surveillance, prevention and control of listed communicable diseases. The former mapping incorrectly described those disease categories as functional surveillance steps. The corrected corpus retains the Article 134 record and adds the appropriate Article 133(II) reference.
 
-## Analytical Architecture: Six Overlapping Layers
+**Notification and referrals.** Final NOM-017-SSA2-2012, published on 19 February 2013, includes responsibilities across technical-administrative levels (6.6.3), a referral to IHR criteria and an international surveillance manual (6.6.4), and domestic immediate notification to DGE within 24 hours of knowledge (8.1.4). The original audit URL pointed to the 2012 PROY-NOM consultation draft. This release corrects the source to the final published NOM. Domestic knowledge-based notification and the international IHR assessment-based deadline must be evaluated separately.
 
-The NormTrace analysis is structured as six overlapping analytical layers, each adding a different dimension of the picture:
+**Charges to travellers.** Article 7 of the international health regulation establishes gratuity with exceptions. A relevant candidate provision is therefore identified for IHR Article 40. The previous `NO_MATCH_IDENTIFIED` conclusion is withdrawn. The exceptions and complete scope still require legal assessment; no replacement compliance score is invented.
 
-### Layer 1 — Obligation Classification
-International obligations are extracted and classified: obligation type, domestic anchoring requirement, implementation domain (IHR Core Capacities CC1–CC8, PoE, rights protection). For each obligation, the minimum domestic legal requirement is specified — what kind of legal authority, procedure, or competence is needed for implementation to have a legal basis.
+**Aircraft and maritime declarations.** Articles 30 and 31 identify submitters, arrival/landing timing and IHR-form references. Previous absence claims based on Article 9 alone are withdrawn. Whether the referrals meet all current annex requirements remains to be examined.
 
-### Layer 2 — Domestic Legal Corpus
-A national legal corpus is assembled from publicly available official sources — constitutional text, federal and general laws, regulations, technical norms, administrative agreements. The corpus is not a keyword index: it is a structured dataset in which each instrument is coded for normative hierarchy, issuing authority, sector, legal function, and IHR relevance.
+## Referrals, absent matches and legal judgments
 
-### Layer 3 — Country Legal System Profile (The Legal Brain)
-Accurate legal mapping requires prior reconstruction of the country's constitutional and administrative logic. The **country legal system profile** — the "legal brain" — encodes: constitutional architecture and fundamental rights; treaty incorporation mechanisms; legal hierarchy and its operative implications; federalism and health competence distribution; health governance structure; public administration and delegation patterns; legislative drafting conventions; and oversight and accountability mechanisms.
+| Record status | Meaning | What must not be inferred |
+|---|---|---|
+| Source text checked | The relevant official text/locator was checked | Complete legal adequacy or compliance |
+| Manual review pending | A legal text expressly refers to a document not yet assessed | No procedure exists |
+| Scope review pending | A relevant provision exists, but its coverage or exceptions need analysis | Full compliance, or full legal gap |
+| Legacy preliminary | Earlier coder assessment retained without revalidation in this targeted audit | Confirmed current finding |
+| Reassessment required | A source correction affects the previous assessment | Zero score or failure in practice |
+| No reference recorded | No match is recorded within this corpus | No legal basis anywhere in the legal system |
 
-This profile governs all mapping decisions. Without it, terminological coincidence between IHR language and domestic statutory text generates false positives. The legal brain is country-specific and is rebuilt for each jurisdiction in which NormTrace is applied.
+For a referral, record the referring provision, the referred instrument, the legal task and the review status. A new regulation or statute should only be recommended after checking competence, enabling provisions, relevant referrals and the complete legal framework. A statute is not always necessary, and a sub-statutory provision is not insufficient merely because of its form or age.
 
-### Layer 4 — Normative Pipeline Analysis
-For each IHR obligation, the normative pipeline is traced: from constitutional bridge, through statutory mandate, through regulatory specification, to institutional actor competence and implementation mechanism. The pipeline reveals:
-- **Where flow is blocked**: the stage at which the legal chain breaks
-- **Tier mismatches**: obligations anchored at the regulatory level when statutory anchoring is required
-- **Temporal decoupling**: anchors that predate the obligation they implement
-- **Cascade failures**: international obligations incorporated at the top level but never cascaded to downstream instruments
+## Scoring and aggregation
 
-### Layer 5 — Gap Typology
-Each obligation area is classified against a ten-type gap typology. Gaps are not failures of intent — they are structural diagnoses: where the normative architecture as currently designed cannot produce the institutional outcome the IHR requires. The typology distinguishes between legal silence (no anchor), procedural gaps (duties without procedures), coordination gaps (actors without coordination mechanisms), tier mismatches (regulatory when statutory is required), and rights-safeguard gaps (restrictive powers without required protections).
+The pilot’s former anchoring scale and prose were not consistently aligned. In this correction release, affected current `anchoring_level` fields are blank; their former values remain in `legacy_anchoring_level` and the archived baseline. An empty current score means **pending**, never zero. Remaining earlier row codes are labeled legacy and unvalidated.
 
-### Layer 6 — Network Topology and Decoupling Analysis
-The corpus is modelled as a legal-institutional network. Network topology analysis identifies: **hubs** (high-centrality nodes whose failure cascades across multiple obligations), **bridges** (nodes connecting otherwise disconnected sub-networks), **structural holes** (absent coordination ties), and **decoupled components** (formally connected but operationally isolated actors or instruments).
+Current mean anchoring, legal-anchoring percentages and complete-pathway counts are withheld. The former counts of 18 procedural/coordination deficits, seven federal-state deficits, two complete pathways and six deficient instruments are not carried forward as validated results. Two rows labeled `none` cannot establish two fully complete obligations where other rows retain unresolved dimensions.
 
-Institutional decoupling — the gap between formal structure and operational practice — is classified as: mandate–performance decoupling (actor holds mandate but does not perform function), cascade decoupling (law adopted without downstream regulatory updates), coordination decoupling (two actors share an obligation with no coordination mechanism), and federal decoupling (federal obligations not cascaded to state authorities).
+Recalibration must specify the construct, the applicable legal requirement, how several provisions jointly cover it, treatment of non-applicable dimensions and unresolved sources, and the rule for aggregation. Reproducible row counts are not a substitute for that legal judgment.
 
----
+## The documentary network
 
-## What NormTrace Identifies That SPAR/JEE Cannot
+The computed graph is an **instrument–requirement network with an actor-profile association layer**. The instrument–requirement edge means a correspondence cites that instrument, including candidate sources under review. Its provenance includes mapping and provision identifiers. All registry obligations remain visible, including isolated nodes.
 
-| Question | SPAR/JEE | NormTrace-IHR |
-|---|:---:|:---:|
-| Does the country have a surveillance system? | ✓ | ✓ |
-| What law designates the surveillance authority? | — | ✓ |
-| Does that law specify the notification procedure? | — | ✓ |
-| Is the law current (post-IHR 2005)? | — | ✓ |
-| Is the actor-procedure link statutory or administrative? | — | ✓ |
-| Where does the normative chain break? | — | ✓ |
-| Is a reform needed at the statutory or regulatory level? | — | ✓ |
-| Are there conflicting norms at different hierarchical levels? | — | ✓ |
+An actor–instrument association means that the actor profile cites the instrument. Exact source aliases in `actor_instrument_associations.csv` replace the former first-30-character substring rule. The DGE is now included separately through its NOM-017 and Interior Regulation references. Profiles with unresolved institutional identity are excluded from this network but retained in the inventory.
 
----
+An actor’s two-hop reach through shared instruments is **documentary reach**, not the number of obligations assigned to that actor. It is not evidence that the actor can issue those instruments, control other actors, or coordinate effectively. The issuing authority recorded in an instrument’s metadata is a separate field and requires its own legal verification.
 
-## Mexico Pilot Scope
+All displayed edges have equal weight. Unvalidated legal scores no longer determine thickness or force strength. Degree counts associations; normalization uses the opposite mode’s node count. Projection communities describe shared documents, not functioning policy communities. The random-graph comparison is descriptive and does not establish political power, resilience, nonlinear behavior or cascade failure. The earlier curated coordination diagrams and operational/CAS conclusions are archived, not presented as current measured findings.
 
-| Parameter | Value |
-|---|---|
-| IHR 2005 obligations mapped | 45 |
-| Domestic legal provisions extracted | 110 |
-| Domestic instruments in corpus | 18 |
-| Mapping rows | 80 |
-| Institutional actors profiled | 18 (15 federal, 2 autonomous, 1 state grouping) |
-| Mean anchoring score | **1.76 / 5** |
-| Primary IHR regulatory instrument | RLGS-SI (1985) — 20 years before IHR 2005 |
-| Corpus level | Federal only (state legislation excluded) |
-| Status | Preliminary · AI-assisted · Expert review required |
+A directed institutional dependency requires a separately evidenced relation: both actors, the specific required input or action, the source clause and temporal scope. That relation cannot be inferred solely from both actors appearing in one law. Actual cooperation requires separate administrative or empirical evidence.
 
----
+## SPAR and legal mapping
 
-## Anchoring Scale (L0–L5)
+SPAR second edition already requests national and subnational legal mapping/assessment through C1.1 and addresses focal-point mandates/functions in C2.1. NormTrace should be understood as a way to organize inspectable provision-level evidence, not as discovery of a legal dimension absent from SPAR.
 
-| Level | Definition | IHR Implementation Implication |
-|:---|:---|:---|
-| **L0** | No identifiable anchor | No legal basis — obligation depends on informal practice |
-| **L1** | Actor mention only | Institutional presence without defined function |
-| **L2** | Indirect anchoring through broad mandate | General authority but no obligation-specific provision |
-| **L3** | Administrative or sub-statutory anchoring | Regulatory basis — ultra vires risk if statute is insufficient |
-| **L4** | General statutory anchoring | Legal basis present but not obligation-specific |
-| **L5** | Specific statutory anchoring with operative framing | Full legal basis with identifiable authority and enforceable competences |
+The SPAR country-level capacity score and the pilot’s legal codes do not have equivalent constructs or denominators. Their subtraction is removed: no 26-point or historical-mean divergence is calculated. The SPAR page retains 2021–2025 second-edition observations as reported values from the source dataset. The earlier series is preserved for provenance, not pooled across changes in the reporting instruments. The 2026 revision requires a separate crosswalk.
 
-*The scale measures textual legal-institutional anchoring in the available corpus. It does not assess whether anchored functions are implemented, resourced, or enforced in practice.*
+## National IHR Authority
 
----
+PAHO’s CD63/INF/1, dated 21 August 2026, paragraph 17, reports that Mexico had confirmed designation or establishment of a National IHR Authority by 15 July 2026. The report does not identify the Mexican institution or its domestic designation instrument. Both remain pending retrieval in this dataset.
 
-## Gap Typology
+DGE’s National Focal Point role does not identify it as the new Authority. Amended IHR Article 4 permits one or two entities and refers to legislative and/or administrative arrangements as appropriate; it does not universally require designation by statute. A reported designation and the domestic legal effects of its mandate are different evidentiary questions.
 
-| Gap Type | Diagnostic Meaning |
-|:---|:---|
-| **Legal silence** | No provision identifiable — legal vacuum |
-| **Competence ambiguity** | Overlapping or unclear institutional mandates |
-| **Administrative-only anchoring** | Regulatory basis without adequate statutory foundation |
-| **Procedural gap** | Obligation assigned but implementation procedures undefined |
-| **Coordination gap** | Multiple actors implicated but no coordination mechanism |
-| **Federal implementation gap** | Federal mandate not cascaded to state authorities |
-| **Rights-safeguard gap** | Coercive/restrictive powers without required protections |
-| **Oversight gap** | No accountability or review mechanism |
-| **Budget/capacity gap** | Duties without resource specification |
-| **Update-review needed** | Anchor predates IHR 2005 or 2024 amendments |
+## AI assistance, review and reproducibility
 
----
+AI assists with search, organization and preliminary coding; it is not a source of legal authority. This audit checks specified source errors and corrects invalid inferences. It does not retroactively certify every legacy extraction or recode all 45 requirements as legally validated.
 
-## Normative Hierarchy — Mexico
+Canonical CSVs are under `03_tables`. The webapp and export tables are synchronized with them. Network construction, SPAR context and audit statistics have deterministic builders. Validation checks identifiers, mirrors, graph endpoints, review-cohort membership, score absence handling and withdrawn-claim regressions. Browser tests check navigation, source visibility, pending labels, network selection and the SPAR comparison removal. Build/test success certifies technical consistency, not substantive legal validity.
 
-NormTrace applies the country-specific legal hierarchy as a structural filter. For Mexico:
+Historical records are preserved in `99_archive/audit_2026_10_14`. The earlier Zenodo DOI identifies its archived version, not automatically this working correction release.
 
-| Tier | Level | IHR Relevance |
-|:---|:---:|:---|
-| CPEUM (Constitution) | Supreme | Treaty incorporation (Art. 133); pro-persona bloc (Art. 1, 2011 reform); health competence (Art. 4, 73(XVI)) |
-| Leyes Generales/Federales | 2 | Primary IHR statutory framework (LGS, LOAPF, biosecurity, data protection) |
-| Reglamentos | 3 | Primary IHR regulatory instrument (RLGS-SI, 1985) — update-review critical |
-| NOMs, Acuerdos | 4 | Technical specifications for specific capacity areas |
+## Sources
 
-The critical structural finding: Mexico's primary IHR implementation instrument (RLGS-SI) sits at **tier 3 (regulatory)** but must implement obligations that require **tier 2 (statutory)** anchoring. This tier mismatch — not legal silence — explains the 1.76/5 mean anchoring score.
-
-### SPAR self-report vs legal anchoring
-
-Scoped to CC1 (Legislation, policy & financing) only: the one SPAR capacity that shares a name and general theme with NormTrace's legal-anchoring score. SPAR's other capacities assess operational readiness, which NormTrace does not measure. Treat this pairing as thematic: no verified equivalent-denominator crosswalk backs it. SPAR's CC1 is a single self-reported value for the capacity area as a whole. NormTrace's figure averages its own obligation-level anchoring across the 20 obligations it tags CC1, an internal categorisation that has not been crosswalked item-by-item against SPAR's specific indicator content. On that basis, Mexico's latest (2025) self-reported CC1 capacity runs well above NormTrace's legal anchoring for those obligations: 60.0% (SPAR, 2025) against 34.0% (NormTrace anchoring), a +26.0-point divergence. NormTrace's anchoring score is a current-state snapshot, so it is compared against SPAR's latest submission. SPAR's 2010–2025 historical mean (80.6%) is shown for reference only. This is a **construct-validity diagnostic**: two lenses on the same named capacity area, where reported capacity can exceed the domestic legal base for the obligations NormTrace associates with it. This does not show that SPAR self-reports are inflated or false (independent SPAR–JEE comparisons show the gap has narrowed in recent editions), nor that the two figures share a verified equivalent denominator. See `/spar-bridge` in the webapp and `00_project/network_methodology_rationale.md` §4 for the full guardrails.
-
----
-
-## Role of Artificial Intelligence, Python, and Human Review
-
-- **AI-assisted structuring**: corpus conversion, metadata coding, provision extraction, preliminary anchoring classification. AI systematises legal text according to researcher-defined schemas and decision rules; it does not function as a legal authority.
-- **Python pipeline**: cleaning, validation, cross-reference checks, network analysis, reproducibility. Network and SPAR-divergence figures are computed by `06_scripts/build_tables/build_network.py` and `spar_normtrace_bridge.py`; see `00_project/network_methodology_rationale.md` for the theoretical basis and interpretive limits.
-- **Human expert review**: required for legal validity, interpretation, and any policy application. All outputs are designated *preliminary_ai_assisted*.
-- **Technical audit**: PASS\_WITH\_DOCUMENTED\_FINDINGS (Audit L-01 through L-08).
-
----
-
-## Key References
-
-- Habibi R, et al. Do not violate the International Health Regulations during the COVID-19 outbreak. *Lancet*. 2020;395(10225):664–6.
-- Paina L, Peters DH. Understanding pathways for scaling up health interventions drawing from the literature on complex adaptive systems. *Implementation Science*. 2012;7:101.
-- Gostin LO, Katz R. The International Health Regulations: the governing framework for global health security. *Milbank Q*. 2016;94(2):264–313.
-- Meyer JW, Rowan B. Institutionalized organizations: formal structure as myth and ceremony. *Am J Sociol*. 1977;83(2):340–363.
-- Bishowkarma K, et al. Estimating global public health security preparedness capacity: the contribution of SPAR and JEE. *Dialogues Health*. 2026;8:100282.
-
----
-
-*NormTrace-IHR Mexico Pilot v0.1 · Preliminary · Expert Review Required · DOI: 10.5281/zenodo.20085170*
+- [Final NOM-017-SSA2-2012, DOF 19 February 2013](https://sidof.segob.gob.mx/notas/docFuente/5288225), especially 6.6.3, 6.6.4 and 8.1.4.
+- [General Health Law](https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf), Articles 133(II) and 134.
+- [International health regulation](https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MSI.pdf), Articles 7, 30 and 31.
+- [SPAR second edition](https://cdn.who.int/media/docs/default-source/health-security-preparedness/cap/spar/9789240040120-eng-new.pdf), C1.1 and C2.1.
+- [IHR consolidated text](https://apps.who.int/gb/bd/pdf_files/IHR_2014-2022-2024-en.pdf), Article 4.
+- [PAHO CD63/INF/1](https://iris.paho.org/bitstreams/7c461167-1eae-4e58-ad9c-d8ba8338c9dc/download), paragraph 17.

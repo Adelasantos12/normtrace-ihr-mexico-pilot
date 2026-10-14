@@ -13,7 +13,7 @@ import { PreliminaryBanner } from './components/PreliminaryBanner';
 // 15 top-level links.
 const coreItems = [
   { path: '/actors', label: 'Traceability Network', icon: Share2 },
-  { path: '/spar-bridge', label: 'SPAR ↔ Legal', icon: Scale },
+  { path: '/spar-bridge', label: 'SPAR & legal review', icon: Scale },
   { path: '/mapping', label: 'Mapping Explorer', icon: Search },
   { path: '/methodology', label: 'Methodology & Limitations', icon: Shield },
 ];
@@ -24,9 +24,9 @@ const advancedItems = [
   { path: '/pipeline', label: 'Normative Pipeline', icon: Zap },
   { path: '/normative-hierarchy', label: 'Normative Hierarchy', icon: Layers },
   { path: '/norm-diagnostic', label: 'Norm Diagnostic', icon: Activity },
-  { path: '/political-brain', label: 'Political Brain', icon: Scale },
+  { path: '/political-brain', label: 'Governance review', icon: Scale },
   { path: '/provisions', label: 'Legal Provisions', icon: BookOpen },
-  { path: '/gap-map', label: 'Implementation Gap Map', icon: Map },
+  { path: '/gap-map', label: 'Review queue', icon: Map },
   { path: '/capacity', label: 'Capacity Brief', icon: Info },
   { path: '/international', label: 'International Instruments', icon: Globe },
   { path: '/report', label: 'Report & Citation', icon: FileBarChart },
@@ -90,7 +90,7 @@ export default function Layout() {
       )}>
         <div className="p-6 border-b border-slate-800">
           <h2 className="text-xl font-bold text-sky-400 tracking-tight">NormTrace-IHR</h2>
-          <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-[0.2em] mt-1">Mexico Pilot v0.1</p>
+          <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-[0.2em] mt-1">Mexico Pilot · audit 2026-10-14</p>
           <p className="text-[8px] text-slate-600 font-mono mt-2">DOI: 10.5281/zenodo.20085170</p>
         </div>
 
@@ -146,7 +146,7 @@ export default function Layout() {
             </div>
             <div className="p-8 space-y-6 text-sm text-slate-700 leading-relaxed">
               <div className="space-y-4">
-                <p className="font-bold text-slate-900">NormTrace-IHR Mexico Pilot v0.1</p>
+                <p className="font-bold text-slate-900">NormTrace-IHR Mexico Pilot · audit 2026-10-14</p>
                 <p>
                   This application provides a structural mapping of domestic legal anchoring for international health obligations.
                   It reconstructs what domestic law formally establishes — a legal-textual reading, not an observation of

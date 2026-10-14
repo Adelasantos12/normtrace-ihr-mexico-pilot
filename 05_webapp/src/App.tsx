@@ -1,3 +1,4 @@
+import AuditRecord from './pages/AuditRecord';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './Layout';
 import LandingPage from './pages/LandingPage';
@@ -25,6 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route element={<Layout />}>
+          <Route path="/audit" element={<AuditRecord />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/pipeline" element={<NormPipeline />} />
           <Route path="/normative-hierarchy" element={<NormativeHierarchy />} />

@@ -1,3 +1,4 @@
+import { AuditNotice } from '../components/AuditNotice';
 import { useMemo, useState } from 'react';
 import { useCsvData } from '../hooks/useData';
 import {
@@ -30,6 +31,7 @@ const FIT_LABELS: any = {
 };
 
 export default function MappingExplorer() {
+  const { data: provisions } = useCsvData<any>('mexico_legal_provisions_clean.csv');
   const { data: mapping, loading: l1 } = useCsvData<any>('mexico_ihr2005_mapping_clean.csv');
   const { data: obl, loading: l2 } = useCsvData<any>('ihr_2005_obligations_clean.csv');
   const { data: changes, loading: l3 } = useCsvData<any>('ihr_2024_changes_clean.csv');
@@ -42,8 +44,9 @@ export default function MappingExplorer() {
 
   const joined = useMemo(() => {
     const byId = new Map(obl.map((o) => [o.obligation_id, o]));
-    return mapping.map((m) => ({ ...m, ...(byId.get(m.obligation_id) || {}) }));
-  }, [mapping, obl]);
+    const byProvision = new Map(provisions.map(p => [p.provision_id, p]));
+    return mapping.map((m) => ({ ...(byId.get(m.obligation_id) || {}), ...m, source_provision: byProvision.get(m.domestic_provision_id) }));
+  }, [mapping, obl, provisions]);
 
   const filtered = useMemo(() => joined.filter((r) =>
     (!filters.article || r.article === filters.article) &&
@@ -56,9 +59,9 @@ export default function MappingExplorer() {
 
   const stats = useMemo(() => ({
     obligations: new Set(mapping.map(m => m.obligation_id)).size,
-    anchors: mapping.filter(m => parseInt(m.anchoring_level) > 0).length,
-    sensitive: mapping.filter(m => m.review_status === 'REVIEW_REQUIRED').length,
-    gaps: new Set(mapping.map(m => m.gap_type).filter(g => g && g !== 'none')).size
+    anchors: mapping.filter(m => m.domestic_provision_id && m.domestic_provision_id !== 'NO_MATCH_IDENTIFIED').length,
+    sensitive: mapping.filter(m => m.audit_status !== 'legacy_preliminary').length,
+    gaps: new Set(mapping.filter(m => m.audit_status !== 'legacy_preliminary').map(m => m.obligation_id)).size
   }), [mapping]);
 
   if (l1 || l2 || l3 || l4 || l5) return (
@@ -82,6 +85,7 @@ export default function MappingExplorer() {
 
   return (
     <div className="space-y-8 pb-24">
+      <AuditNotice/>
       <header className="space-y-4">
         <div>
           <div className="text-xs font-semibold uppercase tracking-widest text-blue-700">
@@ -97,9 +101,9 @@ export default function MappingExplorer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-slate-100 rounded-2xl overflow-hidden border border-slate-100">
           {[
             { label: 'IHR 2005 Obligations', value: stats.obligations, icon: Globe },
-            { label: 'Domestic Anchors', value: stats.anchors, icon: Shield },
-            { label: 'Review-Sensitive', value: stats.sensitive, icon: AlertTriangle },
-            { label: 'Primary Gap Types', value: stats.gaps, icon: Activity }
+            { label: 'Source-linked rows', value: stats.anchors, icon: Shield },
+            { label: 'Rows for reassessment', value: stats.sensitive, icon: AlertTriangle },
+            { label: 'Requirements for reassessment', value: stats.gaps, icon: Activity }
           ].map((s, i) => (
             <div key={i} className="bg-white p-5 flex items-center gap-4">
               <s.icon size={18} className="text-slate-400" />
@@ -194,25 +198,25 @@ export default function MappingExplorer() {
 
                           <div className="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-100 flex flex-wrap gap-y-3">
                             <div className="w-full md:w-1/2">
-                              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Domestic anchor</div>
+                              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Cited domestic provision</div>
                               <div className="text-sm font-bold text-slate-800">
                                 {r.domestic_norm}
                                 <span className="mx-2 text-slate-300">/</span>
-                                Art. {r.domestic_article}
+                                {r.domestic_article}
                                 <span className="ml-2 text-slate-400 font-normal text-xs">({r.domestic_provision_id})</span>
                               </div>
                             </div>
                             <div className="w-full md:w-1/2 flex flex-wrap gap-2 items-center">
                               <span className={cn("px-2.5 py-1 rounded-full text-[10px] font-bold border shadow-sm", getLevelColor(r.anchoring_level))}>
-                                L{r.anchoring_level}
+                                {r.anchoring_level === '' || r.anchoring_level == null ? 'Score pending' : `Legacy code L${r.anchoring_level}`}
                               </span>
                               <span className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold border border-slate-200">
                                 {r.match_type}
                               </span>
                               <span className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold border border-slate-200">
-                                {r.gap_type}
+                                {r.audit_status === 'legacy_preliminary' ? `Legacy label: ${r.gap_type}` : r.gap_type}
                               </span>
-                              {r.review_status === 'REVIEW_REQUIRED' && (
+                              {r.review_status === 'requires_human_review' && (
                                 <span className="px-2.5 py-1 rounded-full bg-amber-100 text-amber-700 text-[10px] font-bold border border-amber-200 flex items-center gap-1">
                                   <AlertTriangle size={10} /> REVIEW
                                 </span>
@@ -241,16 +245,20 @@ export default function MappingExplorer() {
                               </h4>
                               <div className="space-y-4">
                                 <div>
-                                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Anchoring reason</div>
+                                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Legacy selection rationale</div>
                                   <p className="text-sm text-slate-700">{r.anchoring_reason || 'Not identified in current corpus'}</p>
                                 </div>
                                 <div>
-                                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Minimum domestic requirement</div>
+                                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Legacy minimum-requirement hypothesis (unvalidated)</div>
                                   <p className="text-sm text-slate-700">{r.minimum_domestic_requirement || 'Not identified in current corpus'}</p>
                                 </div>
                                 <div>
                                   <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Assessment summary</div>
-                                  <p className="text-sm text-slate-700 italic">{r.assessment_summary}</p>
+                                  <p className="text-sm text-slate-700">{r.assessment_summary}</p>
+                                  <p className="text-xs text-slate-500 mt-2">{r.audit_status} · {r.referral_status} · {r.audit_date}</p>
+                                  {r.audit_notes && <p className="text-sm text-amber-900 mt-2">{r.audit_notes}</p>}
+                                  {r.source_provision && <div className="mt-4 p-4 bg-white border rounded-xl space-y-2"><strong className="text-sm">Source text / recorded excerpt</strong><p className="text-sm">{r.source_provision.provision_text}</p><p className="text-xs text-slate-500">{r.source_provision.source_verification_status}</p><a href={r.source_provision.source_url} target="_blank" rel="noreferrer" className="text-blue-700 underline text-sm">Open official source</a></div>}
+                                  {r.legacy_anchoring_level && r.audit_status !== 'legacy_preliminary' && <details className="mt-3 text-sm"><summary>Superseded row coding (not a current finding)</summary><p>Former code L{r.legacy_anchoring_level}; former label: {r.legacy_gap_type}. Reassessment is pending, not scored as zero.</p></details>}
                                 </div>
                                 {r.reviewer_notes && (
                                   <div className="p-3 bg-blue-50 border border-blue-100 rounded-lg">
@@ -269,7 +277,7 @@ export default function MappingExplorer() {
                                   <div className="text-xs text-slate-700 font-medium">{r.implementation_domain}</div>
                                 </div>
                                 <div>
-                                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Confidence</div>
+                                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Coder confidence (not validation)</div>
                                   <div className="text-xs text-slate-700 font-medium">{r.confidence_level}</div>
                                 </div>
                                 <div>

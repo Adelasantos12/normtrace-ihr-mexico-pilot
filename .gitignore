@@ -37,3 +37,9 @@ outputs_temp/
 
 # Claude Code agent tooling state (local worktrees for background subagents)
 .claude/
+
+# Audit test outputs
+05_webapp/audit-screenshots/
+05_webapp/test-results/
+05_webapp/playwright-report/
+**/__pycache__/

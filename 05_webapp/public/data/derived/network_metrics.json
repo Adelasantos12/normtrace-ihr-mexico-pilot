@@ -1,5 +1,8 @@
 {
   "generated_by": "06_scripts/build_tables/build_network.py",
+  "audit_version": "0.1.1-audit.20261014",
+  "edge_semantics": "documentary_association_only",
+  "edge_weight_semantics": "constant_1_not_legal_strength",
   "network": {
     "modes": [
       "instrument",
@@ -7,206 +10,323 @@
     ],
     "n_instruments": 9,
     "n_obligations": 45,
-    "n_edges": 68,
-    "density": 0.168
+    "n_edges": 69,
+    "density": 0.1704
   },
   "instrument_degree_ranked": [
     {
       "instrument": "LGS",
       "obligations_anchored": 21,
-      "degree_norm": 0.467,
-      "betweenness": 0.5281
+      "degree_norm": 0.4667,
+      "betweenness": 0.5431
     },
     {
       "instrument": "RLGS-SI",
-      "obligations_anchored": 19,
-      "degree_norm": 0.422,
-      "betweenness": 0.4457
+      "obligations_anchored": 20,
+      "degree_norm": 0.4444,
+      "betweenness": 0.4815
     },
     {
       "instrument": "RI-SS-2025",
       "obligations_anchored": 11,
-      "degree_norm": 0.244,
-      "betweenness": 0.2119
+      "degree_norm": 0.2444,
+      "betweenness": 0.2163
     },
     {
       "instrument": "NOM-017",
       "obligations_anchored": 6,
-      "degree_norm": 0.133,
-      "betweenness": 0.042
+      "degree_norm": 0.1333,
+      "betweenness": 0.0435
     },
     {
       "instrument": "CPEUM",
       "obligations_anchored": 5,
-      "degree_norm": 0.111,
-      "betweenness": 0.0813
+      "degree_norm": 0.1111,
+      "betweenness": 0.0831
     },
     {
       "instrument": "Ley Aduanera",
       "obligations_anchored": 3,
-      "degree_norm": 0.067,
-      "betweenness": 0.0354
+      "degree_norm": 0.0667,
+      "betweenness": 0.0361
     },
     {
       "instrument": "LGPDPPSO",
       "obligations_anchored": 1,
-      "degree_norm": 0.022,
+      "degree_norm": 0.0222,
       "betweenness": 0.0
     },
     {
       "instrument": "LOAPF",
       "obligations_anchored": 1,
-      "degree_norm": 0.022,
+      "degree_norm": 0.0222,
       "betweenness": 0.0
     },
     {
       "instrument": "RLGS-Inv",
       "obligations_anchored": 1,
-      "degree_norm": 0.022,
+      "degree_norm": 0.0222,
       "betweenness": 0.0
     }
   ],
   "actor_reach_ranked": [
     {
+      "actor": "Autoridades portuarias y aeroportuarias (puntos de entrada)",
+      "actor_id": "MEX_ACTOR_PORTS_AIRPORTS_001",
+      "instruments": [
+        "LGS",
+        "RLGS-SI"
+      ],
+      "n_instruments": 2,
+      "obligation_reach": 35,
+      "association_type": "source_cited_in_actor_profile",
+      "source_articles": [
+        "Reglamento LGS Sanidad Internacional art. 26, 27, 35, 42; LGS art. 3o frac. XXVII"
+      ],
+      "interpretation_limit": "Documentary reach, not assigned tasks, issuing powers or observed cooperation."
+    },
+    {
       "actor": "Secretaría de Salud",
+      "actor_id": "MEX_ACTOR_SS_001",
       "instruments": [
         "CPEUM",
         "LGS",
-        "LOAPF"
+        "LOAPF",
+        "RI-SS-2025"
       ],
-      "n_instruments": 3,
-      "obligation_reach": 24
+      "n_instruments": 4,
+      "obligation_reach": 29,
+      "association_type": "source_cited_in_actor_profile",
+      "source_articles": [
+        "CPEUM art. 73 frac. XVI base 2a; LOAPF art. 26 frac. XVI, art. 39 frac. I, V, VII, VIII, IX, XI, XXI; LGS art. 4o frac. III, art. 7o, art. 13 apartado A, art. 181, art. 184; RI-SS-2025 art. 2, art. 7 (indelegable competences)"
+      ],
+      "interpretation_limit": "Documentary reach, not assigned tasks, issuing powers or observed cooperation."
     },
     {
       "actor": "Consejo de Salubridad General",
+      "actor_id": "MEX_ACTOR_CSG_001",
       "instruments": [
         "CPEUM",
         "LGS"
       ],
       "n_instruments": 2,
-      "obligation_reach": 23
+      "obligation_reach": 23,
+      "association_type": "source_cited_in_actor_profile",
+      "source_articles": [
+        "CPEUM art. 73 frac. XVI base 1a, base 4a; LGS art. 4o frac. II, art. 15, art. 17 frac. III, IV, V, X, XI"
+      ],
+      "interpretation_limit": "Documentary reach, not assigned tasks, issuing powers or observed cooperation."
     },
     {
       "actor": "Entidades federativas (gobiernos estatales — 32 entidades)",
+      "actor_id": "MEX_ACTOR_STATES_001",
       "instruments": [
         "CPEUM",
         "LGS"
       ],
       "n_instruments": 2,
-      "obligation_reach": 23
-    },
-    {
-      "actor": "Autoridades portuarias y aeroportuarias (puntos de entrada)",
-      "instruments": [
-        "LGS"
+      "obligation_reach": 23,
+      "association_type": "source_cited_in_actor_profile",
+      "source_articles": [
+        "CPEUM art. 115; LGS art. 4o frac. IV, art. 9o, art. 13 apartado B frac. I-VIII, art. 18"
       ],
-      "n_instruments": 1,
-      "obligation_reach": 21
+      "interpretation_limit": "Documentary reach, not assigned tasks, issuing powers or observed cooperation."
     },
     {
       "actor": "Comisión Federal para la Protección contra Riesgos Sanitarios (COFEPRIS)",
+      "actor_id": "MEX_ACTOR_COFEPRIS_001",
       "instruments": [
         "LGS"
       ],
       "n_instruments": 1,
-      "obligation_reach": 21
-    },
-    {
-      "actor": "Secretaría de Relaciones Exteriores",
-      "instruments": [
-        "CPEUM",
-        "LOAPF"
+      "obligation_reach": 21,
+      "association_type": "source_cited_in_actor_profile",
+      "source_articles": [
+        "LGS art. 9o Bis, art. 17 Bis frac. I-XIII, art. 17 Bis 1, art. 17 Bis 2"
       ],
-      "n_instruments": 2,
-      "obligation_reach": 6
-    },
-    {
-      "actor": "Auditoría Superior de la Federación",
-      "instruments": [
-        "CPEUM"
-      ],
-      "n_instruments": 1,
-      "obligation_reach": 5
-    },
-    {
-      "actor": "Comisión Nacional de los Derechos Humanos (CNDH)",
-      "instruments": [
-        "CPEUM"
-      ],
-      "n_instruments": 1,
-      "obligation_reach": 5
-    },
-    {
-      "actor": "Congreso de la Unión",
-      "instruments": [
-        "CPEUM"
-      ],
-      "n_instruments": 1,
-      "obligation_reach": 5
-    },
-    {
-      "actor": "Cámara de Diputados",
-      "instruments": [
-        "CPEUM"
-      ],
-      "n_instruments": 1,
-      "obligation_reach": 5
-    },
-    {
-      "actor": "Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI) / Transparencia para el Pueblo",
-      "instruments": [
-        "CPEUM",
-        "LGPDPPSO"
-      ],
-      "n_instruments": 2,
-      "obligation_reach": 5
-    },
-    {
-      "actor": "Senado de la República",
-      "instruments": [
-        "CPEUM"
-      ],
-      "n_instruments": 1,
-      "obligation_reach": 5
+      "interpretation_limit": "Documentary reach, not assigned tasks, issuing powers or observed cooperation."
     },
     {
       "actor": "Instituto Nacional de Migración",
+      "actor_id": "MEX_ACTOR_INM_001",
       "instruments": [
-        "LOAPF"
+        "LOAPF",
+        "RLGS-SI"
+      ],
+      "n_instruments": 2,
+      "obligation_reach": 21,
+      "association_type": "source_cited_in_actor_profile",
+      "source_articles": [
+        "LOAPF art. 27 frac. V; Reglamento LGS Sanidad Internacional art. 26, 42"
+      ],
+      "interpretation_limit": "Documentary reach, not assigned tasks, issuing powers or observed cooperation."
+    },
+    {
+      "actor": "Dirección General de Epidemiología",
+      "actor_id": "MEX_ACTOR_DGE_001",
+      "instruments": [
+        "NOM-017",
+        "RI-SS-2025"
+      ],
+      "n_instruments": 2,
+      "obligation_reach": 15,
+      "association_type": "source_cited_in_actor_profile",
+      "source_articles": [
+        "NOM-017-SSA2-2012 (sections 4, 5, 6 and Appendices A-B-C); RI-SS-2025 art. 35 fracs. I-XXII"
+      ],
+      "interpretation_limit": "Documentary reach, not assigned tasks, issuing powers or observed cooperation."
+    },
+    {
+      "actor": "Dirección General de Relaciones Internacionales (DGRI)",
+      "actor_id": "MEX_ACTOR_DGRI_001",
+      "instruments": [
+        "RI-SS-2025"
       ],
       "n_instruments": 1,
-      "obligation_reach": 1
+      "obligation_reach": 11,
+      "association_type": "source_cited_in_actor_profile",
+      "source_articles": [
+        "RI-SS-2025 art. 33 fracs. I-XXI"
+      ],
+      "interpretation_limit": "Documentary reach, not assigned tasks, issuing powers or observed cooperation."
+    },
+    {
+      "actor": "Dirección General del Servicio Nacional de Salud Pública (SNSP)",
+      "actor_id": "MEX_ACTOR_SNSP_001",
+      "instruments": [
+        "RI-SS-2025"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 11,
+      "association_type": "source_cited_in_actor_profile",
+      "source_articles": [
+        "RI-SS-2025 art. 43 fracs. I-XVIII"
+      ],
+      "interpretation_limit": "Documentary reach, not assigned tasks, issuing powers or observed cooperation."
+    },
+    {
+      "actor": "Secretaría de Relaciones Exteriores",
+      "actor_id": "MEX_ACTOR_SRE_001",
+      "instruments": [
+        "CPEUM",
+        "LOAPF"
+      ],
+      "n_instruments": 2,
+      "obligation_reach": 6,
+      "association_type": "source_cited_in_actor_profile",
+      "source_articles": [
+        "CPEUM art. 89 frac. X; LOAPF art. 26 frac. II, art. 28 frac. I, II, III; Ley sobre Celebración de Tratados art. 2"
+      ],
+      "interpretation_limit": "Documentary reach, not assigned tasks, issuing powers or observed cooperation."
+    },
+    {
+      "actor": "Auditoría Superior de la Federación",
+      "actor_id": "MEX_ACTOR_ASF_001",
+      "instruments": [
+        "CPEUM"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 5,
+      "association_type": "source_cited_in_actor_profile",
+      "source_articles": [
+        "CPEUM art. 74 frac. II, art. 79 frac. I, II"
+      ],
+      "interpretation_limit": "Documentary reach, not assigned tasks, issuing powers or observed cooperation."
+    },
+    {
+      "actor": "Comisión Nacional de los Derechos Humanos (CNDH)",
+      "actor_id": "MEX_ACTOR_CNDH_001",
+      "instruments": [
+        "CPEUM"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 5,
+      "association_type": "source_cited_in_actor_profile",
+      "source_articles": [
+        "CPEUM art. 102 apartado B"
+      ],
+      "interpretation_limit": "Documentary reach, not assigned tasks, issuing powers or observed cooperation."
+    },
+    {
+      "actor": "Congreso de la Unión",
+      "actor_id": "MEX_ACTOR_CONGRESS_001",
+      "instruments": [
+        "CPEUM"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 5,
+      "association_type": "source_cited_in_actor_profile",
+      "source_articles": [
+        "CPEUM art. 50, art. 73 frac. XVI base 4a, art. 73 frac. XXIX-S"
+      ],
+      "interpretation_limit": "Documentary reach, not assigned tasks, issuing powers or observed cooperation."
+    },
+    {
+      "actor": "Cámara de Diputados",
+      "actor_id": "MEX_ACTOR_CHAMBER_DEPUTIES_001",
+      "instruments": [
+        "CPEUM"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 5,
+      "association_type": "source_cited_in_actor_profile",
+      "source_articles": [
+        "CPEUM art. 51, art. 74 frac. II, IV, VI, VII"
+      ],
+      "interpretation_limit": "Documentary reach, not assigned tasks, issuing powers or observed cooperation."
+    },
+    {
+      "actor": "Senado de la República",
+      "actor_id": "MEX_ACTOR_SENATE_001",
+      "instruments": [
+        "CPEUM"
+      ],
+      "n_instruments": 1,
+      "obligation_reach": 5,
+      "association_type": "source_cited_in_actor_profile",
+      "source_articles": [
+        "CPEUM art. 56, art. 76 frac. I; Ley sobre Celebración de Tratados art. 2"
+      ],
+      "interpretation_limit": "Documentary reach, not assigned tasks, issuing powers or observed cooperation."
     },
     {
       "actor": "Secretaría de Gobernación",
+      "actor_id": "MEX_ACTOR_SEGOB_001",
       "instruments": [
         "LOAPF"
       ],
       "n_instruments": 1,
-      "obligation_reach": 1
+      "obligation_reach": 1,
+      "association_type": "source_cited_in_actor_profile",
+      "source_articles": [
+        "LOAPF art. 26 frac. I, art. 27 frac. I, II, V"
+      ],
+      "interpretation_limit": "Documentary reach, not assigned tasks, issuing powers or observed cooperation."
     }
   ],
   "communities": {
-    "n": 5,
-    "modularity": 0.286,
+    "n": 4,
+    "modularity": 0.2928,
     "sizes": [
       22,
-      20,
-      1,
+      21,
       1,
       1
     ]
   },
   "cug_test": {
-    "measure": "instrument-degree centralisation",
-    "observed": 0.6402,
-    "random_mean": 0.3282,
-    "p_value_ge_random": 0.0,
-    "interpretation": "centralisation significantly ABOVE random"
+    "measure": "descriptive instrument-degree concentration",
+    "observed": 0.6349,
+    "random_mean": 0.3284,
+    "p_value_ge_random": 0.001,
+    "interpretation": "Size/density-matched random association benchmark only; not political power or response performance."
   },
   "isolated_obligations": [
-    "IHR-OBL-011",
-    "IHR-OBL-037"
+    "IHR-OBL-011"
   ],
-  "provenance_note": "All figures computed from mexico_ihr2005_mapping.csv. Supersedes hard-coded degree values previously in ActorsExplorer.tsx. n_obligations always equals the full IHR-2005_obligations_domestic-anchoring.csv corpus (45): obligations with no anchoring row in the mapping (full gap / legal silence) are included as isolated, zero-degree nodes -- see isolated_obligations -- rather than dropped, so the network's coverage figure never falls below the corpus total and its worst findings stay visible instead of vanishing. n_instruments (9) legitimately covers only instruments that anchor at least one of these 45 obligations; the broader 18-instrument legal corpus includes instruments scoped to the Pandemic Agreement, PABS, or general administrative matters outside IHR 2005, which this IHR-anchoring network does not include."
+  "provenance_note": "All registry obligations are retained. An isolated node means no reference in this corpus, not proven legal silence. Instrument degree counts distinct cited obligations. Actor links come from explicit source aliases in actor_instrument_associations.csv; reach through a shared instrument is not competence for all linked obligations. Legal adequacy scores are not used as edge weights.",
+  "legacy_field_aliases": {
+    "obligations_anchored": "distinct obligations with a cited instrument (including candidates)",
+    "obligation_reach": "documentary two-hop reach, not assigned responsibilities"
+  }
 }
