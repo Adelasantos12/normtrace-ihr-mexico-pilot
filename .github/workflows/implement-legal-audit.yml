@@ -2,9 +2,7 @@ name: Implement and verify scoped legal audit
 on:
   push:
     branches: [audit/implemented-corrections-20261014]
-    paths:
-      - '06_scripts/audit/**'
-      - '.github/workflows/implement-legal-audit.yml'
+    paths: ['06_scripts/audit/**', '.github/workflows/implement-legal-audit.yml']
 permissions:
   contents: write
 concurrency:
@@ -26,8 +24,8 @@ jobs:
           node-version: '22'
           cache: npm
           cache-dependency-path: 05_webapp/package-lock.json
-      - name: Apply source corrections and regenerate descriptive artifacts
-        run: python3 06_scripts/audit/apply_20261014.py
+      - name: Apply source corrections and verify migration idempotence
+        run: python3 06_scripts/audit/finalize_20261014.py
       - name: Verify builder determinism
         run: |
           sha256sum 04_outputs/figures/* 05_webapp/public/data/derived/* > /tmp/before-hashes
@@ -66,14 +64,13 @@ jobs:
           }
           await page.goto('http://127.0.0.1:4173/mapping',{waitUntil:'networkidle'});
           await page.getByLabel('Search correspondences').fill('IHR-OBL-037');
-          await page.waitForTimeout(200);
-          assert((await page.locator('article').count())===1,'Article40 active replacement is unique');
-          assert((await page.locator('article').innerText()).includes('Art. 7'),'Article40 links to Article7');
+          assert.equal(await page.locator('article').count(),1);
+          assert((await page.locator('article').innerText()).includes('Art. 7'));
           await page.getByText('Include superseded records').click();
-          assert((await page.locator('article').count())===2,'Superseded no-match is available only when requested');
+          assert.equal(await page.locator('article').count(),2);
           await page.goto('http://127.0.0.1:4173/actors',{waitUntil:'networkidle'});
           await page.getByLabel('Select a network node').selectOption('MEX_ACTOR_DGE_001');
-          assert((await page.locator('body').innerText()).includes('Dirección General de Epidemiología'),'DGE separately selectable');
+          assert((await page.locator('body').innerText()).includes('Dirección General de Epidemiología'));
           await page.getByRole('button',{name:'Zoom in',exact:true}).click();
           await page.getByRole('button',{name:'Fit',exact:true}).click();
           await page.screenshot({path:'../04_outputs/reports/audit-browser/actors-desktop.png',fullPage:true});
@@ -81,8 +78,7 @@ jobs:
           const summary=await response.json(); assert.equal(summary.obligations,45); assert.equal(summary.active_mapping_records,89); assert.equal(summary.confirmed_gap_count,null);
           await page.setViewportSize({width:390,height:844});
           await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});
-          const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2);
-          assert(!overflow,'Home has no mobile document overflow');
+          assert(!(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2)),'mobile home overflow');
           await page.screenshot({path:'../04_outputs/reports/audit-browser/home-mobile.png',fullPage:true});
           assert.equal(errors.length,0,errors.join('\n'));
           fs.writeFileSync('../04_outputs/reports/audit_browser_20261014.json',JSON.stringify({status:'passed',routes:checked,page_errors:errors,checks:['Article40 replacement','superseded visibility','DGE selection','zoom and fit','summary counts','mobile home overflow'],scope:'Browser/data regression, not legal validity'},null,2)+'\n');
@@ -94,7 +90,7 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add 00_project 03_tables 04_outputs 05_webapp/src 05_webapp/public/data 06_scripts 99_archive/legal_audit_20261014
           if ! git diff --cached --quiet; then
-            git commit -m 'fix: apply verified source corrections and withdraw unsupported legal inferences [skip ci]'
+            git commit -m 'fix: finalize idempotent source corrections and reproducible web artifacts [skip ci]'
             git push origin HEAD:audit/implemented-corrections-20261014
           fi
           git rev-parse HEAD > /tmp/audit-tested-sha.txt
